@@ -1,0 +1,105 @@
+{
+  "self_alignment": [
+    {
+      "domain": "ubuntu_irc",
+      "self_coef": -7.573434472957755
+    },
+    {
+      "domain": "arxiv",
+      "self_coef": -0.159881810596235
+    },
+    {
+      "domain": "freelaw",
+      "self_coef": -2.4152936428478067
+    },
+    {
+      "domain": "github",
+      "self_coef": -2.357497486616642
+    },
+    {
+      "domain": "hackernews",
+      "self_coef": -1.979626466650776
+    },
+    {
+      "domain": "arxiv",
+      "self_coef": -2.613261132073972
+    },
+    {
+      "domain": "pubmed_central",
+      "self_coef": -2.122747818931724
+    },
+    {
+      "domain": "c4",
+      "self_coef": -0.8427707538136485
+    },
+    {
+      "domain": "uspto_backgrounds",
+      "self_coef": -2.4724839829579013
+    },
+    {
+      "domain": "wikipedia",
+      "self_coef": -2.132046458619318
+    },
+    {
+      "domain": "stackexchange",
+      "self_coef": -2.087809906767103
+    },
+    {
+      "domain": "book",
+      "self_coef": -2.3302104073045578
+    },
+    {
+      "domain": "pubmed_abstracts",
+      "self_coef": -2.4098755082133483
+    }
+  ],
+  "self_neg_frac": 1.0,
+  "top_neg_pairs": [
+    {
+      "source": "arxiv",
+      "loss_domain": "arxiv",
+      "coef": -9.6282085004639
+    },
+    {
+      "source": "ubuntu_irc",
+      "loss_domain": "ubuntu_irc",
+      "coef": -7.573434472957755
+    },
+    {
+      "source": "arxiv",
+      "loss_domain": "arxiv",
+      "coef": -2.613261132073972
+    },
+    {
+      "source": "uspto_backgrounds",
+      "loss_domain": "uspto_backgrounds",
+      "coef": -2.4724839829579013
+    },
+    {
+      "source": "freelaw",
+      "loss_domain": "freelaw",
+      "coef": -2.4152936428478067
+    },
+    {
+      "source": "pubmed_abstracts",
+      "loss_domain": "pubmed_abstracts",
+      "coef": -2.4098755082133483
+    },
+    {
+      "source": "github",
+      "loss_domain": "github",
+      "coef": -2.357497486616642
+    },
+    {
+      "source": "book",
+      "loss_domain": "book",
+      "coef": -2.3302104073045578
+    }
+  ],
+  "book_col_stats": {
+    "mean": -4.9822603975804034e-05,
+    "min": -2.3302104073045578,
+    "max": 0.6636506897167566,
+    "n_help": 8
+  }
+}

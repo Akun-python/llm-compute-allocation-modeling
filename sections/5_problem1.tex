@@ -115,6 +115,25 @@ $x\in\Delta^{17}$ 为解释变量、损失 $L_r^{(s)}$ 为响应建立岭回归
 \label{fig:p1_shrink}
 \end{figure}
 
+\subsubsection{配比--损失域迁移结构}
+
+对 1M 尺度 13 源域 $\times$ 17 损失域的系数矩阵做解释性分析（图
+\ref{fig:p1_transfer}）：\textbf{自域对齐}——每个损失域的``本域''源域系数
+全部为负（13/13，如 ubuntu\_irc $-7.6$、arxiv $-9.6$），即混合中本域
+份额越高、该域验证损失越低，配比模型与``同域强化''的直觉完全一致；
+\textbf{跨域迁移}——最强负迁移对几乎都是自域对，说明配比的第一作用是
+自域强化而非跨域借力；\textbf{book 域}系数均值约 0（min $-2.3$、max
+$0.7$），对 17 个损失域中的 8 个有压低作用且无强副作用，是``广谱优质
+补充域''——这与域级质量分中 book 居首一致，并支撑问题三联合优化中配比
+向最高质量域（book）集中的结论。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/v19_p1_transfer.png}
+\caption{配比源域 $\times$ 损失域迁移系数热图（1M 尺度，负值=压低损失）。}
+\label{fig:p1_transfer}
+\end{figure}
+
 \subsection{求解结果}
 
 \subsubsection{域级质量分}
