@@ -1,0 +1,136 @@
+{
+  "kendall_W": 0.6626984126984127,
+  "pairwise": [
+    {
+      "a": "TOPSIS",
+      "b": "SAW",
+      "spearman": 1.0
+    },
+    {
+      "a": "TOPSIS",
+      "b": "GRA",
+      "spearman": 0.42857142857142866
+    },
+    {
+      "a": "TOPSIS",
+      "b": "RSR",
+      "spearman": 0.25
+    },
+    {
+      "a": "TOPSIS",
+      "b": "熵-CRITIC",
+      "spearman": 1.0
+    },
+    {
+      "a": "TOPSIS",
+      "b": "CRITIC-only",
+      "spearman": 0.7857142857142859
+    },
+    {
+      "a": "SAW",
+      "b": "GRA",
+      "spearman": 0.42857142857142866
+    },
+    {
+      "a": "SAW",
+      "b": "RSR",
+      "spearman": 0.25
+    },
+    {
+      "a": "SAW",
+      "b": "熵-CRITIC",
+      "spearman": 1.0
+    },
+    {
+      "a": "SAW",
+      "b": "CRITIC-only",
+      "spearman": 0.7857142857142859
+    },
+    {
+      "a": "GRA",
+      "b": "RSR",
+      "spearman": 0.25
+    },
+    {
+      "a": "GRA",
+      "b": "熵-CRITIC",
+      "spearman": 0.42857142857142866
+    },
+    {
+      "a": "GRA",
+      "b": "CRITIC-only",
+      "spearman": 0.8214285714285715
+    },
+    {
+      "a": "RSR",
+      "b": "熵-CRITIC",
+      "spearman": 0.25
+    },
+    {
+      "a": "RSR",
+      "b": "CRITIC-only",
+      "spearman": 0.4642857142857144
+    },
+    {
+      "a": "熵-CRITIC",
+      "b": "CRITIC-only",
+      "spearman": 0.7857142857142859
+    }
+  ],
+  "ranks": {
+    "TOPSIS": {
+      "arxiv": 2,
+      "book": 1,
+      "c4": 6,
+      "commoncrawl": 7,
+      "github": 4,
+      "stackexchange": 5,
+      "wikipedia": 3
+    },
+    "SAW": {
+      "arxiv": 2,
+      "book": 1,
+      "c4": 6,
+      "commoncrawl": 7,
+      "github": 4,
+      "stackexchange": 5,
+      "wikipedia": 3
+    },
+    "GRA": {
+      "arxiv": 7,
+      "book": 1,
+      "c4": 4,
+      "commoncrawl": 6,
+      "github": 3,
+      "stackexchange": 5,
+      "wikipedia": 2
+    },
+    "RSR": {
+      "arxiv": 4,
+      "book": 6,
+      "c4": 5,
+      "commoncrawl": 7,
+      "github": 2,
+      "stackexchange": 3,
+      "wikipedia": 1
+    },
+    "熵-CRITIC": {
+      "arxiv": 2,
+      "book": 1,
+      "c4": 6,
+      "commoncrawl": 7,
+      "github": 4,
+      "stackexchange": 5,
+      "wikipedia": 3
+    },
+    "CRITIC-only": {
+      "arxiv": 5,
+      "book": 1,
+      "c4": 6,
+      "commoncrawl": 7,
+      "github": 3,
+      "stackexchange": 4,
+      "wikipedia": 2
+    }
+  }
+}
