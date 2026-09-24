@@ -90,6 +90,24 @@ book 让位于 c4——说明``内容质量族''整体是 book 领先的主要�
 \label{fig:p1_ablation}
 \end{figure}
 
+\subsection{无监督质量评分的对照检验}
+
+作为``典型的异质方法族''对照，尝试以无监督自编码重构误差作为质量分
+（PCA 线性自编码与 MLP 自编码，重构误差小视为``典型''即高质量）。结果
+\emph{与基线 TOPSIS 域排序显著相反}（Spearman $-0.68$/$-0.29$）：自编码
+把 book 评为最低（0.07--0.08）而 TOPSIS 评为最高（0.68）。机理清晰：
+book 语料在 22 维指标上高度\textbf{独特}（文学性措辞、长句、低重复），
+重构误差大——``典型性''测度惩罚独特性，而质量恰恰青睐独特性。该对照
+说明：数据质量不可还原为统计典型性，必须依赖方向明确的指标语义（本文
+TOPSIS 组合赋权）与冲突消解框架；这也是问题一选型的正面论据。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/v15_p1_ae.png}
+\caption{TOPSIS 组合赋权与自编码典型性评分的域级对照（方向相反）。}
+\label{fig:p1_ae}
+\end{figure}
+
 \subsection{跨规模配比收缩的稳健性}
 
 跨尺度收缩指数在 1M/60M/1B 三点拟合时为 $\kappa=0.314$；改用全部 6 个规模点
