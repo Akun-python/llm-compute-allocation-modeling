@@ -180,6 +180,23 @@ BIC/AIC 形式选择（$n=810$）。interaction\_N 的 BIC 最优（$-4813.73$�
 \label{fig:p2_resid}
 \end{figure}
 
+\textbf{参数的跨形式一致性}（图 \ref{fig:p2_formparams}）：六种形式
+独立拟合后，共享的\textbf{规模弹性} $a$（$N$ 指数）均值 0.284、范围
+[0.270, 0.305]、\textbf{CV 3.7\%}；$b$（$D$ 指数）均值 0.290、范围
+[0.260, 0.310]、CV 5.1\%——跨形式高度稳定，\textbf{弹性是数据的性质而
+非形式的产物}；质量弹性 $g$ 在 $(1-Q)^{g}$ 族均值 1.02（[0.99, 1.13]，
+近线性衰减）。例外：exponential\_Q 形式的 $E$ 退化到下限 0 且 $g$ 语义
+不同（指数衰减系数 0.216），与该形式最低的 $R^2$（0.9715）一致——
+\textbf{形式选择只影响质量通道的机制，不改变规模通道的结论}，与 BIC
+选择（v50）互证。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/v66_p2_form_params.png}
+\caption{六形式共享参数：a/b 跨形式稳定（CV<6\%）、$(1-Q)^{g}$ 族 g≈1。}
+\label{fig:p2_formparams}
+\end{figure}
+
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.85\textwidth]{figures/p2_generalized_fit.png}
