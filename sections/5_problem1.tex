@@ -317,6 +317,24 @@ book/arxiv 提高配比、commoncrawl 降低），文档级质量分 $Q_i$ 定�
 \label{fig:p1_domainicc}
 \end{figure}
 
+\textbf{域内分布的形状差异}（图 \ref{fig:p1_domdist}）：逐文档质量分
+$Q_i$ 的域内分布形状差异巨大——book \textbf{左偏}（偏度 $-2.93$），
+95\% 的文档高于全域 75 分位（质量集中高位）；commoncrawl/c4 \textbf{右偏
+长尾}（偏度 $+2.37/+1.74$），高质尾（$>$全域 75 分位）占比仅 4\%/10\%；
+arxiv 49\%、wikipedia 30\%、github 23\%、stackexchange 20\% 居中。含义：
+(1) 域内差异不仅大（v45 的 ICC），而且\textbf{形状不同}——book 近似
+``全员优质''，commoncrawl 是``少数优质 + 大量低质''；(2)
+commoncrawl/c4/github 的\textbf{高质长尾就是第二层筛选的可挽救对象}
+（过滤头寸），文档级 $Q_i$ 筛选在这些域内存在实质收益，与
+``域级粗筛 + 文档级细筛''的两级口径闭环。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/v58_p1_dom_dist.png}
+\caption{域内文档质量分布（重叠直方图）：book 左偏高位、commoncrawl 右偏长尾。}
+\label{fig:p1_domdist}
+\end{figure}
+
 \textbf{book 领先的指标族分解}（图 \ref{fig:p1_contrib}）：把加权标准化值
 $V_{ij}=w_jX_{ij}$ 的域均值差按指标族可加分解，book 相对全域的加权分优势
 为 0.1441，其中\textbf{结构/格式族贡献 +0.178}（主导），语义模型分族
