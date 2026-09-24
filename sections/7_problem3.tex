@@ -173,6 +173,24 @@ $Q^{*}=1.000$}（质量饱和对参数不确定完全稳健，与饱和预算 $3
 \label{fig:p3_paramrobust}
 \end{figure}
 
+\textbf{上下文长度的二维核验}（图 \ref{fig:p3_lctxsurf}）：把 $L_{ctx}\in
+\{0.5,1,2,4,8\}$k 与预算阶梯 $10^{18}$--$10^{24}$ 合成二维响应面
+（exp 形式）：$Q^{*}$ 在全部 $L_{ctx}$ 下 $10^{18}$ 即饱和（与 exp 激活
+阈值 $6.3\times10^{17}$ 一致）；$L^{*}$ 路径受 $L_{ctx}$ 影响极小——
+$10^{18}$ 处 3.907（0.5k）$\to$ 3.974（8k，$+0.07$），$10^{24}$ 处
+1.887$\to$1.895（$+0.008$）。原因：注意力成本
+$\eta NDL_{ctx}$ 相对训练成本 $6\times10^{18}ND$ 的占比仅约 $10^{-17}$
+量级（$\eta=2\times10^{-4}$ 的校准量级），\textbf{长上下文部署对算力最
+优配置的影响在当前成本校准下可忽略}，且该结论在预算阶梯上\textbf{均匀
+成立}（与 v9 的 $L_{ctx}$ 敏感性一致）。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{figures/v67_p3_lctx_surface.png}
+\caption{上下文长度 $\times$ 预算响应面：L* 路径几乎不随 L\_ctx 移动。}
+\label{fig:p3_lctxsurf}
+\end{figure}
+
 \textbf{计算最优数据曲线 vs 实际前沿}：纯规模（$Q=Q_0$）下由 KKT 均衡
 $N^a/D^b=aA/(bB)$ 得数据最优曲线 $D^{*}(N)=49.8\,N^{1.046}$
 （tokens/param 比约 50 并随 $N$ 微增）。与 B4 十二族实际训练点对照
