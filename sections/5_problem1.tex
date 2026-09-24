@@ -335,6 +335,22 @@ commoncrawl/c4/github 的\textbf{高质长尾就是第二层筛选的可挽救�
 \label{fig:p1_domdist}
 \end{figure}
 
+\textbf{文档级筛选的收益量化}（图 \ref{fig:p1_filtercurve}）：按 $Q_i$
+对每域截尾低质 20\% 文档，域平均质量提升（相对）：arxiv +5.1\%、book
++4.3\%、github/stackexchange +3.7\%、wikipedia +3.5\%、commoncrawl
++3.3\%、c4 +2.7\%。两处值得注意：(1) 提升\textbf{全域有限}（3\%--5\%），
+文档级筛选是\textbf{锦上添花而非雪中送炭}；(2) 提升最大的是 arxiv/book
+（分布宽 + 尾部有货），而非低质域——commoncrawl/c4 的底部文档贴近分数
+下限、可删部分本身很少。这与 v47（配比有限杠杆）、v45（域内方差仅
+5\%）相互印证，把``两级筛选''的收益预期校准到 3\%--5\% 的增量。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/v60_p1_filter_curve.png}
+\caption{文档级筛选的质量提升曲线：全域 3\%--5\%（arxiv/book 相对最大）。}
+\label{fig:p1_filtercurve}
+\end{figure}
+
 \textbf{book 领先的指标族分解}（图 \ref{fig:p1_contrib}）：把加权标准化值
 $V_{ij}=w_jX_{ij}$ 的域均值差按指标族可加分解，book 相对全域的加权分优势
 为 0.1441，其中\textbf{结构/格式族贡献 +0.178}（主导），语义模型分族
