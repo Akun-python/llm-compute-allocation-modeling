@@ -231,6 +231,24 @@ $t$，系数绝对水平与主链路年度粒度不同，但漂移趋势一致�
 \label{fig:p4_3d}
 \end{figure}
 
+\textbf{家族留出验证}（图 \ref{fig:p4_familycv}）：把前沿模型按家族分桶
+（llama/qwen/gemma/deepseek/mistral/phi/yi/other，$n=2493$），逐个
+家族留出拟合 $\ln S=c_0+b_N\ln N+b_T t$。全量 OLS 得 $b_N=0.366$
+（与 QR90 的 0.364 一致，估计器稳健）；家族留出下 $b_N\in[0.353,0.384]$，
+最大偏离约 5\%——\textbf{规模弹性跨家族稳定}，前沿斜率不是由单一家族
+驱动。留出残差显示：qwen（+0.223）与 phi（+0.161）显著高于
+规模--时间预测线（技术进步更快），llama/mistral 略低于线；留出 $R^2$
+中 qwen 最高（0.588），gemma（0.109）与 phi（0.286）最低，说明这两家
+族的分数更受个体因素影响。该验证同时说明：`双驱动''模型对领先家族的
+``超出规模''能力（如 qwen）存在系统性低估，预测区间已涵盖此差异。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/v46_p4_family_cv.png}
+\caption{家族留出的规模弹性 $b_N$：全家族稳定在 0.36 附近。}
+\label{fig:p4_familycv}
+\end{figure}
+
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.8\textwidth]{figures/p4_decomposition.png}
