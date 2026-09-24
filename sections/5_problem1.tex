@@ -265,6 +265,23 @@ commoncrawl 显著偏低——域间差异不仅是均值层面的，而且是�
 \label{fig:p1_sampleconv}
 \end{figure}
 
+\textbf{域级质量分的解释力边界}：对样本级 TOPSIS 质量分做单向方差分解，
+域间方差占比（ICC）仅约 $0.047$，但域主效应 $F(6,81223)=3990$（$p<10^{-300}$，
+因 $n=81$k 而极度显著）。这说明：域间差异\textbf{统计显著、排序稳定}
+（见抽样收敛性与推断检验），但\textbf{只解释质量分方差的约 5\%}——域内
+文档级差异（同一域内不同文档的质量离散，如 book 域内 $sd=0.058$）远大于
+域间差异。据此，域级质量分定位为\textbf{第一层粗粒度筛选}（决定配比方向：
+book/arxiv 提高配比、commoncrawl 降低），文档级质量分 $Q_i$ 定位为
+\textbf{第二层细粒度筛选}（域内删选低质文档）——两级筛选各有依据，与
+``配比在域级、质量分在文档级''的应用口径一致。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{figures/v45_p1_domain_icc.png}
+\caption{域内质量分标准差（域内离散度；ICC=0.047，域间仅解释约 5\% 方差）。}
+\label{fig:p1_domainicc}
+\end{figure}
+
 \subsubsection{抽样/全量一致性验证}
 
 将 1M 抽样集与 A2/A3 扩展集合并后重新聚合，arxiv 域抽样口径 0.481 对全量
