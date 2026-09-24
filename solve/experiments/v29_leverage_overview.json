@@ -1,0 +1,41 @@
+{
+  "rows": [
+    {
+      "channel": "质量 Q (P2)",
+      "type": "损失弹性 |eps_Q|",
+      "value": 0.1460795265663229,
+      "unit": "d lnL / dQ (Q+0.1 -> L降1.5%)"
+    },
+    {
+      "channel": "上下文长度 (P3)",
+      "type": "能力弹性 b_Lctx",
+      "value": 0.197243177578566,
+      "unit": "lnS / ln L_ctx (约参数量弹性一半)"
+    },
+    {
+      "channel": "预算 C (P3)",
+      "type": "预算弹性",
+      "value": 0.16092259245235074,
+      "unit": "d ln(L*-E)/d lnC (翻倍预算损失降10.5%)"
+    },
+    {
+      "channel": "参数量 N (P2)",
+      "type": "损失弹性 |eps_N|",
+      "value": 0.06018536595561256,
+      "unit": "d lnL / d lnN"
+    },
+    {
+      "channel": "时间 t (P4)",
+      "type": "前沿斜率 b_T",
+      "value": 0.0890448564867425,
+      "unit": "d lnS / 年 (2024H2后放缓)"
+    },
+    {
+      "channel": "数据量 D (P2)",
+      "type": "损失弹性 |eps_D|",
+      "value": 0.02994223232519388,
+      "unit": "d lnL / d lnD"
+    }
+  ],
+  "scale_share_p4": 0.8365696274256044
+}

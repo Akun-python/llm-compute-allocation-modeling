@@ -97,6 +97,22 @@ github 域最低（均值 0.124），与 C4/Common Crawl 网页混合广告、�
 \label{fig:p1_conflict}
 \end{figure}
 
+\textbf{消解深度敏感性}（图 \ref{fig:p1_ksens}）：在 81{,}230 个样本
+（含抽样与扩展数据）上扫描对称截尾深度 $k\in\{0,2,4,6,8,10\}$。高冲突
+样本（冲突指数 top 20\%，$n=16{,}246$）的消解后质量分随 $k$ \textbf{严格
+单调上升}（0.307$\to$0.358，+16.7\%）——截尾深度越大，内部不一致的极端
+指标被剔除得越彻底，与``对称截尾''的语义一致；域级排序对 $k$ 稳健：与
+默认 $k=6$ 的对齐 Spearman 秩相关为 0.68--0.96，book 始终位居前二、
+c4/commoncrawl 始终垫底，仅存在相邻域的偶发互换。这说明 $k=6$
+的选择落在稳健平台上，主结论不依赖该超参数。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.78\textwidth]{figures/v28_p1_k_sens.png}
+\caption{冲突消解深度敏感性：高冲突样本质量分随 $k$ 单调上升。}
+\label{fig:p1_ksens}
+\end{figure}
+
 \subsection{领域配比--损失模型}
 
 \subsubsection{线性配比模型}
