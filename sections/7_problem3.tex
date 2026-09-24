@@ -157,6 +157,21 @@ $N^a/D^b=aA/(bB)$ 得数据最优曲线 $D^{*}(N)=49.8\,N^{1.046}$
 \label{fig:p3_dstar}
 \end{figure}
 
+\textbf{$D^{*}(N)$ 参数的 Bootstrap 区间}（图 \ref{fig:p3_dstarboot}）：
+对 B6+B7 做 300 次 case bootstrap，$D^{*}(N)=k\,N^{\alpha}$ 的指数
+$\alpha=a/b$：点估计 0.963，95\% 区间 $[0.802,1.155]$——\textbf{Chinchilla
+经验规则的线性斜率 1.0 落在区间内}，数据最优曲线的近似线性关系成立；比例
+常数 $k$：25.37（区间 $[22.2,29.3]$），即 $N=1$B 处最优数据/参数比约
+25 倍，略高于 Chinchilla 经验规则 $D=20N$（20 不在 95\% 区间内）——本
+数据口径下最优数据配比略偏向数据侧，与 B4 实际训练点分布一致。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/v49_p2_dstar_boot.png}
+\caption{$D^{*}(N)$ 参数 Bootstrap：指数 CI 含 1.0，常数 CI 高于 $D=20N$。}
+\label{fig:p3_dstarboot}
+\end{figure}
+
 \subsubsection{结构性转移点}
 
 预算扫描识别的转移点（质量激活阈值）如下：
