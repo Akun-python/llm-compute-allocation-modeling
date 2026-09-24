@@ -1,0 +1,32 @@
+[
+  {
+    "frac": 0.05,
+    "p_book_rank1": 1.0,
+    "spearman_vs_full": 0.9988095238095238
+  },
+  {
+    "frac": 0.1,
+    "p_book_rank1": 1.0,
+    "spearman_vs_full": 1.0
+  },
+  {
+    "frac": 0.2,
+    "p_book_rank1": 1.0,
+    "spearman_vs_full": 1.0
+  },
+  {
+    "frac": 0.4,
+    "p_book_rank1": 1.0,
+    "spearman_vs_full": 1.0
+  },
+  {
+    "frac": 0.7,
+    "p_book_rank1": 1.0,
+    "spearman_vs_full": 1.0
+  },
+  {
+    "frac": 1.0,
+    "p_book_rank1": 1.0,
+    "spearman_vs_full": 1.0
+  }
+]

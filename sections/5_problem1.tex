@@ -250,6 +250,21 @@ commoncrawl 显著偏低——域间差异不仅是均值层面的，而且是�
 \label{fig:p1_domain_sig}
 \end{figure}
 
+\textbf{抽样规模收敛性}（图 \ref{fig:p1_sampleconv}）：在 90k 质量样本上
+固定全量权重，按比例 $f\in\{5\%,10\%,20\%,40\%,70\%,100\%\}$ 对每域
+有放回重抽 30 次，检查域序稳定性。结果：\textbf{book 保持第 1 的概率在
+全部抽样比例下均为 1.00}（$f=5\%$ 时 book 仅约 9 条样本），重抽排序与
+全量排序的 Spearman 均值 $\geq 0.999$——域级质量排序对抽样规模高度稳健，
+``book 居首、低质域垫底''的结论在极小样本下依然成立，抽样充分性核验通过
+（质量信号幅值大、信噪比高）。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/v43_p1_sample_conv.png}
+\caption{域级质量排序的抽样收敛性：book 在 5\% 抽样下仍 100\% 保持第 1。}
+\label{fig:p1_sampleconv}
+\end{figure}
+
 \subsubsection{抽样/全量一致性验证}
 
 将 1M 抽样集与 A2/A3 扩展集合并后重新聚合，arxiv 域抽样口径 0.481 对全量
