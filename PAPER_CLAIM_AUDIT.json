@@ -1,0 +1,73 @@
+{
+  "audit_skill": "paper-claim-audit",
+  "verdict": "WARN",
+  "reason_code": "rounding_drift_plus_executor_verification_external_reviewer_timeout",
+  "summary": "45 条量化断言全部追回到原始结果文件：exact/rounding 一致；审计发现 1 处无来源数值（sigma 区间）已用可复现口径修正并重编译，1 处未固化数值（qr80）已固化进 p4_results.json。",
+  "audited_input_hashes": {
+    "main.tex": "sha256:3014a0265c6cf43c2708c74927c92d4ce70800f5121079e325adacf90e40fd6d",
+    "sections/1_restatement.tex": "sha256:6307e3fc085b48c4690e7f4e203a93095da25da877971c53b9db620b74cbdde0",
+    "sections/2_analysis.tex": "sha256:1c3b446f7a02c51c75d06c1586853fe9953ad053c672ad01367b6ef08863213f",
+    "sections/3_assumptions.tex": "sha256:a953494952f58156003112f949c01a967b20aeef8a24ab6e7abe12b4ae34ff1e",
+    "sections/4_symbols.tex": "sha256:26d23f35e96cd7f2958a4fb77633c9c0e9484cc26cb3265dbd5b6f6493477f6d",
+    "sections/5_problem1.tex": "sha256:8c11b4e6bb5bc0f65c19c236e65cba1da68b929a25fc7aa9a2c51a823360c977",
+    "sections/6_problem2.tex": "sha256:cdaf04e81371e970712389159431eab1e757d2780a3caeff2c5bed758e486e8e",
+    "sections/7_problem3.tex": "sha256:5b8238fc7499414926d81033fb498c901d50fcccf53465e23f28c495c32c8bf1",
+    "sections/8_problem4.tex": "sha256:3770387da41ab1a6ac45c8d9243263b4e31eca9f6d19a3c100bb2c7283213540",
+    "sections/9_sensitivity.tex": "sha256:0929480536b6e3a75e7aba4c71a895e7b90b9d8b272ba400203e39765b9f4dd4",
+    "sections/10_evaluation.tex": "sha256:7264537ae606a5c6f289c0fa0572f5169c468ba1f200b30f0a3201840943529a",
+    "sections/A_code.tex": "sha256:927b643a1fedabb59789462b8e145eddcbfeb661780aec62e08a0087a8e0e7e6",
+    "sections/B_params.tex": "sha256:89a0a0daaa45daa82e00eb6a2fb7e0dc699a1d4fa6a69019eb59926ceb92d1cd",
+    "solve\\results\\p4_results.json": "sha256:0122c3a655b949509811db1b12bfb88bf4b069eb08c72fb7764d01e63722ad98",
+    "solve\\results\\p2_scaling_results.json": "sha256:15bd405ff548aff306958be79e9602686dccee1a51e2889c92c363f06ce6a9e8",
+    "solve\\results\\p3_results.json": "sha256:6e8daae503dc9eabfdb94067e88543a43b081286431388b037f756c0460f9367",
+    "solve\\results\\p1_domain_quality.csv": "sha256:0f7f29b42e85d93ed62f622fd5e48373a98d0155f99261c7efb40152a1c3e46c",
+    "solve\\results\\p1_conflict_by_domain.csv": "sha256:866997c44a2de1fb429ce84f9f6614d6ad5e569adc8aee371ecf70e95291d30a",
+    "solve\\results\\p4_prediction.csv": "sha256:4c18d28db50a344ca6e6d1cad97738457bd00235e4f4de3cab27b44aa1bb732a",
+    "solve\\results\\p4_decomposition.csv": "sha256:6eae5dde8641471212f24eeefd712c628c6d1a07d811838aba8bed8fc7b51e79",
+    "solve\\results\\p4_frontier_years.csv": "sha256:b57fefc32e0cd63c49a146c6704d7c760d18754231d0bfe823802222dce6f152",
+    "solve\\results\\p1_mixture_scale_shrink.csv": "sha256:95123d5adce4f0f8ead1179ff96f5eba8f788bd2b9e0b7ae7a2346a739e8bd64",
+    "solve\\results\\p4_c8_task_stats.csv": "sha256:d2f05b65bc7736c19afd9deebfb86153aa8de12e2bda468e1700a051ac612191",
+    "solve\\experiments\\v12_p4_ci.json": "sha256:76e9ea839ad6b584d351c8aa58561896d87911c5e84070435a841d5f32e584dd",
+    "solve\\experiments\\v14_p2_profile.csv": "sha256:58ef4e81371c0dbf8bc6d4ed1670d2adad17abe266681b5185643c8fc7c82dd1",
+    "solve\\experiments\\v10_p1_ablation.csv": "sha256:c88e037d349f26e4edb5cb414d886a332659937efee295ab66412f2a0a99d877",
+    "solve\\experiments\\v11_p4_ml.csv": "sha256:a922039a8d17ec61b99747c491395cd405c7977d752118949f40f31e7cb42a31",
+    "solve\\experiments\\v16_p4_sigma.csv": "sha256:986fcc9267c40ae740ae4d02e0aaa1d5c95d7adcf54c312d5aba4f4e99e4fc45"
+  },
+  "trace_path": null,
+  "thread_id": null,
+  "reviewer_model": "executor-side mechanical check (codex gpt-6-astra ultra external review did not converge: 3h sandbox reconnect loop, terminated)",
+  "reviewer_reasoning": "ultra (attempted)",
+  "generated_at": "2026-09-24T19:52:44Z",
+  "details": {
+    "total_claims": 45,
+    "claim_counts": {
+      "exact_match": 22,
+      "rounding_ok": 23,
+      "mismatch": 0,
+      "missing_evidence": 0,
+      "ambiguous_mapping": 0
+    },
+    "resolved_issues": [
+      "sigma 敏感性区间无落盘来源 -> v16 复现并替换",
+      "qr80 数值未固化 -> p4_results.json frontier_qr80",
+      "遗留 p4_frontier_*.csv 与主文件不一致但报告未引用-建议删除"
+    ],
+    "result_files": [
+      "solve\\results\\p4_results.json",
+      "solve\\results\\p2_scaling_results.json",
+      "solve\\results\\p3_results.json",
+      "solve\\results\\p1_domain_quality.csv",
+      "solve\\results\\p1_conflict_by_domain.csv",
+      "solve\\results\\p4_prediction.csv",
+      "solve\\results\\p4_decomposition.csv",
+      "solve\\results\\p4_frontier_years.csv",
+      "solve\\results\\p1_mixture_scale_shrink.csv",
+      "solve\\results\\p4_c8_task_stats.csv",
+      "solve\\experiments\\v12_p4_ci.json",
+      "solve\\experiments\\v14_p2_profile.csv",
+      "solve\\experiments\\v10_p1_ablation.csv",
+      "solve\\experiments\\v11_p4_ml.csv",
+      "solve\\experiments\\v16_p4_sigma.csv"
+    ]
+  }
+}
