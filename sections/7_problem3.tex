@@ -126,6 +126,24 @@ $10.5\%$}，且该规律与质量成本假设无关（三种形式斜率仅差 0
 \label{fig:p3_ladder}
 \end{figure}
 
+\textbf{计算最优数据曲线 vs 实际前沿}：纯规模（$Q=Q_0$）下由 KKT 均衡
+$N^a/D^b=aA/(bB)$ 得数据最优曲线 $D^{*}(N)=49.8\,N^{1.046}$
+（tokens/param 比约 50 并随 $N$ 微增）。与 B4 十二族实际训练点对照
+（图 \ref{fig:p3_dstar}）：实际前沿模型普遍处于\textbf{数据过量区}——
+中位 $D/N=214$ tokens/param，中位为理论同 $N$ 值的 $20.8$ 倍
+（如 LLaMA-65B 实际 175 vs 理论 60，约 2.9 倍），与``算力约束、数据
+充裕''的现实一致。自洽性检验：三档预算最优解的 $(D,N)$ 在低预算时显著
+低于纯规模曲线（$10^{19}$ 处 $-72\%$）——质量通道在低预算下\textbf{替代
+数据}；随预算增大逐渐收敛（$10^{24}$ 处仅 $-5\%$），与质量饱和后``规模
+主导''的结论一致。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/v24_p2_dstar_curve.png}
+\caption{计算最优数据曲线 $D^{*}(N)$、Chinchilla 经验规则与 B4 实际训练点。}
+\label{fig:p3_dstar}
+\end{figure}
+
 \subsubsection{结构性转移点}
 
 预算扫描识别的转移点（质量激活阈值）如下：
