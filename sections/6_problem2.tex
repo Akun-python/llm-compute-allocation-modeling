@@ -207,6 +207,21 @@ B8 为大规模外推补充数据（含 calibrated 984 条与 extrapolated 720 �
 依然适用，但绝对参数不可混用。这一数据口径核验体现了对半合成数据局限性的
 严谨处理。
 
+\textbf{参数级复核}（图 \ref{fig:p2_b8refit}）：直接在 B8 原样（不映射）上
+拟合 $interaction\_N$，参数\textbf{退化到边界}：$E=0.000$、$C=0.000$
+（质量项被拟合器整体剔除）、$g=9.995$（撞上界），$a$、$b$ 由
+0.306/0.292 骤降至 0.140/0.124；且六种形式在 B8 原样上的 $R^2$ \textbf{完全相同}
+（0.274，均不含质量项）——说明 B8 原样的 $Q$ 列对``质量越低损失越高''
+规律\textbf{不携带任何信息}，与组内相关 $+0.984$ 的原始诊断互证。这构成
+``B8 不可直接混用''的形式化统计依据：直接拟合只会产生无质量的退化解。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/v40_p2_b8_refit.png}
+\caption{B8 原样 vs B6+B7 的参数对比：B8 质量项退化（$E=C=0$，$g$ 撞界）。}
+\label{fig:p2_b8refit}
+\end{figure}
+
 \subsubsection{极端规模外推}
 
 在 B10（100B--10000B 大规模基线）上检验经典标度律外推，原始与偏移修正
