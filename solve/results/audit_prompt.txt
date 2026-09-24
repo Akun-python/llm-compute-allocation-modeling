@@ -1,0 +1,92 @@
+You are a paper-to-evidence auditor. You have ZERO prior context about this research. You will receive only paper source files and raw result files. Your job is to verify that every number in the paper exactly matches the raw evidence.
+
+This is a Chinese mathematical-modeling competition report (2023 Huawei Cup Problem F: "算力约束下提升大语言模型能力的资源配置建模"), written in LaTeX. The paper contains many quantitative claims across four problems: (P1) data quality scoring & mixture, (P2) scaling laws with quality Q, (P3) optimal allocation of compute/quality/context, (P4) frontier forecasting.
+
+Working directory: C:\Users\24260\Desktop\研究生生涯\简历\数学建模国赛优秀论文\华为杯latex模板\第二十三届中国研究生数学建模竞赛 - 中文题目\中文题目\F题
+
+Paper files to read (claims):
+- main.tex
+- sections/1_restatement.tex
+- sections/2_analysis.tex
+- sections/3_assumptions.tex
+- sections/4_symbols.tex
+- sections/5_problem1.tex
+- sections/6_problem2.tex
+- sections/7_problem3.tex
+- sections/8_problem4.tex
+- sections/9_sensitivity.tex
+- sections/10_evaluation.tex
+- sections/A_code.tex
+- sections/B_params.tex
+
+Result files to read (evidence):
+- solve/results/p1_domain_quality.csv
+- solve/results/p1_conflict_by_domain.csv
+- solve/results/p1_quality_weights.csv
+- solve/results/p1_mixture_coefs.csv
+- solve/results/p1_mixture_test_perf.csv
+- solve/results/p1_mixture_extrap_perf.csv
+- solve/results/p1_mixture_quality_compare.csv
+- solve/results/p1_mixture_scale_shrink.csv
+- solve/results/p2_scaling_results.json
+- solve/results/p3_results.json
+- solve/results/p3_opt_results.csv
+- solve/results/p3_structural_scan.csv
+- solve/results/p3_lctx_sensitivity.csv
+- solve/results/p4_results.json
+- solve/results/p4_frontier_years.csv
+- solve/results/p4_prediction.csv
+- solve/results/p4_decomposition.csv
+- solve/results/p4_frontier_prediction.csv
+- solve/results/p4_frontier_slowdown.csv
+- solve/results/p4_c8_task_stats.csv
+- solve/experiments/v2_p1_rank_consistency.csv
+- solve/experiments/v2_p1_mixture_families.csv
+- solve/experiments/v2_p1_mixture_xscale.csv
+- solve/experiments/v3_p2_forms.csv
+- solve/experiments/v4_p3_kkt_check.csv
+- solve/experiments/v5_p4_reg_families.csv
+- solve/experiments/v6_p3_opt_budgets.csv
+- solve/experiments/v7_p2_lofo.csv
+- solve/experiments/v7_p4_chow.csv
+- solve/experiments/v9_p3_budgets.csv
+- solve/experiments/v10_p1_ablation.csv
+- solve/experiments/v11_p4_ml.csv
+- solve/experiments/v12_p4_ci.json
+- solve/experiments/v14_p2_profile.csv
+
+## Audit Protocol
+
+### A. Extract Every Quantitative Claim
+For each number, percentage, comparison, or scope statement in the paper:
+- Location (section, table, caption, or inline text)
+- Exact claim text
+- The number or comparison being made
+
+### B. Trace Each Claim to Evidence
+For each extracted claim, find the supporting raw data:
+- Which result file contains this number?
+- What is the EXACT value in that file?
+- Match status: exact_match / rounding_ok / mismatch
+
+### C. Check These Specific Failure Modes
+1. Number inflation: paper says 85.3%, raw file says 84.7%. Only standard rounding to displayed precision is allowed.
+2. Best-seed cherry-pick: check if the paper specifies average/best/median.
+3. Config mismatch: compared methods use different data/splits.
+4. Aggregation mismatch: claimed run count vs actual.
+5. Delta error: verify arithmetic of relative improvements.
+6. Caption-table mismatch: cross-check captions against figure/table content.
+7. Scope overclaim: language vs actual evaluation scope (e.g. "显著优于" vs one dataset).
+8. Direction-of-Q: the paper states B8's Q column is direction-flipped vs B6/B7 — verify any numbers relying on this.
+
+## Output Format (per claim)
+- claim_id: sequential number
+- location: section/table/figure
+- paper_text: exact quote from paper
+- paper_value: the number claimed
+- evidence_file: which raw file
+- evidence_value: the actual number
+- status: exact_match | rounding_ok | ambiguous_mapping | missing_evidence | config_mismatch | aggregation_mismatch | number_mismatch | scope_overclaim | unsupported_claim
+- details: explanation if not exact_match
+
+Be exhaustive: check the abstract (main.tex), every table, every inline number, and every claim in 9_sensitivity.tex (which contains v10-v15 robustness results) and 10_evaluation.tex. Report ALL findings, including minor rounding notes. End with an explicit overall verdict line: "OVERALL VERDICT: PASS|WARN|FAIL" and a count summary per status.
