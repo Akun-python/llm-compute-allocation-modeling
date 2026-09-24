@@ -1,0 +1,16 @@
+﻿method,domain_rank_rho_vs_base
+gra_entropy,1.0
+topsis_combo,1.0
+wsum_combo,1.0
+topsis_entropy,0.9642857142857145
+wsum_entropy,0.9642857142857145
+gra_combo,0.8928571428571429
+topsis_critic,0.6071428571428572
+topsis_pca,0.6071428571428572
+topsis_equal,0.6071428571428572
+gra_critic,0.4642857142857144
+gra_equal,0.4642857142857144
+wsum_equal,0.4642857142857144
+wsum_critic,0.4642857142857144
+wsum_pca,0.4642857142857144
+gra_pca,0.28571428571428575

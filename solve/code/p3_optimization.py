@@ -33,10 +33,18 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
 
-# ---- 广义标度律参数 (问题二 interaction 形式拟合值) ----
-GL = {"E": 1.551497836760937, "A": 0.5340242690174833, "a": 0.2813537379269008,
-      "B": 1.250801775247864, "b": 0.3101638726673506,
-      "C": 0.44511211150804275, "g": 0.9905293045386531, "d": 0.044689829791678105}
+# ---- 广义标度律参数 (从 p2 结果动态读取, 跟随问题二选定的形式) ----
+_p2 = os.path.join(RES, "p2_scaling_results.json")
+if os.path.exists(_p2):
+    _g = json.load(open(_p2, encoding="utf-8"))["generalized"]
+    GL = {k: float(v) for k, v in _g["forms"][_g["chosen"]]["params"].items()}
+    GL_FORM = _g["chosen"]
+else:
+    # 兜底: 问题二 interaction_N 形式拟合值
+    GL = {"E": 1.6396839267703547, "A": 0.40394596478669254, "a": 0.3054960764042083,
+          "B": 1.3228095407006433, "b": 0.2920839076580176,
+          "C": 0.35631433576271077, "g": 0.9912297150999083, "h": 0.1627368836868693}
+    GL_FORM = "interaction_N"
 ETA = 2e-4
 LCTX_CRIT = 6.0 / ETA  # 30000
 
@@ -54,8 +62,14 @@ G_FORMS = ["exp", "power", "log"]
 Q0 = 0.4
 
 def loss_generalized(N, D, Q):
-    E, A, a, B, b, C, g, d = (GL[k] for k in ["E", "A", "a", "B", "b", "C", "g", "d"])
-    return E + A * N ** (-a) + B * D ** (-b) + C * np.maximum(1 - Q, 0) ** g * D ** (-d)
+    E, A, a, B, b, C, g = (GL[k] for k in ["E", "A", "a", "B", "b", "C", "g"])
+    base = E + A * N ** (-a) + B * D ** (-b)
+    qterm = C * np.maximum(1 - Q, 0) ** g
+    if GL_FORM == "interaction":
+        qterm *= D ** (-GL["d"])
+    elif GL_FORM == "interaction_N":
+        qterm *= N ** (-GL["h"])
+    return base + qterm
 
 def cost_terms(N, D, Q, form, L_ctx):
     """返回 (C_train, C_Q, C_attn) FLOPs"""

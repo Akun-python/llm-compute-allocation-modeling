@@ -48,8 +48,9 @@ def predict_classical(p, N, D):
 
 
 def fit_generalized(N, D, Q, L, form="additive", p0=None):
-    """additive: L = E + A N^{-a} + B D^{-b} + C (1-Q)^g
-    interaction: L = E + A N^{-a} + B D^{-b} + C (1-Q)^g * D^{-d} (质量收益随数据量衰减)"""
+    """additive:  L = E + A N^{-a} + B D^{-b} + C (1-Q)^g
+    interaction:  L = E + A N^{-a} + B D^{-b} + C (1-Q)^g * D^{-d} (质量收益随数据量衰减)
+    interaction_N: L = E + A N^{-a} + B D^{-b} + C (1-Q)^g * N^{-h} (质量缺口随参数量衰减)"""
     def resid_add(p):
         E, A, a, B, b, C, g = p
         return E + A * N ** (-a) + B * D ** (-b) + C * np.maximum(1 - Q, 0) ** g - L
@@ -59,10 +60,17 @@ def fit_generalized(N, D, Q, L, form="additive", p0=None):
         return (E + A * N ** (-a) + B * D ** (-b)
                 + C * np.maximum(1 - Q, 0) ** g * D ** (-d) - L)
 
+    def resid_intN(p):
+        E, A, a, B, b, C, g, h = p
+        return (E + A * N ** (-a) + B * D ** (-b)
+                + C * np.maximum(1 - Q, 0) ** g * N ** (-h) - L)
+
     if form == "additive":
         resid, npar = resid_add, 7
-    else:
+    elif form == "interaction":
         resid, npar = resid_int, 8
+    else:
+        resid, npar = resid_intN, 8
     if p0 is None:
         p0 = np.array([L.min() * 0.7, 3.0, 0.3, 3.0, 0.3, 1.0, 1.5] + ([0.3] if npar == 8 else []))
     lb = np.array([0.0, 1e-6, 1e-4, 1e-6, 1e-4, 1e-6, 1e-4] + ([1e-4] if npar == 8 else []))
@@ -74,9 +82,13 @@ def predict_generalized(p, N, D, Q, form="additive"):
     if form == "additive":
         E, A, a, B, b, C, g = p
         return E + A * N ** (-a) + B * D ** (-b) + C * np.maximum(1 - Q, 0) ** g
-    E, A, a, B, b, C, g, d = p
+    if form == "interaction":
+        E, A, a, B, b, C, g, d = p
+        return (E + A * N ** (-a) + B * D ** (-b)
+                + C * np.maximum(1 - Q, 0) ** g * D ** (-d))
+    E, A, a, B, b, C, g, h = p
     return (E + A * N ** (-a) + B * D ** (-b)
-            + C * np.maximum(1 - Q, 0) ** g * D ** (-d))
+            + C * np.maximum(1 - Q, 0) ** g * N ** (-h))
 
 
 def r2_metric(y, yhat):
@@ -147,12 +159,12 @@ def main():
     fit_df = pd.concat([b6, b7])
     NN, DD, QQ, LL = (fit_df[k].to_numpy() for k in ["N_params_B", "D_tokens_B", "Q_score", "val_loss"])
     results = {}
-    for form in ("additive", "interaction"):
+    for form in ("additive", "interaction", "interaction_N"):
         sol = fit_generalized(NN, DD, QQ, LL, form=form)
         lh = predict_generalized(sol.x, NN, DD, QQ, form=form)
         r2 = r2_metric(LL, lh)
-        results[form] = {"params": {kk: float(v) for kk, v in
-                                    zip(["E", "A", "a", "B", "b", "C", "g"] + (["d"] if form == "interaction" else []), sol.x)},
+        pnames = ["E", "A", "a", "B", "b", "C", "g"] + (["d"] if form == "interaction" else []) + (["h"] if form == "interaction_N" else [])
+        results[form] = {"params": {kk: float(v) for kk, v in zip(pnames, sol.x)},
                          "r2_fit": r2}
         print(f"[广义 {form}] 拟合R2={r2:.5f}")
     # B8 数据一致性诊断: 同一 N,D 下 Q 与 Loss 的方向
@@ -170,15 +182,15 @@ def main():
     # B8 单独拟合 (说明: B8 为半合成外推补充, 其 Loss 尺度与 Q 方向与 B6/B7 不同,
     #  仅用于结构稳健性对照, 不作直接实验观测)
     b8_fit = {}
-    for form in ("additive", "interaction"):
+    for form in ("additive", "interaction", "interaction_N"):
         sol8 = fit_generalized(b8["N_params_B"].to_numpy(), b8["D_tokens_B"].to_numpy(),
                                1.0 - b8["Q_score"].to_numpy(), b8["val_loss"].to_numpy(), form=form)
         lh8 = predict_generalized(sol8.x, b8["N_params_B"].to_numpy(), b8["D_tokens_B"].to_numpy(),
                                   1.0 - b8["Q_score"].to_numpy(), form=form)
         b8_fit[form] = {"r2_fit_B8": r2_metric(b8["val_loss"].to_numpy(), lh8)}
         print(f"[B8 单独 {form}] 拟合R2={b8_fit[form]['r2_fit_B8']:.5f}")
-    # 选拟合优度更高者 (基于 B6+B7)
-    formg = "interaction" if results["interaction"]["r2_fit"] > results["additive"]["r2_fit"] else "additive"
+    # 选拟合优度更高者 (基于 B6+B7; 同参数个数 7/8/8, 直接比 R2)
+    formg = max(results, key=lambda f: results[f]["r2_fit"])
     pg = results[formg]["params"]
     print("选用形式:", formg, pg)
     res["generalized"] = {"chosen": formg, "forms": results, "B8_diagnosis": diag, "B8_fit": b8_fit}
@@ -186,12 +198,15 @@ def main():
     # ===== 6. 弹性与等价条件 (基准点 N=1B, D=300B, Q=0.6) =====
     E2, A2, a2, B2, b2, C2, g2 = (pg[k] for k in ["E", "A", "a", "B", "b", "C", "g"])
     d2 = pg.get("d", 0.0)
+    h2 = pg.get("h", 0.0)
 
     def Lfun(NNv, DDv, QQv):
         base_val = E2 + A2 * NNv ** (-a2) + B2 * DDv ** (-b2)
         qterm = C2 * np.maximum(1 - QQv, 0) ** g2
         if formg == "interaction":
             qterm *= DDv ** (-d2)
+        if formg == "interaction_N":
+            qterm *= NNv ** (-h2)
         return base_val + qterm
 
     N0, D0, Q0 = 1.0, 300.0, 0.6
@@ -209,6 +224,8 @@ def main():
     dLdQ = -C2 * g2 * (1 - Q0) ** (g2 - 1)
     if formg == "interaction":
         dLdQ *= D0 ** (-d2)
+    if formg == "interaction_N":
+        dLdQ *= N0 ** (-h2)
     eq_dN = -(dLdQ / dLdN) * 0.1
     res["equivalence"] = {"dLdN": dLdN, "dLdQ": dLdQ, "dN_per_dQ0.1": eq_dN}
     print(f"质量提升0.1等价于参数增加 dN = {eq_dN:.4f} B (基准点)")
@@ -220,6 +237,8 @@ def main():
         dLdQq = -C2 * g2 * (1 - q) ** (g2 - 1)
         if formg == "interaction":
             dLdQq *= D0 ** (-d2)
+        if formg == "interaction_N":
+            dLdQq *= N0 ** (-h2)
         dns.append(-(dLdQq / dLdN) * 0.1)
     res["equivalence"]["curve"] = {"q": qs.tolist(), "dN": dns}
 

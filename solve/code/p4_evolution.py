@@ -42,15 +42,14 @@ DIM_METRIC = {"IFEval": ("inst_level_strict_acc", "prompt_level_strict_acc"),
 
 
 def quantile_fit(X, y, tau=0.9):
-    """简单分位数回归 (线性规划)"""
+    """精确分位数回归 (线性规划, Koenker-Bassett 形式)"""
+    from scipy.optimize import linprog
     n, m = X.shape
-    # 用迭代重加权最小二乘近似分位数回归
-    beta = np.linalg.lstsq(X, y, rcond=None)[0]
-    for _ in range(60):
-        resid = y - X @ beta
-        w = np.where(resid > 0, tau, 1 - tau)
-        beta = np.linalg.lstsq(X * w[:, None], y * w, rcond=None)[0]
-    return beta
+    c = np.concatenate([np.zeros(m), tau * np.ones(n), (1 - tau) * np.ones(n)])
+    Aeq = np.hstack([X, np.eye(n), -np.eye(n)])
+    res = linprog(c, A_eq=Aeq, b_eq=y,
+                  bounds=[(None, None)] * m + [(0, None)] * (2 * n), method="highs")
+    return res.x[:m]
 
 
 def load_c8():
