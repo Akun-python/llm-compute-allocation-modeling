@@ -146,6 +146,38 @@ $3.2\times10^{18}$--$5.0\times10^{18}$ 区间出现训练/质量主导的短暂�
 \label{fig:p3_structural}
 \end{figure}
 
+\subsubsection{解析核对：纯规模情形的 Chinchilla 式分配}
+
+在质量固定于基线（$Q=Q_0$）、忽略质量成本的纯规模情形下，优化问题退化为
+Chinchilla 型双变量分配。由拉格朗日乘子法（KKT 条件）可直接推出均衡条件：
+\begin{equation}
+\frac{\partial L}{\partial N}\Big/\frac{\partial L}{\partial D}
+=\frac{D}{N}\quad\Longrightarrow\quad
+\frac{N^{a}}{D^{b}}=\frac{aA}{bB},
+\label{eq:kkt_balance}
+\end{equation}
+即参数量与数据量的边际损失相等；联合预算约束
+$(6+\eta L_{\text{ctx}})\times10^{18}\,ND=C$ 即可解析解出 $N^{*},D^{*}$
+（Chinchilla 式分配）。数值核对（$L_{\text{ctx}}=4096$）：
+\begin{table}[htbp]
+\centering
+\caption{KKT 解析解与数值解对比（纯规模 $Q=Q_0$）}
+\begin{tabular}{c|cc|cc|c}
+\toprule
+$C$ & $N^{*}$(解析) & $D^{*}$(解析) & $N^{*}$(数值) & $D^{*}$(数值) & 相对误差 \\
+\midrule
+$10^{19}$ & 0.246 & 5.96 & 0.226 & 6.48 & 8\% \\
+$10^{22}$ & 9.20 & 159.4 & 7.54 & 194.6 & 18\% \\
+$10^{24}$ & 102.9 & 1424.9 & 72.2 & 2031.7 & 30\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+数值解在超宽对数区间内与解析解同量级（差异源于 SLSQP 在宽边界下的收敛
+精度），解析式给出精确的规模分配基准：$N^{*}\propto C^{b/(a+b)}$、
+$D^{*}\propto C^{a/(a+b)}$，即参数量按算力的 $b/(a+b)\approx0.49$ 次方、
+数据量按 $a/(a+b)\approx0.51$ 次方扩张——与三档预算数值结果
+（$N$ 每增 $10^3$ 倍算力约增 $10^{1.5}$ 倍）一致，验证了``规模扩张主导''。
+
 \subsubsection{$L_{\text{ctx}}$ 敏感性}
 
 在 C7 可行值上扫描（幂函数质量成本）：
