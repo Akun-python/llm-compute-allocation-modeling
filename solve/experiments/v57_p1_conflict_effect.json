@@ -1,0 +1,77 @@
+{
+  "rho_weight_resolve": 1.0,
+  "rho_plain_weight": 1.0,
+  "rho_conflict_shift": 0.0,
+  "rows": [
+    {
+      "domain": "book",
+      "Q_weighted": 0.6310737918003736,
+      "Q_topsis": 0.6850789310947618,
+      "conflict_mean": 0.2745251224054523,
+      "rank_shift_resolve": 0,
+      "rank_shift_weight": 0,
+      "score_shift_resolve": 0.054005139294388216,
+      "score_shift_weight": 0.006111935079870179
+    },
+    {
+      "domain": "arxiv",
+      "Q_weighted": 0.4855356351310811,
+      "Q_topsis": 0.473684756183178,
+      "conflict_mean": 0.2233761546245336,
+      "rank_shift_resolve": 0,
+      "rank_shift_weight": 0,
+      "score_shift_resolve": 0.011850878947903098,
+      "score_shift_weight": 0.00018679568572432803
+    },
+    {
+      "domain": "c4",
+      "Q_weighted": 0.4292424183605974,
+      "Q_topsis": 0.3138097379836455,
+      "conflict_mean": 0.4214705468282844,
+      "rank_shift_resolve": 0,
+      "rank_shift_weight": 0,
+      "score_shift_resolve": 0.11543268037695192,
+      "score_shift_weight": 0.0014665167654543954
+    },
+    {
+      "domain": "commoncrawl",
+      "Q_weighted": 0.4079750922207132,
+      "Q_topsis": 0.3071091799190977,
+      "conflict_mean": 0.3242913679141413,
+      "rank_shift_resolve": 0,
+      "rank_shift_weight": 0,
+      "score_shift_resolve": 0.10086591230161551,
+      "score_shift_weight": 0.004598617610655775
+    },
+    {
+      "domain": "github",
+      "Q_weighted": 0.3858910191302275,
+      "Q_topsis": 0.2754586358706218,
+      "conflict_mean": 0.1237536827710577,
+      "rank_shift_resolve": 0,
+      "rank_shift_weight": 0,
+      "score_shift_resolve": 0.1104323832596057,
+      "score_shift_weight": 0.0027345572979647903
+    },
+    {
+      "domain": "wikipedia",
+      "Q_weighted": 0.364512402480831,
+      "Q_topsis": 0.254773280938171,
+      "conflict_mean": 0.1663422155753433,
+      "rank_shift_resolve": 0,
+      "rank_shift_weight": 0,
+      "score_shift_resolve": 0.10973912154266002,
+      "score_shift_weight": 0.007284931138739403
+    },
+    {
+      "domain": "stackexchange",
+      "Q_weighted": 0.3390263651998259,
+      "Q_topsis": 0.2507809293905483,
+      "conflict_mean": 0.1803686127666915,
+      "rank_shift_resolve": 0,
+      "rank_shift_weight": 0,
+      "score_shift_resolve": 0.08824543580927757,
+      "score_shift_weight": 0.006608846384359601
+    }
+  ]
+}

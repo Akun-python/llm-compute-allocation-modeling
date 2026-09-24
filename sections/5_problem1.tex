@@ -130,6 +130,23 @@ c4/commoncrawl 始终垫底，仅存在相邻域的偶发互换。这说明 $k=6
 \label{fig:p1_ksens}
 \end{figure}
 
+\textbf{冲突消解的有效性}（图 \ref{fig:p1_conflicteffect}）：把质量评分
+管道的三个输出阶段（平权均值 $\to$ 熵权加权均值 $\to$ 消解后 TOPSIS）的
+域序两两比较：加权--消解与平权--加权两阶段的\textbf{域序 Spearman 均为
+1.000}（$n=7$）——冲突消解只调整分数\textbf{幅度}（最大约 0.12，如
+c4 0.115/github 0.110），\textbf{不改变任何域的相对次序}；逐域冲突率
+（指标信号打架比例）以 c4 最高（0.42）、github 最低（0.12），是域级
+信号一致性的度量。域序对冲突消解口径\textbf{完全稳健}，与 v28 的
+$k$ 敏感性（0.68--0.96 对齐）一起构成对质量评分管道两个自由度
+（权重、冲突消解）的完整稳健性检验。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/v57_p1_conflict_effect.png}
+\caption{冲突率与消解位移：域序两阶段完全不变（Spearman=1.000）。}
+\label{fig:p1_conflicteffect}
+\end{figure}
+
 \subsection{领域配比--损失模型}
 
 \subsubsection{线性配比模型}
