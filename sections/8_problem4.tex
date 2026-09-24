@@ -266,6 +266,23 @@ $30$--$100$B 普遍放缓（除 MATH +1.13）；$0.3$--$1$B 推理类快速
 \label{fig:p4_taskscale}
 \end{figure}
 
+\textbf{分层演进：分化还是普惠}（图 \ref{fig:p4_stratify}）：按分位层
+（p50/p75/p90）比较年化增速。\textbf{全域}：p50 +0.30、p75 +0.69、
+p90 +0.62，p90/p50 比 \textbf{2.04}——顶层增速约为中位的两倍，
+\textbf{顶层分化}（能力进步集中在头部）。但按规模段看，\textbf{段内是
+普惠式提升}：$1$--$3$B 段 p50 +0.59 快于 p90 +0.30（比 0.50），
+$10$--$30$B 段 p50 +1.04 也快于 p90 +0.79（比 0.76）。综合含义：
+全域分化主要来自\textbf{规模段间差距扩大}（中段整体被抬升 + 头部大模型
+独享），段内各层同步进步——与 v59 两端滞后、v55 甜点区相互印证，
+``普惠与分化并存''。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/v64_p4_stratify.png}
+\caption{分层演进：全域顶层分化（p90/p50≈2），段内普惠（p50 快于 p90）。}
+\label{fig:p4_stratify}
+\end{figure}
+
 \textbf{滚动窗口参数核验}（图 \ref{fig:p4_rolling}）：以月度精度时间轴
 $t$ 对四个截止窗口（2024-06 至 2025-03）滚动拟合 QR90。规模弹性 $b_N$
 随窗口单调上升（$0.224\to0.338$，逼近全样本 $0.364$），而时间斜率 $b_T$
