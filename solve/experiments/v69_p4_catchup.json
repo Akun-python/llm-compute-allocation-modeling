@@ -1,0 +1,58 @@
+{
+  "rows": [
+    {
+      "family": "qwen",
+      "gap_log": 0.0,
+      "gap_pct": 0.0,
+      "T_catch_months": null,
+      "T_catch_label": "永不(增速不足)"
+    },
+    {
+      "family": "other",
+      "gap_log": 0.028907689382614437,
+      "gap_pct": 2.932957204112019,
+      "T_catch_months": 5.657801127222789,
+      "T_catch_label": "6 个月"
+    },
+    {
+      "family": "phi",
+      "gap_log": 0.07672212164791203,
+      "gap_pct": 7.974199777483348,
+      "T_catch_months": null,
+      "T_catch_label": "永不(增速不足)"
+    },
+    {
+      "family": "mistral",
+      "gap_log": 0.12468006800092477,
+      "gap_pct": 13.278598060334934,
+      "T_catch_months": 136.5910645533264,
+      "T_catch_label": "11.4 年"
+    },
+    {
+      "family": "llama",
+      "gap_log": 0.3468282696022003,
+      "gap_pct": 41.45737791925861,
+      "T_catch_months": null,
+      "T_catch_label": "永不(增速不足)"
+    },
+    {
+      "family": "gemma",
+      "gap_log": 0.6924341292921888,
+      "gap_pct": 99.85744057857706,
+      "T_catch_months": null,
+      "T_catch_label": "永不(增速不足)"
+    },
+    {
+      "family": "yi",
+      "gap_log": 1.2231448775949425,
+      "gap_pct": 239.78567920828144,
+      "T_catch_months": null,
+      "T_catch_label": "永不(增速不足)"
+    }
+  ],
+  "leader": {
+    "family": "qwen",
+    "S90": 43.115416222126456,
+    "g_month": 0.0571646359925272
+  }
+}

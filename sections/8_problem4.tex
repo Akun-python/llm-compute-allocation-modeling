@@ -64,6 +64,24 @@ Qwen 连续居于次席），Q4 为 Qwen（47.5）。前 5 高分模型家族的
 \label{fig:p4_family}
 \end{figure}
 
+\textbf{追赶时间的外推预测}（图 \ref{fig:p4_catchup}）：v42 给出的是
+\textbf{历史轮替}（领跑身份季度间更迭），这里用 2025-03 家族 90 分位与
+对数线性增速做\textbf{前向外推}：领跑者为 Qwen（43.1，月增速 +0.057）；
+仅 ``other'' 聚合类（41.9，差距 3\%）预计约 6 个月追平、Mistral（38.1）
+需约 137 个月（11 年，仅略快）；Phi（39.9）、Gemma（21.6）增速不足，
+\textbf{Llama（30.5）月增速仅 +0.004（年化 +0.04，近乎停滞）}、Yi
+（12.7）甚至负增长（$-1.39$/年），均判定为``永不''收敛（当前增速差
+持续）。合起来：近期多强轮替（v42），\textbf{外推下收敛到 Qwen 单极 +
+其余固定差距}——增速结构比领跑身份更能预示格局走向。（注意：90 分位
+增速含发布节奏噪声，``永不''指当前增速差延续的推演。）
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/v69_p4_catchup.png}
+\caption{家族追赶时间：仅 other 可短期追平，Llama 近乎停滞。}
+\label{fig:p4_catchup}
+\end{figure}
+
 \textbf{时间轴口径}：以 C1 的提交日期（Submission Date）作为年份依据；
 C3 的历史前沿（2019--2021）作为补充背景，取累计最大值以保证前沿单调不降
 （2020 年出现 50.0 的孤立高值、2021 回落，属半合成扩展数据，取累计口径
