@@ -7,3 +7,6 @@ solve/results/preview_*.png
 *.fdb_latexmk
 *.fls
 *.xdv
+__pycache__/
+*.pyc
+.dsh/
