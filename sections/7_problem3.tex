@@ -1,0 +1,189 @@
+\section{问题三的模型建立与求解}
+
+\subsection{问题分析}
+
+问题三在算力约束下联合优化参数量 $N$、数据量 $D$ 与数据质量 $Q$。与前两问
+的继承关系：目标函数采用问题二的广义标度律（交互形式），质量基线 $Q_0$ 取
+问题一的语料级典型质量（约 0.4）。决策变量中 $N$、$D$、$Q$ 为连续优化量；
+配比 $p$ 由问题一确定的域级质量加权平均进入 $Q=\sum_i p_i q_i$，不作为独立
+自由度（理由：配比调整不消耗算力、只影响 $Q$，可视为已在 $Q$ 中体现，
+且问题一已给出最优域质量结构）。成本方程按题意给定，$L_{\text{ctx}}$ 外生
+并依据附件 C7 的 \texttt{max\_position\_embeddings} 取值。
+
+\subsection{优化模型}
+
+\subsubsection{目标函数与约束}
+
+\begin{align}
+\min_{N,D,Q}\quad & L(N,D,Q)=E+A N^{-a}+B D^{-b}+C(1-Q)^{g}D^{-d}
+\label{eq:p3obj}\\
+\text{s.t.}\quad & C_{\text{train}}+C_Q+C_{\text{attn}}\le C,
+\label{eq:p3cons}\\
+& C_{\text{train}}=6ND,\qquad
+C_Q=D\,[g(Q)-g(Q_0)]_+,\qquad
+C_{\text{attn}}=\eta N D L_{\text{ctx}},
+\label{eq:p3costs}\\
+& N\ge N_{\min},\quad D\ge D_{\min},\quad Q_0\le Q\le 1.
+\label{eq:p3bounds}
+\end{align}
+其中参数量 $N$（B）、数据量 $D$（B）取对数空间变量以改善数值性态；质量
+成本函数 $g(Q)$ 考虑三种形式（附录 B 参数）：
+\begin{align}
+g_{\text{exp}}(Q)&=\gamma e^{\lambda Q}\ (\gamma{=}10^7,\ \lambda{=}6.0),\nonumber\\
+g_{\text{pow}}(Q)&=\gamma Q^{\lambda}\ \ (\gamma{=}5\times10^9,\ \lambda{=}4.0),\nonumber\\
+g_{\log}(Q)&=\gamma\ln(1+\lambda Q)\ (\gamma{=}2\times10^9,\ \lambda{=}10.0).
+\label{eq:gforms}
+\end{align}
+
+\subsubsection{上下文长度临界点}
+
+注意力成本与训练成本之比为 $\eta L_{\text{ctx}}/6$，两者相等的临界长度为：
+\begin{equation}
+L_{\text{ctx}}^{\text{crit}}=\frac{6}{\eta}=\frac{6}{2\times10^{-4}}
+=30000\ \text{tokens}.
+\label{eq:lcrit}
+\end{equation}
+该临界点有明确物理意义：当 $L_{\text{ctx}}>30000$ 时，注意力开销将超过训练
+开销，长上下文成为算力消耗的主导因素之一。C7 数据中
+\texttt{max\_position\_embeddings} 从 2048 到 131072 不等（中位数 4096），
+因此 $L_{\text{ctx}}=30000$ 位于 C7 可行值区间内部，敏感度分析将在
+$\{2048,4096,8192,30000,32768,131072\}$ 上扫描。
+
+\subsubsection{求解算法}
+
+问题为带非线性约束的光滑优化，采用 SLSQP 多起点求解：对 $(N,D,Q)$ 在对数
+参数空间随机生成 24 个初值，逐个做 SLSQP 迭代并取最优可行解。对结构性转移
+分析，在 $\log_{10}C\in[17,26]$ 上以 0.05 步长扫描 181 个预算点，记录最优
+解与成本份额。
+
+\subsection{结构性转移的定义与识别}
+
+\textbf{定义（结构性转移）}：设 $x^{*}(C)=(N^{*},D^{*},Q^{*})(C)$ 为预算
+$C$ 下的最优配置，定义两类转移指标：
+\begin{enumerate}
+\item \textbf{质量激活}：$Q^{*}$ 是否离开边界 $Q_0$，即
+$\mathbf{1}[Q^{*}>Q_0+\epsilon]$ 发生 0$\to$1 翻转；
+\item \textbf{成本主导成分}：训练/质量/注意力三项中份额最大的成分发生切换。
+\end{enumerate}
+若存在预算 $C^{*}$ 使上述任一指标在 $C^{*}$ 两侧取值不同，则称系统在
+$C^{*}$ 处发生\textbf{结构性转移}（策略的质变，而非量的渐变）。
+\textbf{识别方法}：数值扫描得到份额曲线后，用符号变化检测指标翻转点，再
+用 KKT 条件（在最优解处检验各约束乘子的符号与互补松弛性）确认转移点的
+几何性质（$Q$ 是否处于边界）。
+
+\subsection{求解结果}
+
+\subsubsection{三档预算最优配置}
+
+取 $L_{\text{ctx}}=4096$（C7 中位数附近）为基准，三档预算、三种成本函数
+的最优配置如下（份额为占总成本比例）：
+
+\begin{table}[htbp]
+\centering
+\caption{三档预算最优配置（$L_{\text{ctx}}=4096$）}
+\begin{tabular}{c|c|ccccc|ccc}
+\toprule
+$C$ & $g(Q)$ & $N^{*}$(B) & $D^{*}$(B) & $Q^{*}$ & $L^{*}$ & 训练份额 & 质量份额 & 注意力份额 \\
+\midrule
+$10^{19}$ & 指数 & 0.319 & 3.56 & 0.717 & 3.252 & 0.683 & 0.224 & 0.093 \\
+$10^{19}$ & 幂 & 0.296 & 4.05 & 0.584 & 3.290 & 0.719 & 0.183 & 0.098 \\
+$10^{19}$ & 对数 & 0.413 & 2.28 & 1.000 & 3.206 & 0.564 & 0.359 & 0.077 \\
+\midrule
+$10^{22}$ & 指数 & 9.83 & 140.9 & 1.000 & 2.102 & 0.831 & 0.055 & 0.113 \\
+$10^{22}$ & 幂 & 9.97 & 137.2 & 1.000 & 2.103 & 0.821 & 0.067 & 0.112 \\
+$10^{22}$ & 对数 & 9.46 & 151.3 & 1.000 & 2.099 & 0.859 & 0.024 & 0.117 \\
+\midrule
+$10^{24}$ & 指数 & 103.6 & 1407.9 & 1.000 & 1.828 & 0.875 & 0.006 & 0.119 \\
+$10^{24}$ & 幂 & 103.7 & 1403.8 & 1.000 & 1.828 & 0.874 & 0.007 & 0.119 \\
+$10^{24}$ & 对数 & 103.2 & 1418.0 & 1.000 & 1.828 & 0.878 & 0.002 & 0.120 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+三档预算均呈现``规模扩张主导''：$N^{*}$ 约按 $C^{0.5}$ 量级增长（与
+Chinchilla 计算最优分配一致），$D^{*}$ 同步扩张；质量维度在中低预算时是
+有效杠杆（$10^{19}$ 量级质量份额 18\%--36\%），到 $10^{22}$ 后 $Q^{*}$ 饱和
+于 1，质量份额迅速萎缩（降至 2\%--7\%），新增预算全部转向规模。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/p3_budget_shares.png}
+\caption{三档预算下三种质量成本函数的最优成本份额结构。}
+\label{fig:p3_shares}
+\end{figure}
+
+\subsubsection{结构性转移点}
+
+预算扫描识别的转移点（质量激活阈值）如下：
+
+\begin{table}[htbp]
+\centering
+\caption{结构性转移点（$L_{\text{ctx}}=4096$）}
+\begin{tabular}{c|ccc}
+\toprule
+成本函数 & 指数型 & 幂函数型 & 对数渐进型 \\
+\midrule
+$Q$ 激活阈值 $C^{*}$ & $1.12\times10^{18}$ & $3.16\times10^{18}$ & $3.55\times10^{18}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+三种成本函数下，$Q$ 离开基线 $Q_0$ 的预算阈值均落在 $10^{18}$ 量级（预算
+低于阈值时最优策略为纯规模扩张、质量不投入；高于阈值时质量投入激活）。该
+阈值可解析解释：质量激活条件为质量边际收益超过质量边际成本，前者
+$\sim C(1-Q_0)^{g-1}D^{-d}$，后者 $\sim g'(Q_0)D$，两者交叉处即
+$C^{*}$。三档预算中 $10^{19}$ 高于阈值、$10^{22}/10^{24}$ 远高于阈值，
+故都呈现质量投入（前已述 $10^{22}$ 起 $Q^{*}=1$ 饱和）。成本主导成分在三档
+预算下始终为训练，未发生切换，说明本问题中质量与注意力始终未越过训练成为
+主导成本——结构性转移主要表现为\textbf{质量变量的边界--内点切换}。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/p3_structural.png}
+\caption{幂函数质量成本下最优成本份额随预算的结构性演变（竖线为三档预算）。}
+\label{fig:p3_structural}
+\end{figure}
+
+\subsubsection{$L_{\text{ctx}}$ 敏感性}
+
+在 C7 可行值上扫描（幂函数质量成本）：
+
+\begin{table}[htbp]
+\centering
+\caption{$L_{\text{ctx}}$ 敏感性（幂成本，$C=10^{19}$）}
+\begin{tabular}{c|ccccc}
+\toprule
+$L_{\text{ctx}}$ & $N^{*}$(B) & $D^{*}$(B) & $Q^{*}$ & 训练份额 & 注意力份额 \\
+\midrule
+2048 & 0.304 & 4.20 & 0.578 & 0.766 & 0.052 \\
+4096 & 0.296 & 4.05 & 0.584 & 0.719 & 0.098 \\
+8192 & 0.280 & 3.80 & 0.593 & 0.639 & 0.174 \\
+\textbf{30000} & \textbf{0.227} & \textbf{2.95} & \textbf{0.632} & \textbf{0.401} & \textbf{0.401} \\
+32768 & 0.222 & 2.88 & 0.636 & 0.383 & 0.418 \\
+131072 & 0.140 & 1.74 & 0.722 & 0.146 & 0.639 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+$L_{\text{ctx}}$ 越长，注意力份额越高、最优规模越小：$L_{\text{ctx}}$ 从
+2048 增至 131072，$N^{*}$ 从 0.304B 降至 0.140B，$D^{*}$ 从 4.20B 降至
+1.74B，损失从 3.25 升至 3.37（未列出）。在临界点 $L_{\text{ctx}}^{\text
+{crit}}=30000$ 处注意力份额恰好等于训练份额（0.401 vs 0.401），与解析
+结论 $\eta L_{\text{ctx}}/6=1$ 完全吻合，验证了数值求解的正确性。该结果
+的政策含义：长上下文模型在相同预算下必须以缩小模型规模为代价，$10^{19}$
+量级预算下 128k 上下文只能训练约 0.14B 参数的小模型。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/p3_lctx_sens.png}
+\caption{注意力开销份额随上下文长度的变化（红色虚线为临界点 30000）。}
+\label{fig:p3_lctx}
+\end{figure}
+
+\subsection{小结}
+
+问题三建立了三成本项联合优化模型，得到三档预算最优配置与结构性转移点：
+$Q$ 激活阈值约 $10^{18}$ 量级（三种成本函数一致），$10^{22}$ 起质量饱和，
+新增预算转向规模；$L_{\text{ctx}}$ 临界点 30000 的注意力--训练份额相等得到
+数值验证。配比 $p$ 通过域级质量加权进入 $Q$，未引入额外自由度（理由见
+\ref{eq:p3obj} 前说明）。

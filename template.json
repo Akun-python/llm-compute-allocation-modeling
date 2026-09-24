@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "name": { "zh-CN": "华为杯", "en": "Huawei Cup" },
+  "description": {
+    "zh-CN": "2026 年第二十三届中国研究生数学建模竞赛论文模板",
+    "en": "2026 · 23rd China Postgraduate Mathematical Contest in Modeling"
+  },
+  "language": "zh-CN",
+  "entryFile": "main.tex",
+  "order": 40,
+  "defaultFor": [],
+  "fields": [
+    {
+      "id": "teamNumber",
+      "label": { "zh-CN": "参赛队号", "en": "Team number" },
+      "required": true
+    }
+  ],
+  "profileFields": ["school", "members"]
+}

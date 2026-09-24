@@ -1,0 +1,9 @@
+﻿real_attachments/
+solve/results/tex_build*.log
+solve/results/preview_*.png
+*.aux
+*.log
+*.out
+*.fdb_latexmk
+*.fls
+*.xdv

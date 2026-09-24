@@ -1,0 +1,33 @@
+\section{符号说明}
+
+\begin{table}[htbp]
+\centering
+\caption{主要符号说明}
+\begin{tabular}{c|c|c}
+\toprule
+\textbf{符号} & \textbf{含义} & \textbf{单位/取值} \\
+\midrule
+$N$ & 模型参数量 & B（十亿） \\
+$D$ & 训练数据量 & B（十亿 token） \\
+$Q$ & 数据质量综合分 & 0--1 \\
+$Q_0$ & 基线质量（配比天然质量） & 0--1 \\
+$p$ & 17 领域配比向量 & $\sum_i p_i=1$ \\
+$L$ & 验证损失（交叉熵） & --- \\
+$E,A,B,C$ & 标度律系数 & --- \\
+$\alpha,\beta,a,b,g,d$ & 标度律指数 & --- \\
+$\kappa$ & 配比系数跨尺度收缩指数 & --- \\
+$C$ & 总算力预算 & FLOPs \\
+$C_{\text{train}}$ & 训练成本 $6ND$ & FLOPs \\
+$C_Q$ & 质量提升成本 $D[g(Q)-g(Q_0)]_+$ & FLOPs \\
+$C_{\text{attn}}$ & 注意力成本 $\eta N D L_{\text{ctx}}$ & FLOPs \\
+$\eta$ & 注意力成本系数 & $2\times10^{-4}$ \\
+$L_{\text{ctx}}$ & 上下文长度 & token \\
+$L_{\text{ctx}}^{\text{crit}}$ & 注意力=训练临界长度 $6/\eta$ & 30000 token \\
+$g(Q)$ & 单位数据质量成本函数 & FLOPs/token \\
+$S$ & 排行榜综合得分（6 维平均） & 0--100 \\
+$t$ & 时间（年份，2022 为基准） & 年 \\
+$b_N,b_T$ & 前沿分位数回归的规模/时间系数 & --- \\
+$g_N$ & 开源模型参数量对数年增速 & --- \\
+\bottomrule
+\end{tabular}
+\end{table}

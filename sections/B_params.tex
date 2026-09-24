@@ -1,0 +1,45 @@
+\section{质量成本函数参数（附录 B）}
+
+问题三中单位数据质量成本函数 $g(Q)$ 采用三种形式，参数如下（FLOPs/token）：
+
+\begin{table}[htbp]
+\centering
+\caption{三种质量成本函数及其参数}
+\begin{tabular}{c|cc|c}
+\toprule
+形式 & 表达式 & 参数 & $g(1.0)$（FLOPs/token） \\
+\midrule
+指数型 & $g_{\text{exp}}(Q)=\gamma e^{\lambda Q}$ & $\gamma=10^{7}$，$\lambda=6.0$ & $\approx4.0\times10^{9}$ \\
+幂函数型 & $g_{\text{pow}}(Q)=\gamma Q^{\lambda}$ & $\gamma=5\times10^{9}$，$\lambda=4.0$ & $5.0\times10^{9}$ \\
+对数渐进型 & $g_{\log}(Q)=\gamma\ln(1+\lambda Q)$ & $\gamma=2\times10^{9}$，$\lambda=10.0$ & $\approx4.8\times10^{9}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+三种形式在 $Q\in[0,1]$ 上均单调上升：指数型在 $Q$ 接近 1 时增速最快（质量
+提升越到后期越昂贵），幂函数型次之，对数渐进型在高 $Q$ 区域增速放缓（模拟
+质量提升存在``免费午餐''递减的现实）。基线质量 $Q_0=0.4$ 时三种成本分别为
+$g(0.4)$：指数 $1.1\times10^{8}$、幂 $1.28\times10^{8}$、对数 $1.79\times
+10^{9}$（对数型在基线处成本已较高，故其质量激活阈值略大，见敏感性分析）。
+
+$L_{\text{ctx}}$ 的可行取值依据附件 C7（\texttt{model\_architecture\_metadata.\\ csv}）的 \texttt{max\_position\_embeddings} 字段：最小值 2048、25\% 分位
+2048、中位数 4096、75\% 分位 32768、最大值 131072。敏感性分析在
+$\{2048,4096,8192,30000,32768,131072\}$ 上扫描，其中 30000 为解析临界点
+$L_{\text{ctx}}^{\text{crit}}=6/\eta$。
+
+\section{附件使用与数据口径说明}
+
+\begin{itemize}
+\item A1--A3 含 26 列质量指标（19 项标量 + 8 项列表取均值后去重），
+共 272505 条有效样本；列表型指标均值压缩；负向指标方向统一后做
+1\%/99\% 缩尾与 Min--Max 归一化；
+\item B1 共 1176 条 Pythia 训练轨迹；B4/B5 为跨家族与文献缩放数据；
+B6+B7 共 810 条 $N$--$D$--$Q$ 半合成实验；B8 为外推补充（$Q$ 方向与
+B6/B7 相反，仅作结构对照）；B10 为 100B--10000B 大规模基线；
+\item C1 开源筛选以 Hub License 开源许可词为判据（2496/4564 条），
+前沿分析仅用开源子集；C4 的``Open model weights?''用于交叉核对；
+\item C8 共 1863 个模型目录、1958 个 JSON；跳过 4 个损坏文件，每目录
+取日期最新记录，共解析 1860 个模型；任务指标键：IFEval 取
+\texttt{inst\_level\_strict\_acc}、MATH 取 \texttt{exact\_match}、
+其余取 \texttt{acc\_norm}。
+\end{itemize}

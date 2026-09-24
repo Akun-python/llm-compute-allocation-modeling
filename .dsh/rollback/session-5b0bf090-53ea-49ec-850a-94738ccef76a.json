@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "sessionId": "session-5b0bf090-53ea-49ec-850a-94738ccef76a",
+  "cwd": "C:\\Users\\24260\\Desktop\\研究生生涯\\简历\\数学建模国赛优秀论文\\华为杯latex模板\\第二十三届中国研究生数学建模竞赛 - 中文题目\\中文题目\\F题",
+  "checkpoints": [
+    {
+      "turn": 1,
+      "commit": "a63330818e21ed590eef42af83a5ecb77202cf43",
+      "parent": "a63330818e21ed590eef42af83a5ecb77202cf43",
+      "time": 1790247657129,
+      "untracked": [],
+      "truncated": false
+    }
+  ],
+  "rolls": [],
+  "updatedAt": 1790247661619
+}

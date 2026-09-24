@@ -1,0 +1,158 @@
+\section{问题一的模型建立与求解}
+
+\subsection{问题分析}
+
+问题一要求完成三项任务：（1）建立数据质量评分方法，给出样本级与域级质量分；
+（2）定义并消解质量信号冲突；（3）建立 17 领域配比与损失之间的数量关系模型，
+并讨论配比效应随规模的转移。A1--A3 提供约 27.3 万条样本、22 个质量指标
+（14 项标量、8 项列表型），A4--A15 提供 1M/60M/1B 训练集与 10b/70b 估计
+五档规模下的配比--损失数据，A16 给出 17 个配比域到 7 个质量域的映射。
+
+\subsection{质量评分模型}
+
+\subsubsection{指标预处理}
+
+质量指标分为标量指标（如词数、熵、可读性等）与列表型指标（如各质量模型的
+得分分布）。列表型指标先取均值压缩为标量；对``数值越小越好''的负向指标
+（如无字母词占比、重复率）取相反数统一方向；随后对各指标做 1\%/99\% 缩尾
+抑制离群值，再按 Min--Max 归一化到 $[0,1]$。经处理后得到标准化指标矩阵
+$X\in[0,1]^{n\times 22}$。
+
+\subsubsection{组合赋权}
+
+为避免单一赋权法的偏差，采用熵权法与 CRITIC 法按 $0.5:0.5$ 组合：
+\begin{equation}
+w_j=\frac{1}{2}w_j^{\text{ent}}+\frac{1}{2}w_j^{\text{critic}},\qquad
+w_j^{\text{ent}}=\frac{1-H_j}{22-\sum_k H_k},\quad
+w_j^{\text{critic}}=\frac{\sigma_j\sum_{k\neq j}(1-|r_{jk}|)}{\sum_l
+\sigma_l\sum_{k\neq l}(1-|r_{lk}|)}
+\label{eq:weights}
+\end{equation}
+其中 $H_j$ 为第 $j$ 指标的归一化信息熵，$r_{jk}$ 为指标间 Spearman 相关系数。
+熵权法强调信息量，CRITIC 强调指标强度与独立性，二者互补。
+
+\subsubsection{TOPSIS 综合评分}
+
+在组合权重下构造加权标准化矩阵 $V_{ij}=w_j X_{ij}$，计算正理想解
+$V^{+}$（各列最大值）与负理想解 $V^{-}$（各列最小值），样本质量分为贴近度：
+\begin{equation}
+Q_i=\frac{d_i^{-}}{d_i^{+}+d_i^{-}},\qquad
+d_i^{+}=\sqrt{\sum_j (V_{ij}-V_j^{+})^2},\quad
+d_i^{-}=\sqrt{\sum_j (V_{ij}-V_j^{-})^2}.
+\label{eq:topsis}
+\end{equation}
+$Q_i\in[0,1]$，越接近 1 质量越高。域级质量按样本加权平均聚合：
+$Q^{(d)}=\sum_{i\in d}w_i Q_i/\sum_{i\in d}w_i$。
+
+\subsection{冲突定义与消解}
+
+\subsubsection{双族冲突指数}
+
+将 22 项指标划分为``内容质量族''（15 项，含各质量模型得分、推理/专业性等，
+记为 $Q_C$）与``格式清洁族''（7 项，含词长、标点、无字母占比等，记为
+$Q_F$）。样本级冲突指数定义为：
+\begin{equation}
+\mathrm{conf}_i=\bigl|Q_C(i)-Q_F(i)\bigr|,
+\label{eq:conflict}
+\end{equation}
+它量化了``内容很好但格式脏''（或反之）的样本所呈现的信号矛盾。统计显示
+冲突指数均值 0.152、最大值 0.632，与文档长度正相关（Spearman 0.244），
+说明长文档更易出现内容与格式的混合信号；c4 域冲突最高（均值 0.421），
+github 域最低（均值 0.124），与 C4/Common Crawl 网页混合广告、代码仓库
+高度结构化的直觉一致。
+
+\subsubsection{对称截尾融合}
+
+对冲突超过阈值（取第 90 分位 0.268，共 27249 条）的高冲突样本，实施对称
+截尾融合：按指标分从低到高排序后，同时删去最低的 $k/2$ 个与最高的 $k/2$
+个指标（$k=6$），再对剩余指标按原权重重归一化求均值。对称截尾同时抑制
+``虚假低分''（少数极差指标拖累整体）与``虚假高分''（少数极好指标拉高
+整体），避免单侧截尾带来的系统性偏差。消解后高冲突样本的平均质量分由
+0.430 升至 0.535，说明截尾确实移除了拖低评分的极端噪声指标；全量样本的
+域级质量排序在消解前后基本不变，验证了方法的稳健性。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/p1_conflict_hist.png}
+\caption{冲突指数分布：整体偏右拖尾，c4 域冲突显著高于其他域。}
+\label{fig:p1_conflict}
+\end{figure}
+
+\subsection{领域配比--损失模型}
+
+\subsubsection{线性配比模型}
+
+对每个损失域 $r\in\{1,\dots,13\}$ 与规模 $s$，以 17 维配比
+$x\in\Delta^{17}$ 为解释变量、损失 $L_r^{(s)}$ 为响应建立岭回归
+\begin{equation}
+\hat L_r^{(s)}=b_{0,r}+\sum_{k=1}^{17}\beta_{k,r}^{(s)}x_k,\qquad
+\hat\beta_r^{(s)}=\arg\min_{\beta}\Bigl\{\lVert Y_r^{(s)}-X\beta\rVert_2^2
++\lambda\lVert\beta\rVert_2^2\Bigr\}.
+\label{eq:ridge}
+\end{equation}
+岭回归在配比高度共线（领域间相关性高）时仍能给出稳定系数。训练/测试按
+规模内留出划分，采用\textbf{尺度校正 $R^2$}：在去均值（即对每个规模族内
+中心化）的意义上计算决定系数，避免不同规模绝对 Loss 尺度差异污染拟合优度。
+
+\subsubsection{跨尺度系数收缩分析}
+
+将同一损失域在不同规模 $s$ 上拟合的系数范数 $\lVert\beta^{(s)}\rVert_2$
+对参数量 $N_s$ 取对数回归：
+\begin{equation}
+\ln\lVert\beta^{(s)}\rVert_2 = \ln c - \kappa \ln N_s,
+\label{eq:shrink}
+\end{equation}
+拟合得到 $\kappa=0.314$、$c=0.730$。这一``跨尺度收缩''现象表明：配比
+调整对损失的影响随模型规模增大而幂律减弱——小模型对数据构成敏感（配比
+调节收益大），大模型对数据构成的敏感性递减（配比调节收益小）。这一结论
+为问题三的资源配置提供了重要依据：在算力充裕、模型做大后，把预算花在
+``调配比''上的边际收益下降，应转向提升整体数据质量 $Q$。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/p1_mixture_shrink.png}
+\caption{配比系数范数随模型规模幂律收缩（$\kappa=0.314$）。}
+\label{fig:p1_shrink}
+\end{figure}
+
+\subsection{求解结果}
+
+\subsubsection{域级质量分}
+
+\begin{table}[htbp]
+\centering
+\caption{七域域级质量分（$Q_{\text{weighted}}$，按样本加权）}
+\begin{tabular}{c|ccccccc}
+\toprule
+域 & book & arxiv & c4 & commoncrawl & github & wikipedia & stackexchange \\
+\midrule
+$Q$ & 0.631 & 0.486 & 0.429 & 0.408 & 0.386 & 0.365 & 0.339 \\
+$n$ & 171 & 18942 & 10000 & 9640 & 213752 & 10000 & 10000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.82\textwidth]{figures/p1_domain_q.png}
+\caption{七域域级质量分（左：加权质量分排序；右：TOPSIS 对照）。}
+\label{fig:p1_domain_q}
+\end{figure}
+
+书域（Gutenberg 等长文、排版规范）质量最高，arxiv 次之；github 与
+wikipedia 因包含大量代码与模板噪声而偏低，stackexchange 最低。该排序与
+``高质量预训练语料''的直觉一致，且为问题三的 $Q_0$ 取值提供了域级依据。
+
+\subsubsection{抽样/全量一致性验证}
+
+将 1M 抽样集与 A2/A3 扩展集合并后重新聚合，arxiv 域抽样口径 0.481 对全量
+0.486、github 0.386 对 0.386，偏差均小于 0.005，说明 22 指标评分在抽样集
+上训练、可安全迁移到全量扩展集，评分体系具有可迁移性。
+
+\subsection{小结}
+
+问题一建立了``预处理 $\to$ 组合赋权 $\to$ TOPSIS''的质量评分链，定义了
+双族冲突指数并给出对称截尾消解规则，得到 7 域质量分；进一步用岭回归刻画
+17 域配比与 13 损失域的数量关系，并通过跨尺度系数收缩（$\kappa=0.314$）
+揭示了配比效应随规模递减的规律。质量分 $Q$ 与配比关系将作为问题二、三的
+输入。

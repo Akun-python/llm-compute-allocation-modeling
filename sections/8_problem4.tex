@@ -1,0 +1,178 @@
+\section{问题四的模型建立与求解}
+
+\subsection{问题分析}
+
+问题四要求：（1）基于附件 C 把开源模型能力提升分解为规模扩张与非规模技术
+进步的贡献；（2）在算力增长放缓情景下预测未来 12/24 个月能力前沿并给不确定
+区间；（3）完成至少一项基于 C8 的逐任务聚合分析。数据侧：C1/C2 为排行榜
+（4576 条，6 维平均分 + 参数量 + 提交日期 + 许可证），C3 为扩展时序
+（2019--2025），C4 为 Epoch 模型库（含算力、参数、开源权重标记），C5/C6
+为 Loss--Benchmark 桥接，C7 为架构元数据，C8 为逐任务明细。
+
+\subsection{综合能力度量与数据口径}
+
+\textbf{能力度量}：采用 C1 排行榜 6 维平均分 $S\in[0,100]$（IFEval、BBH、
+MATH-Lvl5、GPQA、MUSR、MMLU-Pro 的平均）。该指标覆盖指令遵循、推理、数学、
+科学问答与多步推理，作为综合能力代理变量。
+
+\textbf{开源筛选口径}：以 C1 的 \texttt{Hub License} 含开源许可词
+（apache/mit/bsd/llama/gemma/cc-by 等）为主判据，并交叉核对 C4 的
+``Open model weights?'' 标记；筛选出开源模型 2496/4564 条，后续前沿分析
+仅用开源子集，避免闭源模型（如 GPT 系列）的能力虚高与数据泄露。
+
+\textbf{时间轴口径}：以 C1 的提交日期（Submission Date）作为年份依据；
+C3 的历史前沿（2019--2021）作为补充背景，取累计最大值以保证前沿单调不降
+（2020 年出现 50.0 的孤立高值、2021 回落，属半合成扩展数据，取累计口径
+规避该噪声）。
+
+\subsection{前沿能力模型}
+
+对开源模型样本建立 90\% 分位数回归：
+\begin{equation}
+\ln S = c + b_N \ln N + b_T t,
+\label{eq:frontier}
+\end{equation}
+其中 $t$ 为以 2022 年为 0 的年份。分位数回归（迭代重加权最小二乘实现）对
+前沿点稳健，比均值回归更能刻画``能力前沿''。拟合结果（$n=2493$）：
+\begin{equation}
+c=2.575,\qquad b_N=0.319,\qquad b_T=0.091.
+\label{eq:frontier_fit}
+\end{equation}
+解释：$b_N=0.319$ 表示参数每翻倍、前沿平均分约提升 $\ln2\times0.319
+\approx 22\%$（对数尺度 0.22）；$b_T=0.091$ 表示即使参数不变，每年前沿
+整体上移约 9\%——这就是非规模技术进步（算法、对齐、数据组织、工程优化）的
+量化体现。
+
+\subsection{规模/非规模贡献分解}
+
+\textbf{增长核算}：前沿能力的年增速可分解为：
+\begin{equation}
+\frac{d\ln S}{dt}=\underbrace{b_N g_N}_{\text{规模贡献}}
++\underbrace{b_T}_{\text{非规模技术贡献}},
+\label{eq:growthacc}
+\end{equation}
+其中 $g_N=d\ln N/dt$ 为开源模型参数量对数年增速。由 C4 开源模型按年份
+90\% 分位参数量拟合 $\ln N=\text{const}+g_N t$ 得 $g_N=1.251$（约为每年
+3.5 倍）。代入得：
+\begin{equation}
+\text{规模贡献}=b_N g_N=0.400\ (81.4\%),\qquad
+\text{非规模技术贡献}=b_T=0.091\ (18.6\%).
+\label{eq:decomp}
+\end{equation}
+结论：过去数年开源模型前沿能力的提升约 81\% 来自规模扩张（更大参数量），
+约 19\% 来自非规模技术进步。这一分解表明，即便算力增长放缓（参数量增速
+减半），非规模技术进步仍能维持约 0.091/年的底线增速——这是预测情景构建的
+关键。
+
+\subsection{前沿预测（12/24 个月）}
+
+\subsubsection{情景设定}
+
+\begin{itemize}
+\item \textbf{基准点}：2025 年分位数前沿水平 $\hat S_{2025}=40.8$（对应
+90\% 分位参数约 14.7B，$\ln N=2.69$），由 \eqref{eq:frontier_fit} 代入
+$t=3$ 得到；
+\item \textbf{基础情景}：参数量增速延续历史 $g_N=1.251$；
+\item \textbf{算力放缓情景}：参数量增速减半 $g_N=0.626$（模拟算力供给
+受限、摩尔定律放缓）；
+\item \textbf{不确定性}：对前沿外推噪声（$\sigma=0.12$，由残差标准差
+校准）自助采样 800 次，取 10\%/90\% 分位为置信区间。
+\end{itemize}
+
+\subsubsection{预测结果}
+
+\begin{table}[htbp]
+\centering
+\caption{开源模型能力前沿预测（$S$：6 维平均分）}
+\begin{tabular}{c|c|cc|cc}
+\toprule
+ & & \multicolumn{2}{c|}{基础情景} & \multicolumn{2}{c}{算力放缓情景} \\
+时间 & 预测中位 & 90\% 区间 & & 90\% 区间 \\
+\midrule
+2026.0（12 个月） & 66.7 & [57.2, 77.6] & 54.6 & [46.3, 63.8] \\
+2027.0（24 个月） & 109.2 & [92.5, 125.3] & 73.2 & [63.1, 86.0] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+基础情景下 12 个月前沿平均分约从 40.8 升至 66.7（+63\%）、24 个月升至
+109.2（+168\%）；放缓情景下分别为 54.6（+34\%）与 73.2（+79\%）。放缓
+情景与基础情景的差距随预测期扩大：24 个月时放缓情景比基础情景低约 33 分，
+凸显算力供给对前沿演进速度的显著约束。两个情景的 90\% 区间随预测期变宽，
+反映了外推不确定性的累积。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.88\textwidth]{figures/p4_frontier.png}
+\caption{开源模型能力前沿（历史点）与 12/24 个月预测（基础/放缓情景，90\% 区间）。}
+\label{fig:p4_frontier}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/p4_decomposition.png}
+\caption{前沿能力增长分解：规模贡献与非规模技术贡献。}
+\label{fig:p4_decomp}
+\end{figure}
+
+\subsection{Loss--Benchmark 桥接（C6）}
+
+为统一``损失''与``排行榜分''两套度量，用 C6 的 75 个模型的验证损失与
+Benchmark 平均分建立 logit--log 线性映射：
+\begin{equation}
+\text{logit}\bigl(\tfrac{S}{100}\bigr)=0.852-3.304\ln L,
+\qquad R^2=0.276\ (n=75).
+\label{eq:bridge}
+\end{equation}
+映射误差按可比性分组：同一模型同一验证集（High）误差均值 $7.96\pm2.62$
+分，不同验证集近似（Medium）为 $-3.13\pm10.26$ 分——说明桥接在中低精度
+场景可用，且高可比性样本误差更集中。该桥接可将问题二的损失预测换算为能力
+分，实现``资源 $\to$ 损失 $\to$ 能力''的完整链。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.62\textwidth]{figures/p4_bridge.png}
+\caption{Loss--Benchmark 桥接映射（C6，75 个模型）。}
+\label{fig:p4_bridge}
+\end{figure}
+
+\subsection{C8 逐任务聚合分析}
+
+从 C8 的 1863 个模型目录解析全部 JSON（跳过 4 个损坏文件，取每目录最新
+记录，得 1860 个模型），提取 6 维逐任务 \texttt{acc}（IFEval 取
+\texttt{inst\_level\_strict\_acc}、MATH 取 \texttt{exact\_match}、其余取
+\texttt{acc\_norm}），聚合为模型级平均分：
+
+\begin{table}[htbp]
+\centering
+\caption{C8 逐任务聚合得分（1860 模型）}
+\begin{tabular}{c|cccccc}
+\toprule
+任务 & BBH & IFEval & MUSR & MMLU & GPQA & MATH \\
+\midrule
+平均 & 0.475 & 0.402 & 0.400 & 0.320 & 0.298 & 0.113 \\
+标准差 & 0.116 & 0.215 & 0.046 & 0.130 & 0.039 & 0.120 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+任务难度排序（MATH 最难、BBH 相对最容易）与常识一致。将 C8 聚合分与 C1
+排行榜平均分按模型名归一化匹配（$n=1895$），Spearman 相关 $=0.989$，说明
+C8 逐任务明细与 C1 汇总高度一致，聚合口径可靠，可作为排行榜得分的独立
+复算验证。同时 BBH/GPQA 等推理任务的内部子任务（如 BBH 的 27 个子任务）
+也可逐项提取，用于刻画``推理能力谱''，此处从略。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.7\textwidth]{figures/p4_c8_tasks.png}
+\caption{C8 逐任务聚合得分（6 维）。}
+\label{fig:p4_c8}
+\end{figure}
+
+\subsection{小结}
+
+问题四建立了分位数前沿回归 $\ln S=2.575+0.319\ln N+0.091t$，把前沿能力
+年增速分解为规模 81.4\% 与非规模 18.6\%；基于 C4 参数增速构建基础与放缓
+情景，预测 12/24 个月前沿（基础 66.7/109.2，放缓 54.6/73.2，含 90\% 区间）；
+C6 桥接完成损失--能力统一；C8 逐任务聚合与 C1 对照 Spearman 0.989，验证
+口径可靠。

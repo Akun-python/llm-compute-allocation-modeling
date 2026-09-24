@@ -1,0 +1,152 @@
+\section{核心代码}
+
+全部代码位于 \texttt{solve/code/}，由 \texttt{common.py}（路径与常量）、
+\texttt{p1\_quality.py}（问题一评分与冲突消解）、\texttt{p1\_mixture.py}
+（问题一配比建模）、\texttt{p2\_scaling.py}（问题二标度律）、
+\texttt{p3\_optimization.py}（问题三优化）、\texttt{p4\_evolution.py}
+（问题四分解预测）六个脚本构成，运行环境为 Python 3.14 + numpy 2.4 +
+pandas 3.0 + scipy 1.17 + scikit-learn 1.8 + matplotlib 3.10，结果写入
+\texttt{solve/results/}，插图写入 \texttt{solve/figures/}。以下列出每个
+脚本的核心代码片段（完整代码随提交文件一并提供）。
+
+\subsection{问题一：质量评分与冲突消解（\texttt{p1\_quality.py}）}
+
+\begin{lstlisting}[language=Python, basicstyle=\ttfamily\small]
+def entropy_weight(X):
+    """信息熵权重: H_j 越小(分布越集中)权重越大"""
+    X = np.clip(X, 1e-12, 1.0)
+    P = X / X.sum(axis=0, keepdims=True)
+    H = -(P * np.log(P)).sum(axis=0) / np.log(len(X))
+    w = (1 - H) / np.maximum((1 - H).sum(), 1e-12)
+    return w / w.sum()
+
+def critic_weight(X):
+    """CRITIC 权重: 标准差大且独立性高的指标权重大"""
+    n = X.shape[1]
+    sigma = X.std(axis=0, ddof=1)
+    R = np.corrcoef(X.T)
+    indep = np.array([1 - np.abs(R[j]).sum() / (n - 1) for j in range(n)])
+    w = sigma * indep
+    return w / w.sum()
+
+def topsis(X, w):
+    V = X * w
+    Vp, Vn = V.max(axis=0), V.min(axis=0)
+    dP = ((V - Vp) ** 2).sum(axis=1) ** 0.5
+    dN = ((V - Vn) ** 2).sum(axis=1) ** 0.5
+    return dN / (dP + dN)            # 贴近度 => 质量分
+
+def conflict_index(frame):
+    """双族冲突指数 = |内容质量族均值 - 格式清洁族均值|"""
+    Qc = frame[FAMILY_C].mean(axis=1)
+    Qf = frame[FAMILY_F].mean(axis=1)
+    return (Qc - Qf).abs()
+
+def robust_resolve(X, w, k=6):
+    """对称截尾融合: 同删最低 k/2 与最高 k/2 个指标后重归一化"""
+    order = np.argsort(X, axis=1)          # 每样本科升序排列
+    keep = order[:, k//2 : X.shape[1]-k//2]
+    sel = np.zeros_like(X, dtype=bool)
+    np.put_along_axis(sel, keep, True, axis=1)
+    W = np.where(sel, w, 0.0)
+    return (X * W).sum(axis=1) / np.maximum(W.sum(axis=1), 1e-12)
+\end{lstlisting}
+
+\subsection{问题一：跨尺度系数收缩（\texttt{p1\_mixture.py}）}
+
+\begin{lstlisting}[language=Python, basicstyle=\ttfamily\small]
+def fit_eval(Xtr, Ytr, Xte, Yte, alpha=1.0, scale_correct=True):
+    """岭回归配比模型; scale_correct 为尺度校正 R2 (去均值)"""
+    model = Ridge(alpha=alpha)
+    model.fit(Xtr, Ytr)
+    pred = model.predict(Xte)
+    if scale_correct:
+        resid = (Yte - pred) - (Yte - pred).mean()   # 去整体偏差
+        r2 = 1 - (resid ** 2).sum() / ((Yte - Yte.mean()) ** 2).sum()
+    else:
+        r2 = r2_score(Yte, pred)
+    return model, r2
+
+# 跨尺度收缩: ||beta(N)|| = c * N^{-kappa}
+ns = np.array([0.001, 0.06, 1.0])          # 1M/60M/1B 规模参数量(B)
+norms = np.array([norm_beta_1m, norm_beta_60m, norm_beta_1b])
+kappa = -np.polyfit(np.log(ns), np.log(norms), 1)[0]
+\end{lstlisting}
+
+\subsection{问题二：广义标度律拟合（\texttt{p2\_scaling.py}）}
+
+\begin{lstlisting}[language=Python, basicstyle=\ttfamily\small]
+def fit_generalized(N, D, Q, L, form="interaction"):
+    """最小二乘拟合 L = E + A N^-a + B D^-b + C(1-Q)^g D^-d"""
+    def resid(p):
+        E, A, a, B, b, C, g = p[:7]
+        d = p[7] if form == "interaction" else 0.0
+        return (E + A * N**(-a) + B * D**(-b)
+                + C * np.maximum(1 - Q, 0)**g * D**(-d) - L)
+    p0 = np.array([L.min()*0.7, 3, 0.3, 3, 0.3, 1, 1.5, 0.3])
+    lb = np.array([0, 1e-6, 1e-4, 1e-6, 1e-4, 1e-6, 1e-4, 1e-4])
+    ub = np.array([L.min()*1.2, 1e3, 5, 1e3, 5, 1e3, 10, 5])
+    return least_squares(resid, p0, bounds=(lb, ub), max_nfev=60000)
+
+def r2_offset(y, yhat):
+    mu = (y - yhat).mean()                 # 家族偏移修正 R2
+    return 1 - ((y - yhat - mu)**2).sum() / ((y - y.mean())**2).sum()
+\end{lstlisting}
+
+\subsection{问题三：算力约束优化（\texttt{p3\_optimization.py}）}
+
+\begin{lstlisting}[language=Python, basicstyle=\ttfamily\small]
+def solve_opt(C, form, L_ctx, Q0v=0.4):
+    """SLSQP 多起点求解 min L(N,D,Q) s.t. 成本<=C"""
+    def obj(z):
+        lnN, lnD, Q = z
+        Q = np.clip(Q, Q0v, 1.0)
+        return loss_generalized(np.exp(lnN), np.exp(lnD), Q)
+
+    def cons(z):
+        lnN, lnD, Q = z
+        N, D = np.exp(lnN), np.exp(lnD)
+        ct = 6e18 * N * D                          # C_train
+        cq = D*1e9 * max(g_cost(Q, form) - g_cost(Q0v, form), 0.0)
+        ca = ETA * (N*1e9) * (D*1e9) * L_ctx       # C_attn
+        return C - (ct + cq + ca)
+
+    best = None
+    for seed in range(24):
+        rng = np.random.default_rng(seed)
+        z0 = [rng.uniform(np.log(0.01), np.log(5000)),
+              rng.uniform(np.log(1), np.log(5000)),
+              rng.uniform(Q0v, 0.98)]
+        sol = minimize(obj, z0, method="SLSQP",
+                       constraints={"type": "ineq", "fun": cons},
+                       bounds=[(np.log(0.005), np.log(1e5)),
+                               (np.log(0.2), np.log(1e5)), (Q0v, 1.0)],
+                       options={"maxiter": 600, "ftol": 1e-12})
+        if sol.success and (best is None or sol.fun < best[0]):
+            best = (sol.fun, sol.x)
+    return best
+\end{lstlisting}
+
+\subsection{问题四：前沿分解与预测（\texttt{p4\_evolution.py}）}
+
+\begin{lstlisting}[language=Python, basicstyle=\ttfamily\small]
+def quantile_fit(X, y, tau=0.9):
+    """迭代重加权最小二乘实现分位数回归"""
+    beta = np.linalg.lstsq(X, y, rcond=None)[0]
+    for _ in range(60):
+        resid = y - X @ beta
+        w = np.where(resid > 0, tau, 1 - tau)
+        beta = np.linalg.lstsq(X * w[:, None], y * w, rcond=None)[0]
+    return beta
+
+# 增长核算: 规模贡献 = b_N * g_N, 非规模 = b_T
+beta = quantile_fit(np.column_stack([np.ones(n), lnN, t]), lnS)
+bN, bT = beta[1], beta[2]
+gN = np.polyfit(years, np.log(params90), 1)[0]     # C4 90% 分位参数
+scale_share = bN * gN / (bN * gN + bT)
+
+# 自助法 90% 预测区间
+paths = [[c0 + bN*(lnN_now + gNsc*h/12) + bT*(t_h-2022)
+          + np.random.normal(0, 0.12) for _ in range(800)]
+         for h in horizons]
+\end{lstlisting}

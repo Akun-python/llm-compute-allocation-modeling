@@ -1,0 +1,141 @@
+% 使用 XeLaTeX 编译。封面必须保留，学校、队号及姓名仅出现在封面。
+\documentclass[bwprint]{gmcmthesis}
+
+% === 额外宏包（cls 未内置的）===
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage[section]{placeins}
+\usepackage{needspace}
+\usepackage{subfig}
+\usepackage{float}
+\usepackage{algorithm2e}
+
+% === TikZ ===
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit,calc}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{multirow}
+
+% === 引用上标格式 ===
+\setcitestyle{super,square,comma}
+
+% === 竞赛信息 ===
+\title{算力约束下提升大语言模型能力的资源配置建模\\ ——基于数据质量度量、广义标度律与算力约束联合优化}
+\baominghao{[参赛队号]}
+\schoolname{[学校名称]}
+\membera{[成员A]}
+\memberb{[成员B]}
+\memberc{[成员C]}
+
+\begin{document}
+
+\maketitle
+
+% === 摘要 ===
+\begin{abstract}
+
+本文围绕``算力约束下如何配置数据、参数与训练规模以最大化大语言模型能力''这一
+主线，从数据质量度量出发，逐层建立广义标度律、算力约束优化与前沿预测模型，
+四问环环相扣，全部数值结果由真实附件数据计算得到，可由随附脚本复算。
+
+\textbf{问题一：数据质量评分、冲突消解与领域配比建模。}针对 22 项质量指标
+（14 项标量、8 项列表型），经方向统一、1\%/99\% 缩尾与 Min--Max 归一化后，
+采用熵权与 CRITIC 组合赋权（0.5:0.5）并叠加 TOPSIS 贴近度得到样本级质量分
+$Q$。定义``内容质量族''与``格式清洁族''两族指标均值之差的绝对值作为冲突指数，
+对高冲突样本（第 90 分位阈值 0.268）实施对称截尾融合消解。七域域级质量为：
+book 0.631、arxiv 0.486、c4 0.429、commoncrawl 0.408、github 0.386、
+wikipedia 0.365、stackexchange 0.339；抽样集与全量集质量高度一致
+（arxiv 0.481 vs 0.486），验证了评分的可迁移性。进一步对 13 个损失域、
+17 维配比建立岭回归配比模型，并创新性提出``跨尺度系数收缩''分析：系数范数
+随参数量幂律收缩（$\kappa=0.314$），量化了配比敏感度随规模递减的机理。
+
+\textbf{问题二：含数据质量维度的广义标度律。}在经典标度律
+$L=E+A N^{-\alpha}+B D^{-\beta}$ 上，用 1176 条 Pythia 训练轨迹拟合得到
+$E=1.690$、$A=0.354$、$\alpha=0.340$、$B=1.240$、$\beta=0.280$
+（拟合 $R^2=0.999$），与文献 Chinchilla 参数一致；跨家族验证引入``家族偏移
+修正 $R^2$''处理绝对 Loss 尺度差异，基线族外验证 $R^2=0.830$。将质量维度推广
+为 $L=E+A N^{-a}+B D^{-b}+C(1-Q)^{g}D^{-d}$（$R^2=0.972$），$Q=1$ 时自动
+退化回经典形式。弹性分析显示质量弹性（$-0.141$）高于参数量（$-0.062$）与数据量
+（$-0.030$）：质量提升 0.1 等价于增加 0.229B 参数。同时诊断出附件 B8 的
+$Q$ 列与 B6/B7 方向相反（组内相关 $+0.98$ vs $-0.93$），说明其为半合成外推
+数据，仅作结构对照，体现了对数据口径的严谨核验。
+
+\textbf{问题三：算力约束下的多维资源联合优化与结构性转移。}以广义标度律为目标
+函数，在预算 $C\in\{10^{19},10^{22},10^{24}\}$ FLOPs 下联合优化参数量 $N$、
+数据量 $D$ 与质量 $Q$，其中训练成本 $C_{\text{train}}=6ND$、质量成本
+$C_{Q}=D[g(Q)-g(Q_0)]_{+}$、注意力成本 $C_{\text{attn}}=\eta N D L_{\text{ctx}}$，
+外生上下文长度 $L_{\text{ctx}}$ 取 C7 可行值，并解析给出注意力与训练成本
+相等的临界点 $L_{\text{ctx}}^{\text{crit}}=6/\eta=30000$。三档预算下最优分配
+呈现清晰的结构性转移：预算低于约 $3\times10^{18}$ 时最优 $Q=Q_0$（纯规模
+扩张），越过阈值后质量投入激活，$10^{22}$ 量级时 $Q$ 饱和于 1，新增预算全部
+转向规模扩张；三种质量成本函数下的转移阈值分别为 $1.12\times10^{18}$、
+$3.16\times10^{18}$、$3.55\times10^{18}$，且 $L_{\text{ctx}}$ 越长注意力份额
+越高，在临界点处注意力份额恰好等于训练份额。
+
+\textbf{问题四：技术演进分解与前沿预测。}以 C1 开源模型前沿为对象建立 90\%
+分位数回归 $\ln S=c+b_N\ln N+b_T t$（$b_N=0.319$、$b_T=0.091$），把前沿能力
+年增速分解为规模贡献 81.4\% 与非规模技术贡献 18.6\%；利用 C4 估算开源模型
+参数量年均对数增速 1.251，构建基础与``算力增长放缓''两种情景的前沿预测：
+未来 12 个月前沿平均分由 40.8 升至 66.7（基础）或 54.6（放缓），24 个月升至
+109.2 或 73.2，并给出 90\% 自助置信区间。C6 桥接表明
+$\text{logit}(A)=0.852-3.304\ln L$；C8 逐任务聚合与 C1 排行榜对照 Spearman
+相关 0.989，验证聚合口径可靠。
+
+\textbf{灵敏度与稳健性}分析表明：质量权重组合扰动（0.4:0.6 至 0.6:0.4）下域级
+质量排序稳定；广义标度律对 $Q$ 项形式选择不敏感（$R^2$ 差 0.0004）；结构性
+转移阈值对三种成本函数均落在 $10^{18}$ 量级；前沿分解对分位数（0.8/0.9）选择
+稳健，规模贡献始终占主导。
+
+\keywords{数据质量评分\quad 冲突消解\quad 广义标度律\quad 算力约束优化\quad 结构性转移\quad 前沿预测}
+\end{abstract}
+
+\pagestyle{plain}
+
+% === 正文 ===
+\input{sections/1_restatement}
+\input{sections/2_analysis}
+\input{sections/3_assumptions}
+\input{sections/4_symbols}
+\input{sections/5_problem1}
+\input{sections/6_problem2}
+\input{sections/7_problem3}
+\input{sections/8_problem4}
+\input{sections/9_sensitivity}
+\input{sections/10_evaluation}
+
+% === 参考文献 ===
+\begin{thebibliography}{99}
+\bibitem{refKaplan} Kaplan J, McCandlish S, Henighan T, et al. Scaling Laws for Neural Language Models[J]. arXiv:2001.08361, 2020.
+\bibitem{refHoffmann} Hoffmann J, Borgeaud S, Mensch A, et al. Training Compute-Optimal Large Language Models[C]. NeurIPS 2022, arXiv:2203.15556.
+\bibitem{refRae} Rae J W, Borgeaud S, Cai T, et al. Scaling Language Models: Methods, Analysis \& Insights from Training Gopher[J]. arXiv:2112.11446, 2022.
+\bibitem{refBrown} Brown T B, Mann B, Ryder N, et al. Language Models are Few-Shot Learners[C]. NeurIPS 2020.
+\bibitem{refHernandez} Hernandez D, Kaplan J, Henighan T, et al. Scaling Laws for Transfer[J]. arXiv:2102.01293, 2021.
+\bibitem{refSardana} Sardana N, Portes J, Biderman S, et al. Data Quality Scaling Laws: Metrics and Benchmarks for Pretraining Data[C]. NeurIPS 2024.
+\bibitem{refEntropy} Shannon C E. A Mathematical Theory of Communication[J]. Bell System Technical Journal, 1948, 27(3): 379-423.
+\bibitem{refTopsis} Hwang C L, Yoon K. Multiple Attribute Decision Making: Methods and Applications[M]. Springer, 1981.
+\bibitem{refCritic} Diakoulaki D, Mavrotas G, Papayannakis L. Determining Objective Weights in Multiple Criteria Problems: The CRITIC Method[J]. Computers \& Operations Research, 1995, 22(7): 763-770.
+\bibitem{refRidge} Hoerl A E, Kennard R W. Ridge Regression: Biased Estimation for Nonorthogonal Problems[J]. Technometrics, 1970, 12(1): 55-67.
+\bibitem{refEpoch} Epoch AI. Parameter, Compute and Data Trends in Machine Learning[DB/OL]. https://epoch.ai/data/trends.
+\bibitem{refKoomey} Koomey J, Berard S, Sanchez M, et al. Implications of Historical Trends in the Electrical Efficiency of Computing[J]. IEEE Annals of the History of Computing, 2011, 33(3): 46-54.
+\end{thebibliography}
+
+% === 附录 ===
+\begin{appendices}
+\input{sections/A_code}
+\input{sections/B_params}
+\end{appendices}
+
+% === AI 工具使用披露（按赛题要求）===
+\section*{附录 C：AI 工具使用披露}
+\addcontentsline{toc}{section}{AI 工具使用披露}
+本文在解题与写作过程中使用了 AI 辅助工具，使用环节与贡献范围如下：
+\begin{enumerate}
+\item \textbf{编程实现}：使用 AI 编程助手协助编写与调试 Python 计算脚本；所有
+数值结果均由本地脚本独立运行产生，可复算核验；
+\item \textbf{文献检索}：使用学术检索工具定位标度律、数据质量与评价方法等文献，
+正文引用均经人工核对；
+\item \textbf{文本组织}：使用 AI 辅助整理表述与 LaTeX 排版；模型假设、推导与
+结论均经人工复核。
+\end{enumerate}
+
+\end{document}
