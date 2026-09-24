@@ -351,6 +351,23 @@ commoncrawl/c4/github 的\textbf{高质长尾就是第二层筛选的可挽救�
 \label{fig:p1_filtercurve}
 \end{figure}
 
+\textbf{域画像的相似性结构}（图 \ref{fig:p1_domainprof}）：把每域的
+22 维指标均值当作``域画像''，其相关矩阵呈\textbf{两极结构}：
+\textbf{book 画像独树一帜}——与 github 相关仅 $-0.02$（近乎正交）、
+与全部其他域 $\le 0.5$（最高 arxiv 0.49）；而低质通用域
+c4/commoncrawl/stackexchange/wikipedia 两两相关 $\ge 0.82$，构成
+\textbf{核心聚簇}；arxiv 居中（0.45--0.67）。含义：域序第一的 book
+对应的是\textbf{画像的独特性}（质量高 = 画像不同），而非同一质量轴的
+更高取值——与 v48 的 book 优势主要来自结构/格式族、v58 的分布形状
+差异互相咬合。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{figures/v65_p1_domain_prof.png}
+\caption{域画像层次聚类与相关矩阵：book 独树一帜、低质域聚簇。}
+\label{fig:p1_domainprof}
+\end{figure}
+
 \textbf{book 领先的指标族分解}（图 \ref{fig:p1_contrib}）：把加权标准化值
 $V_{ij}=w_jX_{ij}$ 的域均值差按指标族可加分解，book 相对全域的加权分优势
 为 0.1441，其中\textbf{结构/格式族贡献 +0.178}（主导），语义模型分族
