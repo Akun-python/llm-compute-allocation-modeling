@@ -307,14 +307,29 @@ $(N,Q)$ 组合）。等高线的局部切线斜率即替代率：基准点处
 $dN/dQ=-2.43$B/单位$Q$（每提升 0.1 质量可减少 0.243B 参数需求），与
 弹性比值 $|\varepsilon_Q/\varepsilon_N|=0.146/0.060\approx2.4$ 一致；
 而沿轨迹向下，$N$ 越小所需补偿越少（$N$ 的 $-a$ 与 $-h$ 幂的凸性），
-严格非线性等价为每 0.1 节省 0.216B（见 Bootstrap 节）——替代率随规模
-递减，进一步支持``质量投入替代参数投入''的结论。
+严格非线性等价为每 0.1 节省 0.216B（见 Bootstrap 节）。
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.8\textwidth]{figures/v36_p2_subst_contour.png}
 \caption{质量--规模替代等值面：等损失轨迹显示质量对参数的替代关系。}
 \label{fig:p2_subst}
+\end{figure}
+
+\textbf{替代率随规模的演化}（图 \ref{fig:p2_substscale}）：用隐函数定理
+$dN/dQ=-L_Q/L_N$ 评估等损失面上替代率沿规模轴的分布：每 $+0.1Q$
+等价可减少的参数从 $N=0.3$B 处的 0.063B 上升至 $N=1$B 处的 0.243B
+（与等值面基准点一致）、$N=3$B 处约 0.6B——\textbf{替代率随规模近乎
+线性上升}（比值 $eq/N$ 约 0.21--0.25，缓慢增长）。含义：质量购买力的
+\textbf{绝对等价参数}随模型规模增大而增大（大模型下提升 0.1 质量节省
+更多参数），但\textbf{相对份额}（等价参数/当前规模）约 0.24 保持稳定
+——质量投入与规模投入的替代比率在大中小规模上同量级。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/v51_p2_subst_scale.png}
+\caption{每 +0.1Q 等价减少的参数随规模的演化（近线性上升）。}
+\label{fig:p2_substscale}
 \end{figure}
 
 \textbf{弹性排序对参考点的稳健性}（图 \ref{fig:p2_epsgrid}）：在
