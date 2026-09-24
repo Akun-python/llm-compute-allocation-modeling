@@ -170,6 +170,27 @@ $\pm75\%$（24 个月）互证；残差在 12 个月口径下与 $g_N$ 相当，
 \label{fig:p4_uncert}
 \end{figure}
 
+\textbf{能力目标的算力落地换算}（图 \ref{fig:p4_computeconv}）：把 P4 的
+前沿模型（QR90 反解 $N$）与 v24 的数据最优曲线（$D^{*}(N)=49.8N^{1.046}$）
+串成``能力目标 $\to$ 训练算力 $\to$ 工程规模''的决策换算器（2025 年，
+整数年口径）：$S=70$ 需 $N\approx62$B、$1.4\times10^{24}$ FLOP（H100
+$\approx1.6$ 万卡天）；$S=90$ 需 123B、$5.7\times10^{24}$（$\approx6.6$
+万卡天）；$S=120$ 需 271B、$2.8\times10^{25}$（$\approx33$ 万卡天）；
+$S=150$ 需 501B、$1.0\times10^{26}$（$\approx116$ 万卡天）——$S$ 从
+60 到 150 跨越约 3 个数量级。作为对照，P3 联合优化在 $C=10^{22}$ 预算
+下的最优解（$N^{*}\approx6$B）对应训练算力 $8.75\times10^{21}$ FLOP。
+\textbf{说明}：$D^{*}$ 曲线为理论最优（数据充足假设），$C_{train}$ 不含
+质量/注意力成本，H100 取理想吞吐，因此本表给出的是\textbf{下界量级}而非
+精确预算；其价值在于把 P2 标度律、P3 优化、P4 预测串联为可直接使用的
+预算决策接口。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.82\textwidth]{figures/v68_p4_compute_conversion.png}
+\caption{能力目标 $\to$ 训练算力（对数轴）：S=90 约需 6.6 万卡天。}
+\label{fig:p4_computeconv}
+\end{figure}
+
 \textbf{增速假设敏感性}（图 \ref{fig:p4_gNsens}）：预测的核心外生假设是
 参数量年均对数增速 $g_N$（基准 1.251）。在
 $g_N\in[0.4,1.6]$ 内扫描得到：12 个月前沿在 52.8--81.7 之间（相对基准
