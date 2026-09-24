@@ -34,6 +34,22 @@ MATH-Lvl5、GPQA、MUSR、MMLU-Pro 的平均）。该指标覆盖指令遵循、
 \label{fig:p4_opengap}
 \end{figure}
 
+\textbf{差距的规模段分解}（图 \ref{fig:p4_opeseg}）：把开/闭源差距按
+参数规模分桶，中位分比值（open/closed）：$0.3$--$1$B 段 0.93$\to$0.89
+（开源落后约 10\%）；$1$--$3$B 段 0.79$\to$1.13（\textbf{开源反超}）；
+$3$--$10$B 段长期持平（约 1.00）；$10$--$30$B 段 1.35$\to$0.82$\to$1.07
+（波动后趋平）；$30$--$100$B 段 0.88$\to$0.98（追赶中，样本较稀）。
+\textbf{开源追赶分规模段}：中段（$1$--$10$B）已基本完成/接近，两端
+（最小端与头部大模型）仍落后约 10\%——v38 的平均比值 0.95 在此分解为
+``中段持平 + 两端滞后''的结构。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/v59_p4_open_seg.png}
+\caption{开源--闭源差距的规模段分解：中段持平、两端滞后约 10\%。}
+\label{fig:p4_opeseg}
+\end{figure}
+
 \textbf{开源前沿的家族竞争动态}（图 \ref{fig:p4_family}）：按季度识别开源
 领跑家族：2024Q2 为 Llama（38.7），Q3 与 2025Q1 由其他家族领跑（51.2/47.2，
 Qwen 连续居于次席），Q4 为 Qwen（47.5）。前 5 高分模型家族的 HHI 从 2024Q2
