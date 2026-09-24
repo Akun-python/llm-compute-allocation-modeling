@@ -10,3 +10,5 @@ solve/results/preview_*.png
 __pycache__/
 *.pyc
 .dsh/
+
+solve/experiments/*_scores.csv
