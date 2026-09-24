@@ -176,6 +176,7 @@ $0.7$），对 17 个损失域中的 8 个有压低作用且无强副作用，�
 \begin{table}[htbp]
 \centering
 \caption{七域域级质量分（$Q_{\text{weighted}}$，按样本加权）}
+\label{tab:p1_domain}
 \begin{tabular}{c|ccccccc}
 \toprule
 域 & book & arxiv & c4 & commoncrawl & github & wikipedia & stackexchange \\
@@ -196,6 +197,22 @@ $n$ & 171 & 18942 & 10000 & 9640 & 213752 & 10000 & 10000 \\
 书域（Gutenberg 等长文、排版规范）质量最高，arxiv 次之；github 与
 wikipedia 因包含大量代码与模板噪声而偏低，stackexchange 最低。该排序与
 ``高质量预训练语料''的直觉一致，且为问题三的 $Q_0$ 取值提供了域级依据。
+
+\textbf{域间差异的推断性检验}（图 \ref{fig:p1_domain_sig}）：对样本级
+TOPSIS 质量分做 Kruskal--Wallis 检验（$H=1.5\times10^4$，$p<10^{-300}$），
+拒绝七域同分布的零假设；两两 Mann--Whitney $U$ 检验经 Bonferroni 校正
+（$\alpha=2.4\times10^{-3}$）后 \textbf{21/21 对全部显著}，其中 book 显著
+高于全部其余域（book 0.495 vs 次高 arxiv 0.378），stackexchange/c4/
+commoncrawl 显著偏低——域间差异不仅是均值层面的，而且是统计上可识别的
+系统性差异；book 居首、低质域垫底的结论与主链路表 \ref{tab:p1_domain} 一致。
+（注：抽样口径中部域的次序与加权口径略有不同，属赋权口径差异。）
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/v30_p1_domain_sig.png}
+\caption{七域样本级质量分分布（箱线图，Kruskal--Wallis $p<10^{-300}$）。}
+\label{fig:p1_domain_sig}
+\end{figure}
 
 \subsubsection{抽样/全量一致性验证}
 

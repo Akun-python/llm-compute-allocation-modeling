@@ -319,3 +319,12 @@
 - 政策含义: 质量/上下文单投入杠杆最高, 数据最低(叠加kappa收缩),
   时间趋势外生不可购买 => 为预算分配结论提供一致性坐标.
 - 表+图入报告评价节 (能力杠杆总览小节).
+
+
+## v30: 域级质量分推断性检验
+脚本: experiments/v30_p1_domain_sig.py (sample 文件 n=51230 含 7 域)
+- Kruskal-Wallis H=15047 (p<1e-300): 7 域质量分布存在显著差异.
+- 均值序: book 0.495 > arxiv 0.378 > wikipedia 0.315 > github 0.307 >
+  stackexchange 0.297 > c4 0.281 > commoncrawl 0.264 (与全量口径序一致).
+- 两两 Mann-Whitney Bonferroni: 21/21 对全部显著 (alpha=2.4e-3).
+- 箱线图入报告问题一 (域级质量分推断段).
