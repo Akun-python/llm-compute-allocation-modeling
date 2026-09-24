@@ -156,6 +156,23 @@ $-0.047$（三种形式几乎相同，仅差 0.001），比超额口径的 $-0.1
 \label{fig:p3_budgetloss}
 \end{figure}
 
+\textbf{最优解对参数不确定性的稳健性}（图 \ref{fig:p3_paramrobust}）：用
+v33 的 Bootstrap 参数区间取 $a/C/g/h$ 的 $2.5\%/97.5\%$ 角点（16 组 +
+中位），在 $C=10^{22}$（exp 形式）重解联合优化：\textbf{全部角点的
+$Q^{*}=1.000$}（质量饱和对参数不确定完全稳健，与饱和预算 $3.4\times
+10^{20}$ 一致）；$N^{*}$ 带宽 $4.6$--$7.8$B（中位 6.1B，$\pm28\%$，来自
+规模弹性 $a/h$ 的区间）；$L^{*}$ 带宽 $2.075$--$2.232$（$\pm3.5\%$，
+几乎不敏感）。含义：在质量饱和区，\textbf{最优损失承诺对参数不确定性
+高度稳健}，$N^{*}$ 带宽可控——与 v54 的参数不确定性可忽略（7\%--12\%）
+相互印证。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/v62_p3_param_robust.png}
+\caption{参数角点下的最优解：Q*=1 稳定、L* 带宽 ±3.5\%、N* ±28\%。}
+\label{fig:p3_paramrobust}
+\end{figure}
+
 \textbf{计算最优数据曲线 vs 实际前沿}：纯规模（$Q=Q_0$）下由 KKT 均衡
 $N^a/D^b=aA/(bB)$ 得数据最优曲线 $D^{*}(N)=49.8\,N^{1.046}$
 （tokens/param 比约 50 并随 $N$ 微增）。与 B4 十二族实际训练点对照
