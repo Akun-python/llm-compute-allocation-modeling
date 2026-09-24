@@ -152,6 +152,20 @@ $53\%$（0.126$\to$0.060），交互($N$) 形式留出误差最低
 \label{fig:p2_cv}
 \end{figure}
 
+\textbf{信息准则选择}（图 \ref{fig:p2_bic}）：为避免复杂度偏好，补充
+BIC/AIC 形式选择（$n=810$）。interaction\_N 的 BIC 最优（$-4813.73$）；
+次优 multiplicative 的 $\Delta\text{BIC}=20.36$（>10，决定性证据），其余
+形式 $\Delta\text{BIC}=235$--244 被\textbf{决定性拒绝}。信息准则与留出
+交叉验证结论一致：``质量--参数量交互''形式并非样本内过拟合，而是在惩罚
+复杂度后仍然胜出的模型。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.78\textwidth]{figures/v50_p2_bic_table.png}
+\caption{六种形式的 BIC/AIC 选择：interaction\_N 决定性胜出。}
+\label{fig:p2_bic}
+\end{figure}
+
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.85\textwidth]{figures/p2_generalized_fit.png}

@@ -503,3 +503,12 @@
 - k: 25.37, CI [22.20, 29.31] => D*(1B)/1B ~25x, 略高于 Chinchilla D=20N
   经验规则 (20 不在 CI 内) => 本数据口径下最优数据/参数比 22-29 倍.
 - 图入报告问题二 (D* 最优数据量段, 与 v24 曲线互证).
+
+
+## v50: 六形式 BIC/AIC 模型选择
+脚本: experiments/v50_p2_bic_table.py (B6+B7 n=810)
+- interaction_N BIC=-4813.73 最优 (R2 0.9791); 次优 multiplicative dBIC=20.36
+  (>10 决定性证据); interaction_D/additive/saturating/exponential_Q dBIC 235-244
+  被决定性拒绝.
+- 结论: interaction_N 的选择在信息准则下决定性成立 (不仅是 R2 最高).
+- 图入报告问题二 (六形式选择段, 与 CV 互证).
