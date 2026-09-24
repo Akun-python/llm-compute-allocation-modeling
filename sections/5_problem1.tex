@@ -385,6 +385,23 @@ $-0.013$ 与内容/主题族 $-0.021$ 近零。逐指标 Top5（词数 +0.084、
 \label{fig:p1_contrib}
 \end{figure}
 
+\textbf{指标体系的有效维度}（图 \ref{fig:p1_pcadim}）：对 22 个指标
+做 PCA，累积方差 50\%/80\%/90\% 分别只需 \textbf{3/8/11} 个主成分——
+指标体系\textbf{冗余度高但非单维}（PC1 仅解释 34.2\%，PC1--6 累积
+74.3\%）。载荷结构：PC1 是``内容质量''主成分（88\% 载荷来自内容族，
+两族平均 |载荷| 0.230 vs 0.069）；格式洁净信息主要在 PC2/PC3
+（两族载荷互补 0.186/0.145 与 0.170/0.175）。含义：两族信息
+\textbf{正交互补、缺一不可}——若只用内容族指标会丢掉 book 优势所在的
+独立信息轴（与 v48 的格式族主导互证），若只用格式族则会丢失 PC1 的
+主信息。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{figures/v70_p1_pca_dim.png}
+\caption{22 指标的有效维度（80\%=8 维）与 PC1/PC2 载荷：两族互补。}
+\label{fig:p1_pcadim}
+\end{figure}
+
 \subsubsection{抽样/全量一致性验证}
 
 将 1M 抽样集与 A2/A3 扩展集合并后重新聚合，arxiv 域抽样口径 0.481 对全量
