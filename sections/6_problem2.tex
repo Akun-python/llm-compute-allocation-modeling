@@ -122,6 +122,36 @@ L = E + A N^{-a} + B D^{-b} + C(1-Q)^{g} N^{-h}.
 \label{eq:gen_choice}
 \end{equation}
 
+\textbf{留出交叉验证（模型选择的严格检验）}：为避免``形式越复杂越拟合''
+的过拟合风险，对四种形式做 5 折 $\times$ 3 重复交叉验证，报告留出折上的
+预测 RMSE（表 \ref{tab:p2_cv}）。加入质量项后留出 RMSE 下降
+$53\%$（0.126$\to$0.060），交互($N$) 形式留出误差最低
+（0.051），且优于乘性（0.052）与加性（0.060）——所选形式在留出数据上
+同样最优，非单纯样本内拟合。
+
+\begin{table}[htbp]
+\centering
+\caption{标度律形式的留出交叉验证（B6+B7, 5 折 $\times$ 3 重复）}
+\label{tab:p2_cv}
+\begin{tabular}{c|cc|cc}
+\toprule
+形式 & 留出 RMSE & $\pm$ std & 留出 $R^2$ & $\pm$ std \\
+\midrule
+经典（无质量项） & 0.1262 & 0.003 & 0.864 & 0.006 \\
+加性（质量项） & 0.0596 & 0.001 & 0.970 & 0.001 \\
+\textbf{交互($N$)} & \textbf{0.0511} & \textbf{0.001} & \textbf{0.978} & \textbf{0.001} \\
+乘性 & 0.0519 & 0.001 & 0.977 & 0.001 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.78\textwidth]{figures/v26_p2_cv.png}
+\caption{标度律形式 5 折交叉验证的留出 RMSE 对比。}
+\label{fig:p2_cv}
+\end{figure}
+
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.85\textwidth]{figures/p2_generalized_fit.png}
