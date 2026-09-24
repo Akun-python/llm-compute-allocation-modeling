@@ -1,0 +1,95 @@
+{
+  "L_opt": 4.246388997133709,
+  "L_uniform": 5.1128275784665815,
+  "L_train_best": 4.960525463899396,
+  "gain_pct_lp": 16.94636809154301,
+  "gain_pct_reg": 11.878775367522817,
+  "L_reg": 4.50548627549178,
+  "x_opt": [
+    {
+      "domain": "arxiv",
+      "x_lp": 0.0,
+      "x_reg": 1.5117937606345437e-17
+    },
+    {
+      "domain": "freelaw",
+      "x_lp": 0.0,
+      "x_reg": 0.0
+    },
+    {
+      "domain": "nih_exporter",
+      "x_lp": 0.0,
+      "x_reg": 0.0
+    },
+    {
+      "domain": "pubmed_central",
+      "x_lp": 0.0,
+      "x_reg": 0.0
+    },
+    {
+      "domain": "wikipedia_en",
+      "x_lp": 0.0,
+      "x_reg": 0.0
+    },
+    {
+      "domain": "dm_mathematics",
+      "x_lp": -0.0,
+      "x_reg": 0.3
+    },
+    {
+      "domain": "github",
+      "x_lp": 0.0,
+      "x_reg": 0.0
+    },
+    {
+      "domain": "philpapers",
+      "x_lp": 0.0,
+      "x_reg": 0.10000000000000177
+    },
+    {
+      "domain": "stackexchange",
+      "x_lp": 0.0,
+      "x_reg": 0.0
+    },
+    {
+      "domain": "enron_emails",
+      "x_lp": 0.0,
+      "x_reg": 0.0
+    },
+    {
+      "domain": "gutenberg_pg_19",
+      "x_lp": 0.0,
+      "x_reg": 0.0
+    },
+    {
+      "domain": "pile_cc",
+      "x_lp": 0.0,
+      "x_reg": 0.0
+    },
+    {
+      "domain": "ubuntu_irc",
+      "x_lp": 1.0,
+      "x_reg": 0.3
+    },
+    {
+      "domain": "europarl",
+      "x_lp": 0.0,
+      "x_reg": 0.0
+    },
+    {
+      "domain": "hackernews",
+      "x_lp": 0.0,
+      "x_reg": 0.3
+    },
+    {
+      "domain": "pubmed_abstracts",
+      "x_lp": 0.0,
+      "x_reg": 0.0
+    },
+    {
+      "domain": "uspto_backgrounds",
+      "x_lp": 0.0,
+      "x_reg": 0.0
+    }
+  ]
+}

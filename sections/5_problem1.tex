@@ -186,6 +186,24 @@ $-3.11$——模型大到配比效应已被规模效应淹没。这一``60M 可�
 \label{fig:p1_mixcv}
 \end{figure}
 
+\textbf{配比调节的处方价值}（图 \ref{fig:p1_prescribe}）：把平均预测损失
+作为配比处方目标，在单纯形上求最优配比：无约束线性规划顶点解（100\%
+集中于单域）给出\textbf{预测降幅上界 16.9\%}（线性外推、无多样性约束，
+仅作上界）；加入 30\% 单域上限与二次正则后降幅收窄至 11.9\%，最优配比
+集中于 dm\_mathematics/ubuntu\_irc/hackernews/philpapers——注意该集中由
+\textbf{内容亲和}驱动（数学/对话/新闻数据对其同域验证损失自匹配最优），
+\textbf{并非质量驱动}；而训练表中实测最优混合行相对均匀配比的降幅仅约
+3\%。三档收益（上界 12--17\%、实测约 3\%）表明：配比调节是\textbf{有限
+杠杆}，且与``质量''维度解耦——这印证了主链路把配比定位在质量分之下、
+作为第三层杠杆的建模选择。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/v47_p1_mix_prescribe.png}
+\caption{处方最优配比（30\% 上限 + 正则）：预测损失相对均匀配比降 11.9\%。}
+\label{fig:p1_prescribe}
+\end{figure}
+
 \subsubsection{配比--损失域迁移结构}
 
 对 1M 尺度 13 源域 $\times$ 17 损失域的系数矩阵做解释性分析（图
