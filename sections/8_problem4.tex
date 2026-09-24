@@ -138,6 +138,22 @@ $y_0$ & 预测目标 & 预测 $S$ & 实际（数据口径） & 误差 \\
 口径对样本时长敏感，因此该表与放缓情景（$b_T$ 减半）互为印证而非绝对
 倒退的断言——与 Chow 断点检验（2024.5）方向一致。
 
+\textbf{滚动窗口参数核验}（图 \ref{fig:p4_rolling}）：以月度精度时间轴
+$t$ 对四个截止窗口（2024-06 至 2025-03）滚动拟合 QR90。规模弹性 $b_N$
+随窗口单调上升（$0.224\to0.338$，逼近全样本 $0.364$），而时间斜率 $b_T$
+持续下降（$1.10\to0.50$/年）——2024 上半年开源模型的快速追赶（时间驱动）
+在后续窗口显著减弱，规模驱动相对增强。滚动证据与年度前沿增速的
+``增速反转''及 Chow 断点方向一致，进一步说明：\textbf{放缓主要来自时间
+维度的外生驱动衰减，而非规模弹性的内生化衰退}。（注：本处采用月度精度
+$t$，系数绝对水平与主链路年度粒度不同，但漂移趋势一致。）
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.82\textwidth]{figures/v32_p4_rolling.png}
+\caption{前沿 QR90 滚动窗口参数：规模弹性上升、时间斜率持续下降。}
+\label{fig:p4_rolling}
+\end{figure}
+
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.88\textwidth]{figures/p4_frontier.png}
