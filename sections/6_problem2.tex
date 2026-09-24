@@ -159,6 +159,42 @@ $53\%$（0.126$\to$0.060），交互($N$) 形式留出误差最低
 \label{fig:p2_generalized}
 \end{figure}
 
+\textbf{参数不确定性（Bootstrap）}：对交互($N$) 形式做 case bootstrap
+（300 次重抽，$n=810$），参数与弹性均给出 2.5--97.5 分位区间
+（表 \ref{tab:p2_boot}，图 \ref{fig:p2_boot}）。质量缺口的规模衰减指数
+$h=0.163\ [0.142,0.187]$ 与质量指数 $g=0.992\ [0.921,1.067]$ 均显著
+异于 0/1 退化边界；弹性区间表明质量弹性显著高于规模弹性：
+$|\varepsilon_Q|=0.146\ [0.142,0.151]$ vs $|\varepsilon_N|=0.060\
+[0.059,0.061]$（区间不交叠）。严格等价的参数节省（保持损失不变）为
+$0.216\ [0.210,0.224]$B（一阶线性近似 0.289B 因忽略 $N$ 的非线性而略高，
+正文统一采用一阶口径以与弹性定义一致）。
+
+\begin{table}[htbp]
+\centering
+\caption{广义标度律参数 Bootstrap 区间（$B=300$，2.5/97.5 分位）}
+\label{tab:p2_boot}
+\begin{tabular}{c|ccc}
+\toprule
+参数 & 中位数 & 下限 & 上限 \\
+\midrule
+$h$（质量$\times N^{-h}$） & 0.163 & 0.142 & 0.187 \\
+$g$ & 0.992 & 0.921 & 1.067 \\
+$a$ & 0.307 & 0.281 & 0.324 \\
+$b$ & 0.293 & 0.247 & 0.328 \\
+$\varepsilon_N$ & $-0.060$ & $-0.061$ & $-0.059$ \\
+$\varepsilon_D$ & $-0.030$ & $-0.032$ & $-0.028$ \\
+$\varepsilon_Q$ & $-0.146$ & $-0.151$ & $-0.142$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/v33_p2_boot_ci.png}
+\caption{广义标度律参数与弹性的 Bootstrap 置信区间。}
+\label{fig:p2_boot}
+\end{figure}
+
 \subsubsection{B8 数据方向诊断与结构对照}
 
 B8 为大规模外推补充数据（含 calibrated 984 条与 extrapolated 720 条）。
