@@ -44,6 +44,25 @@ d_i^{-}=\sqrt{\sum_j (V_{ij}-V_j^{-})^2}.
 $Q_i\in[0,1]$，越接近 1 质量越高。域级质量按样本加权平均聚合：
 $Q^{(d)}=\sum_{i\in d}w_i Q_i/\sum_{i\in d}w_i$。
 
+\subsubsection{指标结构核验}
+
+对 272{,}505 个样本的 22 项指标做数据驱动核验（图 \ref{fig:p1_family}）：
+（i）\textbf{近似正交性}——指标间 Spearman 平均秩相关极低（族内
+$-0.01$/$+0.02$，跨族 $-0.01$，第一主成分仅解释 37\% 方差），说明 22 项
+指标各自携带独立信息，组合赋权不存在冗余放大，冲突指数
+$|Q_C-Q_F|$ 具有增量信息；（ii）\textbf{族划分不可由无监督聚类恢复}——
+对 $1-\rho$ 距离做层次聚类并切 2 簇，与手工族划分的调整兰德指数约 0
+（样本级 $-0.02$、域级 $-0.06$）：$C/F$ 是\textbf{构念区分}（内容质量 vs
+格式洁净），其效度由冲突指数的域级排序与指标族消融（灵敏度节）操作性地
+支持，而非统计簇结构。该检验同时验证了手工族划分的``非数据挖掘''属性。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/v21_p1_family_cluster.png}
+\caption{22 项质量指标的层次聚类树状图（着色=手工族划分；无清晰族簇）。}
+\label{fig:p1_family}
+\end{figure}
+
 \subsection{冲突定义与消解}
 
 \subsubsection{双族冲突指数}
