@@ -1,0 +1,5 @@
+﻿qtr,leader,S_leader,runner,hhi_top5,n,families
+2024-Q2,llama,38.69613307300818,other,1.0,344,"['falcon', 'gemma', 'gpt', 'llama', 'mistral', 'olmo', 'other', 'phi', 'qwen', 'yi']"
+2024-Q3,other,51.23132307602696,qwen,0.52,575,"['claude', 'gemma', 'gpt', 'llama', 'mistral', 'olmo', 'other', 'phi', 'qwen', 'yi']"
+2024-Q4,qwen,47.464376408361055,other,0.52,766,"['falcon', 'gemma', 'gpt', 'llama', 'mistral', 'other', 'phi', 'qwen', 'yi']"
+2025-Q1,other,47.21693789116021,qwen,0.6800000000000002,808,"['deepseek', 'falcon', 'gemma', 'gpt', 'llama', 'mistral', 'olmo', 'other', 'phi', 'qwen', 'yi']"

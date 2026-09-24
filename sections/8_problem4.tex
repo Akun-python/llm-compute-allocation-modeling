@@ -34,6 +34,20 @@ MATH-Lvl5、GPQA、MUSR、MMLU-Pro 的平均）。该指标覆盖指令遵循、
 \label{fig:p4_opengap}
 \end{figure}
 
+\textbf{开源前沿的家族竞争动态}（图 \ref{fig:p4_family}）：按季度识别开源
+领跑家族：2024Q2 为 Llama（38.7），Q3 与 2025Q1 由其他家族领跑（51.2/47.2，
+Qwen 连续居于次席），Q4 为 Qwen（47.5）。前 5 高分模型家族的 HHI 从 2024Q2
+的 1.00（单家垄断）降至 Q3--Q4 的 0.52、2025Q1 的 0.68，季度内活跃家族数
+9--11——开源前沿的竞争从``一家独大''走向``多家族并立''，且 Qwen 持续
+占据领跑梯队，家族更替快于单一模型的换代周期。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/v42_p4_family_dyn.png}
+\caption{开源前沿家族竞争：领跑家族轮替与 top5 集中度（HHI）。}
+\label{fig:p4_family}
+\end{figure}
+
 \textbf{时间轴口径}：以 C1 的提交日期（Submission Date）作为年份依据；
 C3 的历史前沿（2019--2021）作为补充背景，取累计最大值以保证前沿单调不降
 （2020 年出现 50.0 的孤立高值、2021 回落，属半合成扩展数据，取累计口径

@@ -1,0 +1,82 @@
+[
+  {
+    "qtr": "2024-Q2",
+    "leader": "llama",
+    "S_leader": 38.69613307300818,
+    "runner": "other",
+    "hhi_top5": 1.0,
+    "n": 344,
+    "families": [
+      "falcon",
+      "gemma",
+      "gpt",
+      "llama",
+      "mistral",
+      "olmo",
+      "other",
+      "phi",
+      "qwen",
+      "yi"
+    ]
+  },
+  {
+    "qtr": "2024-Q3",
+    "leader": "other",
+    "S_leader": 51.23132307602696,
+    "runner": "qwen",
+    "hhi_top5": 0.52,
+    "n": 575,
+    "families": [
+      "claude",
+      "gemma",
+      "gpt",
+      "llama",
+      "mistral",
+      "olmo",
+      "other",
+      "phi",
+      "qwen",
+      "yi"
+    ]
+  },
+  {
+    "qtr": "2024-Q4",
+    "leader": "qwen",
+    "S_leader": 47.464376408361055,
+    "runner": "other",
+    "hhi_top5": 0.52,
+    "n": 766,
+    "families": [
+      "falcon",
+      "gemma",
+      "gpt",
+      "llama",
+      "mistral",
+      "other",
+      "phi",
+      "qwen",
+      "yi"
+    ]
+  },
+  {
+    "qtr": "2025-Q1",
+    "leader": "other",
+    "S_leader": 47.21693789116021,
+    "runner": "qwen",
+    "hhi_top5": 0.6800000000000002,
+    "n": 808,
+    "families": [
+      "deepseek",
+      "falcon",
+      "gemma",
+      "gpt",
+      "llama",
+      "mistral",
+      "olmo",
+      "other",
+      "phi",
+      "qwen",
+      "yi"
+    ]
+  }
+]
