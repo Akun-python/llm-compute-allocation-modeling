@@ -248,6 +248,24 @@ $b_T$ 的分解一致），也为``推理--成本权衡''场景提供了任务�
 \label{fig:p4_scalebucket}
 \end{figure}
 
+\textbf{任务 $\times$ 规模二维增速}（图 \ref{fig:p4_taskscale}）：把任务
+维度（v44）与规模维度（v55）合成热图（各桶 90 分位年化增速）：MATH
+全域最快且在 $1$--$3$B（+2.52）与 $10$--$30$B（+2.45）\textbf{双峰}；
+GPQA 峰值在 $10$--$30$B（+1.27）但 $3$--$10$B 近零（+0.02）；
+$10$--$30$B 在 6 个任务中 5 个增速领先或次高（呼应 v55 甜点区）；
+$30$--$100$B 普遍放缓（除 MATH +1.13）；$0.3$--$1$B 推理类快速
+（MATH +1.26/GPQA +0.56）但 MUSR $-0.72$ 下滑；IFEval 在 $1$--$3$B
++0.93、大桶饱和（$-0.03$）。\textbf{推理增速的规模分布呈双峰}（技术
+下放 + 中大规模优化），任务侧与规模侧交叉验证，构成能力 $\times$ 规模的
+完整二维画像。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/v63_p4_task_scale.png}
+\caption{任务 $\times$ 规模二维前沿增速：MATH/GPQA 在 1--3B 与 10--30B 双峰。}
+\label{fig:p4_taskscale}
+\end{figure}
+
 \textbf{滚动窗口参数核验}（图 \ref{fig:p4_rolling}）：以月度精度时间轴
 $t$ 对四个截止窗口（2024-06 至 2025-03）滚动拟合 QR90。规模弹性 $b_N$
 随窗口单调上升（$0.224\to0.338$，逼近全样本 $0.364$），而时间斜率 $b_T$
