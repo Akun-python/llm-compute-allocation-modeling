@@ -1,0 +1,186 @@
+{
+  "book_total": 0.1440574873974282,
+  "family_contrib": {
+    "结构/格式": 0.17825948622597546,
+    "语义模型分": -0.01278717999231285,
+    "内容/主题": -0.02141481883623436
+  },
+  "top5": [
+    {
+      "indicator": "rps_doc_word_count",
+      "book_delta": 0.08425941242221224
+    },
+    {
+      "indicator": "rps_doc_num_sentences",
+      "book_delta": 0.07662224282646335
+    },
+    {
+      "indicator": "rps_lines_uppercase_letter_fraction",
+      "book_delta": 0.027258871860525943
+    },
+    {
+      "indicator": "rps_lines_ending_with_terminal_punctution_mark",
+      "book_delta": 0.014763682607284712
+    },
+    {
+      "indicator": "rps_doc_unigram_entropy",
+      "book_delta": 0.009360730246447782
+    }
+  ],
+  "rows": [
+    {
+      "indicator": "dsir_books",
+      "family": "内容/主题",
+      "book_delta": -0.00400247354910788,
+      "cc_delta": 0.0009132880573013199,
+      "arxiv_delta": -0.0036889925909058645
+    },
+    {
+      "indicator": "dsir_wiki",
+      "family": "内容/主题",
+      "book_delta": -0.006561080843652102,
+      "cc_delta": 0.0008981352278268646,
+      "arxiv_delta": -0.0036221080939625276
+    },
+    {
+      "indicator": "dsir_math",
+      "family": "内容/主题",
+      "book_delta": -0.010358551530362723,
+      "cc_delta": 0.0007892617775043173,
+      "arxiv_delta": -0.0035033843993726894
+    },
+    {
+      "indicator": "rps_doc_word_count",
+      "family": "结构/格式",
+      "book_delta": 0.08425941242221224,
+      "cc_delta": -0.0032649795590508485,
+      "arxiv_delta": 0.026917366943101873
+    },
+    {
+      "indicator": "rps_doc_num_sentences",
+      "family": "结构/格式",
+      "book_delta": 0.07662224282646335,
+      "cc_delta": -0.0042680517604737345,
+      "arxiv_delta": 0.021427237010461175
+    },
+    {
+      "indicator": "rps_doc_unigram_entropy",
+      "family": "结构/格式",
+      "book_delta": 0.009360730246447782,
+      "cc_delta": 0.003093144394266249,
+      "arxiv_delta": 0.006871633556578461
+    },
+    {
+      "indicator": "rps_doc_frac_unique_words",
+      "family": "结构/格式",
+      "book_delta": -0.013346730856847734,
+      "cc_delta": -0.0011556300093642728,
+      "arxiv_delta": -0.009836318832686066
+    },
+    {
+      "indicator": "rps_doc_frac_no_alph_words",
+      "family": "结构/格式",
+      "book_delta": -0.003574234629617975,
+      "cc_delta": -0.004644212039322743,
+      "arxiv_delta": 0.0002462868898532684
+    },
+    {
+      "indicator": "rps_doc_frac_chars_top_2gram",
+      "family": "结构/格式",
+      "book_delta": -0.006893919568284675,
+      "cc_delta": -0.002029133542243864,
+      "arxiv_delta": -0.005803760285216321
+    },
+    {
+      "indicator": "rps_doc_frac_chars_top_3gram",
+      "family": "结构/格式",
+      "book_delta": -0.008786837839798068,
+      "cc_delta": -0.0012456055188977931,
+      "arxiv_delta": -0.0063935318803759545
+    },
+    {
+      "indicator": "rps_lines_uppercase_letter_fraction",
+      "family": "结构/格式",
+      "book_delta": 0.027258871860525943,
+      "cc_delta": -0.012502481339913383,
+      "arxiv_delta": -0.0013349800403932022
+    },
+    {
+      "indicator": "rps_lines_ending_with_terminal_punctution_mark",
+      "family": "结构/格式",
+      "book_delta": 0.014763682607284712,
+      "cc_delta": 0.0031074116517645044,
+      "arxiv_delta": -0.005230796018554234
+    },
+    {
+      "indicator": "rps_lines_numerical_chars_fraction",
+      "family": "结构/格式",
+      "book_delta": 0.003103276664082272,
+      "cc_delta": 0.0008842680332701563,
+      "arxiv_delta": 0.00584647373084847
+    },
+    {
+      "indicator": "rps_doc_mean_word_length",
+      "family": "结构/格式",
+      "book_delta": -0.008136407869725103,
+      "cc_delta": -0.006565414163061626,
+      "arxiv_delta": -0.0034810226399911914
+    },
+    {
+      "indicator": "fineweb_edu",
+      "family": "内容/主题",
+      "book_delta": 0.00017609683416017208,
+      "cc_delta": -0.0003501185323569623,
+      "arxiv_delta": 0.007236562711286766
+    },
+    {
+      "indicator": "fluency_en",
+      "family": "内容/主题",
+      "book_delta": 0.003690737115754388,
+      "cc_delta": 0.0037118575540404757,
+      "arxiv_delta": -0.0099439317747363
+    },
+    {
+      "indicator": "modernbert_cleanliness",
+      "family": "结构/格式",
+      "book_delta": 0.003629400363232711,
+      "cc_delta": -0.004187077420873786,
+      "arxiv_delta": 0.002578491598343729
+    },
+    {
+      "indicator": "modernbert_readability",
+      "family": "语义模型分",
+      "book_delta": -0.0006643605950637753,
+      "cc_delta": -0.003867131581625544,
+      "arxiv_delta": -0.0039083803515505555
+    },
+    {
+      "indicator": "modernbert_reasoning",
+      "family": "内容/主题",
+      "book_delta": -0.0038254347152885566,
+      "cc_delta": 7.462375345633487e-05,
+      "arxiv_delta": -0.0117564083851417
+    },
+    {
+      "indicator": "modernbert_professionalism",
+      "family": "语义模型分",
+      "book_delta": -0.002905513997383126,
+      "cc_delta": -0.0030939964183065542,
+      "arxiv_delta": 0.003054864562085039
+    },
+    {
+      "indicator": "qurater",
+      "family": "内容/主题",
+      "book_delta": -0.0005341121477376622,
+      "cc_delta": -0.0002035605333716925,
+      "arxiv_delta": 0.013567826661156683
+    },
+    {
+      "indicator": "ad_en",
+      "family": "语义模型分",
+      "book_delta": -0.009217305399865948,
+      "cc_delta": -0.007046945449276247,
+      "arxiv_delta": 0.0005206266673296392
+    }
+  ]
+}

@@ -300,6 +300,23 @@ book/arxiv 提高配比、commoncrawl 降低），文档级质量分 $Q_i$ 定�
 \label{fig:p1_domainicc}
 \end{figure}
 
+\textbf{book 领先的指标族分解}（图 \ref{fig:p1_contrib}）：把加权标准化值
+$V_{ij}=w_jX_{ij}$ 的域均值差按指标族可加分解，book 相对全域的加权分优势
+为 0.1441，其中\textbf{结构/格式族贡献 +0.178}（主导），语义模型分族
+$-0.013$ 与内容/主题族 $-0.021$ 近零。逐指标 Top5（词数 +0.084、句数
++0.077、大写字母比例 +0.027、句读结尾 +0.015、unigram 熵 +0.009）全部
+为结构格式信号；commoncrawl 的负贡献则集中在大写比例（$-0.013$）与广告
+类信号（$ad\_en=-0.007$）。这一分解说明：book 的领先主要来自
+\textbf{长文档、规范句读、大写比例等结构性形式信号}，而非语义内容分——
+结构性信号是域级质量判别的统计主体。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/v48_p1_family_contrib.png}
+\caption{book 领先的指标族贡献分解：结构/格式族主导。}
+\label{fig:p1_contrib}
+\end{figure}
+
 \subsubsection{抽样/全量一致性验证}
 
 将 1M 抽样集与 A2/A3 扩展集合并后重新聚合，arxiv 域抽样口径 0.481 对全量
