@@ -166,6 +166,20 @@ BIC/AIC 形式选择（$n=810$）。interaction\_N 的 BIC 最优（$-4813.73$�
 \label{fig:p2_bic}
 \end{figure}
 
+\textbf{残差诊断}（图 \ref{fig:p2_resid}）：所选 interaction\_N 形式的
+残差与 $N/D/Q$ 三个输入的 Pearson 相关均 $|r|<0.01$（无系统遗漏结构）、
+偏度 $-0.17$（近对称）、残差标准差 $0.0496$——比加性形式（0.0577）
+\textbf{低 14\%}，$|残差|>2sd$ 的离群样本仅 43 条（5.3\%）。残差干净
+无偏 + 交互项降低残差离散，为``质量--参数量交互''形式提供模型健康性
+证据，与 BIC 选择（v50）、留出 CV（v26）构成完整的模型检验链。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/v61_p2_resid_diag.png}
+\caption{interaction\_N 残差诊断：与 Q 无相关、分布近对称。}
+\label{fig:p2_resid}
+\end{figure}
+
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.85\textwidth]{figures/p2_generalized_fit.png}
