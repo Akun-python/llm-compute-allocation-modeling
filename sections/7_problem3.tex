@@ -72,14 +72,18 @@ $\{2048,4096,8192,30000,32768,131072\}$ 上扫描。
 \end{figure}
 
 \textbf{跨框架一致性核验}（图 \ref{fig:p3_framework}）：为进一步排除``多初值
-收敛到同一局部陷阱''的可能，引入四种相互独立的求解框架交叉复算——主链路
+收敛到同一局部陷阱''的可能，引入\textbf{九条独立求解路径}交叉复算——主链路
 SLSQP 多初值、无导数法 COBYLA、全局随机搜索差分进化（DE）与单纯同调全局优化
-（SHGO），在三档预算 $\times$ 三种质量成本形式的 9 个实例上独立求解并比较最优
-配置。结果：\textbf{9/9 实例四框架一致}——最优损失的最大相对偏差不超过
+（SHGO）四条\textbf{原约束框架}，外加 L-BFGS-B、Powell、Nelder-Mead、双退火
+（dual annealing）与对数网格-重启五条``相对罚函数 + 可行化精修''路径
+（罚函数把算力约束以相对残差平方并入目标，收敛后用 SLSQP 短迭代投影回精确
+可行域），在三档预算 $\times$ 三种质量成本形式的 9 个实例上独立求解并比较
+最优配置。结果：\textbf{9/9 实例九路径一致}——最优损失的最大相对偏差不超过
 $2.6\times10^{-2}\%$（其中 6/9 实例偏差小于 $10^{-6}$），最优配置
 $(N^{*},D^{*},Q^{*})$ 完全一致（最优质量分 $Q^{*}$ 跨框架波动不超过
-$5.5\times10^{-6}$）；特别是 DE 与 SHGO 两种\textbf{全局方法}独立复现了主链路
-SLSQP 的最优解，证明该最优对初值与收敛算法均不敏感，确认为全局最优。作为对照，
+$5.5\times10^{-6}$）；特别是 DE、SHGO 与双退火三种\textbf{全局方法}以及
+网格-重启参照均独立复现主链路 SLSQP 的最优解，证明该最优对初值、收敛算法
+与约束处理方式（原约束 vs 罚函数）均不敏感，确认为全局最优。作为对照，
 内点法 trust-constr 在 $Q^{*}=1$ 的边界角点最优处数值失稳（高预算下部分
 初值求解失败，成功算例的最优损失偏离主链路最优达 7.5\%）——这说明对
 ``边界活跃集最优''类问题，
@@ -87,9 +91,10 @@ SLSQP 的最优解，证明该最优对初值与收敛算法均不敏感，确�
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.95\textwidth]{figures/v72_p3_framework_solvers.png}
-\caption{五框架求解对比：SLSQP/COBYLA/DE/SHGO 在 9 实例上一致到 $10^{-6}$ 量级
-（括号为四框架最大相对偏差），trust-constr 内点法在边界角点最优处失稳。}
+\includegraphics[width=0.95\textwidth]{figures/v83_p3_solver9.png}
+\caption{九框架求解对比：SLSQP/COBYLA/DE/SHGO/L-BFGS-B/Powell/Nelder-Mead/
+双退火/网格在 9 实例上一致到 $10^{-6}$ 量级（括号为九路径最大相对偏差），
+trust-constr 内点法在边界角点最优处失稳。}
 \label{fig:p3_framework}
 \end{figure}
 
