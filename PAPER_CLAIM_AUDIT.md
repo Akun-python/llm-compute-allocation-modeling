@@ -1170,3 +1170,23 @@ PROMETHEE-II 与 VIKOR），作为"多框架算法交叉验证"的补强轮。
   main.log 无 undefined/multiply-defined 引用; 无重复 label; 其余
   "图/表 N" 匹配均为附件编号 (A12--A15) 或 caption 内数字, 非引用。
 - 编译通过; 本轮零数值声称改动, 纯版式修复轮。
+
+
+---
+
+## Round-48: 排版溢出行全清零 (Overfull=0, 严重 Underfull=0)
+
+- 初始: 6 处 Overfull hbox (56.88/92.05/40.07/57.28/5.27/3.60pt) +
+  5 处 badness>=8000 Underfull (10_evaluation 决策总表单元格)。
+- 探索: 全局 \emergencystretch=2em 可吸收 Overfull 但引入 5 处 badness
+  =10000 Underfull (9_sensitivity 密集公式段) - 弃用。
+- 收敛方案 (最终采用):
+  1) 5 处密集行内公式段落包 sloppypar: 5_problem1(权重扰动/抽样收敛/开篇),
+     6_problem2(开篇), 8_problem4(分位数族), 9_sensitivity(预测区间/前沿
+     分位数) - 共 7 段;
+  2) 10_evaluation 决策总表 p-列改 >{\raggedright\arraybackslash} 消除
+     单元格两端对齐拉伸 -> badness 10000 清零;
+  3) 5_problem1 预算规模经济段一分为二 (公式断点机会增加)。
+- 最终: Overfull=0, Severe Underfull (>=8000)=0, latexmk 全绿。
+两轮工作前后对比: Round-37 修硬编码表编号/引用; Round-38 修排版溢出。
+版式质量达到竞赛提交级。

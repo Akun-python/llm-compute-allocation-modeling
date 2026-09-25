@@ -97,6 +97,12 @@
 - 论文 §7 转移带宽段新增阈值稳健句；§10 决策对照表四行稳健性来源补强：P1"W=0.98 置换 p<0.001"、P2"留出最优配对被检验显著"、P3"带宽排序跨阈值口径不变"、P4"集成口径带全部落区间"
 - 图 v88 配色 0.00%
 
+**排版溢出行清零（Round-38 修复）**
+- 消除全部 Overfull hbox（最初 6 处：56.88/92.05/40.07/57.28pt 等）与全部严重 Underfull（badness≥8000，5 处）
+- 手法：5 处密集行内公式段包 `sloppypar`（§5/§6/§8/§9 共 6 段）；§10 决策总表 p-列改 `>{\raggedright\arraybackslash}` 消除单元格拉伸
+- 实测对比：emergencystretch 全局方案会引入 5 处 badness-10000 underfull，已弃用；局部 sloppypar + raggedright 为最优解
+- 现状态：Overfull=0，Severe underfull=0，编译全绿
+
 **排版完整性走查（Round-37 修复）**
 - §9 "见问题三表 4" 硬编码编号错误（模板按节编号，L_ctx 表实为表 7.10）→ 改 `\ref{tab:p3_lctx}`（该表补加 label）
 - 全文档 80 图 / 16 表 label 唯一性检查：0 重复；唯一硬编码表引用已修复；余下匹配均为附件编号 A12–A15 或 caption 数字，非引用

@@ -155,6 +155,7 @@ scipy/statsmodels/sklearn/torch 四个统计生态的独立实现收敛到同一
 \label{fig:p4_qrfw}
 \end{figure}
 
+\begin{sloppypar}%
 \textbf{分位数族一致性}（图 \ref{fig:p4_taurange}）：将五框架交叉验证扩展到
 分位数族 $\tau\in\{0.5,0.7,0.8,0.9,0.95,0.99\}$。结果：\textbf{框架无关性
 在整族成立}——每个 $\tau$ 上五框架系数最大相对极差
@@ -162,6 +163,7 @@ $b_N\le1.3\times10^{-1}\%$、$b_T\le1.9\%$（后者主要来自 Adam 在 $\tau=0
 的有限步数未收敛；剔除 Adam 后，LP/statsmodels/sklearn/L-BFGS-B 四框架在
 每个 $\tau$ 上高度一致，$b_N$ 极差 $\le1.2\times10^{-4}$、$b_T$ 极差
 $\le0.6\%$）。系数随 $\tau$ 的结构具有明确含义：
+\end{sloppypar}
 \begin{itemize}
 \item $b_T$ 自 $\tau\ge0.8$ 起\textbf{单调递减}（$0.177\to0.089\to0.044$；
 $\tau=0.5/0.7$ 更高，为 $0.248$）：
