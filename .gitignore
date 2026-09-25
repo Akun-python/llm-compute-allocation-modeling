@@ -1,4 +1,4 @@
-﻿real_attachments/
+real_attachments/
 solve/results/tex_build*.log
 solve/results/preview_*.png
 *.aux
@@ -12,3 +12,4 @@ __pycache__/
 .dsh/
 
 solve/experiments/*_scores.csv
+solve/results/p1_quality_all.csv
