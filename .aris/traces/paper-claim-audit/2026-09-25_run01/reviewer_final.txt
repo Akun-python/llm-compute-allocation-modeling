@@ -1,0 +1,17 @@
+**Audit Complete**
+- Report written to `PAPER_CLAIM_AUDIT.md`.
+- Overall verdict: **FAIL**
+- Total audited claim units: **85**
+- Status counts: exact_match **2**; rounding_ok **30**; ambiguous_mapping **4**; missing_evidence **37**; config_mismatch **1**; aggregation_mismatch **1**; number_mismatch **7**; scope_overclaim **2**; unsupported_claim **1**.
+
+**Key Issues**
+- `sections/B_params.tex:40-42`: claims 26 indicators, but raw weights contain 22; also 19+8=27. Fix the count or provide the correct raw schema.
+- `sections/5_problem1.tex:208-218`: paper reports 1M test R²=0.585, while raw evidence is 0.586710, which rounds to 0.587.
+- `sections/6_problem2.tex:355-361`: paper’s `dN/dQ=-2.43` and 0.243B conflict with raw derivatives implying -2.8845 and 0.2885B.
+- `sections/7_problem3.tex:199-206`: “Q saturated at 10¹⁸” and the `10^-17` attention-cost ratio contradict the structural/lctx raw outputs.
+- `sections/7_problem3.tex:215-224`: D, D/N, tokens/param, and the claimed 20.8× comparison mix incompatible units.
+- `sections/8_problem4.tex:104-108`: `ln`-scale doubling gain is 0.252, equivalent to about 28.7% in level terms, not 25%.
+- `sections/8_problem4.tex:118-124`: pinball values are not consistent to six decimals because Adam differs materially.
+- `sections/8_problem4.tex:135-155`: the bT sequence starts at 0.248, which is outside the stated τ≥0.8 range; use 0.177→0.089→0.044 or change the scope.
+- Missing specified files: `solve/results/p4_frontier_prediction.csv` and `solve/results/p4_frontier_slowdown.csv`.
+- P1 aggregation mismatch: domain counts sum to 272,486 versus set counts totaling 272,505; reconcile filtering/missing-value handling.
