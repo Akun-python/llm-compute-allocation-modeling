@@ -30,6 +30,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def main():
@@ -74,8 +76,8 @@ def main():
     rdf.to_csv(os.path.join(EX, "v43_p1_sample_conv.csv"), index=False, encoding="utf-8-sig")
 
     fig, ax = plt.subplots(figsize=(8.5, 5))
-    ax.plot(rdf["frac"] * 100, rdf["p_book_rank1"], "o-", color="#2563EB", lw=2, label="book 排第 1 概率")
-    ax.plot(rdf["frac"] * 100, rdf["spearman_vs_full"], "s--", color="#C2410C", lw=2, label="与全量排序 Spearman")
+    ax.plot(rdf["frac"] * 100, rdf["p_book_rank1"], "o-", color="#177cb0", lw=2, label="book 排第 1 概率")
+    ax.plot(rdf["frac"] * 100, rdf["spearman_vs_full"], "s--", color="#3eede7", lw=2, label="与全量排序 Spearman")
     ax.set_xlabel("抽样比例 (%)"); ax.set_ylim(0.3, 1.02)
     ax.set_title("v43: 域级质量排序的抽样收敛性")
     ax.legend(fontsize=9); ax.grid(alpha=0.3)

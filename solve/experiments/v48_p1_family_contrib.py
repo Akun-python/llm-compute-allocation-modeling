@@ -29,6 +29,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 FAMILY = {
     "内容/主题": ["dsir_books", "dsir_wiki", "dsir_math", "fineweb_edu", "fluency_en",
@@ -83,8 +85,8 @@ def main():
     fig, ax = plt.subplots(figsize=(9, 5))
     fams = list(fam.index)
     pos = np.arange(len(fams))
-    ax.barh(pos, fam.values, color="#2563EB", alpha=0.85)
-    ax.axvline(0, color="#94A3B8", lw=0.8)
+    ax.barh(pos, fam.values, color="#177cb0", alpha=0.85)
+    ax.axvline(0, color="#88ada6", lw=0.8)
     ax.set_yticks(pos); ax.set_yticklabels(fams)
     ax.set_xlabel("book 相对全域的加权分贡献")
     ax.set_title(f"v48: book 领先的指标族贡献分解 (总优势 {book_d.sum():.4f})")

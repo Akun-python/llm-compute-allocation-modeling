@@ -30,6 +30,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def load_b8():
@@ -78,9 +80,9 @@ def main():
     fig, ax = plt.subplots(figsize=(8, 4.6))
     x = np.arange(len(names))
     w = 0.36
-    ax.bar(x - w/2, p_67, w, color="#2563EB", label="B6+B7")
-    ax.bar(x + w/2, p_8, w, color="#C2410C", label="B8 (原样)")
-    ax.axhline(0, color="#94A3B8", lw=0.8)
+    ax.bar(x - w/2, p_67, w, color="#177cb0", label="B6+B7")
+    ax.bar(x + w/2, p_8, w, color="#3eede7", label="B8 (原样)")
+    ax.axhline(0, color="#88ada6", lw=0.8)
     ax.set_xticks(x); ax.set_xticklabels(names)
     ax.set_ylabel("参数值"); ax.set_title("v40: interaction_N 在 B6+B7 vs B8 的参数复核")
     ax.legend(fontsize=9); ax.grid(alpha=0.3)

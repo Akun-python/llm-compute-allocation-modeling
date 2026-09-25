@@ -27,6 +27,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 # 各形式参数个数: E, A, a, B, b, C, g (+h 仅 interaction_*)
 K = {"additive": 7, "interaction_D": 8, "interaction_N": 8, "multiplicative": 7,
@@ -65,7 +67,7 @@ def main():
 
     fig, ax = plt.subplots(figsize=(9, 5))
     pos = np.arange(len(rdf))
-    ax.barh(pos, rdf["dBIC"], color="#2563EB", alpha=0.85)
+    ax.barh(pos, rdf["dBIC"], color="#177cb0", alpha=0.85)
     ax.set_yticks(pos); ax.set_yticklabels(rdf["form"])
     ax.set_xlabel("dBIC (相对最优)"); ax.set_title("v50: 六形式信息准则选择")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v50_p2_bic_table.png"), dpi=200)

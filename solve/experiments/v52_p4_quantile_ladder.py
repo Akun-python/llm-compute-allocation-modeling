@@ -28,6 +28,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def qreg(X, y, tau):
@@ -73,10 +75,10 @@ def main():
     print(f"bT 比值: {disc['bT_month']/disc['bT_int']:.1f}x")
 
     fig, ax = plt.subplots(figsize=(8.5, 5))
-    ax.plot(rdf["tau"], rdf["bN"], marker="o", color="#2563EB", lw=2, label="规模弹性 bN (月度 t)")
-    ax.plot(rdf["tau"], rdf["bT"], marker="s", color="#0EA5E9", lw=2, label="时间弹性 bT (月度 t)")
-    ax.axhline(0.364, color="#C2410C", lw=1.2, ls="--", label="QR90 主链路 bN=0.364 (整数年 t)")
-    ax.axhline(0.089, color="#94A3B8", lw=1.2, ls=":", label="QR90 主链路 bT=0.089 (整数年 t)")
+    ax.plot(rdf["tau"], rdf["bN"], marker="o", color="#177cb0", lw=2, label="规模弹性 bN (月度 t)")
+    ax.plot(rdf["tau"], rdf["bT"], marker="s", color="#1685a9", lw=2, label="时间弹性 bT (月度 t)")
+    ax.axhline(0.364, color="#3eede7", lw=1.2, ls="--", label="QR90 主链路 bN=0.364 (整数年 t)")
+    ax.axhline(0.089, color="#88ada6", lw=1.2, ls=":", label="QR90 主链路 bT=0.089 (整数年 t)")
     ax.set_xlabel("分位 tau"); ax.set_ylabel("弹性")
     ax.set_title("v52: 前沿模型弹性的分位数族 (含时间口径对比)")
     ax.legend(fontsize=8); ax.grid(alpha=0.3)

@@ -28,6 +28,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 # ---------- 数据 ----------
@@ -129,7 +131,7 @@ def main():
         p, _ = fit_form(N, D, Q, L, f)
         pred = loss_forms(N, D, Q, p, f)
         ax.scatter(pred, L - pred, s=6, alpha=0.4, label=f)
-    ax.axhline(0, color="gray", lw=0.8)
+    ax.axhline(0, color="#88ada6", lw=0.8)
     ax.set_xlabel("预测 Loss"); ax.set_ylabel("残差")
     ax.set_title("v3: 不同质量项形式的残差分布")
     ax.legend(fontsize=8)

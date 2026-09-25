@@ -26,6 +26,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def main():
@@ -64,10 +66,10 @@ def main():
     ax.violinplot([rdf["eps_N"], rdf["eps_D"], rdf["eps_Q"]], showmedians=True)
     ax.set_xticks([1, 2, 3]); ax.set_xticklabels(["$\\varepsilon_N$", "$\\varepsilon_D$", "$\\varepsilon_Q$"])
     ax.set_ylabel("弹性"); ax.set_title("175 参考点上的弹性分布")
-    ax.axhline(0, color="#94A3B8", lw=0.8)
+    ax.axhline(0, color="#88ada6", lw=0.8)
     ax = axes[1]
-    ax.hist(rQN, bins=20, color="#2563EB", alpha=0.75, label="$|\\varepsilon_Q/\\varepsilon_N|$")
-    ax.hist(rQD, bins=20, color="#C2410C", alpha=0.6, label="$|\\varepsilon_Q/\\varepsilon_D|$")
+    ax.hist(rQN, bins=20, color="#177cb0", alpha=0.75, label="$|\\varepsilon_Q/\\varepsilon_N|$")
+    ax.hist(rQD, bins=20, color="#3eede7", alpha=0.6, label="$|\\varepsilon_Q/\\varepsilon_D|$")
     ax.set_xlabel("比值"); ax.set_title("质量弹性相对优势分布")
     ax.legend(fontsize=9)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v41_p2_eps_ref_grid.png"), dpi=200)

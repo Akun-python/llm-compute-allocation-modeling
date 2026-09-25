@@ -28,6 +28,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def main():
@@ -87,11 +89,11 @@ def main():
     fig, ax = plt.subplots(figsize=(9, 5.5))
     means = [rdf["cv_r2"].mean(), rdf["r2_1M"].mean(), rdf["r2_60M"].mean(), rdf["r2_1B"].mean()]
     labs = ["同尺度留出 CV", "外推 1M", "外推 60M\n(基线校正)", "外推 1B\n(基线校正)"]
-    bars = ax.bar(labs, means, color=["#2563EB", "#0EA5E9", "#F59E0B", "#C2410C"])
+    bars = ax.bar(labs, means, color=["#177cb0", "#1685a9", "#70f3ff", "#3eede7"])
     for b, v in zip(bars, means):
         ax.text(b.get_x() + b.get_width() / 2, v + (0.08 if v >= 0 else -0.35),
                 f"{v:.3f}", ha="center", fontsize=9)
-    ax.axhline(0, color="#94A3B8", lw=0.8)
+    ax.axhline(0, color="#88ada6", lw=0.8)
     ax.set_ylim(-4.2, 1.05); ax.set_ylabel("平均 R²")
     ax.set_title("v35: 配比模型留出验证与跨尺度迁移 (13 损失域, 60M/1B 含基线校正)")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v35_p1_mix_cv.png"), dpi=200)

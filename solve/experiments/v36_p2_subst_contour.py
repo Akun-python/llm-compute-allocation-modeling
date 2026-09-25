@@ -25,6 +25,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def main():
@@ -41,11 +43,11 @@ def main():
     Z = np.array([[L(n, q) for q in Qs] for n in Ns])
 
     fig, ax = plt.subplots(figsize=(9, 6.2))
-    cf = ax.contourf(Ns, Qs, Z.T, levels=24, cmap="Blues")
+    cf = ax.contourf(Ns, Qs, Z.T, levels=24, cmap="cyan_seq")
     cs = ax.contour(Ns, Qs, Z.T, levels=[2.2, 2.3, 2.4, 2.5, 2.6, 2.7],
-                    colors="#C2410C", linewidths=1.3)
+                    colors="#3eede7", linewidths=1.3)
     ax.clabel(cs, inline=True, fontsize=9)
-    ax.plot([1.0], [0.6], "o", ms=9, color="#DC2626", label="基准 (N=1B, Q=0.6)")
+    ax.plot([1.0], [0.6], "o", ms=9, color="#1685a9", label="基准 (N=1B, Q=0.6)")
     # 等价轨迹: Q+0.1 -> N' (保持 L 不变)
     N0, Q0 = 1.0, 0.6
     L0 = L(N0, Q0)
@@ -60,7 +62,7 @@ def main():
             else:
                 lo = mid
         nq.append(0.5 * (lo + hi))
-    ax.plot(nq, qs, "--", color="#16A34A", lw=2, label="等损失等价轨迹 (质量→规模替代)")
+    ax.plot(nq, qs, "--", color="#44cef6", lw=2, label="等损失等价轨迹 (质量→规模替代)")
     ax.set_xlabel("参数量 N (B)"); ax.set_ylabel("数据质量 Q")
     ax.set_title("v36: 质量-规模替代等值面 (D=300B)")
     ax.legend(fontsize=9, loc="lower left")

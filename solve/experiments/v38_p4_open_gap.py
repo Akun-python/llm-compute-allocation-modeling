@@ -25,6 +25,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def main():
@@ -53,13 +55,13 @@ def main():
     rdf.to_csv(os.path.join(EX, "v38_p4_open_gap.csv"), index=False, encoding="utf-8-sig")
 
     fig, ax = plt.subplots(figsize=(9, 5.5))
-    ax.plot(range(len(rdf)), rdf["S_all"], "o-", lw=2, color="#2563EB", label="全量前沿")
-    ax.plot(range(len(rdf)), rdf["S_open"], "s--", lw=2, color="#C2410C", label="开源前沿")
+    ax.plot(range(len(rdf)), rdf["S_all"], "o-", lw=2, color="#177cb0", label="全量前沿")
+    ax.plot(range(len(rdf)), rdf["S_open"], "s--", lw=2, color="#3eede7", label="开源前沿")
     ax.set_xticks(range(len(rdf))); ax.set_xticklabels(rdf["qtr"], rotation=25)
     ax.set_ylabel("前沿平均分 S")
     ax2 = ax.twinx()
-    ax2.plot(range(len(rdf)), rdf["ratio"], "d-", lw=1.6, color="#16A34A", label="开源/全量比值")
-    ax2.set_ylabel("开源/全量比值", color="#16A34A"); ax2.set_ylim(0.5, 1.05)
+    ax2.plot(range(len(rdf)), rdf["ratio"], "d-", lw=1.6, color="#44cef6", label="开源/全量比值")
+    ax2.set_ylabel("开源/全量比值", color="#44cef6"); ax2.set_ylim(0.5, 1.05)
     ax.set_title("v38: 开源 vs 全量能力前沿 (开源追赶)")
     ax.legend(loc="upper left", fontsize=9); ax2.legend(loc="lower left", fontsize=9)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v38_p4_open_gap.png"), dpi=200)

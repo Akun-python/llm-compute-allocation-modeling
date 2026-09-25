@@ -31,6 +31,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def main():
@@ -81,7 +83,7 @@ def main():
 
     fig, ax = plt.subplots(figsize=(9, 5))
     top = rdf.head(8)
-    ax.barh(range(len(top)), top["x_reg"], color="#2563EB", alpha=0.85)
+    ax.barh(range(len(top)), top["x_reg"], color="#177cb0", alpha=0.85)
     ax.set_yticks(range(len(top))); ax.set_yticklabels(top["domain"])
     ax.set_xlabel("正则最优配比权重"); ax.set_title(f"v47: 处方最优配比 (上限30%+正则, 预测降幅 {(L_unif-L_reg)/L_unif*100:.1f}%)")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v47_p1_mix_prescribe.png"), dpi=200)

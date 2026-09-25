@@ -27,6 +27,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 B0 = 2.481
 BN = 0.364
@@ -59,13 +61,13 @@ def main():
           f"(H100 卡天 {c22_flop/H100_DAY:.0f})")
 
     fig, ax = plt.subplots(figsize=(8.5, 5.2))
-    ax.plot(rdf["S"], rdf["C_train_FLOP"], marker="o", color="#2563EB", lw=1.8)
+    ax.plot(rdf["S"], rdf["C_train_FLOP"], marker="o", color="#177cb0", lw=1.8)
     ax.set_yscale("log")
     ax.set_xlabel("能力目标 S (前沿平均分)"); ax.set_ylabel("训练算力 C_train (FLOP, log)")
     ax2 = ax.twinx()
-    ax2.plot(rdf["S"], rdf["H100_card_days"], marker="s", color="#C2410C", lw=1.2, ls="--")
-    ax2.set_ylabel("H100 卡天数 (log)", color="#C2410C")
-    ax2.tick_params(axis="y", labelcolor="#C2410C")
+    ax2.plot(rdf["S"], rdf["H100_card_days"], marker="s", color="#3eede7", lw=1.2, ls="--")
+    ax2.set_ylabel("H100 卡天数 (log)", color="#3eede7")
+    ax2.tick_params(axis="y", labelcolor="#3eede7")
     ax2.set_yscale("log")
     ax.set_title(f"v68: 能力目标->训练算力->工程规模 (2025, 整数年口径)")
     ax.grid(alpha=0.3)

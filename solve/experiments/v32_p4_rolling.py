@@ -27,6 +27,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def qr_fit(X, y, tau):
@@ -64,11 +66,11 @@ def main():
 
     fig, ax = plt.subplots(figsize=(8.5, 5))
     x = np.arange(len(rdf))
-    ax.plot(x, rdf["bN"], "o-", lw=2, color="#2563EB", label="规模弹性 bN")
-    ax.plot(x, rdf["bT"], "s-", lw=2, color="#C2410C", label="时间斜率 bT")
+    ax.plot(x, rdf["bN"], "o-", lw=2, color="#177cb0", label="规模弹性 bN")
+    ax.plot(x, rdf["bT"], "s-", lw=2, color="#3eede7", label="时间斜率 bT")
     for i, (a, b) in enumerate(zip(rdf["bN"], rdf["bT"])):
-        ax.text(i, a + 0.012, f"{a:.3f}", ha="center", fontsize=9, color="#2563EB")
-        ax.text(i, b + 0.012, f"{b:.3f}", ha="center", fontsize=9, color="#C2410C")
+        ax.text(i, a + 0.012, f"{a:.3f}", ha="center", fontsize=9, color="#177cb0")
+        ax.text(i, b + 0.012, f"{b:.3f}", ha="center", fontsize=9, color="#3eede7")
     ax.set_xticks(x); ax.set_xticklabels([e[:7] for e in rdf["window_end"]])
     ax.set_ylabel("QR90 斜率"); ax.set_title("v32: 前沿模型滚动窗口参数稳定性")
     ax.legend(fontsize=9); ax.grid(alpha=0.3)

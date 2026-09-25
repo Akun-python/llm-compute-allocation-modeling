@@ -25,6 +25,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def main():
@@ -50,13 +52,13 @@ def main():
 
     fig = plt.figure(figsize=(10, 7))
     ax = fig.add_subplot(111, projection="3d")
-    ax.scatter(lnN, t, lnS, s=6, alpha=0.35, color="#2563EB", label="开源前沿样本")
+    ax.scatter(lnN, t, lnS, s=6, alpha=0.35, color="#177cb0", label="开源前沿样本")
     # 拟合平面
     nn = np.linspace(lnN.min(), lnN.max(), 30)
     tt = np.linspace(t.min(), 4.0, 30)
     NN, TT = np.meshgrid(nn, tt)
     SS = b0 + bN * NN + bT * TT
-    ax.plot_surface(NN, TT, SS, alpha=0.25, color="#C2410C")
+    ax.plot_surface(NN, TT, SS, alpha=0.25, color="#3eede7")
     # 2025 前沿点与预测点
     gN = 1.251125395176952
     lnN25 = dfm[dfm["year"] == 2025]["#Params (B)"].to_numpy(dtype=float)
@@ -64,9 +66,9 @@ def main():
     s25 = b0 + bN * lnN25 + bT * (3.0)
     s26 = b0 + bN * (lnN25 + gN) + bT * 4.0
     s27 = b0 + bN * (lnN25 + 2 * gN) + bT * 5.0
-    ax.scatter([lnN25], [3.0], [s25], s=90, marker="*", color="#16A34A", label=f"2025 前沿 (S={np.exp(s25):.0f})")
-    ax.scatter([lnN25 + gN], [4.0], [s26], s=90, marker="^", color="#DC2626", label=f"2026 预测 (S={np.exp(s26):.0f})")
-    ax.scatter([lnN25 + 2 * gN], [5.0], [s27], s=90, marker="^", color="#DC2626", label=f"2027 预测 (S={np.exp(s27):.0f})")
+    ax.scatter([lnN25], [3.0], [s25], s=90, marker="*", color="#44cef6", label=f"2025 前沿 (S={np.exp(s25):.0f})")
+    ax.scatter([lnN25 + gN], [4.0], [s26], s=90, marker="^", color="#1685a9", label=f"2026 预测 (S={np.exp(s26):.0f})")
+    ax.scatter([lnN25 + 2 * gN], [5.0], [s27], s=90, marker="^", color="#1685a9", label=f"2027 预测 (S={np.exp(s27):.0f})")
     ax.set_xlabel("lnN (参数量)"); ax.set_ylabel("t (年, 2022=0)"); ax.set_zlabel("lnS (能力)")
     ax.set_title("v25: 前沿表面与 0.9 分位数回归平面")
     ax.view_init(elev=18, azim=-58)

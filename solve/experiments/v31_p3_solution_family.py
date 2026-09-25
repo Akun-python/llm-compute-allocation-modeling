@@ -27,6 +27,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def main():
@@ -44,7 +46,7 @@ def main():
     rdf.to_csv(os.path.join(EX, "v31_p3_solution_family.csv"), index=False, encoding="utf-8-sig")
 
     fig, axes = plt.subplots(1, 3, figsize=(15, 4.6))
-    colors = {"exp": "#2563EB", "power": "#C2410C", "log": "#16A34A"}
+    colors = {"exp": "#177cb0", "power": "#3eede7", "log": "#44cef6"}
     for form in ["exp", "power", "log"]:
         sub = rdf[rdf["form"] == form]
         axes[0].plot(sub["C"], sub["Q"], "o-", lw=1.8, color=colors[form], label=form)

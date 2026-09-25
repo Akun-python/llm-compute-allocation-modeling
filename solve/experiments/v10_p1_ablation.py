@@ -30,6 +30,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def load_data():
@@ -149,8 +151,8 @@ def main():
     fig, ax = plt.subplots(figsize=(9, 4.5))
     gl = abl[~abl["ablation"].str.startswith("leave1")]
     gl = gl.sort_values("domain_rank_spearman")
-    ax.barh(gl["ablation"], gl["domain_rank_spearman"], color="#2563EB")
-    ax.axvline(1.0, color="#EF4444", ls="--", lw=1)
+    ax.barh(gl["ablation"], gl["domain_rank_spearman"], color="#177cb0")
+    ax.axvline(1.0, color="#44cef6", ls="--", lw=1)
     ax.set_xlabel("域排序 Spearman (vs 基线)"); ax.set_xlim(0.6, 1.02)
     ax.set_title("v10: 指标族消融对域质量排序的影响")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v10_p1_ablation.png"), dpi=200); plt.close(fig)

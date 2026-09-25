@@ -27,6 +27,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 BUCKETS = [(0.3, 1), (1, 3), (3, 10), (10, 30), (30, 100)]
 
@@ -64,7 +66,7 @@ def main():
     rdf.to_csv(os.path.join(EX, "v55_p4_scale_bucket.csv"), index=False, encoding="utf-8-sig")
 
     fig, ax = plt.subplots(figsize=(8.5, 5))
-    ax.bar(range(len(rdf)), rdf["annual_growth"], color="#2563EB", alpha=0.85)
+    ax.bar(range(len(rdf)), rdf["annual_growth"], color="#177cb0", alpha=0.85)
     ax.set_xticks(range(len(rdf))); ax.set_xticklabels(rdf["bucket"], rotation=20)
     ax.set_ylabel("年化增速 (90 分位分)"); ax.set_title("v55: 前沿的规模分桶增速梯度")
     ax.grid(alpha=0.3, axis="y")

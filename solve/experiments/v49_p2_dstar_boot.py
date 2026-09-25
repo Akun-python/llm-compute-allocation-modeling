@@ -27,6 +27,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 B = 300
 
@@ -66,15 +68,15 @@ def main():
 
     fig, axes = plt.subplots(1, 2, figsize=(11, 4.4))
     ax = axes[0]
-    ax.hist(es, bins=30, color="#2563EB", alpha=0.8)
-    ax.axvline(e0, color="#C2410C", lw=2, label=f"点估计 {e0:.3f}")
-    ax.axvline(1.0, color="#16A34A", lw=1.5, ls="--", label="Chinchilla expo=1.0")
+    ax.hist(es, bins=30, color="#177cb0", alpha=0.8)
+    ax.axvline(e0, color="#3eede7", lw=2, label=f"点估计 {e0:.3f}")
+    ax.axvline(1.0, color="#44cef6", lw=1.5, ls="--", label="Chinchilla expo=1.0")
     ax.set_xlabel("a/b"); ax.set_title(f"expo 的 Bootstrap ({B} 次)")
     ax.legend(fontsize=8)
     ax = axes[1]
-    ax.hist(ratio, bins=30, color="#F59E0B", alpha=0.8)
-    ax.axvline(k0, color="#C2410C", lw=2, label=f"D*(1B)/1B ≈ {k0:.1f}")
-    ax.axvline(20, color="#16A34A", lw=1.5, ls="--", label="D=20N 规则")
+    ax.hist(ratio, bins=30, color="#70f3ff", alpha=0.8)
+    ax.axvline(k0, color="#3eede7", lw=2, label=f"D*(1B)/1B ≈ {k0:.1f}")
+    ax.axvline(20, color="#44cef6", lw=1.5, ls="--", label="D=20N 规则")
     ax.set_xlabel("D*(1B)/1B"); ax.set_title("数据/参数比 (1B 处)")
     ax.legend(fontsize=8)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v49_p2_dstar_boot.png"), dpi=200)

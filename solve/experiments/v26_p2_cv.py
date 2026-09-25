@@ -29,6 +29,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def fit_classical(N, D, L):
@@ -90,7 +92,7 @@ def main():
     fig, ax = plt.subplots(figsize=(7.5, 5))
     x = np.arange(len(forms))
     ax.bar(x, rdf["cv_rmse_mean"], yerr=rdf["cv_rmse_std"], capsize=4,
-           color=["#94A3B8", "#F59E0B", "#2563EB", "#16A34A"])
+           color=["#88ada6", "#70f3ff", "#177cb0", "#44cef6"])
     ax.set_xticks(x); ax.set_xticklabels(forms, rotation=15)
     ax.set_ylabel("留出折 RMSE")
     ax.set_title("v26: 标度律形式 5 折 x3 交叉验证 (B6+B7, n=810)")

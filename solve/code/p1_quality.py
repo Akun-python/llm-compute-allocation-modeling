@@ -310,21 +310,23 @@ def main():
     # ---------- 7. 图 ----------
     plt.rcParams["font.sans-serif"] = ["SimHei"]
     plt.rcParams["axes.unicode_minus"] = False
+    plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+    import plotstyle
 
     # 权重对比条形图
     fig, ax = plt.subplots(figsize=(11, 5))
     idx = np.arange(len(ALL_IND))
     w = 0.28
-    ax.bar(idx - w, w_ent, w, label="熵权法", color="#2563EB")
-    ax.bar(idx, w_cri, w, label="CRITIC", color="#0EA5E9")
-    ax.bar(idx + w, w_combo, w, label="组合权重", color="#10B981")
+    ax.bar(idx - w, w_ent, w, label="熵权法", color="#177cb0")
+    ax.bar(idx, w_cri, w, label="CRITIC", color="#1685a9")
+    ax.bar(idx + w, w_combo, w, label="组合权重", color="#3eede7")
     ax.set_xticks(idx); ax.set_xticklabels(ALL_IND, rotation=60, ha="right", fontsize=8)
     ax.set_ylabel("权重"); ax.legend(); ax.set_title("22 项质量指标的三种权重对比 (R2 表示判定系数)")
     fig.tight_layout(); fig.savefig(os.path.join(FIG, "p1_weights.png"), dpi=200); plt.close(fig)
 
     # 域级质量分布
     fig, ax = plt.subplots(figsize=(9, 5))
-    bars = ax.bar(dom_q["domain"], dom_q["Q_weighted"], color="#2563EB", alpha=0.85)
+    bars = ax.bar(dom_q["domain"], dom_q["Q_weighted"], color="#177cb0", alpha=0.85)
     for b, v in zip(bars, dom_q["Q_weighted"]):
         ax.text(b.get_x() + b.get_width()/2, v + 0.002, f"{v:.3f}", ha="center", fontsize=8)
     ax.set_ylabel("域级质量分 Q (加权)")
@@ -335,8 +337,8 @@ def main():
     # 冲突指数直方图 (去掉 NaN 行)
     ci_valid = df_q["conflict"].dropna()
     fig, ax = plt.subplots(figsize=(8, 4.5))
-    ax.hist(ci_valid, bins=60, color="#F59E0B", alpha=0.85, edgecolor="white")
-    ax.axvline(np.nanpercentile(ci_valid, 90), color="red", ls="--", label="P90 分位")
+    ax.hist(ci_valid, bins=60, color="#70f3ff", alpha=0.85, edgecolor="white")
+    ax.axvline(np.nanpercentile(ci_valid, 90), color="#44cef6", ls="--", label="P90 分位")
     ax.set_xlabel("冲突指数 |Q_C − Q_F|"); ax.set_ylabel("频数"); ax.legend()
     ax.set_title("样本级质量冲突指数分布")
     fig.tight_layout(); fig.savefig(os.path.join(FIG, "p1_conflict_hist.png"), dpi=200); plt.close(fig)
@@ -344,7 +346,7 @@ def main():
     # Q_C vs Q_F 散点 (冲突可视化)
     fig, ax = plt.subplots(figsize=(7, 6))
     s = ax.scatter(df_q["Q_content"], df_q["Q_format"], c=df_q["conflict"],
-                   s=4, alpha=0.35, cmap="YlOrRd")
+                   s=4, alpha=0.35, cmap="cyan_seq")
     cb = fig.colorbar(s, ax=ax)
     cb.set_label("冲突指数")
     ax.plot([0, 1], [0, 1], "k--", lw=1)
@@ -364,7 +366,7 @@ def main():
     # 冲突消解效果: Q_weighted vs Q_resolved 散点(按冲突着色)
     fig, ax = plt.subplots(figsize=(7, 6))
     s = ax.scatter(df_q["Q_weighted"], df_q["Q_resolved"], c=df_q["conflict"],
-                   s=5, alpha=0.4, cmap="YlOrRd")
+                   s=5, alpha=0.4, cmap="cyan_seq")
     cb = fig.colorbar(s, ax=ax); cb.set_label("冲突指数")
     ax.plot([0, 1], [0, 1], "k--", lw=1)
     ax.set_xlabel("原始组合质量分 Q"); ax.set_ylabel("冲突消解后质量分 Q*")

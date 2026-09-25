@@ -30,6 +30,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 # interaction_N 参数 (B6+B7 全样本, 与 p2_scaling_results.json 一致)
 E, A, a, B_, b, C, g, h = (1.6397, 0.4039, 0.3055, 1.3228, 0.2921,
@@ -62,9 +64,9 @@ def main():
     rdf.to_csv(os.path.join(EX, "v51_p2_subst_scale.csv"), index=False, encoding="utf-8-sig")
 
     fig, ax = plt.subplots(figsize=(8.5, 5))
-    ax.plot(Ns, rdf["eq_0.1Q_B_fixD"], color="#2563EB", lw=2, marker="o", ms=4,
+    ax.plot(Ns, rdf["eq_0.1Q_B_fixD"], color="#177cb0", lw=2, marker="o", ms=4,
             label="每 +0.1Q 等价减少参数 (B)")
-    ax.axhline(0.243, color="#C2410C", lw=1.4, ls="--", label="v36 参考点 0.243B/0.1Q")
+    ax.axhline(0.243, color="#3eede7", lw=1.4, ls="--", label="v36 参考点 0.243B/0.1Q")
     ax.set_xlabel("N (B)"); ax.set_ylabel("等价参数 (B) / +0.1Q")
     ax.set_title("v51: 质量-参数替代率随规模的演化 (Q=0.6, interaction_N)")
     ax.legend(fontsize=9); ax.grid(alpha=0.3)

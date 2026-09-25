@@ -32,6 +32,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 ETA = 2e-4
 Q0 = 0.4
@@ -196,8 +198,8 @@ def main():
     fig, ax = plt.subplots(figsize=(11, 4.5))
     p_opt = np.array(opt_rows[1]["p"])
     order = np.argsort(qvec)
-    ax.bar(np.arange(nd), qvec[order] * 100, color="#2563EB", alpha=0.55, label="域质量 Q×100")
-    ax.bar(np.arange(nd) + 0.35, p_opt[order] * 100, color="#F59E0B", alpha=0.85, width=0.6, label="最优配比 p×100")
+    ax.bar(np.arange(nd), qvec[order] * 100, color="#177cb0", alpha=0.55, label="域质量 Q×100")
+    ax.bar(np.arange(nd) + 0.35, p_opt[order] * 100, color="#70f3ff", alpha=0.85, width=0.6, label="最优配比 p×100")
     ax.set_xticks(np.arange(nd)); ax.set_xticklabels([MIX_DOMAINS[i] for i in order], rotation=60, fontsize=7)
     ax.set_ylabel("%"); ax.set_title("v6: 联合优化最优配比 vs 域质量 (C=1e22)")
     ax.legend(fontsize=8)

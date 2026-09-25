@@ -32,6 +32,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 # ---- 广义标度律参数 (从 p2 结果动态读取, 跟随问题二选定的形式) ----
 _p2 = os.path.join(RES, "p2_scaling_results.json")
@@ -210,9 +212,9 @@ def main():
         st = g["s_train"].to_numpy()
         sq = g["s_Q"].to_numpy()
         sa = g["s_attn"].to_numpy()
-        ax.bar(xpos + (i - 1) * w, st, w, label=f"{forms_cn[form]}·训练", color="#2563EB")
-        ax.bar(xpos + (i - 1) * w, sq, w, bottom=st, label=f"{forms_cn[form]}·质量", color="#10B981")
-        ax.bar(xpos + (i - 1) * w, sa, w, bottom=st + sq, label=f"{forms_cn[form]}·注意力", color="#F59E0B")
+        ax.bar(xpos + (i - 1) * w, st, w, label=f"{forms_cn[form]}·训练", color="#177cb0")
+        ax.bar(xpos + (i - 1) * w, sq, w, bottom=st, label=f"{forms_cn[form]}·质量", color="#3eede7")
+        ax.bar(xpos + (i - 1) * w, sa, w, bottom=st + sq, label=f"{forms_cn[form]}·注意力", color="#70f3ff")
     ax.set_xticks(xpos)
     ax.set_xticklabels([f"C={c:.0e}" for c in budgets])
     ax.set_ylabel("预算份额"); ax.set_title("三档预算下三种成本函数的最优分配结构")
@@ -222,11 +224,11 @@ def main():
     # (b) 结构性转移: 份额随预算变化 (幂函数型)
     g = sdf[sdf["form"] == "power"].sort_values("C")
     fig, ax = plt.subplots(figsize=(8, 5))
-    ax.plot(g["C"], g["s_train"], label="训练份额", color="#2563EB", lw=2)
-    ax.plot(g["C"], g["s_Q"], label="质量份额", color="#10B981", lw=2)
-    ax.plot(g["C"], g["s_attn"], label="注意力份额", color="#F59E0B", lw=2)
+    ax.plot(g["C"], g["s_train"], label="训练份额", color="#177cb0", lw=2)
+    ax.plot(g["C"], g["s_Q"], label="质量份额", color="#3eede7", lw=2)
+    ax.plot(g["C"], g["s_attn"], label="注意力份额", color="#70f3ff", lw=2)
     for C in budgets:
-        ax.axvline(C, color="gray", ls="--", lw=0.8)
+        ax.axvline(C, color="#88ada6", ls="--", lw=0.8)
     ax.set_xscale("log")
     ax.set_xlabel("算力预算 C (FLOPs, 对数)"); ax.set_ylabel("预算份额")
     ax.set_title("幂函数质量成本: 最优分配随预算的结构性演变")
@@ -249,7 +251,7 @@ def main():
     for C in budgets:
         g = ldf[ldf["budget"] == C].sort_values("L_ctx")
         ax.plot(g["L_ctx"], g["s_attn"], "o-", label=f"C={C:.0e}", lw=1.5)
-    ax.axvline(LCTX_CRIT, color="red", ls="--", label=f"L_ctx^crit=30000")
+    ax.axvline(LCTX_CRIT, color="#44cef6", ls="--", label=f"L_ctx^crit=30000")
     ax.set_xscale("log")
     ax.set_xlabel("上下文长度 L_ctx (对数)"); ax.set_ylabel("注意力开销份额")
     ax.set_title("上下文长度对注意力开销份额的影响")

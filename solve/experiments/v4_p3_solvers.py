@@ -29,6 +29,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 # 广义标度律参数 (interaction_D, 问题二拟合)
 GL = {"E": 1.551497836760937, "A": 0.5340242690174833, "a": 0.2813537379269008,
@@ -231,9 +233,9 @@ def main():
 
     # 图: 求解器对比 + 帕累托
     fig, ax = plt.subplots(figsize=(8, 5))
-    ax.plot(fdf["C"], fdf["L"], "o-", ms=3, color="#2563EB", label="SLSQP 最优")
+    ax.plot(fdf["C"], fdf["L"], "o-", ms=3, color="#177cb0", label="SLSQP 最优")
     for C in [1e19, 1e22, 1e24]:
-        ax.axvline(C, color="gray", ls="--", lw=0.8)
+        ax.axvline(C, color="#88ada6", ls="--", lw=0.8)
     ax.set_xscale("log")
     ax.set_xlabel("预算 C (FLOPs)"); ax.set_ylabel("最优 Loss L*")
     ax.set_title("v4: 算力--性能帕累托前沿")

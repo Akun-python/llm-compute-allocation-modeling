@@ -27,6 +27,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def main():
@@ -57,8 +59,8 @@ def main():
 
     fig, ax = plt.subplots(figsize=(8.5, 5))
     pos = np.arange(len(rdf))
-    ax.barh(pos, rdf["slope_lnL_lnC"], color="#2563EB", alpha=0.85)
-    ax.axvline(-0.14, color="#C2410C", lw=1.4, ls="--", label="纯规模理论 ~ -0.14")
+    ax.barh(pos, rdf["slope_lnL_lnC"], color="#177cb0", alpha=0.85)
+    ax.axvline(-0.14, color="#3eede7", lw=1.4, ls="--", label="纯规模理论 ~ -0.14")
     ax.set_yticks(pos); ax.set_yticklabels(rdf["form"])
     ax.set_xlabel("ln L* / ln C (预算翻倍损失降幅)")
     ax.set_title("v56: 预算-损失弹性的通道差异")

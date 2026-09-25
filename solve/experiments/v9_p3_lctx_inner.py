@@ -29,6 +29,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 ETA = 2e-4
 Q0 = 0.4
@@ -192,10 +194,10 @@ def main():
     # 图: w 敏感性
     fig, ax = plt.subplots(figsize=(8, 4.5))
     ax2 = ax.twinx()
-    ax.plot([r["w"] for r in w_rows], [r["L_ctx_opt"] for r in w_rows], "o-", color="#2563EB", label="最优 L_ctx")
-    ax2.plot([r["w"] for r in w_rows], [r["L_loss"] for r in w_rows], "s--", color="#F59E0B", label="损失")
-    ax.set_xlabel("上下文收益权重 w"); ax.set_ylabel("最优上下文长度 L_ctx*", color="#2563EB")
-    ax2.set_ylabel("训练损失 L", color="#F59E0B")
+    ax.plot([r["w"] for r in w_rows], [r["L_ctx_opt"] for r in w_rows], "o-", color="#177cb0", label="最优 L_ctx")
+    ax2.plot([r["w"] for r in w_rows], [r["L_loss"] for r in w_rows], "s--", color="#70f3ff", label="损失")
+    ax.set_xlabel("上下文收益权重 w"); ax.set_ylabel("最优上下文长度 L_ctx*", color="#177cb0")
+    ax2.set_ylabel("训练损失 L", color="#70f3ff")
     ax.legend(loc="upper left"); ax2.legend(loc="lower right")
     ax.set_yscale("log")
     ax.set_title("v9: 最优上下文长度与收益权重的平衡 (C=1e22)")

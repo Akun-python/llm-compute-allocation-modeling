@@ -29,6 +29,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def stage1_pure(C, form, L_ctx, Q0v=Q0):
@@ -98,8 +100,8 @@ def main():
     labs = [f"{int(r['C']):.0e}\n{r['form']}" for _, r in rdf.iterrows()]
     x = np.arange(len(rdf))
     w = 0.36
-    ax.bar(x - w / 2, rdf["L_joint"], w, color="#2563EB", label="联合优化 (含质量通道)")
-    ax.bar(x + w / 2, rdf["L_seq"], w, color="#94A3B8", label="纯规模基线 (顺序/无质量预算)")
+    ax.bar(x - w / 2, rdf["L_joint"], w, color="#177cb0", label="联合优化 (含质量通道)")
+    ax.bar(x + w / 2, rdf["L_seq"], w, color="#88ada6", label="纯规模基线 (顺序/无质量预算)")
     ax.set_xticks(x); ax.set_xticklabels(labs)
     ax.set_ylabel("最优损失 L*")
     ax.set_title("v27: 联合优化 vs 纯规模基线 (顺序决策陷阱)")
