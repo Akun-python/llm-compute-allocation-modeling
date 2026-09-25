@@ -214,7 +214,7 @@ def main():
         ax.axvline(10, color="#1685a9", lw=1, ls="--")
         ax.set_xlim(0, max(vals) * 1.15)
     ax.text(0.0, -1.6, "虚线=ΔBIC 10 (决定性证据阈值)", transform=axes[0].transAxes, fontsize=8, color="#1685a9")
-    fig.suptitle("v84: BIC 模型选择对拟合框架的鲁棒性 (六形式 × 四框架)", fontsize=12, y=1.02)
+    fig.suptitle("BIC 模型选择对拟合框架的鲁棒性 (六形式 × 四框架)", fontsize=12, y=1.02)
     fig.tight_layout(rect=[0, 0.04, 1, 1])
     fig.savefig(os.path.join(EX, "v84_p2_bic_framework.png"), dpi=200)
     plt.close(fig)

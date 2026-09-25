@@ -298,7 +298,7 @@ def main():
         ax.grid(alpha=0.3, axis="y")
     handles, labels = axes[0].get_legend_handles_labels()
     fig.legend(handles, labels, loc="lower center", ncol=5, fontsize=8, frameon=False)
-    fig.suptitle("v83: 九框架跨框架求解对比 —— 全局最优一致性 (括号为最大相对偏差)",
+    fig.suptitle("九框架跨框架求解对比 —— 全局最优一致性 (括号为最大相对偏差)",
                  fontsize=11, y=1.02)
     fig.tight_layout(rect=[0, 0.08, 1, 1])
     fig.savefig(os.path.join(EX, "v83_p3_solver9.png"), dpi=200)
