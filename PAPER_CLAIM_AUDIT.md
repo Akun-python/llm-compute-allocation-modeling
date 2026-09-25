@@ -1152,3 +1152,21 @@ PROMETHEE-II 与 VIKOR），作为"多框架算法交叉验证"的补强轮。
   §7 N*~C^0.46 双源头 (v31/v76) 逐位一致; 饱和预算 vs v91 全对;
   §5 v60 过滤两端收益 3%-5% 与 line 403 一致; v75 kappa 0.314030626
   跨五框架极差 <1e-9; v28 k 敏感 k∈{0..10} 已覆盖。
+
+
+---
+
+## Round-47: 版式完整性走查 — 发现并修复 §9 硬编码表编号错误
+
+- **发现问题**: §9 line 51 "见问题三表 4" 硬编码表引用错误。gmcmthesis
+  模板按节编号 (\renewcommand{\thetable}{\arabic{section}.\arabic{table}}),
+  问题三(§7)共 5 个表 (line 123/265/348/371/487), L_ctx 敏感性表
+  (line 371) 是 §7 第 4 表 = 表 7.10 而非 "表 4"。
+- **修复**: 给 L_ctx 敏感性表补 \label{tab:p3_lctx}; §9 改
+  "\ref{tab:p3_lctx}" (自动渲染 7.10)。PDF 提取逐字确认: caption
+  "表 7.10 Lctx 敏感性" 与正文 "见问题三表7.10" 均正确渲染。
+- **全量核查**: 80 图 label / 16 表环境 (6 有 label, 10 无 label 的表
+  均为从未被 \ref 引用的展示表, 渲染编号连续 4.1..10.15/B 附录;
+  main.log 无 undefined/multiply-defined 引用; 无重复 label; 其余
+  "图/表 N" 匹配均为附件编号 (A12--A15) 或 caption 内数字, 非引用。
+- 编译通过; 本轮零数值声称改动, 纯版式修复轮。
