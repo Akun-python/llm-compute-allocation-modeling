@@ -132,6 +132,36 @@ scipy/statsmodels/sklearn/torch 四个统计生态的独立实现收敛到同一
 \label{fig:p4_qrfw}
 \end{figure}
 
+\textbf{分位数族一致性}（图 \ref{fig:p4_taurange}）：将五框架交叉验证扩展到
+分位数族 $\tau\in\{0.5,0.7,0.8,0.9,0.95,0.99\}$。结果：\textbf{框架无关性
+在整族成立}——每个 $\tau$ 上五框架系数最大相对极差
+$b_N\le1.3\times10^{-1}\%$、$b_T\le1.9\%$（后者来自 Adam 在 $\tau=0.99$
+的有限步数未收敛，LP/statsmodels/sklearn/L-BFGS-B 四框架在每个 $\tau$ 均
+逐位一致）。系数随 $\tau$ 的结构具有明确含义：
+\begin{itemize}
+\item $b_T$ 自 $\tau\ge0.8$ 起\textbf{单调递减}（$0.248\to0.089\to0.044$）：
+分位越低、时间趋势越强——中分位模型主要以时间追赶，而 0.9 分位前沿的进步
+更依赖规模扩张（$b_N=0.364$），0.99 分位的时间趋势趋近于 0（$0.044$），
+顶级模型的进步几乎完全由规模驱动；
+\item $b_N$ 在 $\tau\le0.8$ 缓升（$0.366\to0.372$）后\textbf{回落}
+（$0.340\to0.279$）：极端尾部（0.95/0.99）的规模回报趋于饱和，参数弹性
+下降，与问题四``前沿能力向硬推理迁移、大桶能力饱和''的任务侧观测互证；
+\item $\tau=0.9$ 的选取位于 $b_T$ 单调递减的稳健中段、$b_N$ 峰后回落之前，
+\textbf{非极端选取}；代入增长核算后，规模贡献占比随 $\tau$ \textbf{单调
+上升}：$64.9\%\to65.0\%\to72.5\%\to83.7\%\to85.4\%\to88.8\%$
+（$\tau=0.5$--$0.99$）——分位越高、时间趋势越小，前沿越由规模驱动；
+``规模主导''在 $\tau\ge0.8$ 的整个前沿区间（占比 $\ge72.5\%$）恒成立且
+单调递增。
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/v77_p4_tau_frameworks.png}
+\caption{分位数族 $\times$ 五框架：每个 $\tau$ 上五框架一致；$b_T$ 随 $\tau$
+单调递减、$b_N$ 峰后回落。}
+\label{fig:p4_taurange}
+\end{figure}
+
 \subsection{规模/非规模贡献分解}
 
 \textbf{增长核算}：前沿能力的年增速可分解为：
