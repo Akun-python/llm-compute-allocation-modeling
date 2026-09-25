@@ -73,6 +73,24 @@ RSR 因忽略指标幅值而偏离（book 降至第 6、wikipedia 升至第 1）
 \label{fig:p1_methods}
 \end{figure}
 
+\textbf{权重扰动鲁棒性}（图 \ref{fig:p1_weightrob}）：在官方全量口径
+（$n=272{,}505$，域序与官方 \texttt{p1\_domain\_quality.csv} 的
+$Q_{\text{weighted}}$ 域序 Spearman$=1.000$）上，对熵-CRITIC 组合权重施加
+对数扰动 $w_j\leftarrow w_j e^{\sigma\varepsilon}$（$\varepsilon\sim
+N(0,1)$，每档 200 次重抽）检验评分链对权重设定的敏感度：$\sigma=0.2$
+（$\pm20\%$ 量级）时七域序与基线 Spearman 最小 0.964、均值 0.999，book
+居首与 stackexchange 垫底概率均为 1.00；即使 $\sigma=0.5$（$\pm50\%$
+量级），book 居首概率仍为 1.00、垫底概率 0.995——域序对权重扰动高度
+稳健，``book 居首、低质域垫底''的结论不依赖单一权重标定。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.82\textwidth]{figures/v93_p1_weight_robust.png}
+\caption{组合权重对数扰动（$\sigma=0.2$，200 次）的七域秩分布：book 恒为
+第 1、stackexchange 恒为第 7。}
+\label{fig:p1_weightrob}
+\end{figure}
+
 \subsubsection{指标结构核验}
 
 对 272{,}505 个样本的 22 项指标做数据驱动核验（图 \ref{fig:p1_family}）：

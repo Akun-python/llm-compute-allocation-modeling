@@ -981,3 +981,22 @@ PROMETHEE-II 与 VIKOR），作为"多框架算法交叉验证"的补强轮。
   mistral 136.6 个月 (11.4 年); llama gap 41.5% 且"永不(增速不足)"
   (近乎停滞); qwen 已在领跑梯队 (gap 0) -- 与论文一致。
 - 结论: 零修改; §5/§8 剩余声称全部核验。
+
+
+---
+
+## Round-39: 新实验 v93 组合权重扰动鲁棒性 + §5 新增声称/图
+
+- v93_p1_weight_robust.py: 官方全量口径 (n=272505) 上对熵-CRITIC
+  组合权重施加对数扰动 w_j = w*exp(sigma*eps) (eps~N(0,1), 每档
+  200 次重抽), 检验七域序稳定性。
+- 基线域序 book>arxiv>c4>commoncrawl>github>wikipedia>stackexchange
+  与官方 p1_domain_quality.csv Q_weighted 域序 Spearman = 1.0000
+  (锚定成功; 注: 域均值聚合需双过滤 NaN 权重, 与 v89 wmean 一致)。
+- sigma=0.2 (+-20% 量级): 七域序 vs 基线 Spearman min 0.9643/
+  mean 0.9995; P(book#1)=1.000, P(stack#7)=1.000。
+- sigma=0.5 (+-50%): min 0.7857/mean 0.9796; book#1 1.000,
+  stack#7 0.995。
+- §5 新增段落"权重扰动鲁棒性"+图 fig:p1_weightrob (v93 png,
+  配色 0.00%): 声称 book 居首/低质域垫底不依赖单一权重标定,
+  数字与 json 一致。重新编译成功。

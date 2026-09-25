@@ -1,0 +1,80 @@
+{
+ "baseline_order": {
+  "arxiv": 2,
+  "book": 1,
+  "c4": 3,
+  "commoncrawl": 4,
+  "github": 5,
+  "stackexchange": 7,
+  "wikipedia": 6
+ },
+ "anchor_spearman_vs_official": 1.0,
+ "n_draws": 200,
+ "n_samples": 272505,
+ "rows": [
+  {
+   "sigma": 0.05,
+   "spearman_min": 1.0,
+   "spearman_mean": 1.0,
+   "p_book_rank1": 1.0,
+   "p_stack_last": 1.0
+  },
+  {
+   "sigma": 0.1,
+   "spearman_min": 1.0,
+   "spearman_mean": 1.0,
+   "p_book_rank1": 1.0,
+   "p_stack_last": 1.0
+  },
+  {
+   "sigma": 0.2,
+   "spearman_min": 0.9642857142857145,
+   "spearman_mean": 0.9994642857142858,
+   "p_book_rank1": 1.0,
+   "p_stack_last": 1.0
+  },
+  {
+   "sigma": 0.3,
+   "spearman_min": 0.9285714285714288,
+   "spearman_mean": 0.99625,
+   "p_book_rank1": 1.0,
+   "p_stack_last": 1.0
+  },
+  {
+   "sigma": 0.5,
+   "spearman_min": 0.7857142857142859,
+   "spearman_mean": 0.9796428571428573,
+   "p_book_rank1": 1.0,
+   "p_stack_last": 0.995
+  }
+ ],
+ "sigma020_rank_counts": {
+  "arxiv": {
+   "2": 199,
+   "3": 1
+  },
+  "book": {
+   "1": 200
+  },
+  "c4": {
+   "3": 198,
+   "4": 1,
+   "2": 1
+  },
+  "commoncrawl": {
+   "4": 198,
+   "3": 1,
+   "5": 1
+  },
+  "github": {
+   "5": 199,
+   "4": 1
+  },
+  "stackexchange": {
+   "7": 200
+  },
+  "wikipedia": {
+   "6": 200
+  }
+ }
+}
