@@ -321,7 +321,7 @@
 | 形式构造 | 经典/加性/乘性/交互（$N$/$D$）/饱和/指数 $Q$ 六种候选 | interaction\_N 以 BIC 决定性胜出（$\Delta$BIC>10） |
 | 模型验证 | 留出 5 折 CV × 3 重复 + 残差诊断 + Bootstrap | 留出 RMSE 0.051（较经典降 53%），残差无偏 sd=0.0496 |
 | 弹性分析 | 固定参考点 + 175 点网格 | $\varepsilon_Q=0.146>\varepsilon_N=0.060>\varepsilon_D=0.030$（100% 稳健） |
-| 替代关系 | 隐函数定理 $dN/dQ=-L_Q/L_N$ | +0.1Q 等价参数节省 0.063B→0.243B→约 0.6B |
+| 替代关系 | 隐函数定理 $dN/dQ=-L_Q/L_N$ | +0.1Q 等价参数节省 0.063B→0.243B→约 0.83B（N=0.3/1/3B，eq/N 0.21–0.28） |
 | 数据曲线 | KKT / Chinchilla 式推导 | $D^{*}(N)=49.8N^{1.046}$，与 B4 实际训练点互证 |
 
 <img src="figures/p2_generalized_fit.png" alt="广义标度律拟合" width="820"/>
