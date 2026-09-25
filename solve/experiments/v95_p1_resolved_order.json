@@ -1,0 +1,79 @@
+{
+ "W_resolved": 0.7321428571428571,
+ "n_methods": 8,
+ "n_domains": 7,
+ "pairwise_spearman_min": 0.21428571428571433,
+ "pairwise_spearman_mean": 0.6938775510204083,
+ "orders": {
+  "arxiv": {
+   "TOPSIS(消解后)": 7,
+   "SAW(消解后)": 6,
+   "熵-CRITIC(消解后)": 6,
+   "CRITIC-only(消解后)": 5,
+   "GRA(消解后)": 6,
+   "RSR(消解后)": 6,
+   "PROMETHEE-II(消解后)": 2,
+   "VIKOR(消解后)": 2
+  },
+  "book": {
+   "TOPSIS(消解后)": 1,
+   "SAW(消解后)": 2,
+   "熵-CRITIC(消解后)": 2,
+   "CRITIC-only(消解后)": 2,
+   "GRA(消解后)": 2,
+   "RSR(消解后)": 4,
+   "PROMETHEE-II(消解后)": 1,
+   "VIKOR(消解后)": 1
+  },
+  "c4": {
+   "TOPSIS(消解后)": 2,
+   "SAW(消解后)": 1,
+   "熵-CRITIC(消解后)": 1,
+   "CRITIC-only(消解后)": 1,
+   "GRA(消解后)": 1,
+   "RSR(消解后)": 1,
+   "PROMETHEE-II(消解后)": 4,
+   "VIKOR(消解后)": 5
+  },
+  "commoncrawl": {
+   "TOPSIS(消解后)": 3,
+   "SAW(消解后)": 3,
+   "熵-CRITIC(消解后)": 3,
+   "CRITIC-only(消解后)": 3,
+   "GRA(消解后)": 3,
+   "RSR(消解后)": 3,
+   "PROMETHEE-II(消解后)": 3,
+   "VIKOR(消解后)": 4
+  },
+  "github": {
+   "TOPSIS(消解后)": 4,
+   "SAW(消解后)": 4,
+   "熵-CRITIC(消解后)": 4,
+   "CRITIC-only(消解后)": 4,
+   "GRA(消解后)": 4,
+   "RSR(消解后)": 2,
+   "PROMETHEE-II(消解后)": 5,
+   "VIKOR(消解后)": 3
+  },
+  "stackexchange": {
+   "TOPSIS(消解后)": 6,
+   "SAW(消解后)": 7,
+   "熵-CRITIC(消解后)": 7,
+   "CRITIC-only(消解后)": 7,
+   "GRA(消解后)": 7,
+   "RSR(消解后)": 7,
+   "PROMETHEE-II(消解后)": 7,
+   "VIKOR(消解后)": 7
+  },
+  "wikipedia": {
+   "TOPSIS(消解后)": 5,
+   "SAW(消解后)": 5,
+   "熵-CRITIC(消解后)": 5,
+   "CRITIC-only(消解后)": 6,
+   "GRA(消解后)": 5,
+   "RSR(消解后)": 5,
+   "PROMETHEE-II(消解后)": 6,
+   "VIKOR(消解后)": 6
+  }
+ }
+}

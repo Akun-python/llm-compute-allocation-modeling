@@ -1041,3 +1041,23 @@ PROMETHEE-II 与 VIKOR），作为"多框架算法交叉验证"的补强轮。
   FIXME/占位/待补), 仅有 TU/FangSong italic 字体 fallback 警告
   (无害)。摘要无同类替代率数字问题。
 - 重新编译成功。
+
+
+---
+
+## Round-42: 新实验 v95 冲突消解后八方法的域序一致性 (压力测试)
+
+- v95_p1_resolved_order.py: 对 §5 主链路消解规则做方法无关性压力测试
+  -- 先按 robust_resolve k=6 (每样本 value-sort 对称剔除 3 低+3 高
+  指标后重归一化加权) 消解, 再重算八方法 (口径与 v81 一致: 81,230
+  样本, 熵-CRITIC 组合赋权; 样本级 6 方法在 keep 子集上重算, 域级
+  PROMETHEE-II/VIKOR 在 7x22 域均矩阵对称裁剪版上重算)。
+- 结果: 消解后八方法 Kendall W=0.732 (vs 消解前 0.69), 两两 Spearman
+  min 0.214 (GRA--VIKOR 类对)/mean 0.694; 锚点保持 (book/c4 前二簇、
+  stackexchange 恒垫底 #7); 但方法间相对序确有分化 (TOPSIS 消解后
+  arxiv 落至 #7; PROMETHEE-II/VIKOR 将 c4 置于 #4/#5)。
+- 结论: §5 声称 (加权/贴近度/折衷五方法消解前两两 Spearman min
+  0.93/W=0.98) 仅覆盖消解前分数, v95 不与之矛盾; 消解会改变方法
+  相对序位但保持关键锚点 -- 已诚实记录, 不向论文添加"消解后五方法
+  高度一致"类声称。配色 0.00%。
+- 由于该结果为审计性发现 (非新声称), 零 tex 修改。
