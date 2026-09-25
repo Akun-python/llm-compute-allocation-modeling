@@ -17,7 +17,8 @@ import numpy as np
 import pandas as pd
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "code"))
 from p1_quality import (load_jsonl_xz, build_frame, winsorize_minmax,
-                        entropy_weight, critic_weight, family_scores, ALL_IND)
+                        entropy_weight, critic_weight, family_scores, ALL_IND,
+                        DIRECTION, robust_resolve)
 from common import A, BASE
 from scipy.stats import spearmanr
 import json
@@ -36,20 +37,6 @@ plt.rcParams["axes.unicode_minus"] = False
 plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
 
 
-def robust_resolve(X, w, k):
-    n, m = X.shape
-    k = min(k, m - 2)
-    k2 = k // 2
-    Qr = np.empty(n)
-    for i in range(n):
-        x = X[i]
-        order = np.argsort(x)
-        keep = order[k2: m - k2]
-        ww = w[keep]
-        Qr[i] = np.nansum(x[keep] * ww) / ww.sum()
-    return Qr
-
-
 def wmean(vals, w):
     m = np.isfinite(vals) & np.isfinite(w)
     if m.sum() == 0:
@@ -60,7 +47,6 @@ def wmean(vals, w):
 def domain_order(Q, dom, doms, conflict=None):
     """域级聚合: 与 p1_domain_quality.csv 一致, 权重=1/(冲突+0.05)"""
     if conflict is None:
-        # 无冲突信息时用平权 (仅内部比较用)
         df = pd.DataFrame({"Q": Q, "d": dom})
         return {d: float(df[df.d == d].Q.mean()) for d in doms}
     df = pd.DataFrame({"Q": Q, "d": dom, "c": conflict})
@@ -72,27 +58,43 @@ def domain_order(Q, dom, doms, conflict=None):
 
 
 def main():
-    a1 = load_jsonl_xz(os.path.join(A, "slimpajama_quality_signal_sample.jsonl.xz"), limit=60000)
-    a2 = load_jsonl_xz(os.path.join(A, "slimpajama_quality_extended", "arxiv_part-6777d8857c6e-000486.jsonl.xz"), limit=15000)
-    a3 = load_jsonl_xz(os.path.join(A, "slimpajama_quality_extended", "github_part-6777d8857c6e-000275.jsonl.xz"), limit=15000)
+    # 全量口径 (与官方 p1_domain_quality.csv 完全一致): A1 51230 + arxiv_ext + github_ext
+    a1 = load_jsonl_xz(os.path.join(A, "slimpajama_quality_signal_sample.jsonl.xz"))
+    a2 = load_jsonl_xz(os.path.join(A, "slimpajama_quality_extended", "arxiv_part-6777d8857c6e-000486.jsonl.xz"))
+    a3 = load_jsonl_xz(os.path.join(A, "slimpajama_quality_extended", "github_part-6777d8857c6e-000275.jsonl.xz"))
     df = pd.concat([build_frame(a1), build_frame(a2, domain_hint="arxiv"),
                     build_frame(a3, domain_hint="github")], ignore_index=True)
     dom = df["_source_domain"].fillna("none").to_numpy()
     doms = [d for d in np.unique(dom) if np.sum(dom == d) >= 50]
-    X = winsorize_minmax(df[ALL_IND].to_numpy(dtype=float).copy())
-    X = np.where(np.isnan(X), np.nanmean(X, axis=0), X)
-    we, _ = entropy_weight(X)
+    # 官方预处理: 负向指标取反 -> 分位裁剪+min-max; 保留 NaN (后续 nansum 聚合)
+    Xraw = df[ALL_IND].to_numpy(dtype=float)
+    for j, k in enumerate(ALL_IND):
+        if not DIRECTION[k]:
+            Xraw[:, j] = -Xraw[:, j]
+    X = winsorize_minmax(Xraw)
+    we, _e = entropy_weight(X)
     wc = critic_weight(X)[0]
-    w = 0.5 * np.asarray(we, float) + 0.5 * np.asarray(wc, float)
+    w = 0.5 * np.asarray(we, dtype=float) + 0.5 * np.asarray(wc, dtype=float)
 
-    Qw = X @ w
+    Qw = np.nansum(X * w, axis=1)          # 官方 Q_weighted
     qc, qf = family_scores(X)
-    conflict_fam = np.abs(qc - qf)   # 官方冲突指数
+    conflict_fam = np.abs(qc - qf)         # 官方冲突指数
     do_w = domain_order(Qw, dom, doms, conflict_fam)
-    # 0) 官方口径复核: p1_domain_quality.csv 的 Q_weighted/Q_topsis 域序
+    # 0) 官方 csv 交叉校验: 同源 (272505) 的 Q_weighted/Q_resolved/Q_topsis
     off = pd.read_csv(os.path.join(os.path.dirname(__file__), "..", "results", "p1_domain_quality.csv"))
-    rho_off = float(spearmanr(off["Q_weighted"], off["Q_topsis"])[0])
-    print(f"官方csv 复核: Spearman(Q_weighted, Q_topsis) = {rho_off}")
+    rho_off_wt = float(spearmanr(off["Q_weighted"], off["Q_topsis"])[0])
+    rho_off_wr = float(spearmanr(off["Q_weighted"], off["Q_resolved"])[0])
+    print(f"官方csv (n={len(off)} 域): Spearman(加权,TOPSIS)={rho_off_wt}; "
+          f"Spearman(加权,消解)={rho_off_wr}")
+    # 0b) 数值闭合: 我的复算 vs 官方 csv 同列 (全量同源, 应逐位一致)
+    offi = off.set_index("domain")
+    Qr6_check = robust_resolve(X, w, 6)
+    do_r6 = domain_order(Qr6_check, dom, doms, conflict_fam)
+    md_w = max(abs(do_w[d] - float(offi.loc[d, "Q_weighted"])) for d in doms if d in offi.index)
+    md_r = max(abs(do_r6[d] - float(offi.loc[d, "Q_resolved"])) for d in doms if d in offi.index)
+    md_t = max(abs(do_r6[d] - do_w[d] - (float(offi.loc[d, "Q_resolved"]) - float(offi.loc[d, "Q_weighted"]))) for d in doms if d in offi.index)
+    print(f"数值闭合: |ΔQ_weighted|max={md_w:.2e}, |ΔQ_resolved(k=6)|max={md_r:.2e}, "
+          f"|Δ(位移)|max={md_t:.2e}")
     # 1) 截尾 k 扫描
     ks = [2, 4, 6, 8]
     k_rows = []
@@ -107,11 +109,13 @@ def main():
     all_one = all(abs(v - 1.0) < 1e-9 for v in k_rho)
     print(f"全部 k 下 rho=1.000: {all_one}")
 
-    # 2) 替代冲突指数: 总体不一致度 std(22 维)
-    conflict_std = X.std(axis=1)
-    thresh = float(np.quantile(conflict_std, 0.9))
-    hi = conflict_std >= thresh
-    lo = conflict_std < thresh
+    # 2) 替代冲突指数: 总体不一致度 std(22 维) (NaN 安全)
+    conflict_std = np.nanstd(X, axis=1)
+    vmask = np.isfinite(conflict_std)
+    cvalid = conflict_std[vmask]
+    thresh = float(np.quantile(cvalid, 0.9))
+    hi = np.zeros(len(X), dtype=bool); hi[vmask] = cvalid >= thresh
+    lo = ~hi
     print(f"替代冲突指数: 90 分位阈值 {thresh:.4f}, 高冲突 n={hi.sum()}")
     # 高冲突子集内域序 vs 全量 (同一加权聚合口径)
     def subset_order(mask, conflict):
@@ -130,8 +134,9 @@ def main():
     # 3) 替代冲突率 vs 消解位移 (v57 为 0.0)
     Qr6 = robust_resolve(X, w, 6)
     shift = Qr6 - Qw
-    rho_shift = float(spearmanr(conflict_std, shift)[0])
-    rho_shift_fam = float(spearmanr(conflict_fam, shift)[0])
+    sm = np.isfinite(shift) & np.isfinite(conflict_std) & np.isfinite(conflict_fam)
+    rho_shift = float(spearmanr(conflict_std[sm], shift[sm])[0])
+    rho_shift_fam = float(spearmanr(conflict_fam[sm], shift[sm])[0])
     print(f"冲突率(std) vs 消解位移 Spearman = {rho_shift:.3f}; "
           f"双族差口径 = {rho_shift_fam:.3f}")
 
