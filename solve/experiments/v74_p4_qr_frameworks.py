@@ -230,7 +230,7 @@ def main():
     ax.legend(fontsize=8, loc="lower right")
     ax.annotate(f"n={len(y)} 点预测最大跨框架差异 {max_pred_diff:.1e}",
                 xy=(0.02, 0.92), xycoords="axes fraction", fontsize=8.5, color="#1685a9")
-    fig.suptitle("v74: 五框架分位数回归交叉验证 —— 前沿系数与规模占比数值稳定性", fontsize=12, y=1.02)
+    fig.suptitle("五框架分位数回归交叉验证 —— 前沿系数与规模占比数值稳定性", fontsize=12, y=1.02)
     fig.tight_layout(rect=[0, 0, 1, 0.97])
     fig.savefig(os.path.join(EX, "v74_p4_qr_frameworks.png"), dpi=200)
     plt.close(fig)

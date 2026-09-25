@@ -86,7 +86,7 @@ def main():
     ax.axhline(beta_full[0], color="#3eede7", lw=1.6, label=f"全量 bN={beta_full[0]:.3f}")
     ax.axhline(0.364, color="#44cef6", lw=1.2, ls="--", label="QR90 主链路 bN=0.364")
     ax.set_xticks(range(len(rdf))); ax.set_xticklabels(rdf["family"], rotation=25)
-    ax.set_ylabel("留出拟合的 bN"); ax.set_title("v46: 家族留出的规模弹性 bN (前沿模型)")
+    ax.set_ylabel("留出拟合的 bN"); ax.set_title("家族留出的规模弹性 bN (前沿模型)")
     ax.legend(fontsize=9); ax.grid(alpha=0.3)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v46_p4_family_cv.png"), dpi=200)
     plt.close(fig)

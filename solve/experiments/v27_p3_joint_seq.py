@@ -104,7 +104,7 @@ def main():
     ax.bar(x + w / 2, rdf["L_seq"], w, color="#88ada6", label="纯规模基线 (顺序/无质量预算)")
     ax.set_xticks(x); ax.set_xticklabels(labs)
     ax.set_ylabel("最优损失 L*")
-    ax.set_title("v27: 联合优化 vs 纯规模基线 (顺序决策陷阱)")
+    ax.set_title("联合优化 vs 纯规模基线 (顺序决策陷阱)")
     ax.legend(fontsize=9)
     for i, (a, b) in enumerate(zip(rdf["L_joint"], rdf["L_seq"])):
         ax.text(i - w / 2, a + 0.01, f"{a:.3f}", ha="center", fontsize=8)

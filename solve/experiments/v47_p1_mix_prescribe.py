@@ -85,7 +85,7 @@ def main():
     top = rdf.head(8)
     ax.barh(range(len(top)), top["x_reg"], color="#177cb0", alpha=0.85)
     ax.set_yticks(range(len(top))); ax.set_yticklabels(top["domain"])
-    ax.set_xlabel("正则最优配比权重"); ax.set_title(f"v47: 处方最优配比 (上限30%+正则, 预测降幅 {(L_unif-L_reg)/L_unif*100:.1f}%)")
+    ax.set_xlabel("正则最优配比权重"); ax.set_title(f"处方最优配比 (上限30%+正则, 预测降幅 {(L_unif-L_reg)/L_unif*100:.1f}%)")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v47_p1_mix_prescribe.png"), dpi=200)
     plt.close(fig)
 

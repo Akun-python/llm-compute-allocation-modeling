@@ -109,7 +109,7 @@ def main():
         ax.grid(alpha=0.3)
         if key == "bN":
             ax.legend(fontsize=8)
-    fig.suptitle("v77: 分位数族 x 五框架交叉验证 —— 前沿系数随 tau 单调且框架无关", fontsize=12, y=1.02)
+    fig.suptitle("分位数族 x 五框架交叉验证 —— 前沿系数随 tau 单调且框架无关", fontsize=12, y=1.02)
     fig.tight_layout(rect=[0, 0, 1, 0.97])
     fig.savefig(os.path.join(EX, "v77_p4_tau_frameworks.png"), dpi=200)
     plt.close(fig)

@@ -79,7 +79,7 @@ def main():
     ax.plot(rdf["frac"] * 100, rdf["p_book_rank1"], "o-", color="#177cb0", lw=2, label="book 排第 1 概率")
     ax.plot(rdf["frac"] * 100, rdf["spearman_vs_full"], "s--", color="#3eede7", lw=2, label="与全量排序 Spearman")
     ax.set_xlabel("抽样比例 (%)"); ax.set_ylim(0.3, 1.02)
-    ax.set_title("v43: 域级质量排序的抽样收敛性")
+    ax.set_title("域级质量排序的抽样收敛性")
     ax.legend(fontsize=9); ax.grid(alpha=0.3)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v43_p1_sample_conv.png"), dpi=200)
     plt.close(fig)

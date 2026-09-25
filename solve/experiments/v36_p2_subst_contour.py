@@ -64,7 +64,7 @@ def main():
         nq.append(0.5 * (lo + hi))
     ax.plot(nq, qs, "--", color="#44cef6", lw=2, label="等损失等价轨迹 (质量→规模替代)")
     ax.set_xlabel("参数量 N (B)"); ax.set_ylabel("数据质量 Q")
-    ax.set_title("v36: 质量-规模替代等值面 (D=300B)")
+    ax.set_title("质量-规模替代等值面 (D=300B)")
     ax.legend(fontsize=9, loc="lower left")
     fig.colorbar(cf, ax=ax, label="L")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v36_p2_subst_contour.png"), dpi=200)

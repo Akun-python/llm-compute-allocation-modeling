@@ -81,7 +81,7 @@ def main():
                 continue
             ax.text(bi, ti, f"{v:+.2f}", ha="center", va="center", fontsize=8,
                     color="white" if abs(v) > 0.7 else "black")
-    ax.set_title("v63: 任务x规模二维前沿增速 (90分位年化)")
+    ax.set_title("任务x规模二维前沿增速 (90分位年化)")
     fig.colorbar(im, ax=ax, label="年化对数增速")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v63_p4_task_scale.png"), dpi=200)
     plt.close(fig)

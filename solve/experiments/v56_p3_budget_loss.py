@@ -63,7 +63,7 @@ def main():
     ax.axvline(-0.14, color="#3eede7", lw=1.4, ls="--", label="纯规模理论 ~ -0.14")
     ax.set_yticks(pos); ax.set_yticklabels(rdf["form"])
     ax.set_xlabel("ln L* / ln C (预算翻倍损失降幅)")
-    ax.set_title("v56: 预算-损失弹性的通道差异")
+    ax.set_title("预算-损失弹性的通道差异")
     ax.legend(fontsize=9); ax.grid(alpha=0.3, axis="x")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v56_p3_budget_loss.png"), dpi=200)
     plt.close(fig)

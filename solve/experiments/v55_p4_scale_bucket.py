@@ -68,7 +68,7 @@ def main():
     fig, ax = plt.subplots(figsize=(8.5, 5))
     ax.bar(range(len(rdf)), rdf["annual_growth"], color="#177cb0", alpha=0.85)
     ax.set_xticks(range(len(rdf))); ax.set_xticklabels(rdf["bucket"], rotation=20)
-    ax.set_ylabel("年化增速 (90 分位分)"); ax.set_title("v55: 前沿的规模分桶增速梯度")
+    ax.set_ylabel("年化增速 (90 分位分)"); ax.set_title("前沿的规模分桶增速梯度")
     ax.grid(alpha=0.3, axis="y")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v55_p4_scale_bucket.png"), dpi=200)
     plt.close(fig)

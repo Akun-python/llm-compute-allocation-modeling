@@ -70,7 +70,7 @@ def main():
     ax.barh(pos, rdf["band_decades"], color="#177cb0", alpha=0.85)
     ax.set_yticks(pos); ax.set_yticklabels(rdf["form"])
     ax.set_xlabel("转移带宽 (log10 预算跨度)")
-    ax.set_title("v53: 质量通道结构性转移的预算带宽 (Q*=0.52->0.88)")
+    ax.set_title("质量通道结构性转移的预算带宽 (Q*=0.52->0.88)")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v53_p3_transit_band.png"), dpi=200)
     plt.close(fig)
 

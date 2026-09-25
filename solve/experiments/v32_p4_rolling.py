@@ -72,7 +72,7 @@ def main():
         ax.text(i, a + 0.012, f"{a:.3f}", ha="center", fontsize=9, color="#177cb0")
         ax.text(i, b + 0.012, f"{b:.3f}", ha="center", fontsize=9, color="#3eede7")
     ax.set_xticks(x); ax.set_xticklabels([e[:7] for e in rdf["window_end"]])
-    ax.set_ylabel("QR90 斜率"); ax.set_title("v32: 前沿模型滚动窗口参数稳定性")
+    ax.set_ylabel("QR90 斜率"); ax.set_title("前沿模型滚动窗口参数稳定性")
     ax.legend(fontsize=9); ax.grid(alpha=0.3)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v32_p4_rolling.png"), dpi=200)
     plt.close(fig)

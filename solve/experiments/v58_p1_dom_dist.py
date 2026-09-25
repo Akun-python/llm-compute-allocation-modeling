@@ -68,7 +68,7 @@ def main():
         ax.hist(q, bins=40, density=True, alpha=0.55, label=d)
     ax.axvline(thr, color="#3eede7", lw=1.2, ls="--", label=f"全域 75 分位 {thr:.2f}")
     ax.set_xlabel("文档级质量分 Q_i"); ax.set_ylabel("密度")
-    ax.set_title("v58: 域内文档质量分布 (重叠直方图)")
+    ax.set_title("域内文档质量分布 (重叠直方图)")
     ax.legend(fontsize=8, ncol=2); ax.grid(alpha=0.3)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v58_p1_dom_dist.png"), dpi=200)
     plt.close(fig)

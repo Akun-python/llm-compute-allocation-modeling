@@ -93,7 +93,7 @@ def main():
     for lb in ax.get_yticklabels():
         nm = lb.get_text()
         lb.set_color("#3eede7" if nm in FAMILY_C else "#177cb0")
-    ax.set_title("v21: 质量指标层次聚类 (样本级 Spearman; 橙=内容族C / 蓝=格式族F; 无清晰族簇)")
+    ax.set_title("质量指标层次聚类 (样本级 Spearman; 橙=内容族C / 蓝=格式族F; 无清晰族簇)")
     ax.set_xlabel("1 - Spearman 相关距离")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v21_p1_family_cluster.png"), dpi=200)
     plt.close(fig)

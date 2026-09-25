@@ -192,7 +192,7 @@ def main():
         ax.text(i, r["hi"] + 3, f"{r['mid']:.0f} [{r['lo']:.0f},{r['hi']:.0f}]", ha="center", fontsize=8)
     ax.set_xticks(xs); ax.set_xticklabels(pdf["method"])
     ax.set_ylabel("24 个月前沿预测 (Average)")
-    ax.set_title("v5: 预测区间家族对比")
+    ax.set_title("预测区间家族对比")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v5_p4_intervals.png"), dpi=200); plt.close(fig)
 
     print("\ndone v5 p4")

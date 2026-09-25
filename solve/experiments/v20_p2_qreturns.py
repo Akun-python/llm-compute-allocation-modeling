@@ -50,7 +50,7 @@ def main():
                      "dLdQ_q06": float((loss_generalized(N, D, 0.62) - loss_generalized(N, D, 0.58)) / 0.04)})
         ax.plot(Qs, Ls - loss_generalized(N, D, 1.0), lw=2, label=f"N={N}B")
     ax.set_xlabel("质量 Q"); ax.set_ylabel("L(Q) - L(Q=1.0)")
-    ax.set_title("v20: 质量投资回报曲线 (D=300B, interaction_N)")
+    ax.set_title("质量投资回报曲线 (D=300B, interaction_N)")
     ax.legend(fontsize=9)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v20_p2_qreturns.png"), dpi=200); plt.close(fig)
 

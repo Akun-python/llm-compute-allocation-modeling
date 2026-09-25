@@ -57,7 +57,7 @@ def main():
 
     fig, axes = plt.subplots(1, 2, figsize=(12, 5), gridspec_kw={"width_ratios": [1, 1.6]})
     dendrogram(Z, labels=doms, ax=axes[0], orientation="left", leaf_font_size=9)
-    axes[0].set_title("v65: 域画像 Ward 层次聚类")
+    axes[0].set_title("域画像 Ward 层次聚类")
     im = axes[1].imshow(Cm[np.ix_(order, order)], cmap="cyan_div", vmin=-1, vmax=1)
     axes[1].set_xticks(range(len(doms))); axes[1].set_xticklabels([doms[i] for i in order], rotation=45, fontsize=8)
     axes[1].set_yticks(range(len(doms))); axes[1].set_yticklabels([doms[i] for i in order], fontsize=8)

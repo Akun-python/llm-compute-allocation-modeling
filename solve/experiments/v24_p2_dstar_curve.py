@@ -64,7 +64,7 @@ def main():
         g = b4[b4["family"] == fm_]
         ax.scatter(g["N_params_B"], g["D_tokens_B"], s=42, alpha=0.75, label=fm_)
     ax.set_xlabel("参数量 N (B)"); ax.set_ylabel("训练数据 D (tokens, B)")
-    ax.set_title("v24: 计算最优 D*(N) 与 B4 实际训练点对照")
+    ax.set_title("计算最优 D*(N) 与 B4 实际训练点对照")
     ax.legend(fontsize=7, ncol=2)
     ax.grid(alpha=0.3)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v24_p2_dstar_curve.png"), dpi=200)

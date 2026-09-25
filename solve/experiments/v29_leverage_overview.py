@@ -69,7 +69,7 @@ def main():
     for b, v in zip(bars, order["value"]):
         ax.text(v + 0.002, b.get_y() + b.get_height() / 2, f"{v:.3f}", va="center", fontsize=9)
     ax.set_xlabel("对数弹性 (绝对值)")
-    ax.set_title("v29: 能力杠杆总览 (上下文/预算/质量 > 时间/参数 > 数据)")
+    ax.set_title("能力杠杆总览 (上下文/预算/质量 > 时间/参数 > 数据)")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v29_leverage_overview.png"), dpi=200)
     plt.close(fig)
 

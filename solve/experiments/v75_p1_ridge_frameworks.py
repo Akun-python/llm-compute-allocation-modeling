@@ -187,7 +187,7 @@ def main():
     ax.set_title("(b) 系数范数收缩曲线与幂律指数")
     ax.grid(alpha=0.3, which="both")
     ax.legend(fontsize=7.5)
-    fig.suptitle("v75: 五框架岭回归交叉验证 —— 配比-Loss 系数与收缩指数 κ 数值稳定性", fontsize=12, y=1.02)
+    fig.suptitle("五框架岭回归交叉验证 —— 配比-Loss 系数与收缩指数 κ 数值稳定性", fontsize=12, y=1.02)
     fig.tight_layout(rect=[0, 0, 1, 0.97])
     fig.savefig(os.path.join(EX, "v75_p1_ridge_frameworks.png"), dpi=200)
     plt.close(fig)

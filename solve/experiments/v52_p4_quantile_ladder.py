@@ -80,7 +80,7 @@ def main():
     ax.axhline(0.364, color="#3eede7", lw=1.2, ls="--", label="QR90 主链路 bN=0.364 (整数年 t)")
     ax.axhline(0.089, color="#88ada6", lw=1.2, ls=":", label="QR90 主链路 bT=0.089 (整数年 t)")
     ax.set_xlabel("分位 tau"); ax.set_ylabel("弹性")
-    ax.set_title("v52: 前沿模型弹性的分位数族 (含时间口径对比)")
+    ax.set_title("前沿模型弹性的分位数族 (含时间口径对比)")
     ax.legend(fontsize=8); ax.grid(alpha=0.3)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v52_p4_quantile_ladder.png"), dpi=200)
     plt.close(fig)

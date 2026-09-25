@@ -65,7 +65,7 @@ def main():
         axes[i].bar(range(len(FORMS)), vals, color="#177cb0", alpha=0.85)
         axes[i].axhline(vals.mean(), color="#3eede7", lw=1.2, ls="--", label=f"均值 {vals.mean():.3f}")
         axes[i].set_xticks(range(len(FORMS))); axes[i].set_xticklabels(FORMS, rotation=25, fontsize=7)
-        axes[i].set_ylabel(name); axes[i].set_title(f"v66: {name} 跨形式稳定性 (CV {vals.std()/vals.mean()*100:.1f}%)")
+        axes[i].set_ylabel(name); axes[i].set_title(f"{name} 跨形式稳定性 (CV {vals.std()/vals.mean()*100:.1f}%)")
         axes[i].legend(fontsize=8); axes[i].grid(alpha=0.3, axis="y")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v66_p2_form_params.png"), dpi=200)
     plt.close(fig)

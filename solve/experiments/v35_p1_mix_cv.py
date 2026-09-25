@@ -95,7 +95,7 @@ def main():
                 f"{v:.3f}", ha="center", fontsize=9)
     ax.axhline(0, color="#88ada6", lw=0.8)
     ax.set_ylim(-4.2, 1.05); ax.set_ylabel("平均 R²")
-    ax.set_title("v35: 配比模型留出验证与跨尺度迁移 (13 损失域, 60M/1B 含基线校正)")
+    ax.set_title("配比模型留出验证与跨尺度迁移 (13 损失域, 60M/1B 含基线校正)")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v35_p1_mix_cv.png"), dpi=200)
     plt.close(fig)
 

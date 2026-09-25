@@ -77,7 +77,7 @@ def main():
     for patch in bp["boxes"]:
         patch.set_facecolor("#70f3ff")
     ax.set_ylabel("TOPSIS 质量分 Q")
-    ax.set_title("v30: 域级质量分分布 (n=%d, Kruskal-Wallis p<1e-300)" % len(Q))
+    ax.set_title("域级质量分分布 (n=%d, Kruskal-Wallis p<1e-300)" % len(Q))
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v30_p1_domain_sig.png"), dpi=200)
     plt.close(fig)
 

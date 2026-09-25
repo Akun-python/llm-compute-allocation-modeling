@@ -71,7 +71,7 @@ def main():
                 [r[f"keep_{int(p*100)}"] for p in P_KEEP], marker="o", ms=3, lw=1.5,
                 label=r["domain"])
     ax.set_xlabel("保留文档比例 (%)"); ax.set_ylabel("域平均质量 Q")
-    ax.set_title("v60: 文档级筛选的质量提升曲线")
+    ax.set_title("文档级筛选的质量提升曲线")
     ax.legend(fontsize=8, ncol=2); ax.grid(alpha=0.3)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v60_p1_filter_curve.png"), dpi=200)
     plt.close(fig)

@@ -154,7 +154,7 @@ def main():
     ax.barh(gl["ablation"], gl["domain_rank_spearman"], color="#177cb0")
     ax.axvline(1.0, color="#44cef6", ls="--", lw=1)
     ax.set_xlabel("域排序 Spearman (vs 基线)"); ax.set_xlim(0.6, 1.02)
-    ax.set_title("v10: 指标族消融对域质量排序的影响")
+    ax.set_title("指标族消融对域质量排序的影响")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v10_p1_ablation.png"), dpi=200); plt.close(fig)
 
     print("\ndone v10")
