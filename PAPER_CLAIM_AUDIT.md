@@ -479,3 +479,23 @@ PROMETHEE-II 与 VIKOR），作为"多框架算法交叉验证"的补强轮。
   段"四类框架"→"九类求解框架"。
 - 结论：全局最优对初值、收敛算法与约束处理方式均不敏感；罚函数类框架的
   加入同时检验了"约束建模方式"这一维度。
+
+
+---
+
+## Round-15: P2 BIC 模型选择对拟合框架的鲁棒性 (2026-09-25, v84)
+
+问题二模型选择结论的"拟合器不变性"补强轮：v50 的 BIC 表仅用 TRF 单一拟合器。
+
+- 新实验 v84_p2_bic_framework.py/.csv(表+汇总)/.json/.png：
+  - 六形式 x 四框架（TRF/L-BFGS-B/DE/Adam），同数据 B6+B7(n=810)、同边界/初值。
+  - 结果：四框架 BIC 排序完全一致（interaction_N > multiplicative > interaction_D
+    > additive > exponential_Q > saturating）；interaction_N 最优 BIC 逐位相同
+    （-4813.73）；次优 multiplicative ΔBIC 恒 20.36（>10 决定性）；其余 >230。
+  - TRF 腿逐位复现 v50（交叉验证）；DE/Adam 两全局/梯度框架独立重拟合仍同排序。
+- 严谨性修正（诚实记录）：v50 的 K 表把 saturating 计为 k=7，而形式定义有 8 参数；
+  v84 统一用真实参数个数。saturating 的 BIC 因此升高 ln(810)≈6.7，其 ΔBIC 从
+  ~235 升至 ~242，仍被决定性拒绝；论文引用的 interaction_N BIC=-4813.73 与
+  次优 dBIC=20.36 不受影响（k 相同）。已在 README/审计中注明该口径修正。
+- 论文更新：§6.2 新增拟合框架鲁棒性句与图 fig:p2_bic_fw（v84，配色 0.96%<1% 合规，
+  黑色小号文字亚像素渲染噪声所致，其余像素 0.00%）。

@@ -167,13 +167,26 @@ BIC/AIC 形式选择（$n=810$）。interaction\_N 的 BIC 最优（$-4813.73$�
 次优 multiplicative 的 $\Delta\text{BIC}=20.36$（>10，决定性证据），其余
 形式 $\Delta\text{BIC}=235$--244 被\textbf{决定性拒绝}。信息准则与留出
 交叉验证结论一致：``质量--参数量交互''形式并非样本内过拟合，而是在惩罚
-复杂度后仍然胜出的模型。
+复杂度后仍然胜出的模型。为排除对单一拟合器（TRF）的依赖，用四个独立
+拟合框架（TRF、L-BFGS-B、差分进化、Adam 梯度下降）对六种形式分别重拟合
+并各做 BIC 排序（图 \ref{fig:p2_bic_fw}）：\textbf{四框架的 BIC 排序完全
+一致}——interaction\_N 均为最优且最优 BIC 逐位相同（$-4813.73$），次优
+multiplicative 的 $\Delta\text{BIC}$ 恒为 $20.36$（>10），其余四形式的
+$\Delta\text{BIC}>230$ 被决定性拒绝——模型选择结论对拟合器选择不变。
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.78\textwidth]{figures/v50_p2_bic_table.png}
 \caption{六种形式的 BIC/AIC 选择：interaction\_N 决定性胜出。}
 \label{fig:p2_bic}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{figures/v84_p2_bic_framework.png}
+\caption{拟合框架鲁棒性：四种独立拟合框架（TRF/L-BFGS-B/DE/Adam）下的
+BIC 排序完全一致（虚线为 $\Delta\text{BIC}=10$ 决定性阈值）。}
+\label{fig:p2_bic_fw}
 \end{figure}
 
 \textbf{残差诊断}（图 \ref{fig:p2_resid}）：所选 interaction\_N 形式的

@@ -1,0 +1,43 @@
+{
+  "n": 810,
+  "summary": [
+    {
+      "framework": "TRF",
+      "best": "interaction_N",
+      "second": "multiplicative",
+      "second_dBIC": 20.36,
+      "best_bic": -4813.733447016853,
+      "ranking": "interaction_N > multiplicative > interaction_D > additive > exponential_Q > saturating"
+    },
+    {
+      "framework": "L-BFGS-B",
+      "best": "interaction_N",
+      "second": "multiplicative",
+      "second_dBIC": 20.36,
+      "best_bic": -4813.733447002588,
+      "ranking": "interaction_N > multiplicative > interaction_D > additive > exponential_Q > saturating"
+    },
+    {
+      "framework": "DE",
+      "best": "interaction_N",
+      "second": "multiplicative",
+      "second_dBIC": 20.36,
+      "best_bic": -4813.733437472944,
+      "ranking": "interaction_N > multiplicative > interaction_D > additive > exponential_Q > saturating"
+    },
+    {
+      "framework": "Adam",
+      "best": "interaction_N",
+      "second": "multiplicative",
+      "second_dBIC": 20.36,
+      "best_bic": -4813.733447016902,
+      "ranking": "interaction_N > multiplicative > interaction_D > additive > exponential_Q > saturating"
+    }
+  ],
+  "all_best_interaction_N": true,
+  "all_second_dec": true,
+  "second_dBIC_range": [
+    20.36,
+    20.36
+  ]
+}

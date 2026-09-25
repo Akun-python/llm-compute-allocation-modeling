@@ -1,0 +1,5 @@
+﻿framework,best,second,second_dBIC,best_bic,ranking
+TRF,interaction_N,multiplicative,20.36,-4813.733447016853,interaction_N > multiplicative > interaction_D > additive > exponential_Q > saturating
+L-BFGS-B,interaction_N,multiplicative,20.36,-4813.733447002588,interaction_N > multiplicative > interaction_D > additive > exponential_Q > saturating
+DE,interaction_N,multiplicative,20.36,-4813.733437472944,interaction_N > multiplicative > interaction_D > additive > exponential_Q > saturating
+Adam,interaction_N,multiplicative,20.36,-4813.733447016902,interaction_N > multiplicative > interaction_D > additive > exponential_Q > saturating
