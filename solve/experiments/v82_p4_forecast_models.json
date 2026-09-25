@@ -1,0 +1,37 @@
+{
+  "windows": 3,
+  "agg": {
+    "err_lin": {
+      "mape": 177.7,
+      "max_abs": 276.0,
+      "over_frac": 1.0
+    },
+    "err_quad": {
+      "mape": 70.89999999999999,
+      "max_abs": 83.2,
+      "over_frac": 1.0
+    },
+    "err_sat": {
+      "mape": 56.93333333333334,
+      "max_abs": 83.0,
+      "over_frac": 1.0
+    },
+    "err_naive": {
+      "mape": 9.833333333333332,
+      "max_abs": 14.7,
+      "over_frac": 0.0
+    }
+  },
+  "full_proj": {
+    "12m": {
+      "lin": 71.7,
+      "quad": 64.1,
+      "sat": 64.1
+    },
+    "24m": {
+      "lin": 123.6,
+      "quad": 102.7,
+      "sat": 102.7
+    }
+  }
+}
