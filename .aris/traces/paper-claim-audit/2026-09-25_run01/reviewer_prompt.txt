@@ -1,0 +1,98 @@
+﻿You are a paper-to-evidence auditor. You have ZERO prior context about this research. You will receive only paper source files and raw result files. Your job is to verify that every number in the paper exactly matches the raw evidence. Do not read README.md, any .md summary files, any .py scripts, or any conversation history — only the .tex claim files and the raw .csv/.json evidence files listed below.
+
+This is a Chinese mathematical-modeling competition report (2023 Huawei Cup Problem F: "算力约束下提升大语言模型能力的资源配置建模") written in LaTeX. It contains quantitative claims across four problems: (P1) data quality scoring & mixture ridge modeling, (P2) scaling laws with quality Q, (P3) optimal allocation of compute/quality/context, (P4) frontier quantile regression & forecasting. The current working directory is the paper directory.
+
+PAPER FILES TO READ (claims):
+- main.tex  (abstract with many headline numbers)
+- sections/1_restatement.tex
+- sections/2_analysis.tex
+- sections/3_assumptions.tex
+- sections/4_symbols.tex
+- sections/5_problem1.tex
+- sections/6_problem2.tex
+- sections/7_problem3.tex
+- sections/8_problem4.tex
+- sections/9_sensitivity.tex
+- sections/10_evaluation.tex
+- sections/A_code.tex
+- sections/B_params.tex
+
+RESULT FILES TO READ (raw evidence):
+solve/results/p1_domain_quality.csv
+solve/results/p1_conflict_by_domain.csv
+solve/results/p1_conflict_by_set.csv
+solve/results/p1_quality_weights.csv
+solve/results/p1_mixture_coefs.csv
+solve/results/p1_mixture_test_perf.csv
+solve/results/p1_mixture_extrap_perf.csv
+solve/results/p1_mixture_quality_compare.csv
+solve/results/p1_mixture_scale_shrink.csv
+solve/results/p1_sample_vs_full_Q.csv
+solve/results/p1_shrink_kappa.txt   (plain text: kappa / base constants)
+solve/results/p2_scaling_results.json
+solve/results/p3_results.json
+solve/results/p3_opt_results.csv
+solve/results/p3_structural_scan.csv
+solve/results/p3_lctx_sensitivity.csv
+solve/results/p4_results.json
+solve/results/p4_frontier_years.csv
+solve/results/p4_frontier_prediction.csv
+solve/results/p4_frontier_slowdown.csv
+solve/results/p4_decomposition.csv
+solve/results/p4_prediction.csv
+solve/results/p4_c8_task_stats.csv
+solve/results/v23_p4_annual_slowdown.csv
+solve/experiments/v72_p3_framework_solvers.csv
+solve/experiments/v72_p3_framework_solvers.json
+solve/experiments/v73_p2_fit_frameworks.csv
+solve/experiments/v73_p2_fit_frameworks.json
+solve/experiments/v74_p4_qr_frameworks.csv
+solve/experiments/v74_p4_qr_frameworks.json
+solve/experiments/v75_p1_ridge_frameworks.csv
+solve/experiments/v75_p1_ridge_frameworks.json
+solve/experiments/v76_p3_real_closure.csv
+solve/experiments/v76_p3_real_closure.json
+solve/experiments/v77_p4_tau_frameworks.csv
+solve/experiments/v77_p4_tau_frameworks.json
+
+## Audit Protocol
+
+### A. Extract Every Quantitative Claim
+For each number, percentage, comparison, or scope statement in the paper (including figure captions and the abstract):
+- Location (section, table, caption, or inline text)
+- Exact claim text
+- The number or comparison being made
+
+### B. Trace Each Claim to Evidence
+For each extracted claim, find the supporting raw data:
+- Which result file contains this number?
+- What is the EXACT value in that file?
+- Match status: exact_match / rounding_ok / ambiguous_mapping / missing_evidence / config_mismatch / aggregation_mismatch / number_mismatch / scope_overclaim / unsupported_claim
+
+### C. Check These Specific Failure Modes
+1. Number inflation: paper says 85.3%, raw file says 84.7% — only standard rounding to displayed precision is allowed.
+2. Best-seed cherry-pick: check whether the paper specifies average/best/median.
+3. Config mismatch: compared methods must use same settings (e.g., same alpha, same tau, same cost form).
+4. Aggregation mismatch: count actual runs vs claimed count (e.g., paper claims "300 bootstrap", evidence shows another count; "57 real training points" vs count in B4-derived tables).
+5. Delta error: verify arithmetic of all relative improvements (e.g., the v76 claim that the P3 trajectory is "about 30% better" than the Chinchilla rule: verify median abs delta 0.363 vs 0.515 gives ~30%; check any other relative claims).
+6. Caption-table mismatch: cross-check every caption against its content.
+7. Scope overclaim: check that language matches actual evaluation scope.
+
+Pay special attention to the NEW result files v72-v77, which ground newer paper claims:
+- v72 (solve/experiments/v72_*.json/csv): four-framework SLSQP/COBYLA/DE/SHGO agreement on 9 instances in sections/7_problem3.tex. Verify: "9 组实例最大相对偏差 <2.6e-2%", "Q* 范围 ≤5.5e-6", trust-constr boundary failure statement, and the abstract's "跨 SLSQP/COBYLA/差分进化/SHGO 四类求解框架在 9 组预算—成本实例上交叉验证得到全局一致最优解" (which excludes trust-constr — check this matches the paper's own §7 text).
+- v73 (solve/experiments/v73_*.json): six-framework fit on B6+B7, SSE=1.989752, R^2=0.979073, max param relative spread 2.4e-3%, max prediction diff 6.7e-6 in sections/6_problem2.tex.
+- v74 (solve/experiments/v74_*.json): five-framework quantile regression tau=0.9, c0=2.4807, bN=0.3643, bT=0.0890, pinball 135.950, max pred diff 1e-3, scale share 83.65%-83.70% in sections/8_problem4.tex.
+- v75 (solve/experiments/v75_*.json): five-framework ridge, kappa=0.314031 (spread 3e-10 / 2.6e-10 as stated), coefficient norms 16.45/8.84/1.72, max coef rel dev 8.2e-6, lsqr tol=1e-12 discussion in sections/5_problem1.tex. Carefully reconcile ANY small textual discrepancy between the spread magnitude stated in §5 and the v75 JSON's kappa_range value, or verify the paper does not contradict itself.
+- v76 (solve/experiments/v76_*.json): P3 trajectory vs B4 real training points; median |delta|=0.363 dex, IQR 0.210-0.510, 37% <=0.25 dex, 72% <=0.5 dex, Pearson 0.919 / Spearman 0.926, OLS slope 0.490 vs trajectory 0.463, Chinchilla median 0.515, frac_neg_delta 0.895 in sections/7_problem3.tex and main.tex. Verify every one of these numbers, the "30% better" arithmetic, and the "89.5%" claim.
+- v77 (solve/experiments/v77_*.json/csv): per-tau coefficients (tau=0.5..0.99: bN 0.3659/0.3687/0.3721/0.3643/0.3402/0.2785, bT 0.2477/0.2482/0.1766/0.0890/0.0729/0.0438), per-tau max spread, shares 64.89/65.01/72.49/83.66/85.37/88.83% in sections/8_problem4.tex and main.tex: verify the bT "0.248→0.089→0.044" monotone claim (from tau>=0.8), the bN "0.366→0.372 → 0.340→0.279" claim, the share "64.9%→65.0%→72.5%→83.7%→85.4%→88.8%" monotone rise claim (compute share = bN*1.251/(bN*1.251+bT) for the median coefficients and compare), and "系数极差 <0.2%" for bN — flag if any percentage choice is inaccurate.
+
+## Output
+
+Write your complete per-claim audit to a file named PAPER_CLAIM_AUDIT.md in the current working directory, using this structure:
+1. Overall verdict line: "Overall verdict: PASS | WARN | FAIL"
+2. Statistics: total claims, exact_match / rounding_ok / ambiguous_mapping / missing_evidence / mismatch counts
+3. A per-claim table: | # | Location | Paper text (exact quote, may be shortened) | Paper value | Evidence file | Evidence value | Status | Details |
+4. An "Issues Found" section listing every non-exact claim with location, paper says, evidence shows, status, and the specific fix needed.
+5. A short "Verdict Summary" paragraph.
+
+Also return in your final chat message: overall verdict, total claims verified, counts per status, and the list of any FAIL/WARN issues with their locations and fixes (concise).
