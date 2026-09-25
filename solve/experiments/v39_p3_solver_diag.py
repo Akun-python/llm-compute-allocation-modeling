@@ -82,11 +82,11 @@ def main():
     fig, ax = plt.subplots(figsize=(8.5, 5))
     x = np.arange(len(rdf))
     w = 0.28
-    ax.bar(x - w, rdf["L_best"], w, color="#177cb0", label="24 初值最优")
+    ax.bar(x - w, rdf["L_best"], w, color="#177cb0", label="收敛初值最优")
     ax.bar(x, rdf["L_median"], w, color="#70f3ff", label="中位")
     ax.bar(x + w, rdf["L_worst"], w, color="#88ada6", label="最差")
     ax.set_xticks(x); ax.set_xticklabels([f"{int(r['C']):.0e}" for _, r in rdf.iterrows()])
-    ax.set_ylabel("目标 L"); ax.set_title("v39: SLSQP 24 初值解族散布 (power)")
+    ax.set_ylabel("目标 L"); ax.set_title("v39: SLSQP 多初值解族散布 (power)")
     ax.legend(fontsize=9); ax.grid(alpha=0.3)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v39_p3_solver_diag.png"), dpi=200)
     plt.close(fig)

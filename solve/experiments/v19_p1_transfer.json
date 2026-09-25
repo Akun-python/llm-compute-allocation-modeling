@@ -5,8 +5,8 @@
       "self_coef": -7.573434472957755
     },
     {
-      "domain": "arxiv",
-      "self_coef": -0.159881810596235
+      "domain": "dm_mathematics",
+      "self_coef": -9.6282085004639
     },
     {
       "domain": "freelaw",
@@ -56,8 +56,8 @@
   "self_neg_frac": 1.0,
   "top_neg_pairs": [
     {
-      "source": "arxiv",
-      "loss_domain": "arxiv",
+      "source": "dm_mathematics",
+      "loss_domain": "dm_mathematics",
       "coef": -9.6282085004639
     },
     {

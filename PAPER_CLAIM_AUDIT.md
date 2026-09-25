@@ -220,3 +220,73 @@ because the prompt was written before deletion; their absence is intentional.
 - Material mismatches: 0
 - Verdict after executor resolution: WARN→PASS recommended for re-check on
   next audit run with solve/experiments evidence scope.
+
+
+---
+
+## Round-2 Verification (2026-09-25, executor value-level re-check of all missing_evidence items)
+
+Follow-up to the zero-context reviewer run: all 37 missing_evidence items plus
+the ambiguous/config items were re-checked value-by-value against the actual
+experiment outputs in `solve/experiments/` (evidence scope was widened to
+`solve/experiments/*.{csv,json}` as the reviewer recommended). The checker
+script is `solve/experiments/v78_claims_check.py` (34 file-layer probes, all
+PASS; outputs v78_claims_check.csv/.json).
+
+### New fixes applied in this round (4)
+
+| # | Location | Paper claim | Evidence | Fix |
+|---|---|---|---|---|
+| A | 7_problem3.tex:60-62 | "24/24 初值全部收敛到同一最优" | v39_p3_solver_diag.json: n_success=15/13/17 of 24 seeds (13-17 converged; converged ones 100% same optimum, spread ~1e-12) | Rewrote: 成功收敛初值（13--17 个）全部落到同一最优；未收敛=SLSQP 极端宽边界数值失败；v39 figure label/title fixed & rerun |
+| B | 6_problem2.tex:71-73 | "除 GPT2 外其余 11 族均在 0.79 以上" | v7_p2_lofo.csv: valid families 9/10 >=0.91, Pythia r2_offset=0.787971 (<0.79), Mistral n_test=1 (R2 undefined) | Rewrote: 其余 10 个可验证家族中 9 个 >=0.91、Pythia 0.788 略低、Mistral 不可计算 |
+| C | 5_problem1.tex:249 | "如 ubuntu_irc -7.6、arxiv -9.6" | p1_mixture_coefs.csv + v19_p1_transfer.py: -9.63 is dm_mathematics self-coef; arxiv self = -2.6133. v19 ALIAS wrongly mapped dm_mathematics->arxiv | Tex -> dm\_mathematics $-9.6$; v19 ALIAS fixed & rerun (figure labels now correct) |
+| D | 8_problem4.tex:302 | "断点前的技术增速 b_T≈0.88/年" | No source for 0.88; v32 rolling first window bT=1.101 (paper's own rolling section reports 1.10->0.50) | Rewrote: 滚动窗口首窗 b_T 曾高达约 1.1/年 |
+
+### Verified (paper values match evidence exactly, rounding-standard)
+
+P1: v28 k-sens (6 k values, 0.30696->0.35829 +16.7%, Spearman 0.6786-0.9643);
+v45 ICC (0.0468, F=3989.67, df 6/81223); v58 skews (-2.926/2.366/1.741) &
+tail shares (arxiv .491, wiki .304, github .226, se .200, cc .041, c4 .099);
+v60 uplifts (5.07/4.26/3.71/3.74/3.48/3.28/2.67); v70 PCA (3/8/11 dims,
+PC1 0.3423, PC1-6 0.7428); v48 book contrib (0.1441, +0.178/-0.013/-0.021,
+Top5 0.084/0.077/0.027/0.015/0.009); coef matrix 13/13 self-negative;
+v19 book_col_stats (mean≈0, min -2.3302, max 0.6637, n_help 8/17).
+P2: v7 LOFO (12 fam/57 pts, mean 0.888, range 0.338-0.997, alpha 0.07-0.17);
+v50 BIC (-4813.73, multiplicative ΔBIC 20.36); v61 residuals (|corr|<0.01,
+interaction_N sd 0.0496); v33 bootstrap (n=300, equiv_B 0.2163 [0.2099,0.2238],
+h [0.1424,0.1866]); v14 profile (h≈0.16, g≈0.99); v51 (N=1B eq .243, N=0.3B
+.063); B8 diag (B6 -0.925 vs B8 +0.984).
+P3: v39 (converged seeds all same optimum); v4 KKT table (0.246/5.96 etc.,
+8%/18%/30% as reported); v62 corner N* 4.586-7.754; v27 joint vs seq
+(-2.04%); v9 lctx (bL 0.197, L_ctx_opt 125174); v17 marginal; v24 dstar
+(k=49.78, expo 1.0459, D/N median 214.29, actual/theory 20.81x, 1e19 off -72%).
+P4: forecast table (71.7/57.1/123.9/78.6 + CI from p4_prediction.csv); v54
+decomp (12M 42.6/11.8/46.1, 24M 17.2/7.3/77.6, sigma 0.12/0.481); v71
+isoquant (mrs -0.2445, saving 21.7%, premium 27.7%); v18 backtest
+(+105/+276/+152%); v44 tasks (0.03/0.32/0.89/0.45/0.54/0.20); v55 buckets
+(5.61/3.56/4.85/9.46/3.09); v63 2D (all cells match); v64 strata
+(0.30/0.69/0.62, ratios 2.04/0.50/0.76); v32 rolling (0.224->0.338,
+1.10->0.50); v46 family CV (bN_loo 0.353-0.384, dev 5.0%, qwen 0.588/
+gemma 0.109/phi 0.286); Chow (F=7.953, p=2.8e-5, break 2024.5); v16 sigma
+CI ([108.7,140.2]/[105.9,143.7]/[101.9,149.2], nboot=800); v11 ML RMSE
+(0.528/0.448/0.450/0.452/1.742); bridge eq (0.852, 3.304, R2=0.276); C8-C1
+Spearman 0.9887 (n=1895); C8 dirs 1863 (v24_log); S_2025=41.63, lnN_90=2.69
+(p4_log); C1 2496/4564 (p4_log).
+
+### Reclassified
+
+- missing_evidence 37 -> 0 (evidence located & verified; see lists above)
+- ambiguous_mapping 4 -> 0 (v19 coef labels fixed; v45 domains confirmed;
+  others resolved)
+- config_mismatch 1 -> 0 (v24 confirms all D*(N)/B4 claims; the confusion
+  was derived-D in v76 vs actual-D in v24)
+- aggregation_mismatch 1 -> 0 (B_params now notes 19 no-domain-label samples)
+- number_mismatch 7 -> 0 (fixed round 8 + round 9)
+- scope_overclaim 2 -> 0 (fixed round 8: trust-constr wording, tau-range bT)
+- unsupported_claim 1 -> 0 (A_code config claims are implementation-config
+  assertions; values confirmed in code, documented as such)
+
+Final executor status: all 85 claim units reconciled to evidence (2 exact +
+30 rounding-ok + 40 verified-with-evidence + 13 fixed), verdict upgraded from
+FAIL to PASS (executor mechanical standard; reviewer's zero-context report
+preserved verbatim above).

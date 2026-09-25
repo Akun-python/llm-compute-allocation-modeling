@@ -1,0 +1,172 @@
+[
+  {
+    "item": "P1-7[0.268] in p1_quality_log",
+    "ok": true,
+    "detail": "log contains '0.268': True"
+  },
+  {
+    "item": "P1-7[27249] in p1_quality_log",
+    "ok": true,
+    "detail": "log contains '27249': True"
+  },
+  {
+    "item": "P1-7[0.430] in p1_quality_log",
+    "ok": true,
+    "detail": "log contains '0.4301': True"
+  },
+  {
+    "item": "P1-7[0.535] in p1_quality_log",
+    "ok": true,
+    "detail": "log contains '0.5350': True"
+  },
+  {
+    "item": "P1-8 n/k/top20",
+    "ok": true,
+    "detail": "json keys=['rows', 'spearman_vs_k6']"
+  },
+  {
+    "item": "P1-10 ICC",
+    "ok": true,
+    "detail": "v45 keys=['icc', 'F', 'df_b', 'df_w', 'sigma_b', 'sigma_w', 'domains']"
+  },
+  {
+    "item": "P1-11 dist",
+    "ok": true,
+    "detail": "v58 cols=['domain', 'n', 'mean', 'std', 'skew', 'kurt', 'high_tail_share', 'p90']"
+  },
+  {
+    "item": "P1-12 filter",
+    "ok": true,
+    "detail": "v60 cols=['domain', 'n', 'mean_full', 'uplift_del20', 'rel_uplift_del20_pct', 'keep_100', 'keep_90', 'keep_80', 'keep_70', 'keep_60']"
+  },
+  {
+    "item": "P1-13 PCA",
+    "ok": true,
+    "detail": "v70={\"n_ind\": 22, \"dims\": {\"p50\": 3, \"p80\": 8, \"p90\": 11}, \"cum_var\": [0.3423329225629415, 0.48914338446452693, 0.563814509025038, 0.6353784983529864, 0.6952859278544063, 0.7428226170271552], \"share_c_pc1\": 0.8775479866345299}"
+  },
+  {
+    "item": "P1-16 coefs",
+    "ok": true,
+    "detail": "coef shape=(17, 16) cols=['Unnamed: 0', 'arxiv', 'freelaw', 'pubmed_central', 'wikipedia_en', 'dm_mathematics']"
+  },
+  {
+    "item": "P2-22 LOFO",
+    "ok": true,
+    "detail": "v7_p2_lofo cols=['held_out_family', 'n_train', 'n_test', 'r2_offset', 'r2_raw', 'alpha', 'beta'] rows=12"
+  },
+  {
+    "item": "P2-25 BIC",
+    "ok": true,
+    "detail": "v50 cols=['form', 'k', 'r2', 'rss', 'bic', 'aic', 'dBIC', 'dAIC']"
+  },
+  {
+    "item": "P2-26 resid",
+    "ok": true,
+    "detail": "v61 cols=['form', 'r2', 'resid_sd', 'corr_N', 'corr_D', 'corr_Q', 'skew', 'n_outliers_2sd']"
+  },
+  {
+    "item": "P2-28 boot",
+    "ok": true,
+    "detail": "v33 keys=['n_boot', 'rows']"
+  },
+  {
+    "item": "P2-32 profile",
+    "ok": true,
+    "detail": "v14 cols=['param', 'value', 'rss', 'r2', 'lr_stat']"
+  },
+  {
+    "item": "P2-36 v51",
+    "ok": true,
+    "detail": "v51={\"rows\": [{\"N\": 0.3, \"Dstar\": 14.13497903633105, \"eq_0.1Q_B_fixD\": 0.06285938514223367, \"eq_0.1Q_B_optD\": 0.06285938514223367}, {\"N\": 0.4, \"Dstar\": 19.097012503507536, \"eq_0.1Q_B_fixD\": 0.0868263846325827, \"eq_0.1Q_B_optD\": 0.0868263846325827}, {\"N\": 0.5, \"Dstar\": 24.116882267432864, \"eq_0.1Q_B_fixD"
+  },
+  {
+    "item": "P2-30 B8 diag",
+    "ok": true,
+    "detail": "B8_diagnosis={\"B6_within_corr_mean\": -0.9247886196145926, \"B8_within_corr_mean\": 0.9842725708157865}"
+  },
+  {
+    "item": "P3-40 v39",
+    "ok": true,
+    "detail": "v39 keys=['list[3]', 'C', 'form', 'n_success', 'L_best', 'L_median', 'L_worst', 'spread_pct']"
+  },
+  {
+    "item": "P3-44 v22",
+    "ok": true,
+    "detail": "v22 keys=['fits', 'rows']"
+  },
+  {
+    "item": "P3-45 v62",
+    "ok": true,
+    "detail": "v62 keys=['C', 'rows']"
+  },
+  {
+    "item": "P3-49 KKT",
+    "ok": true,
+    "detail": "v4_p3_kkt cols=['C', 'analytic_N', 'analytic_D', 'num_N', 'num_D', 'rel_err_N']"
+  },
+  {
+    "item": "P3-52 v6",
+    "ok": true,
+    "detail": "v6 keys=['qvec', 'scenarios', 'opt_budgets', 'value']"
+  },
+  {
+    "item": "P3-53 v27/v9",
+    "ok": true,
+    "detail": "v27 keys=['list[5]', 'C', 'form', 'L_joint', 'L_stage1', 'L_seq', 'Q_joint', 'Q_seq'] v9 keys=['benefit', 'budgets', 'w_sens']"
+  },
+  {
+    "item": "P3-54 v17",
+    "ok": true,
+    "detail": "v17 keys=['1e+19_exp', '1e+22_power', '1e+24_power']"
+  },
+  {
+    "item": "P4-73 family CV",
+    "ok": true,
+    "detail": "v46 keys=['bN_full', 'bT_full', 'r2_full', 'n', 'rows']"
+  },
+  {
+    "item": "P4-79 v52",
+    "ok": true,
+    "detail": "v52 keys=['rows', 'n', 'discretization']"
+  },
+  {
+    "item": "P4-80 Chow",
+    "ok": true,
+    "detail": "v7_p4_chow cols=['break_t', 'n1', 'n2', 'F', 'p', 'rss_full', 'rss_ur']"
+  },
+  {
+    "item": "P4-81 sigma/ML",
+    "ok": true,
+    "detail": "v16 cols=['sigma', 'median', 'p10', 'p90', 'nboot', 'seed'] v11 cols=['model', 'rmse', 'p90_abs_err']"
+  },
+  {
+    "item": "P4-82 v10/v15/v43",
+    "ok": true,
+    "detail": "v10 cols=['ablation', 'n_ind', 'removed', 'domain_rank_spearman', 'domain_Q_corr', 'conflict_mean']; v15 cols=['Q_topsis', 'Q_pca_ae', 'Q_mlp_ae', 'conflict']; v43 keys=['list[6]', 'frac', 'p_book_rank1', 'spearman_vs_full']"
+  },
+  {
+    "item": "P4-57 gap/seg/fam/catchup",
+    "ok": true,
+    "detail": "v38 keys=['list[4]', 'qtr', 'n', 'n_open', 'S_all', 'S_open', 'ratio']; v59 keys=['rows']; v42 keys=['list[4]', 'qtr', 'leader', 'S_leader', 'runner', 'hhi_top5', 'n', 'families']; v69 keys=['rows', 'leader']"
+  },
+  {
+    "item": "P4-65 v54",
+    "ok": true,
+    "detail": "v54 keys=['rows', 'sigma', 'sigma_alt']"
+  },
+  {
+    "item": "P4-67 v68",
+    "ok": true,
+    "detail": "v68 keys=['rows', 'p3_ref']"
+  },
+  {
+    "item": "P4-69 v71/v34",
+    "ok": true,
+    "detail": "v71 keys=['mrs_lnN_t', 'one_year_param_saving_pct', 'one_year_early_premium_pct', 'rows']; v34 keys=['rows', 'span12_pct', 'span24_pct']"
+  },
+  {
+    "item": "P4-70 v18",
+    "ok": true,
+    "detail": "v18 cols=['y0', 'y_target', 'n_train', 'bN', 'bT', 'S_pred', 'S_data90', 'S_qr_full']"
+  }
+]

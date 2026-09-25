@@ -31,7 +31,7 @@ plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7'
 import plotstyle
 
 ALIAS = {"wikipedia_en": "wikipedia", "gutenberg_pg_19": "book",
-         "dm_mathematics": "arxiv", "pile_cc": "c4"}
+         "pile_cc": "c4"}
 
 
 def clean(s):
