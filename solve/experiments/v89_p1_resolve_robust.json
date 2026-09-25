@@ -1,72 +1,72 @@
 {
-  "n": 81230,
+  "n": 272505,
   "k_sweep": [
     {
       "k": 2,
-      "rho_weight_resolve": 0.9285714285714288,
+      "rho_weight_resolve": 0.9642857142857145,
       "order_resolve": [
         "book",
-        "wikipedia",
-        "github",
         "arxiv",
-        "stackexchange",
+        "c4",
+        "github",
         "commoncrawl",
-        "c4"
+        "wikipedia",
+        "stackexchange"
       ]
     },
     {
       "k": 4,
-      "rho_weight_resolve": 0.8571428571428573,
+      "rho_weight_resolve": 0.8214285714285715,
       "order_resolve": [
         "book",
-        "wikipedia",
+        "c4",
         "github",
-        "stackexchange",
         "arxiv",
         "commoncrawl",
-        "c4"
+        "wikipedia",
+        "stackexchange"
       ]
     },
     {
       "k": 6,
-      "rho_weight_resolve": 0.7142857142857144,
+      "rho_weight_resolve": 0.5714285714285715,
       "order_resolve": [
-        "wikipedia",
-        "github",
+        "c4",
         "book",
-        "stackexchange",
-        "arxiv",
         "commoncrawl",
-        "c4"
+        "github",
+        "wikipedia",
+        "arxiv",
+        "stackexchange"
       ]
     },
     {
       "k": 8,
-      "rho_weight_resolve": 0.7500000000000002,
+      "rho_weight_resolve": 0.5714285714285715,
       "order_resolve": [
-        "wikipedia",
-        "github",
-        "book",
-        "stackexchange",
-        "arxiv",
         "c4",
-        "commoncrawl"
+        "book",
+        "commoncrawl",
+        "github",
+        "wikipedia",
+        "arxiv",
+        "stackexchange"
       ]
     }
   ],
   "k_all_rho_one": false,
-  "alt_conflict_std_p90": 0.3663822387205982,
-  "n_high": 8123,
-  "rho_high_vs_all": 0.9285714285714288,
-  "rho_std_vs_shift": -0.03450179783066222,
-  "rho_family_vs_shift": -0.1844068426468186,
+  "alt_conflict_std_p90": 0.36176373281988994,
+  "n_high": 27251,
+  "rho_high_vs_all": 0.9642857142857145,
+  "rho_std_vs_shift": 0.1681409945837751,
+  "rho_family_vs_shift": -0.20225978186392107,
   "domain_order_weighted": {
-    "arxiv": 0.3393180997094312,
-    "book": 0.46707965746357083,
-    "c4": 0.2915260310795185,
-    "commoncrawl": 0.2769787022594612,
-    "github": 0.3343941779235657,
-    "stackexchange": 0.3198369832232636,
-    "wikipedia": 0.3407042824904963
+    "arxiv": 0.48553563513108117,
+    "book": 0.6310737918003736,
+    "c4": 0.4292424183605974,
+    "commoncrawl": 0.40797509222071326,
+    "github": 0.38589101913022755,
+    "stackexchange": 0.3390263651998259,
+    "wikipedia": 0.364512402480831
   }
 }
