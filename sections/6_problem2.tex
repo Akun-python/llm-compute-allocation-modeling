@@ -180,6 +180,26 @@ BIC/AIC 形式选择（$n=810$）。interaction\_N 的 BIC 最优（$-4813.73$�
 \label{fig:p2_resid}
 \end{figure}
 
+\textbf{跨框架拟合稳定性}（图 \ref{fig:p2_fitfw}）：为保证参数估计不依赖
+特定优化器实现，用六个相互独立的拟合框架在 B6+B7 上复算同一
+interaction\_N 形式——信赖域反射（TRF，主链路）、信赖域狗腿（dogbox）、
+Levenberg--Marquardt（LM）、L-BFGS-B、差分进化（DE，全局搜索）与 Adam
+（深度学习优化器，边界投影）。结果：\textbf{六框架收敛到同一最优}——残差
+平方和全部为 $1.989752$（$R^2=0.979073$），8 个参数的\textbf{最大相对极差
+仅 $\boldsymbol{2.4\times10^{-3}\%}$}（$b,g,h$ 约 $2\times10^{-3}\%$，
+$a,C$ 约 $10^{-4}\%$），810 个样本点上的预测最大跨框架差异仅
+$6.7\times10^{-6}$。梯度类、无导数全局类与深度学习优化器一致收敛到同一
+参数点，证明\textbf{参数估计与拟合结论对求解框架数值上稳健}；配合 BIC
+选择（v50）、留出 CV（v26）与残差诊断（v61），形成完整的模型检验链。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/v73_p2_fit_frameworks.png}
+\caption{六框架跨框架拟合对比：参数最大相对极差 $2.4\times10^{-3}\%$，
+预测差异 $6.7\times10^{-6}$，$R^2$ 全部为 0.979073。}
+\label{fig:p2_fitfw}
+\end{figure}
+
 \textbf{参数的跨形式一致性}（图 \ref{fig:p2_formparams}）：六种形式
 独立拟合后，共享的\textbf{规模弹性} $a$（$N$ 指数）均值 0.284、范围
 [0.270, 0.305]、\textbf{CV 3.7\%}；$b$（$D$ 指数）均值 0.290、范围
