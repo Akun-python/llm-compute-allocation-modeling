@@ -1,0 +1,72 @@
+{
+  "n": 81230,
+  "k_sweep": [
+    {
+      "k": 2,
+      "rho_weight_resolve": 0.9285714285714288,
+      "order_resolve": [
+        "book",
+        "wikipedia",
+        "github",
+        "arxiv",
+        "stackexchange",
+        "commoncrawl",
+        "c4"
+      ]
+    },
+    {
+      "k": 4,
+      "rho_weight_resolve": 0.8571428571428573,
+      "order_resolve": [
+        "book",
+        "wikipedia",
+        "github",
+        "stackexchange",
+        "arxiv",
+        "commoncrawl",
+        "c4"
+      ]
+    },
+    {
+      "k": 6,
+      "rho_weight_resolve": 0.7142857142857144,
+      "order_resolve": [
+        "wikipedia",
+        "github",
+        "book",
+        "stackexchange",
+        "arxiv",
+        "commoncrawl",
+        "c4"
+      ]
+    },
+    {
+      "k": 8,
+      "rho_weight_resolve": 0.7500000000000002,
+      "order_resolve": [
+        "wikipedia",
+        "github",
+        "book",
+        "stackexchange",
+        "arxiv",
+        "c4",
+        "commoncrawl"
+      ]
+    }
+  ],
+  "k_all_rho_one": false,
+  "alt_conflict_std_p90": 0.3663822387205982,
+  "n_high": 8123,
+  "rho_high_vs_all": 0.9285714285714288,
+  "rho_std_vs_shift": -0.03450179783066222,
+  "rho_family_vs_shift": -0.1844068426468186,
+  "domain_order_weighted": {
+    "arxiv": 0.3393180997094312,
+    "book": 0.46707965746357083,
+    "c4": 0.2915260310795185,
+    "commoncrawl": 0.2769787022594612,
+    "github": 0.3343941779235657,
+    "stackexchange": 0.3198369832232636,
+    "wikipedia": 0.3407042824904963
+  }
+}
