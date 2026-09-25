@@ -27,6 +27,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 FAMILIES = ["llama", "qwen", "gemma", "deepseek", "mistral", "phi", "olmo",
             "gpt", "claude", "baichuan", "yi", "falcon"]
@@ -89,8 +91,8 @@ def main():
 
     fig, ax = plt.subplots(figsize=(9.5, 5.2))
     for _, r in odf.iterrows():
-        c = "#2563EB" if r["T_catch_months"] is not None and r["T_catch_months"] <= 12 else \
-            ("#0EA5E9" if r["T_catch_months"] is not None else "#C2410C")
+        c = "#177cb0" if r["T_catch_months"] is not None and r["T_catch_months"] <= 12 else \
+            ("#1685a9" if r["T_catch_months"] is not None else "#3eede7")
         ax.barh(r["family"], r["gap_pct"], color=c, alpha=0.85)
         lab = r["T_catch_label"]
         ax.text(r["gap_pct"], r["family"], f"  {lab}", va="center", fontsize=8)

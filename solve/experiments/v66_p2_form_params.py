@@ -27,6 +27,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 FORMS = ["additive", "interaction_D", "interaction_N", "multiplicative",
          "saturating", "exponential_Q"]
@@ -60,8 +62,8 @@ def main():
 
     fig, axes = plt.subplots(1, 2, figsize=(11, 4.6))
     for i, (name, vals) in enumerate([("a (N 弹性)", a), ("b (D 弹性)", b)]):
-        axes[i].bar(range(len(FORMS)), vals, color="#2563EB", alpha=0.85)
-        axes[i].axhline(vals.mean(), color="#C2410C", lw=1.2, ls="--", label=f"均值 {vals.mean():.3f}")
+        axes[i].bar(range(len(FORMS)), vals, color="#177cb0", alpha=0.85)
+        axes[i].axhline(vals.mean(), color="#3eede7", lw=1.2, ls="--", label=f"均值 {vals.mean():.3f}")
         axes[i].set_xticks(range(len(FORMS))); axes[i].set_xticklabels(FORMS, rotation=25, fontsize=7)
         axes[i].set_ylabel(name); axes[i].set_title(f"v66: {name} 跨形式稳定性 (CV {vals.std()/vals.mean()*100:.1f}%)")
         axes[i].legend(fontsize=8); axes[i].grid(alpha=0.3, axis="y")

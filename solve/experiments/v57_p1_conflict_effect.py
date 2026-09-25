@@ -30,6 +30,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def main():
@@ -67,7 +69,7 @@ def main():
     print(f"\n冲突率 vs 消解位移 Spearman = {corr_cm:.3f}")
 
     fig, ax = plt.subplots(figsize=(8.5, 5))
-    ax.scatter(cm, shift_resolve, color="#2563EB", s=60, alpha=0.85)
+    ax.scatter(cm, shift_resolve, color="#177cb0", s=60, alpha=0.85)
     for i in range(len(rdf)):
         ax.annotate(rdf.loc[i, "domain"], (cm[i], shift_resolve[i]),
                     textcoords="offset points", xytext=(5, 4), fontsize=8)

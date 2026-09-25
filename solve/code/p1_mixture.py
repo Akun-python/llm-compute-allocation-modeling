@@ -28,6 +28,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 RIDGE_ALPHA = 1.0
 
@@ -203,7 +205,7 @@ def main():
     # 1) 检验集 R2 条形
     fig, ax = plt.subplots(figsize=(8, 4.5))
     x = perf["scale"]; y = perf["mean_r2"]
-    bars = ax.bar(x, y, color="#2563EB", alpha=0.85)
+    bars = ax.bar(x, y, color="#177cb0", alpha=0.85)
     for b, v in zip(bars, y):
         ax.text(b.get_x() + b.get_width()/2, v + 0.005, f"{v:.3f}", ha="center")
     ax.set_ylabel("13 域平均 R2 (尺度内去均值)")
@@ -213,9 +215,9 @@ def main():
 
     # 2) 跨尺度收缩曲线
     fig, ax = plt.subplots(figsize=(7, 4.8))
-    ax.plot(Ns, norms, "o-", color="#7C3AED", lw=2)
+    ax.plot(Ns, norms, "o-", color="#1685a9", lw=2)
     Nfit = np.linspace(0.0005, 1.2, 100)
-    ax.plot(Nfit, np.exp(A_) * Nfit ** (-kappa), "--", color="#EF4444", lw=1.5,
+    ax.plot(Nfit, np.exp(A_) * Nfit ** (-kappa), "--", color="#44cef6", lw=1.5,
             label=f"幂律拟合: ||β|| = {np.exp(A_):.3f}·N^(−{kappa:.3f})")
     ax.set_xscale("log"); ax.set_yscale("log")
     ax.set_xlabel("参数量 N (B, 对数轴)"); ax.set_ylabel("配比系数范数 ||β|| (对数轴)")
@@ -226,8 +228,8 @@ def main():
     # 2) 域边际效应排序
     fig, ax = plt.subplots(figsize=(10, 5))
     top = coef_df.head(17)
-    ax.barh(top.index[::-1], top["mean_effect"], color=["#EF4444" if v < 0 else "#10B981" for v in top["mean_effect"][::-1]])
-    ax.axvline(0, color="gray", lw=0.8)
+    ax.barh(top.index[::-1], top["mean_effect"], color=["#44cef6" if v < 0 else "#3eede7" for v in top["mean_effect"][::-1]])
+    ax.axvline(0, color="#88ada6", lw=0.8)
     ax.set_xlabel("对 13 域 Loss 的平均边际效应 (增加 1% 配比)")
     ax.set_title("17 个训练域对验证损失的边际效应排序")
     fig.tight_layout(); fig.savefig(os.path.join(FIG, "p1_mixture_effects.png"), dpi=200); plt.close(fig)
@@ -237,7 +239,7 @@ def main():
     avg_yhat = np.mean([models_1m[j].predict(Xte) for j in range(len(LOSS_DOMAINS))], axis=0)
     avg_y = Yte.mean(axis=1)
     fig, ax = plt.subplots(figsize=(6, 6))
-    ax.scatter(avg_y, avg_yhat, s=18, alpha=0.7, color="#2563EB")
+    ax.scatter(avg_y, avg_yhat, s=18, alpha=0.7, color="#177cb0")
     lims = [min(avg_y.min(), avg_yhat.min()), max(avg_y.max(), avg_yhat.max())]
     ax.plot(lims, lims, "r--", lw=1)
     ax.set_xlabel("实际平均验证 Loss"); ax.set_ylabel("预测平均验证 Loss")

@@ -28,6 +28,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def main():
@@ -59,12 +61,12 @@ def main():
     pN, _ = fit_form(N, D, Q, L, "interaction_N")
     res = L - loss_forms(N, D, Q, pN, "interaction_N")
     fig, axes = plt.subplots(1, 2, figsize=(11, 4.4))
-    axes[0].scatter(Q, res, s=8, color="#2563EB", alpha=0.5)
-    axes[0].axhline(0, color="#C2410C", lw=1.2)
+    axes[0].scatter(Q, res, s=8, color="#177cb0", alpha=0.5)
+    axes[0].axhline(0, color="#3eede7", lw=1.2)
     axes[0].set_xlabel("Q"); axes[0].set_ylabel("残差")
     axes[0].set_title(f"interaction_N 残差 vs Q (r={np.corrcoef(res,Q)[0,1]:+.3f})")
-    axes[1].hist(res, bins=40, color="#0EA5E9", alpha=0.85)
-    axes[1].axvline(0, color="#C2410C", lw=1.2)
+    axes[1].hist(res, bins=40, color="#1685a9", alpha=0.85)
+    axes[1].axvline(0, color="#3eede7", lw=1.2)
     axes[1].set_xlabel("残差"); axes[1].set_title(f"残差分布 (sd={res.std():.4f})")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v61_p2_resid_diag.png"), dpi=200)
     plt.close(fig)

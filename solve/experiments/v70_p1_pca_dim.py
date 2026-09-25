@@ -28,6 +28,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def main():
@@ -63,15 +65,15 @@ def main():
     print(f"PC1 中内容族载荷份额 {share_c_pc1:.2f}")
 
     fig, axes = plt.subplots(1, 2, figsize=(11, 4.8), gridspec_kw={"width_ratios": [1, 1.5]})
-    axes[0].bar(range(len(eig)), cum, color="#2563EB", alpha=0.85)
+    axes[0].bar(range(len(eig)), cum, color="#177cb0", alpha=0.85)
     for thr, d in [(0.5, d50), (0.8, d80), (0.9, d90)]:
-        axes[0].axhline(thr, color="#C2410C", lw=0.9, ls="--")
-        axes[0].text(d - 0.4, thr + 0.02, f"{int(thr*100)}%: {d} 维", fontsize=8, color="#C2410C")
+        axes[0].axhline(thr, color="#3eede7", lw=0.9, ls="--")
+        axes[0].text(d - 0.4, thr + 0.02, f"{int(thr*100)}%: {d} 维", fontsize=8, color="#3eede7")
     axes[0].set_xlabel("主成分序"); axes[0].set_ylabel("累积方差占比")
     axes[0].set_title(f"v70: 有效维度 (80% = {d80} 维 / 22)")
     axes[0].grid(alpha=0.3, axis="y")
-    axes[1].bar(np.arange(len(ALL_IND)) - 0.15, load3[:, 0], 0.3, label="PC1", color="#2563EB")
-    axes[1].bar(np.arange(len(ALL_IND)) + 0.15, load3[:, 1], 0.3, label="PC2", color="#0EA5E9")
+    axes[1].bar(np.arange(len(ALL_IND)) - 0.15, load3[:, 0], 0.3, label="PC1", color="#177cb0")
+    axes[1].bar(np.arange(len(ALL_IND)) + 0.15, load3[:, 1], 0.3, label="PC2", color="#1685a9")
     axes[1].set_xticks(range(len(ALL_IND)))
     axes[1].set_xticklabels(ALL_IND, rotation=60, ha="right", fontsize=6)
     axes[1].set_ylabel("|载荷|"); axes[1].set_title("PC1/PC2 载荷 (内容族=前15)")

@@ -30,6 +30,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def gra(X, ref):
@@ -107,7 +109,7 @@ def main():
 
     fig, ax = plt.subplots(figsize=(8, 5))
     R = df2.rank(axis=0, ascending=False).astype(int)
-    im = ax.imshow(R.T, cmap="YlOrRd_r", vmin=1, vmax=7)
+    im = ax.imshow(R.T, cmap="cyan_seq_r", vmin=1, vmax=7)
     ax.set_xticks(range(len(doms))); ax.set_xticklabels(doms, rotation=25, ha="right")
     ax.set_yticks(range(len(names))); ax.set_yticklabels(names)
     for i in range(len(names)):

@@ -29,6 +29,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def fit_classical(N, D, L, p0=None):
@@ -258,7 +260,7 @@ def main():
     # ===== 8. 图 =====
     # (a) 经典标度律拟合
     fig, ax = plt.subplots(figsize=(6.2, 6))
-    ax.scatter(L, Lhat_c, s=8, alpha=0.5, color="#2563EB")
+    ax.scatter(L, Lhat_c, s=8, alpha=0.5, color="#177cb0")
     lims = [L.min() - 0.1, L.max() + 0.1]
     ax.plot(lims, lims, "r--", lw=1)
     ax.set_xlabel("实际验证 Loss (B1 Pythia)"); ax.set_ylabel("标度律预测 Loss")
@@ -268,7 +270,7 @@ def main():
     # (b) 广义标度律拟合 (B6+B7)
     lh_all = predict_generalized(np.array([pg[k] for k in pg]), NN, DD, QQ, form=formg)
     fig, ax = plt.subplots(figsize=(6.2, 6))
-    s = ax.scatter(LL, lh_all, c=QQ, s=10, alpha=0.6, cmap="viridis")
+    s = ax.scatter(LL, lh_all, c=QQ, s=10, alpha=0.6, cmap="cyan_seq")
     cb = fig.colorbar(s, ax=ax); cb.set_label("Q")
     lims = [LL.min() - 0.1, LL.max() + 0.1]
     ax.plot(lims, lims, "r--", lw=1)
@@ -280,16 +282,16 @@ def main():
     fig, ax = plt.subplots(figsize=(6, 4.5))
     names = ["参数弹性 eps_N", "数据弹性 eps_D", "质量弹性 eps_Q"]
     vals = [eps_N, eps_D, eps_Q]
-    bars = ax.bar(names, vals, color=["#2563EB", "#0EA5E9", "#10B981"])
+    bars = ax.bar(names, vals, color=["#177cb0", "#1685a9", "#3eede7"])
     for b, v in zip(bars, vals):
         ax.text(b.get_x() + b.get_width() / 2, v + 0.005, f"{v:.3f}", ha="center")
-    ax.axhline(0, color="gray", lw=0.8)
+    ax.axhline(0, color="#88ada6", lw=0.8)
     ax.set_title(f"基准点 (N={N0}B, D={D0}B, Q={Q0}) 的边际弹性")
     fig.tight_layout(); fig.savefig(os.path.join(FIG, "p2_elasticity.png"), dpi=200); plt.close(fig)
 
     # (d) 质量-参数等价
     fig, ax = plt.subplots(figsize=(6.2, 4.5))
-    ax.plot(qs, dns, color="#7C3AED", lw=2)
+    ax.plot(qs, dns, color="#1685a9", lw=2)
     ax.set_xlabel("当前质量 Q"); ax.set_ylabel("Q 提升 0.1 的等效参数增量 dN (B)")
     ax.set_title(f"质量-规模等价关系 (N={N0}B, D={D0}B)")
     ax.grid(alpha=0.3)
@@ -297,8 +299,8 @@ def main():
 
     # (e) 外推验证 (B8 + B10)
     fig, ax = plt.subplots(figsize=(6.2, 6))
-    ax.scatter(Nl, Ll, s=30, color="#2563EB", label="大模型 Loss (B10)")
-    ax.scatter(Nl, Llh, s=18, marker="x", color="#EF4444", label="经典标度律预测")
+    ax.scatter(Nl, Ll, s=30, color="#177cb0", label="大模型 Loss (B10)")
+    ax.scatter(Nl, Llh, s=18, marker="x", color="#44cef6", label="经典标度律预测")
     ax.set_xscale("log")
     ax.set_xlabel("参数量 N (B)"); ax.set_ylabel("Loss")
     ax.set_title(f"100B-10000B 外推验证 (去偏移R2={r2_large_off:.4f})")

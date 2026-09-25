@@ -26,6 +26,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 ETA = 2e-4
 Q0 = 0.4
@@ -104,7 +106,7 @@ def main():
         g = rdf[rdf["lctx"] == lctx].sort_values("C")
         axes[0].plot(np.log10(g["C"]), g["Q"], marker="o", ms=3, lw=1.4, label=f"Lctx={lctx}")
         axes[1].plot(np.log10(g["C"]), g["L"], marker="o", ms=3, lw=1.4, label=f"Lctx={lctx}")
-    axes[0].axhline(Q0, color="#C2410C", lw=1.0, ls="--")
+    axes[0].axhline(Q0, color="#3eede7", lw=1.0, ls="--")
     axes[0].set_xlabel("log10 预算"); axes[0].set_ylabel("Q*")
     axes[0].set_title("v67: Q*(C) 曲线族 (exp 形式)")
     axes[0].legend(fontsize=7, ncol=2); axes[0].grid(alpha=0.3)

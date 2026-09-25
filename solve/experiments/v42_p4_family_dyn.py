@@ -26,6 +26,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 FAMILIES = ["llama", "qwen", "gemma", "deepseek", "mistral", "phi", "olmo",
             "gpt", "claude", "baichuan", "yi", "falcon"]
@@ -67,12 +69,12 @@ def main():
     rdf.to_csv(os.path.join(EX, "v42_p4_family_dyn.csv"), index=False, encoding="utf-8-sig")
 
     fig, ax = plt.subplots(figsize=(9, 5))
-    ax.plot(range(len(rdf)), rdf["hhi_top5"], "o-", color="#2563EB", lw=2, label="top5 家族 HHI")
+    ax.plot(range(len(rdf)), rdf["hhi_top5"], "o-", color="#177cb0", lw=2, label="top5 家族 HHI")
     ax.set_xticks(range(len(rdf))); ax.set_xticklabels(rdf["qtr"], rotation=25)
     ax.set_ylabel("HHI (前 5 高分模型)"); ax.set_ylim(0.2, 1.0)
     for i, r in rdf.iterrows():
         ax.annotate(r["leader"], (i, r["hhi_top5"]),
-                    textcoords="offset points", xytext=(0, -16), ha="center", fontsize=8, color="#C2410C")
+                    textcoords="offset points", xytext=(0, -16), ha="center", fontsize=8, color="#3eede7")
     ax.set_title("v42: 开源前沿家族竞争 (领跑家族 + top5 集中度)")
     ax.legend(fontsize=9); ax.grid(alpha=0.3)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v42_p4_family_dyn.png"), dpi=200)

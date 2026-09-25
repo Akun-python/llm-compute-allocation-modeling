@@ -30,6 +30,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 SIGMA = 0.12   # 报告 CI 校准 (v12 原始残差 0.481 备查)
 lnN_now = 2.700
@@ -93,9 +95,9 @@ def main():
     for j, h in enumerate((12, 24)):
         r = rows[j]
         vals = [r["share_eps_pct"], r["share_param_pct"], r["share_gN_pct"]]
-        ax.bar([h], [vals[0]], color="#94A3B8", label=labels[0] if j == 0 else None)
-        ax.bar([h], [vals[1]], bottom=[vals[0]], color="#2563EB", label=labels[1] if j == 0 else None)
-        ax.bar([h], [vals[2]], bottom=[vals[0] + vals[1]], color="#F59E0B", label=labels[2] if j == 0 else None)
+        ax.bar([h], [vals[0]], color="#88ada6", label=labels[0] if j == 0 else None)
+        ax.bar([h], [vals[1]], bottom=[vals[0]], color="#177cb0", label=labels[1] if j == 0 else None)
+        ax.bar([h], [vals[2]], bottom=[vals[0] + vals[1]], color="#70f3ff", label=labels[2] if j == 0 else None)
     ax.set_xticks([12, 24]); ax.set_xticklabels(["12M", "24M"])
     ax.set_ylabel("方差占比 (%)"); ax.set_title("v54: 前沿预测不确定性的来源分解")
     ax.legend(fontsize=9); ax.grid(alpha=0.3, axis="y")

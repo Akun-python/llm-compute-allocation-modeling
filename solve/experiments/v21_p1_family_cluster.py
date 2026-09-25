@@ -31,6 +31,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def load():
@@ -90,7 +92,7 @@ def main():
     dendrogram(Z, labels=ind, orientation="left", ax=ax, leaf_font_size=8)
     for lb in ax.get_yticklabels():
         nm = lb.get_text()
-        lb.set_color("#C2410C" if nm in FAMILY_C else "#2563EB")
+        lb.set_color("#3eede7" if nm in FAMILY_C else "#177cb0")
     ax.set_title("v21: 质量指标层次聚类 (样本级 Spearman; 橙=内容族C / 蓝=格式族F; 无清晰族簇)")
     ax.set_xlabel("1 - Spearman 相关距离")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v21_p1_family_cluster.png"), dpi=200)

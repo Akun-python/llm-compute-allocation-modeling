@@ -29,6 +29,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def icc_anova(Q, dom):
@@ -77,7 +79,7 @@ def main():
 
     fig, ax = plt.subplots(figsize=(8.5, 5))
     pos = np.arange(len(rdf))
-    ax.barh(pos, rdf["sd"], color="#2563EB", alpha=0.85)
+    ax.barh(pos, rdf["sd"], color="#177cb0", alpha=0.85)
     ax.set_yticks(pos); ax.set_yticklabels(rdf["domain"])
     ax.set_xlabel("域内质量分标准差"); ax.set_title(f"v45: 域内离散度 (ICC={icc:.3f})")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v45_p1_domain_icc.png"), dpi=200)

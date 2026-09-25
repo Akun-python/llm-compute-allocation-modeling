@@ -29,6 +29,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def main():
@@ -73,7 +75,7 @@ def main():
     bp = ax.boxplot(data, tick_labels=[f"{d}\n({qmeans[d]:.2f})" for d in order],
                     showfliers=False, patch_artist=True)
     for patch in bp["boxes"]:
-        patch.set_facecolor("#BFDBFE")
+        patch.set_facecolor("#70f3ff")
     ax.set_ylabel("TOPSIS 质量分 Q")
     ax.set_title("v30: 域级质量分分布 (n=%d, Kruskal-Wallis p<1e-300)" % len(Q))
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v30_p1_domain_sig.png"), dpi=200)

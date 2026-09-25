@@ -31,6 +31,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def solve_alloc(C, s_train, s_Q, form, L_ctx, Q0v=Q0):
@@ -139,10 +141,10 @@ def main():
                     if r:
                         Z[a, b] = r["L"]
             fig, ax = plt.subplots(figsize=(8, 6))
-            c = ax.contourf(gq, grid, Z, levels=18, cmap="YlOrRd")
+            c = ax.contourf(gq, grid, Z, levels=18, cmap="cyan_seq")
             ax.contour(gq, grid, Z, levels=10, colors="k", linewidths=0.4, alpha=0.5)
             ax.set_xlabel("质量通道份额 s_Q"); ax.set_ylabel("训练通道份额 s_train")
-            ax.plot(s[1], s[0], "o", ms=12, color="#2563EB", mec="white", mew=2, label="全局最优分配")
+            ax.plot(s[1], s[0], "o", ms=12, color="#177cb0", mec="white", mew=2, label="全局最优分配")
             cb = fig.colorbar(c, ax=ax); cb.set_label("最小损失 L*")
             ax.set_title("v17: 三通道分配响应面 (C=1e22, power)")
             ax.legend(fontsize=9)

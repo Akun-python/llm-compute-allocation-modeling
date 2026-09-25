@@ -27,6 +27,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 TASKS = ["IFEval", "BBH", "MATH Lvl 5", "GPQA", "MUSR", "MMLU-PRO"]
 LABS = ["IFEval", "BBH", "MATH", "GPQA", "MUSR", "MMLU-PRO"]
@@ -69,7 +71,7 @@ def main():
                    "tasks": LABS, "buckets": BNAMES}, f, ensure_ascii=False, indent=2)
 
     fig, ax = plt.subplots(figsize=(9.5, 6.2))
-    im = ax.imshow(grid, cmap="RdBu_r", vmin=-1.5, vmax=1.5, aspect="auto")
+    im = ax.imshow(grid, cmap="cyan_div", vmin=-1.5, vmax=1.5, aspect="auto")
     ax.set_xticks(range(len(BNAMES))); ax.set_xticklabels(BNAMES)
     ax.set_yticks(range(len(LABS))); ax.set_yticklabels(LABS)
     for ti in range(len(TASKS)):

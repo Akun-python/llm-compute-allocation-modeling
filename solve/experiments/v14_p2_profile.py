@@ -26,6 +26,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def load_b67():
@@ -96,8 +98,8 @@ def main():
     fig, axes = plt.subplots(2, 2, figsize=(10, 7.5))
     for ax, key in zip(axes.ravel(), ["h", "g", "a", "b"]):
         sub = prof[prof["param"] == key]
-        ax.plot(sub["value"], sub["r2"], "-o", ms=2.5, color="#2563EB")
-        ax.axhline(1 - thr / np.sum((L - L.mean()) ** 2), color="#EF4444", ls="--", lw=1)
+        ax.plot(sub["value"], sub["r2"], "-o", ms=2.5, color="#177cb0")
+        ax.axhline(1 - thr / np.sum((L - L.mean()) ** 2), color="#44cef6", ls="--", lw=1)
         ax.set_xlabel(key); ax.set_ylabel("剖面 R2")
         ax.set_title(f"profile: {key} (ref={pref[key]:.3f})")
     fig.tight_layout()

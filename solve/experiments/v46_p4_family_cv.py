@@ -28,6 +28,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 FAMILIES = ["llama", "qwen", "gemma", "deepseek", "mistral", "phi", "olmo", "yi"]
 
@@ -80,9 +82,9 @@ def main():
     rdf.to_csv(os.path.join(EX, "v46_p4_family_cv.csv"), index=False, encoding="utf-8-sig")
 
     fig, ax = plt.subplots(figsize=(9, 5))
-    ax.bar(range(len(rdf)), rdf["bN_loo"], color="#2563EB", alpha=0.85)
-    ax.axhline(beta_full[0], color="#C2410C", lw=1.6, label=f"全量 bN={beta_full[0]:.3f}")
-    ax.axhline(0.364, color="#16A34A", lw=1.2, ls="--", label="QR90 主链路 bN=0.364")
+    ax.bar(range(len(rdf)), rdf["bN_loo"], color="#177cb0", alpha=0.85)
+    ax.axhline(beta_full[0], color="#3eede7", lw=1.6, label=f"全量 bN={beta_full[0]:.3f}")
+    ax.axhline(0.364, color="#44cef6", lw=1.2, ls="--", label="QR90 主链路 bN=0.364")
     ax.set_xticks(range(len(rdf))); ax.set_xticklabels(rdf["family"], rotation=25)
     ax.set_ylabel("留出拟合的 bN"); ax.set_title("v46: 家族留出的规模弹性 bN (前沿模型)")
     ax.legend(fontsize=9); ax.grid(alpha=0.3)

@@ -29,6 +29,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def main():
@@ -64,7 +66,7 @@ def main():
     for d in np.unique(dom):
         q = Q[dom == d]
         ax.hist(q, bins=40, density=True, alpha=0.55, label=d)
-    ax.axvline(thr, color="#C2410C", lw=1.2, ls="--", label=f"全域 75 分位 {thr:.2f}")
+    ax.axvline(thr, color="#3eede7", lw=1.2, ls="--", label=f"全域 75 分位 {thr:.2f}")
     ax.set_xlabel("文档级质量分 Q_i"); ax.set_ylabel("密度")
     ax.set_title("v58: 域内文档质量分布 (重叠直方图)")
     ax.legend(fontsize=8, ncol=2); ax.grid(alpha=0.3)

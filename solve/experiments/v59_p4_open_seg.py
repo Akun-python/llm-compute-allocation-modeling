@@ -26,6 +26,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 BUCKETS = [(0.3, 1), (1, 3), (3, 10), (10, 30), (30, 100)]
 
@@ -68,7 +70,7 @@ def main():
         if len(g):
             ax.plot(g["quarter"], g["med_ratio"], marker="o", lw=1.6,
                     label=f"{b[0]}-{b[1]}B")
-    ax.axhline(1.0, color="#C2410C", lw=1.3, ls="--", label="open = closed")
+    ax.axhline(1.0, color="#3eede7", lw=1.3, ls="--", label="open = closed")
     ax.set_xticks(qs); ax.set_xticklabels([f"Q{int(q%4) or 4}" for q in qs])
     ax.set_ylabel("开源/闭源中位分比"); ax.set_xlabel("季度")
     ax.set_title("v59: 开源-闭源差距的规模段分解")

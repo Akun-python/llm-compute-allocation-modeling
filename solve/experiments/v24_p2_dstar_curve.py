@@ -31,6 +31,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 A, a, B_, b = GL["A"], GL["a"], GL["B"], GL["b"]
 k = (b * B_ / (a * A)) ** (1 / b)   # D = k * N^{a/b}
@@ -54,9 +56,9 @@ def main():
     dn_curve = k * Ns ** (expo - 1)
 
     fig, ax = plt.subplots(figsize=(9, 6.5))
-    ax.loglog(Ns, Ds, lw=2, color="#2563EB", label="计算最优 D*(N) (本文 KKT)")
+    ax.loglog(Ns, Ds, lw=2, color="#177cb0", label="计算最优 D*(N) (本文 KKT)")
     N20 = np.geomspace(0.05, 5000, 100)
-    ax.loglog(N20, 20 * N20, "--", lw=1.5, color="#94A3B8", label="Chinchilla 经验规则 D=20N")
+    ax.loglog(N20, 20 * N20, "--", lw=1.5, color="#88ada6", label="Chinchilla 经验规则 D=20N")
     fams = b4["family"].unique()
     for fm_ in fams:
         g = b4[b4["family"] == fm_]

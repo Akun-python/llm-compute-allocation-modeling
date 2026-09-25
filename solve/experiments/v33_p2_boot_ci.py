@@ -27,6 +27,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 PARAMS = ["E", "A", "a", "B", "b", "C", "g", "h"]
 N0, D0, Q0 = 1.0, 300.0, 0.6
@@ -111,9 +113,9 @@ def main():
     y = np.arange(len(sub))
     ax.errorbar(sub["boot_median"], y, xerr=[sub["boot_median"] - sub["ci_lo"],
                                              sub["ci_hi"] - sub["boot_median"]],
-                fmt="o", color="#2563EB", capsize=4, lw=1.5)
+                fmt="o", color="#177cb0", capsize=4, lw=1.5)
     ax.set_yticks(y); ax.set_yticklabels(sub["param"])
-    ax.axvline(0, color="#94A3B8", lw=0.8, ls="--")
+    ax.axvline(0, color="#88ada6", lw=0.8, ls="--")
     ax.set_title("v33: 广义标度律参数 Bootstrap CI (n=810, B=300)")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v33_p2_boot_ci.png"), dpi=200)
     plt.close(fig)

@@ -26,6 +26,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def main():
@@ -54,12 +56,12 @@ def main():
     print(f"跨度: 12个月 ±{span12*100:.0f}% | 24个月 ±{span24*100:.0f}%")
 
     fig, ax = plt.subplots(figsize=(8.5, 5.5))
-    ax.plot(rdf["gN"], rdf["S_12"], "o-", lw=2, color="#2563EB", label="12 个月前沿 S")
-    ax.plot(rdf["gN"], rdf["S_24"], "s-", lw=2, color="#C2410C", label="24 个月前沿 S")
-    ax.axvline(gN_base, ls=":", color="#16A34A", label=f"基准 gN={gN_base:.2f}")
+    ax.plot(rdf["gN"], rdf["S_12"], "o-", lw=2, color="#177cb0", label="12 个月前沿 S")
+    ax.plot(rdf["gN"], rdf["S_24"], "s-", lw=2, color="#3eede7", label="24 个月前沿 S")
+    ax.axvline(gN_base, ls=":", color="#44cef6", label=f"基准 gN={gN_base:.2f}")
     for _, r in rdf.iterrows():
         ax.annotate(f"{r['S_24']:.0f}", (r["gN"], r["S_24"]), textcoords="offset points",
-                    xytext=(0, 6), fontsize=8, color="#C2410C")
+                    xytext=(0, 6), fontsize=8, color="#3eede7")
     ax.set_xlabel("参数量年均对数增速 gN"); ax.set_ylabel("预测前沿平均分 S")
     ax.set_title("v34: 前沿预测对增速假设的敏感性 (tornado)")
     ax.legend(fontsize=9); ax.grid(alpha=0.3)

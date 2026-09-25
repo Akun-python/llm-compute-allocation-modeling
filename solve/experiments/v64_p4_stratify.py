@@ -26,6 +26,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 QS = [0.5, 0.75, 0.9]
 QL = ["p50", "p75", "p90"]
@@ -72,8 +74,8 @@ def main():
     x = np.arange(len(rdf))
     w = 0.26
     for i, ql in enumerate(QL):
-        ax.bar(x + (i - 1) * w, rdf[ql], w, label=ql, color=["#94A3B8", "#0EA5E9", "#2563EB"][i])
-    ax.axhline(0, color="#C2410C", lw=1.0)
+        ax.bar(x + (i - 1) * w, rdf[ql], w, label=ql, color=["#88ada6", "#1685a9", "#177cb0"][i])
+    ax.axhline(0, color="#3eede7", lw=1.0)
     ax.set_xticks(x); ax.set_xticklabels(rdf["scope"])
     ax.set_ylabel("年化对数增速")
     ax.set_title("v64: 前沿的分层演进 (p90/p75/p50)")

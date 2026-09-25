@@ -29,6 +29,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def main():
@@ -81,9 +83,9 @@ def main():
     rdf.to_csv(os.path.join(EX, "v28_p1_k_sens.csv"), index=False, encoding="utf-8-sig")
 
     fig, ax = plt.subplots(figsize=(8, 5))
-    ax.plot(rdf["k"], rdf["Qstar_high_conf"], "o-", lw=2, color="#2563EB", label="高冲突样本 Q*")
-    ax.plot(rdf["k"], rdf["Qstar_all"], "s--", lw=2, color="#94A3B8", label="全体样本 Q*")
-    ax.axhline(rows[0]["Qstar_base_conf"], ls=":", color="#C2410C", label="高冲突基准(未消解)")
+    ax.plot(rdf["k"], rdf["Qstar_high_conf"], "o-", lw=2, color="#177cb0", label="高冲突样本 Q*")
+    ax.plot(rdf["k"], rdf["Qstar_all"], "s--", lw=2, color="#88ada6", label="全体样本 Q*")
+    ax.axhline(rows[0]["Qstar_base_conf"], ls=":", color="#3eede7", label="高冲突基准(未消解)")
     ax.set_xlabel("对称截尾深度 k"); ax.set_ylabel("聚合质量分 Q*")
     ax.set_title("v28: 冲突消解深度敏感性")
     ax.legend(fontsize=9); ax.grid(alpha=0.3)

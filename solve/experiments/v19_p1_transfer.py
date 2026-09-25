@@ -27,6 +27,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 ALIAS = {"wikipedia_en": "wikipedia", "gutenberg_pg_19": "book",
          "dm_mathematics": "arxiv", "pile_cc": "c4"}
@@ -85,7 +87,7 @@ def main():
 
     # 热图
     fig, ax = plt.subplots(figsize=(10, 6.5))
-    im = ax.imshow(M, cmap="RdBu_r", vmin=-np.percentile(np.abs(M), 95), vmax=np.percentile(np.abs(M), 95), aspect="auto")
+    im = ax.imshow(M, cmap="cyan_div", vmin=-np.percentile(np.abs(M), 95), vmax=np.percentile(np.abs(M), 95), aspect="auto")
     ax.set_xticks(np.arange(len(src_doms))); ax.set_xticklabels(src_doms, rotation=45, ha="right", fontsize=9)
     ax.set_yticks(np.arange(len(loss_doms))); ax.set_yticklabels(loss_doms, fontsize=9)
     ax.set_xlabel("混合源域 (配比系数)"); ax.set_ylabel("下游损失域")

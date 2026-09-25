@@ -28,6 +28,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 DIM_GROUPS = {"leaderboard_ifeval": "IFEval", "leaderboard_bbh": "BBH",
               "leaderboard_math_hard": "MATH", "leaderboard_gpqa": "GPQA",
@@ -279,9 +281,9 @@ def main():
         else:
             r = fy[fy["year"] == yy]
             S_all.append(r["S"].iloc[0] if len(r) else np.nan)
-    ax.plot(all_years, S_all, "o-", color="#2563EB", lw=2, label="历史前沿 (C1 开源 + C3)")
+    ax.plot(all_years, S_all, "o-", color="#177cb0", lw=2, label="历史前沿 (C1 开源 + C3)")
     for s, p in pred_df.iterrows():
-        color = "#10B981" if p["scenario"] == "base" else "#F59E0B"
+        color = "#3eede7" if p["scenario"] == "base" else "#70f3ff"
         ax.plot([t_now, p["year"]], [S_all[-1], p["median"]], "--", color=color, lw=1.5,
                 label=f"{p['scenario']} {int(p['horizon_months'])}M" if s % 2 == 0 else None)
         ax.errorbar(p["year"], p["median"], yerr=[[p["median"] - p["p10"]], [p["p90"] - p["median"]]],
@@ -295,17 +297,17 @@ def main():
     if len(decomp):
         fig, ax = plt.subplots(figsize=(8.5, 5))
         d = decomp.dropna(subset=["scale_share"])
-        ax.bar(d["year"], d["growth"], label="总增长", color="#2563EB", alpha=0.45)
-        ax.bar(d["year"], d["scale"], label="规模贡献", color="#10B981")
-        ax.bar(d["year"], d["non_scale"], bottom=d["scale"], label="非规模技术贡献", color="#F59E0B")
-        ax.axhline(0, color="gray", lw=0.8)
+        ax.bar(d["year"], d["growth"], label="总增长", color="#177cb0", alpha=0.45)
+        ax.bar(d["year"], d["scale"], label="规模贡献", color="#3eede7")
+        ax.bar(d["year"], d["non_scale"], bottom=d["scale"], label="非规模技术贡献", color="#70f3ff")
+        ax.axhline(0, color="#88ada6", lw=0.8)
         ax.set_ylabel("对数能力增长"); ax.set_title("前沿能力增长分解: 规模 vs 非规模技术")
         ax.legend()
         fig.tight_layout(); fig.savefig(os.path.join(FIG, "p4_decomposition.png"), dpi=200); plt.close(fig)
 
     # (c) 桥接
     fig, ax = plt.subplots(figsize=(6.5, 5.5))
-    ax.scatter(br["Val_Loss"], br["LB_Average"], c="#2563EB", s=14, alpha=0.7)
+    ax.scatter(br["Val_Loss"], br["LB_Average"], c="#177cb0", s=14, alpha=0.7)
     xs = np.linspace(br["Val_Loss"].min(), br["Val_Loss"].max(), 100)
     ax.plot(xs, loss_to_avg(xs), "r-", lw=2, label="桥接映射")
     ax.set_xlabel("验证 Loss"); ax.set_ylabel("Benchmark 平均分")
@@ -317,7 +319,7 @@ def main():
     if len(c8):
         fig, ax = plt.subplots(figsize=(8, 4.5))
         ts_top = task_stats.head(6)
-        ax.barh(ts_top.index[::-1], ts_top["mean"][::-1], color="#7C3AED", alpha=0.85)
+        ax.barh(ts_top.index[::-1], ts_top["mean"][::-1], color="#1685a9", alpha=0.85)
         ax.set_xlabel("平均 acc"); ax.set_title("C8 逐任务聚合 (6 维)")
         fig.tight_layout(); fig.savefig(os.path.join(FIG, "p4_c8_tasks.png"), dpi=200); plt.close(fig)
 

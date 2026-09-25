@@ -28,6 +28,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def main():
@@ -62,8 +64,8 @@ def main():
 
     fig, ax = plt.subplots(figsize=(9, 5.5))
     order = rdf.sort_values("value", ascending=True)
-    bars = ax.barh(order["channel"], order["value"], color=["#2563EB", "#0EA5E9", "#F59E0B",
-                                                             "#16A34A", "#94A3B8", "#C2410C"])
+    bars = ax.barh(order["channel"], order["value"], color=["#177cb0", "#1685a9", "#70f3ff",
+                                                             "#44cef6", "#88ada6", "#3eede7"])
     for b, v in zip(bars, order["value"]):
         ax.text(v + 0.002, b.get_y() + b.get_height() / 2, f"{v:.3f}", va="center", fontsize=9)
     ax.set_xlabel("对数弹性 (绝对值)")

@@ -28,6 +28,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 Q0 = 0.4
 Q20, Q80 = Q0 + 0.2 * (1 - Q0), Q0 + 0.8 * (1 - Q0)   # 0.52 / 0.88
@@ -65,7 +67,7 @@ def main():
 
     fig, ax = plt.subplots(figsize=(8.5, 5))
     pos = np.arange(len(rdf))
-    ax.barh(pos, rdf["band_decades"], color="#2563EB", alpha=0.85)
+    ax.barh(pos, rdf["band_decades"], color="#177cb0", alpha=0.85)
     ax.set_yticks(pos); ax.set_yticklabels(rdf["form"])
     ax.set_xlabel("转移带宽 (log10 预算跨度)")
     ax.set_title("v53: 质量通道结构性转移的预算带宽 (Q*=0.52->0.88)")

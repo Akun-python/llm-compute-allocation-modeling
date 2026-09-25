@@ -32,6 +32,8 @@ for _f in ("SimHei.ttf", "simsun.ttf"):
         fm.fontManager.addfont(_p)
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["axes.prop_cycle"] = "cycler(color=['#177cb0', '#1685a9', '#3eede7', '#70f3ff', '#44cef6', '#88ada6'])"
+import plotstyle
 
 
 def load_data():
@@ -123,9 +125,9 @@ def main():
     # 图: 域级三方法对比
     fig, ax = plt.subplots(figsize=(9, 4.5))
     x = np.arange(len(doms))
-    ax.bar(x - 0.25, dq_base.reindex(doms).values, 0.22, color="#2563EB", label="TOPSIS 组合赋权")
-    ax.bar(x, dq_pca.reindex(doms).values, 0.22, color="#10B981", label="PCA 自编码")
-    ax.bar(x + 0.25, dq_mlp.reindex(doms).values, 0.22, color="#F59E0B", label="MLP 自编码")
+    ax.bar(x - 0.25, dq_base.reindex(doms).values, 0.22, color="#177cb0", label="TOPSIS 组合赋权")
+    ax.bar(x, dq_pca.reindex(doms).values, 0.22, color="#3eede7", label="PCA 自编码")
+    ax.bar(x + 0.25, dq_mlp.reindex(doms).values, 0.22, color="#70f3ff", label="MLP 自编码")
     ax.set_xticks(x); ax.set_xticklabels(doms, rotation=20); ax.set_ylabel("域平均质量分")
     ax.set_title("v15: 监督/无监督质量评分家族对比")
     ax.legend(fontsize=8)
