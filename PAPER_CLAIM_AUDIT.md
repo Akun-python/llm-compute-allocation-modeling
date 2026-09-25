@@ -609,3 +609,21 @@ PROMETHEE-II 与 VIKOR），作为"多框架算法交叉验证"的补强轮。
 - 论文更新: §8 趋势形式回测段新增集成句(65.2/105.9 + 口径带 +
   双重稳健表述)。
 - 图配色 0.00% 合规; 论文内文字引用, 图入 figures/ 支撑。
+
+
+---
+
+## Round-22: P2 留出交叉验证配对被检验 (v87)
+
+- v87_p2_cv_paired.py/.json/.png: 复现 v26 协议 (K=5, REP=3, seed 42,
+  forms=classical/additive/interaction_N/multiplicative), 记录逐折 RMSE;
+  均值与 v26 逐位一致 (0.1262/0.0596/0.0511/0.0519, assert<1e-6)。
+- 配对检验 (n=15 折):
+  * interaction_N vs classical: 降 59.5%, Wilcoxon p=6.1e-5,
+    配对 t p=1.6e-21 (显著)。
+  * interaction_N vs multiplicative (0.0511 vs 0.0519, 降 1.4%):
+    Wilcoxon p=3.1e-4, t p=8.0e-5 (仍显著, 非噪声)。
+  * additive vs classical: 降 52.8%, Wilcoxon p=6.1e-5, t p=3.5e-21。
+- 论文 §6 留出 CV 段新增显著性句 (59.5%/Wilcoxon p/t 检验 p/乘性对比)。
+- README: changelog + 总览表 P4 预测行补 v86/v87 口径。
+- 图配色 0.00%; 论文内文字引用 (图入 figures/ 支撑)。
