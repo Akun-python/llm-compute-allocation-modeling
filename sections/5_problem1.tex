@@ -184,6 +184,27 @@ $x\in\Delta^{17}$ 为解释变量、损失 $L_r^{(s)}$ 为响应建立岭回归
 \label{fig:p1_shrink}
 \end{figure}
 
+\textbf{跨框架一致性核验}（图 \ref{fig:p1_ridgefw}）：为保证配比系数与
+收缩指数不依赖回归实现，用五个相互独立的框架复算同一岭回归
+（$\lambda=1$，13 损失域 $\times$ 3 参数尺度独立拟合）——sklearn Ridge
+闭式解（主链路）、sklearn Ridge 迭代求解（lsqr，收敛容差 $10^{-12}$）、
+解析闭式解 $\hat\beta=(X^{T}X+\lambda I)^{-1}X^{T}Y$、scipy 信赖域最小
+二乘（TRF）与 Adam 梯度下降。结果：\textbf{五框架系数一致}——以显著系数
+幅度（$\max_j\lvert\beta_j\rvert$ 的 $10^{-3}$ 倍）为下限的相对偏差最大值
+$\le8.2\times10^{-6}$；三个尺度上的系数范数完全一致
+（$16.45/8.84/1.72$），代入幂律式 (\ref{eq:shrink}) 得到的收缩指数
+\textbf{全部为 $\kappa=0.314031$}（极差 $3\times10^{-10}$）。跨
+sklearn/numpy/scipy/torch 四个生态的独立实现收敛到同一正则化解，证明
+\textbf{配比-损失系数与 $\kappa=0.314$ 的收缩结论对估计器实现数值稳健}。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/v75_p1_ridge_frameworks.png}
+\caption{五框架岭回归交叉验证：系数范数收缩曲线完全重合，
+$\kappa=0.314031$（极差 $3\times10^{-10}$）。}
+\label{fig:p1_ridgefw}
+\end{figure}
+
 \textbf{配比模型的留出验证与迁移损失}（图 \ref{fig:p1_mixcv}）：对 1M
 配比--损失数据（512 行 $\times$ 13 损失域）做逐损失域 5 折留出 CV，
 同尺度留出 $R^2=0.459$（域间 0.110--0.682），1M 测试集 $R^2=0.585$——
