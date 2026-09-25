@@ -1,0 +1,57 @@
+{
+  "n_grid": 181,
+  "L_ctx": 4096,
+  "Q0": 0.4,
+  "all_match": true,
+  "activation": {
+    "exp": {
+      "C": 6.309573444801943e+17
+    },
+    "power": {
+      "C": 1.995262314968883e+18
+    },
+    "log": {
+      "C": 3.1622776601683794e+18
+    }
+  },
+  "saturation": {
+    "exp": {
+      "C": 1.778279410038923e+20
+    },
+    "power": {
+      "C": 8.91250938133744e+19
+    },
+    "log": {
+      "C": 3.1622776601683794e+18
+    }
+  },
+  "checks": [
+    {
+      "form": "exp",
+      "Q_active": 6.309573444801943e+17,
+      "Q_active_ref": 6.309573444801943e+17,
+      "Q_active_match": true,
+      "first_sat": 1.778279410038923e+20,
+      "first_sat_ref": 1.778279410038923e+20,
+      "first_sat_match": true
+    },
+    {
+      "form": "power",
+      "Q_active": 1.995262314968883e+18,
+      "Q_active_ref": 1.995262314968883e+18,
+      "Q_active_match": true,
+      "first_sat": 8.91250938133744e+19,
+      "first_sat_ref": 8.91250938133744e+19,
+      "first_sat_match": true
+    },
+    {
+      "form": "log",
+      "Q_active": 3.1622776601683794e+18,
+      "Q_active_ref": 3.1622776601683794e+18,
+      "Q_active_match": true,
+      "first_sat": 3.1622776601683794e+18,
+      "first_sat_ref": 3.1622776601683794e+18,
+      "first_sat_match": true
+    }
+  ]
+}

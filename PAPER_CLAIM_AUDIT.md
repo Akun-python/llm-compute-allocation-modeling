@@ -878,3 +878,27 @@ PROMETHEE-II 与 VIKOR），作为"多框架算法交叉验证"的补强轮。
   范围 [0.1096, 0.6822] (0.110--0.682); r2_1M mean 0.5851 (0.585);
   p1_mixture_test_perf 1M mean_r2 0.5867 (抽样噪声) -- 一致。
 - 结论: 零修改; §5/§10 剩余数字走查完成。
+
+
+---
+
+## Round-34: §7 目标函数公式修正 (D^-d -> N^-h) + v91 激活/饱和阈值一键复算
+
+- **发现并修正**: §7 eq:p3obj (7_problem3.tex:18) 目标函数误写为
+  交互(D) 形式 C(1-Q)^g D^-d, 与选定形式 interaction_N (N^-h,
+  h=0.1627, p2_scaling_results generalized.chosen 确认) 及全部 P3
+  实验 (p3_optimization.loss_generalized 读取 chosen) 不符; 且与
+  §7 自身 line 281 (N^-h) 矛盾。早期修正 (README item 2: A_code
+  交互项 D^-d -> N^-h) 遗漏了 §7 公式展示。已改 eq:pobj 为
+  C(1-Q)^g N^-h; 所有 P3 数字均基于 interaction_N 计算, 公式修正
+  不影响任何数值。
+- 一致性复查: §7 line 6 "交互形式" 通用措辞兼容; line 281 已是
+  N^-h; A_code 默认 interaction_N; §6/§9 候选形式列表含 D^-d 为
+  正确的候选列举。
+- **v91 复算结果 (全部逐位一致, all_match=True)**: 激活 exp
+  6.309573e17/power 1.995262e18/log 3.162278e18 (与 p3_results
+  transitions Q_active 一致); 首饱和 exp 1.778279e20/power
+  8.912509e19/log 3.162278e18 (与 p3_structural_scan.csv 首饱和行
+  一致) -- §9/附录B 的 6.3e17/2.0e18/3.2e18 与 1.8e20/8.9e19/
+  3.2e18 现可一键再生; 产出 v91 json/csv/png (0.00% 配色)。
+- §7 eq:p3obj 修正后重新编译 main.pdf 成功 (exit 0)。
