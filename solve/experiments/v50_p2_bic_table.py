@@ -69,7 +69,7 @@ def main():
     pos = np.arange(len(rdf))
     ax.barh(pos, rdf["dBIC"], color="#177cb0", alpha=0.85)
     ax.set_yticks(pos); ax.set_yticklabels(rdf["form"])
-    ax.set_xlabel("dBIC (相对最优)"); ax.set_title("v50: 六形式信息准则选择")
+    ax.set_xlabel("dBIC (相对最优)"); ax.set_title("六形式信息准则选择")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v50_p2_bic_table.png"), dpi=200)
     plt.close(fig)
 

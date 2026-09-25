@@ -202,7 +202,7 @@ def main():
     ax.grid(alpha=0.3, axis="y")
     ax.annotate(f"810 点预测最大跨框架差异 {max_pred_diff:.1e}", xy=(0.5, 0.90),
                 xycoords="axes fraction", ha="center", fontsize=9, color="#1685a9")
-    fig.suptitle("v73: 六框架跨框架拟合对比 —— 广义标度律参数稳定性核验", fontsize=12, y=1.02)
+    fig.suptitle("六框架跨框架拟合对比 —— 广义标度律参数稳定性核验", fontsize=12, y=1.02)
     fig.tight_layout(rect=[0, 0, 1, 0.97])
     fig.savefig(os.path.join(EX, "v73_p2_fit_frameworks.png"), dpi=200)
     plt.close(fig)

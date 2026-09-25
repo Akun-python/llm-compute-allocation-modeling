@@ -160,7 +160,7 @@ def main():
     for i in range(len(names)):
         for j in range(len(doms)):
             ax.text(j, i, str(R.iloc[j, i]), ha="center", va="center", fontsize=8.5)
-    ax.set_title(f"v81: 8 种评分方法的域序 (Kendall W={W:.3f})")
+    ax.set_title(f"8 种评分方法的域序 (Kendall W={W:.3f})")
     fig.colorbar(im, ax=ax, label="秩 (1=最优)")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v81_p1_method_agree8.png"), dpi=200)
     plt.close(fig)
