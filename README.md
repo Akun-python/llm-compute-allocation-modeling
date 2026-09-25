@@ -121,6 +121,12 @@
 - 删除遗留文件 p4_frontier_slowdown.csv / p4_frontier_prediction.csv（09-24 审计建议，未被论文引用）
 - 交付物：PAPER_CLAIM_AUDIT.md（评审+执行方处理附录）、PAPER_CLAIM_AUDIT.json（47 文件 SHA256）、.aris/traces/paper-claim-audit/2026-09-25_run01/（prompt+评审终稿）；论文重新编译
 
+**Claim Audit 二轮：missing_evidence 全量值级复核（v78 核对脚本）**
+- 对 zero-context 评审标记的 37 条 missing_evidence + 4 条 ambiguous + 1 条 config + 1 条聚合逐条做**值级机械核对**（solve/experiments 全量输出为证据范围，脚本 v78_claims_check.py：34 项文件层探针全 PASS）
+- **再揪出并修正 4 处**：①§7 "24/24 初值全部收敛"→实为 13–17 个收敛（v39 json n_success），改"成功收敛初值全部同一最优"并修正图注/图标题；②§6 "其余 11 族均>0.79"→实为 10 个可验证族中 9 个≥0.91（Pythia 0.788 略低、Mistral 不可计算）；③§5 "arxiv -9.6"→实为 dm_mathematics（v19 脚本 ALIAS 误映射 dm_mathematics→arxiv，已修脚本重跑图+json，arxiv 真实自域 -2.61）；④§8 "bT≈0.88/年"无出处→改"滚动窗口首窗约 1.1/年"（v32 实测 1.101）
+- **其余全部核实为真**（列举）：v28 k 敏感 0.307→0.358 +16.7%/Spearman 0.68-0.96；v45 ICC 0.047/F=3989.7；v58 偏度与尾占比；v60 过滤增益 5.1-2.7%；v70 PCA 3/8/11/PC1 34.2%；v48 book 分解 0.1441/+0.178/-0.013/-0.021；v7 LOFO 12 族 57 点 0.888/0.338-0.997；v50 BIC -4813.7；v33 自助 equiv_B 0.216 [0.210,0.224]；v24 D*(N)=49.8N^1.046/D-N 中位 214/20.8x；v4 KKT 8-30%；v62 角点 N*4.59-7.75；v27 联合 -2.04%；v9 bL=0.197；v54 分解 42.6/11.8/46.1 与 17.2/7.3/77.6；v71 等能力线 -0.245/22%/28%；v18 回测 +105/+276/+152%；v44-v55-v63-v64-v32 任务/规模/二维/分层/滚动全部吻合；v46 家族留出 bN[0.353,0.384] 偏离5.0%；Chow F=7.95 p=2.8e-5；v16 sigma CI 三档/nboot=800；v11 ML RMSE；桥接 0.852/3.304/R²0.276；C8-C1 Spearman 0.989(n=1895)
+- 审计收口：85 条全部对齐证据（2 精确 + 30 舍入 + 40 补证 + 13 修正），执行方口径 PASS；评审零上下文报告原样保留于 PAPER_CLAIM_AUDIT.md
+
 ### 2026-09-24
 
 **建模基线 v1–v9（论文 27 → 29 页）**

@@ -63,5 +63,24 @@
                                  "solve\\results\\p4_frontier_years.csv":  "b57fefc32e0cd63c49a146c6704d7c760d18754231d0bfe823802222dce6f152"
                              },
     "date":  "2026-09-25",
-    "audit_type":  "paper-claim-audit"
+    "audit_type":  "paper-claim-audit",
+    "round2":  {
+                   "date":  "2026-09-25",
+                   "method":  "executor value-level re-check vs solve/experiments outputs (v78_claims_check.py)",
+                   "new_fixes":  4,
+                   "fixed_locations":  [
+                                           "7_problem3.tex:60-62 24/24-\u003e13-17收敛初值",
+                                           "6_problem2.tex:71-73 LOFO 11族\u003e0.79-\u003e9/10\u003e=0.91+Pythia0.788",
+                                           "5_problem1.tex:249 arxiv-9.6-\u003edm_mathematics(v19 ALIAS修复)",
+                                           "8_problem4.tex:302 bT0.88-\u003e1.1(v32首窗)"
+                                       ],
+                   "missing_evidence_resolved":  37,
+                   "ambiguous_resolved":  4,
+                   "config_resolved":  1,
+                   "aggregation_resolved":  1,
+                   "number_mismatch_resolved":  7,
+                   "scope_resolved":  2,
+                   "unsupported_resolved":  1,
+                   "final_status":  "PASS(executor mechanical standard); all 85 units reconciled"
+               }
 }
