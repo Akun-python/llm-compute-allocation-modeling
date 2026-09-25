@@ -85,6 +85,12 @@
 - 结论：梯度类、无导数全局类与深度学习优化器一致收敛到同一参数点，参数估计与拟合结论对求解框架数值稳健（与 BIC v50 / 留出 CV v26 / 残差诊断 v61 构成完整检验链）
 - 已写入论文 6_problem2.tex（新插图 v73_p2_fit_frameworks.png，论文重新编译）
 
+**v74 分位数回归跨框架交叉验证（问题四）**
+- 新增 5 框架对比实验 `solve/experiments/v74_p4_qr_frameworks.py`：linprog 精确 LP（主链路）/ statsmodels QuantReg / sklearn QuantileRegressor / L-BFGS-B pinball 直接极小化 / Adam 梯度下降，在 C1 开源模型（n=2493，τ=0.9）上独立复算前沿 QR
+- **五框架复现同一系数**：lnS = 2.481 + 0.364·lnN + 0.089·t（相对极差 c0 4e-3%、bN 2e-2%、bT 3e-1% 仅来自 Adam 有限步数未收敛），pinball 目标一致到 6 位小数，2493 点预测最大跨框架差异 1.0×10⁻³
+- 增长核算规模贡献占比五框架全部 **83.66%**（极差 ≤4×10⁻⁴）——跨 scipy/statsmodels/sklearn/torch 四生态的独立实现收敛到同一前沿，系数与规模/非规模分解对估计器实现数值稳健
+- 已写入论文 8_problem4.tex（新插图 v74_p4_qr_frameworks.png，论文重新编译）
+
 ### 2026-09-24
 
 **建模基线 v1–v9（论文 27 → 29 页）**
