@@ -412,3 +412,25 @@ E. AI 使用规范：main.tex 末尾已披露（编程实现/文献检索/文本
 
 ### 结论
 四问递进主线与全部硬性要求已覆盖；3 处实质口径冲突修正、2 处硬性要求补强（含新实验 v80）、12 处确认满足。
+
+
+---
+
+## Round-12: 评分方法族扩展 6→8 方法 (2026-09-25, v81)
+
+问题一的评分方法一致性分析从 6 种方法扩展为 8 种（新增标准多准则决策框架
+PROMETHEE-II 与 VIKOR），作为"多框架算法交叉验证"的补强轮。
+
+- 新实验 v81_p1_method_agree8.py/.json/.csv/.png：与 v37 同一数据口径
+  （A1 51,230 + A2/A3 各 15,000 = 81,230 样本）；PROMETHEE-II/VIKOR 为
+  outranking/折衷类方法，在 7 域×22 指标域均矩阵上计算（备选方案=域）。
+- 结果：八方法 Kendall W=0.6908；加权/贴近度/折衷五方法（TOPSIS/SAW/
+  熵-CRITIC/PROMETHEE-II/VIKOR）两两 Spearman 均值 0.971、最小 0.929
+  （TOPSIS/SAW/熵-CRITIC/PROMETHEE-II 四方法域序完全一致；VIKOR 仅
+  book↔arxiv 与 c4↔commoncrawl 相邻互换，book 稳定前二）；GRA book 居首
+  全序略异（arxiv 第 7）；RSR 偏离（book 第 6）；两两最小 0.143
+  （GRA--VIKOR）。
+- 论文更新：§5 评分方法一致性段（八方法 + 新统计量 + 方法学说明）；
+  图 fig:p1_methods 换 v81 热力图（配色检查 0.00% 非蓝色超标）；
+  10_evaluation 稳健性列更新（两两 Spearman≥0.93）。
+- 数值均存于 v81 json/csv，无未证数字；旧 v37 输出保留供对照。
