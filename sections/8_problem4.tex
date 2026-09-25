@@ -111,6 +111,27 @@ Huber 稳健回归 $b_T=0.21$，均因受大量非前沿样本拖累而失真；
 $b_T\in[0.068,0.103]$，均显著异于 0；对应规模贡献占比区间约为
 81\%--87\%，``规模主导''结论在参数不确定性下稳健。
 
+\textbf{跨框架一致性核验}（图 \ref{fig:p4_qrfw}）：为保证分位数前沿结论
+不依赖统计实现，用五个相互独立的框架复算同一 $\tau=0.9$ 回归——线性规划
+精确解（HiGHS，主链路）、statsmodels QuantReg、sklearn
+QuantileRegressor（$\alpha=0$）、L-BFGS-B 直接极小化 pinball 损失与 Adam
+梯度下降。结果：\textbf{五框架复现同一系数}——$c_0=2.481$、$b_N=0.364$、
+$b_T=0.089$（相对极差：$c_0$ 为 $4\times10^{-3}\%$、$b_N$ 为
+$2\times10^{-2}\%$、$b_T$ 为 $3\times10^{-1}\%$——后者来自 Adam 梯度下降
+在有限步数下的微小未收敛，其余四框架逐位一致），pinball 目标值一致到 6 位
+小数，$n=2493$ 个样本上的预测最大跨框架差异仅 $1.0\times10^{-3}$。代入
+增长核算式 (\ref{eq:growthacc})（$g_N=1.251$），五个框架给出的规模贡献
+占比\textbf{全部为 $83.66\%$}（差异 $\le4\times10^{-4}$）。跨
+scipy/statsmodels/sklearn/torch 四个统计生态的独立实现收敛到同一前沿，
+证明\textbf{前沿系数与规模/非规模分解对估计器实现数值稳健}。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{figures/v74_p4_qr_frameworks.png}
+\caption{五框架分位数回归交叉验证：系数与规模贡献占比（83.7\%）跨框架一致。}
+\label{fig:p4_qrfw}
+\end{figure}
+
 \subsection{规模/非规模贡献分解}
 
 \textbf{增长核算}：前沿能力的年增速可分解为：
