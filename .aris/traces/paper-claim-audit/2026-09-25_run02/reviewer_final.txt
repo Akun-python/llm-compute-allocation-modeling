@@ -1,0 +1,49 @@
+Completed the audit and wrote `PAPER_CLAIM_AUDIT.md`.
+
+**Result**
+- Overall verdict: **FAIL**
+- Total claim clusters audited: **121**
+- Accepted (`exact_match` + `rounding_ok`): **94**
+- Status counts:
+  - `exact_match`: 3
+  - `rounding_ok`: 91
+  - `ambiguous_mapping`: 8
+  - `missing_evidence`: 4
+  - `config_mismatch`: 4
+  - `aggregation_mismatch`: 2
+  - `number_mismatch`: 6
+  - `scope_overclaim`: 2
+  - `unsupported_claim`: 1
+
+**FAIL Issues**
+- `sections/B_params.tex:40-43`: 27 raw indicators / 26 compressed columns conflicts with the 22-indicator pipeline and has the internal `19+8≠26` inconsistency. Fix the dimensionality statement and provide a field manifest.
+- `sections/A_code.tex:76-89`: appendix code uses quality×`D^{-d}`, while the paper’s selected model is quality×`N^{-h}`. Update the code.
+- `sections/6_problem2.tex:371-377`: at `N=3B`, evidence gives `0.8289B`, not “about `0.6B`”. Change to approximately `0.83B`.
+- `sections/7_problem3.tex:186`: saturation reference `3.4×10^20` is unsupported; use the form-specific values `1.8×10^20` / `8.9×10^19` / `3.2×10^18`.
+- `sections/7_problem3.tex:378-384`; `sections/9_sensitivity.tex:34-37`: loss is `3.274→3.638`, not `3.24→3.38`.
+- `sections/B_params.tex:21-23`: logarithmic `g(0.4)` should be approximately `3.22×10^9`, not `1.79×10^9`.
+- `sections/B_params.tex:29-30`: appendix saturation budgets disagree with the structural scan; replace with form-specific values.
+- `sections/8_problem4.tex:247-265`: `S=60→150` spans about 2.24 orders of magnitude in FLOPs, not 3.
+- `sections/8_problem4.tex:254-255`: `8.75×10^21` uses an unstated configuration not matching a specific P3 main-table solution; identify the configuration or revise the value.
+- `sections/8_problem4.tex:433-447`: paper claims eight family-CV groups including DeepSeek, but evidence contains seven rows totaling 2,484 samples. Reconcile the family grouping.
+- `sections/10_evaluation.tex:57`: “six methods consistent” overstates the evidence; RSR substantially differs. Qualify the claim.
+- `sections/10_evaluation.tex:59`: “24 initial values 100% converged” is false; only 13–17 of 24 succeeded, although successful runs agree.
+- `sections/A_code.tex:130-150`: appendix IRLS code does not reproduce the LP/QuantReg framework used for the reported QR results. Replace with the actual estimator.
+- `main.tex:39`; `sections/10_evaluation.tex:6-8`: “all results and conclusions are reproducible” is too absolute given the mismatches and missing manifests. Qualify the reproducibility claim.
+- `main.tex:73-76`; `sections/7_problem3.tex:140-143`: “all additional budget shifts to scale” overclaims because the saturated-quality processing cost remains nonzero.
+
+**WARN Issues**
+- Missing source-count evidence for B2/B3/C1/C3/C4/C7 in `sections/1_restatement.tex:43-48`.
+- Missing direct raw field classification and winsorization configuration for P1 in `main.tex:41-43` and `sections/5_problem1.tex:7-28`.
+- Domain-level autoencoder results and leave-one-scale κ range need raw aggregation files: `sections/9_sensitivity.tex:118-140`.
+- B8 “same optimal form” needs qualification: `main.tex:99-100`.
+- C7 quantile metadata is not directly persisted: `sections/7_problem3.tex:48-50`; `sections/B_params.tex:32-35`.
+- Trust-constr’s stated partial initial-value failures lack failure-status records: `sections/7_problem3.tex:83-84`.
+- Cross-budget scope of the `0.32–2.25` marginal-loss range is unclear: `sections/7_problem3.tex:463-483`.
+- C1/C8 directory, JSON, and open-filter totals need an ingestion manifest: `sections/8_problem4.tex:8-20`; `sections/B_params.tex:47-50`.
+- The preprocessed annual frontier file cannot independently prove the raw 2021 decline: `sections/8_problem4.tex:85-88`.
+- OLS/Huber comparisons and QR bootstrap intervals lack directly locatable raw evidence: `sections/8_problem4.tex:108-113`.
+
+Committed as:
+
+`ef65c02 新增论文主张证据审计报告`

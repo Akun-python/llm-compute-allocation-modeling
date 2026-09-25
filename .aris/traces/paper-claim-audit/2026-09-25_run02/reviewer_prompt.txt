@@ -1,0 +1,216 @@
+﻿You are a paper-to-evidence auditor. You have ZERO prior context about this research. You will receive only paper source files and raw result files. Your job is to verify that every number in the paper exactly matches the raw evidence. Do not read README.md, any .md summary files, any .py scripts, or any conversation history — only the .tex claim files and the raw .csv/.json evidence files listed below.
+
+This is a Chinese mathematical-modeling competition report (2023 Huawei Cup Problem F: "算力约束下提升大语言模型能力的资源配置建模") written in LaTeX. It contains quantitative claims across four problems: (P1) data quality scoring & mixture ridge modeling, (P2) scaling laws with quality Q, (P3) optimal allocation of compute/quality/context, (P4) frontier quantile regression & forecasting. The current working directory is the paper directory.
+
+PAPER FILES TO READ (claims):
+- main.tex  (abstract with many headline numbers)
+- sections/1_restatement.tex
+- sections/2_analysis.tex
+- sections/3_assumptions.tex
+- sections/4_symbols.tex
+- sections/5_problem1.tex
+- sections/6_problem2.tex
+- sections/7_problem3.tex
+- sections/8_problem4.tex
+- sections/9_sensitivity.tex
+- sections/10_evaluation.tex
+- sections/A_code.tex
+- sections/B_params.tex
+
+RESULT FILES TO READ (raw evidence — NOTE: the evidence scope is now FULL; solve/experiments/*.{csv,json} are included):
+solve/results/p1_domain_quality.csv
+solve/results/p1_conflict_by_domain.csv
+solve/results/p1_conflict_by_set.csv
+solve/results/p1_quality_weights.csv
+solve/results/p1_mixture_coefs.csv
+solve/results/p1_mixture_test_perf.csv
+solve/results/p1_mixture_extrap_perf.csv
+solve/results/p1_mixture_quality_compare.csv
+solve/results/p1_mixture_scale_shrink.csv
+solve/results/p1_sample_vs_full_Q.csv
+solve/results/p1_shrink_kappa.txt   (plain text: kappa / base constants)
+solve/results/p1_quality_log.txt    (UTF-16 log: conflict threshold/counts, ICC context, 81230 samples, top-20% n=16246)
+solve/results/p2_scaling_results.json
+solve/results/p3_results.json
+solve/results/p3_opt_results.csv
+solve/results/p3_structural_scan.csv
+solve/results/p3_lctx_sensitivity.csv
+solve/results/p4_results.json
+solve/results/p4_frontier_years.csv
+solve/results/p4_decomposition.csv
+solve/results/p4_prediction.csv
+solve/results/p4_c8_task_stats.csv
+solve/results/v23_p4_annual_slowdown.csv
+solve/experiments/v10_p1_ablation.csv
+solve/experiments/v11_p4_ml.csv
+solve/experiments/v14_p2_profile.csv
+solve/experiments/v15_p1_ae_scores.csv
+solve/experiments/v16_p4_sigma.csv
+solve/experiments/v17_p3_marginal.json
+solve/experiments/v18_p4_backtest.csv
+solve/experiments/v19_p1_transfer.json
+solve/experiments/v22_p3_budget_ladder.csv
+solve/experiments/v22_p3_budget_ladder.json
+solve/experiments/v24_p2_dstar_curve.json
+solve/experiments/v27_p3_joint_seq.csv
+solve/experiments/v27_p3_joint_seq.json
+solve/experiments/v28_p1_k_sens.csv
+solve/experiments/v28_p1_k_sens.json
+solve/experiments/v32_p4_rolling.csv
+solve/experiments/v32_p4_rolling.json
+solve/experiments/v33_p2_boot_ci.csv
+solve/experiments/v33_p2_boot_ci.json
+solve/experiments/v34_p4_gN_sens.csv
+solve/experiments/v34_p4_gN_sens.json
+solve/experiments/v38_p4_open_gap.csv
+solve/experiments/v38_p4_open_gap.json
+solve/experiments/v39_p3_solver_diag.csv
+solve/experiments/v39_p3_solver_diag.json
+solve/experiments/v4_p3_kkt_check.csv
+solve/experiments/v4_p3_pareto.csv
+solve/experiments/v4_p3_q_sensitivity.csv
+solve/experiments/v4_p3_solvers.csv
+solve/experiments/v4_p3_summary.json
+solve/experiments/v41_p2_eps_ref_grid.csv
+solve/experiments/v41_p2_eps_ref_grid.json
+solve/experiments/v42_p4_family_dyn.csv
+solve/experiments/v42_p4_family_dyn.json
+solve/experiments/v43_p1_sample_conv.csv
+solve/experiments/v43_p1_sample_conv.json
+solve/experiments/v44_p4_task_growth.csv
+solve/experiments/v44_p4_task_growth.json
+solve/experiments/v45_p1_domain_icc.csv
+solve/experiments/v45_p1_domain_icc.json
+solve/experiments/v46_p4_family_cv.csv
+solve/experiments/v46_p4_family_cv.json
+solve/experiments/v47_p1_mix_prescribe.csv
+solve/experiments/v47_p1_mix_prescribe.json
+solve/experiments/v48_p1_family_contrib.csv
+solve/experiments/v48_p1_family_contrib.json
+solve/experiments/v50_p2_bic_table.csv
+solve/experiments/v50_p2_bic_table.json
+solve/experiments/v51_p2_subst_scale.csv
+solve/experiments/v51_p2_subst_scale.json
+solve/experiments/v52_p4_quantile_ladder.csv
+solve/experiments/v52_p4_quantile_ladder.json
+solve/experiments/v54_p4_uncert_budget.csv
+solve/experiments/v54_p4_uncert_budget.json
+solve/experiments/v55_p4_scale_bucket.csv
+solve/experiments/v55_p4_scale_bucket.json
+solve/experiments/v56_p3_budget_loss.csv
+solve/experiments/v56_p3_budget_loss.json
+solve/experiments/v57_p1_conflict_effect.csv
+solve/experiments/v57_p1_conflict_effect.json
+solve/experiments/v58_p1_dom_dist.csv
+solve/experiments/v58_p1_dom_dist.json
+solve/experiments/v59_p4_open_seg.csv
+solve/experiments/v59_p4_open_seg.json
+solve/experiments/v6_p3_joint.json
+solve/experiments/v6_p3_opt_budgets.csv
+solve/experiments/v6_p3_scenarios.csv
+solve/experiments/v60_p1_filter_curve.csv
+solve/experiments/v60_p1_filter_curve.json
+solve/experiments/v61_p2_resid_diag.csv
+solve/experiments/v61_p2_resid_diag.json
+solve/experiments/v62_p3_param_robust.csv
+solve/experiments/v62_p3_param_robust.json
+solve/experiments/v63_p4_task_scale.csv
+solve/experiments/v63_p4_task_scale.json
+solve/experiments/v64_p4_stratify.csv
+solve/experiments/v64_p4_stratify.json
+solve/experiments/v65_p1_domain_prof.csv
+solve/experiments/v65_p1_domain_prof.json
+solve/experiments/v68_p4_compute_conversion.csv
+solve/experiments/v68_p4_compute_conversion.json
+solve/experiments/v69_p4_catchup.csv
+solve/experiments/v69_p4_catchup.json
+solve/experiments/v7_p2_lofo.csv
+solve/experiments/v7_p4_chow.csv
+solve/experiments/v70_p1_pca_dim.json
+solve/experiments/v71_p4_isoquant.csv
+solve/experiments/v71_p4_isoquant.json
+solve/experiments/v72_p3_framework_solvers.csv
+solve/experiments/v72_p3_framework_solvers.json
+solve/experiments/v73_p2_fit_frameworks.csv
+solve/experiments/v73_p2_fit_frameworks.json
+solve/experiments/v74_p4_qr_frameworks.csv
+solve/experiments/v74_p4_qr_frameworks.json
+solve/experiments/v75_p1_ridge_frameworks.csv
+solve/experiments/v75_p1_ridge_frameworks.json
+solve/experiments/v76_p3_real_closure.csv
+solve/experiments/v76_p3_real_closure.json
+solve/experiments/v77_p4_tau_frameworks.csv
+solve/experiments/v77_p4_tau_frameworks.json
+solve/experiments/v78_claims_check.csv
+solve/experiments/v78_claims_check.json
+solve/experiments/v9_p3_budgets.csv
+solve/experiments/v9_p3_lctx_inner.json
+solve/experiments/v9_p3_w_sens.csv
+
+## Audit Protocol
+
+### A. Extract Every Quantitative Claim
+For each number, percentage, comparison, or scope statement in the paper (including figure captions and the abstract):
+- Location (section, table, caption, or inline text)
+- Exact claim text
+- The number or comparison being made
+
+### B. Trace Each Claim to Evidence
+For each extracted claim, find the supporting raw data:
+- Which result file contains this number?
+- What is the EXACT value in that file?
+- Match status: exact_match / rounding_ok / ambiguous_mapping / missing_evidence / config_mismatch / aggregation_mismatch / number_mismatch / scope_overclaim / unsupported_claim
+
+### C. Check These Specific Failure Modes
+1. Number inflation: paper says 85.3%, raw file says 84.7% — only standard rounding to displayed precision is allowed.
+2. Best-seed cherry-pick: check whether the paper specifies average/best/median.
+3. Config mismatch: compared methods must use same settings (e.g., same alpha, same tau, same cost form).
+4. Aggregation mismatch: count actual runs vs claimed count (e.g., "300 bootstrap", "57 real training points", "13--17 converged seeds" vs v39 n_success values).
+5. Delta error: verify arithmetic of all relative improvements (e.g., v76 "about 30% better" than Chinchilla rule: median |delta| 0.363 vs 0.515; the v75 kappa spread "3e-10" vs kappa_range 2.57e-10; the v77 "bN spread <0.2%, bT spread <2%" claim — check the exact per-tau spreads).
+6. Caption-table mismatch: cross-check every caption against its content.
+7. Scope overclaim: check that language matches actual evaluation scope.
+
+### D. Re-check the 13 spots fixed on 2026-09-25 (they should now be EXACT; confirm or flag)
+1. sections/8_problem4.tex ~line 104: "参数每翻倍、前沿平均分（对数尺度）提升 ln2*0.364≈0.252，对应水平增幅约 28.7%" (was "25%").
+2. sections/8_problem4.tex ~line 121: pinball 135.95035 agreement is now qualified to four exact frameworks (LP/statsmodels/sklearn/L-BFGS-B); Adam differs ≤2e-3.
+3. sections/8_problem4.tex ~line 143: bT monotone sequence from tau>=0.8 is 0.177→0.089→0.044 (0.248 is the tau=0.5/0.7 value).
+4. sections/7_problem3.tex ~line 197-206: Q* at C=1e18 is "开始激活" (exp Q*=0.468, power/log=Q0=0.4), NOT saturated; attention/training share = eta*L_ctx/6 (≈2% at 0.5k, ≈14% at 4k) per p3_lctx_sensitivity.csv / p3_structural_scan.csv.
+5. sections/7_problem3.tex ~line 300-308: first-saturation budgets exp 1.8e20 / power 8.9e19 / log 3.2e18 (per p3_structural_scan.csv rows with Q>=1-1e-6); Delta_g exp 3.92e9 / power 4.87e9 / log 1.58e9.
+6. sections/7_problem3.tex ~line 81: trust-constr wording now "部分初值求解失败" (was "全部初值不收敛").
+7. sections/6_problem2.tex ~line 358: dN/dQ=-2.88B/unit Q, per 0.1 Q saves 0.288B (p2_scaling_results.json equivalence.dN_per_dQ0.1=0.2885; dLdQ=-0.3560, dLdN=0.1234).
+8. sections/B_params.tex ~line 40: A1-A3 quality indicators: 27 raw (19 scalar + 8 list), 26 columns after list-mean compression; 272505 valid samples, domain-level stats cover 272486 (19 without domain labels).
+9. sections/7_problem3.tex ~line 60: "成功收敛的初值（13--17 个）全部落到同一最优" (v39_p3_solver_diag.json n_success=15/13/17 of 24 seeds; converged ones identical to ~1e-12).
+10. sections/6_problem2.tex ~line 71: LOFO wording now "其余 10 个可验证家族中 9 个留出 R2>=0.91（仅 Pythia 0.788 略低；Mistral 仅 1 个留出点不可计算）" (v7_p2_lofo.csv).
+11. sections/5_problem1.tex ~line 249: self-domain examples now "ubuntu_irc -7.6、dm_mathematics -9.6" (p1_mixture_coefs.csv: dm_mathematics self=-9.6282, arxiv self=-2.6133; v19_p1_transfer.json regenerated with corrected labels).
+12. sections/8_problem4.tex ~line 302: pre-break bT wording now "滚动窗口首窗 b_T 曾高达约 1.1/年" (v32_p4_rolling.json first window bT=1.101).
+13. sections/8_problem4.tex ~line 118-124 + main.tex abstract: robustness claim now "bN 极差 <0.2%、bT 极差 <2%" (five frameworks across tau; four non-Adam frameworks bN≤1.2e-4, bT≤0.6%).
+
+### E. Special checks on newer result files
+- v72 (solve/experiments/v72_*.json/csv): four-framework SLSQP/COBYLA/DE/SHGO agreement on 9 instances in sections/7_problem3.tex. Verify: "9 组实例最大相对偏差 <2.6e-2%", "Q* 范围 ≤5.5e-6", trust-constr boundary failure statement, and the abstract's "跨 SLSQP/COBYLA/差分进化/SHGO 四类求解框架在 9 组预算—成本实例上交叉验证得到全局一致最优解".
+- v73 (solve/experiments/v73_*.json): six-framework fit on B6+B7, SSE=1.989752, R^2=0.979073, max param relative spread 2.4e-3%, max prediction diff 6.7e-6 in sections/6_problem2.tex.
+- v74 (solve/experiments/v74_*.json): five-framework quantile regression tau=0.9, c0=2.4807, bN=0.3643, bT=0.0890, pinball 135.950, max pred diff 1e-3, scale share 83.65%-83.70% in sections/8_problem4.tex.
+- v75 (solve/experiments/v75_*.json): five-framework ridge, kappa=0.314031 (spread 2.6e-10), coefficient norms 16.45/8.84/1.72, max coef rel dev 8.2e-6 in sections/5_problem1.tex.
+- v76 (solve/experiments/v76_*.json): P3 trajectory vs B4 real points; median |delta|=0.363 dex, IQR 0.210-0.510, 37% <=0.25, 72% <=0.5, Pearson 0.919 / Spearman 0.926, OLS slope 0.490 vs trajectory 0.463, Chinchilla median 0.515, frac_neg_delta 0.895 in sections/7_problem3.tex and main.tex.
+- v77 (solve/experiments/v77_*.json/csv): per-tau coefficients bN 0.3659/0.3687/0.3721/0.3643/0.3402/0.2785, bT 0.2477/0.2482/0.1766/0.0890/0.0729/0.0438; shares = bN*1.251/(bN*1.251+bT): 64.89/65.01/72.49/83.66/85.37/88.83% in sections/8_problem4.tex and main.tex.
+- v78 (solve/experiments/v78_claims_check.csv/json): executor's own claim-check ledger — you may use it as a cross-reference, not as primary evidence.
+- v24_p2_dstar_curve.json: D*(N)=49.8*N^1.046, actual D/N median 214, actual/theory median 20.8x, LLaMA 65B actual 175 vs theory 60, budget off-curve -72%/-5% in sections/7_problem3.tex.
+- v7_p2_lofo.csv: 12 families / 57 points, mean R2 0.888, range 0.338-0.997, alpha in [0.07,0.17] in sections/6_problem2.tex.
+- v45/v58/v60/v70/v48/v65/v28/v19: P1 claims (ICC 0.047 F(6,81223)=3990; domain skews/tails; filter uplifts 5.1-2.7%; PCA 3/8/11 & PC1 34.2% & PC1-6 74.3%; book contribution 0.1441/+0.178/-0.013/-0.021; k-sens 0.307→0.358 +16.7% & Spearman 0.68-0.96; coef matrix 13/13 self-negative).
+- v50/v61/v33/v14/v51: P2 BIC -4813.73 (multiplicative d-BIC 20.36); residuals |corr|<0.01; bootstrap 300 (equiv 0.216 [0.210,0.224], h [0.142,0.187]); profile likelihood h≈0.16; substitution curve 0.063→0.243 (N=0.3→1.0B).
+- v39/v4/v62/v27/v9/v17/v6: P3 solver diagnostics (converged seeds 13-17, all identical); KKT table 8/18/30%; corner N* 4.586-7.754; joint vs sequential -2.04%; L_ctx endogen bL=0.197 & L_ctx_opt 125174; marginal shares; joint scenarios.
+- v44/v55/v63/v64/v32/v46/v38/v59/v42/v69/v68/v71/v34/v18/v52/v16/v11/v7_p4_chow/v54: P4 claims — task growth 0.03/0.32/0.89/0.45/0.54/0.20; scale buckets 5.61/3.56/4.85/9.46/3.09; 2D grid cells; strata 0.30/0.69/0.62 & ratios 2.04/0.50/0.76; rolling bN 0.224→0.338 & bT 1.10→0.50; family CV bN_loo 0.353-0.384 & max dev ~5% & qwen 0.588/gemma 0.109/phi 0.286; open-gap/segmentation/family/catchup rows; compute conversion (S=70 → 1.4e24 FLOP ≈1.6万卡天 etc.); isoquant mrs -0.245 & saving 22% & premium 28%; gN sensitivity ±40%/±75%; backtest +105/+276/+152%; quantile ladder; sigma CI [108.7,140.2]/[105.9,143.7]/[101.9,149.2] & nboot=800; ML RMSE 0.448-0.528 vs QR 1.74; Chow F=7.953 p=2.8e-5 break 2024.5; uncertainty decomposition 42.6/11.8/46.1 (12M) & 17.2/7.3/77.6 (24M).
+- Bridge eq: logit(S/100)=0.852-3.304*ln L, R2=0.276 (n=75); High error 7.96±2.62, Medium -3.13±10.26.
+- C8: 1863 directories (v24_log.txt), 1860 models after skipping 4 damaged; C8-vs-C1 Spearman 0.9887 (n=1895). S_2025=41.63, lnN_90=2.69 (p4_log.txt); C1 open filter 2496/4564.
+
+NOTE: solve/results/p4_frontier_prediction.csv and p4_frontier_slowdown.csv were intentionally DELETED on 2026-09-25 (historical leftovers superseded by p4_prediction.csv; unreferenced by the paper). Their absence is expected — do not flag them as missing evidence.
+
+## Output
+
+Write your complete per-claim audit to a file named PAPER_CLAIM_AUDIT.md in the current working directory, using this structure:
+1. Overall verdict line: "Overall verdict: PASS | WARN | FAIL"
+2. Statistics: total claims, exact_match / rounding_ok / ambiguous_mapping / missing_evidence / mismatch counts
+3. A per-claim table: | # | Location | Paper text (exact quote, may be shortened) | Paper value | Evidence file | Evidence value | Status | Details |
+4. An "Issues Found" section listing every non-exact claim with location, paper says, evidence shows, status, and the specific fix needed.
+5. A short "Verdict Summary" paragraph.
+
+Also return in your final chat message: overall verdict, total claims verified, counts per status, and the list of any FAIL/WARN issues with their locations and fixes (concise).
