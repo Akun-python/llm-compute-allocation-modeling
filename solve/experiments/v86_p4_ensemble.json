@@ -1,0 +1,68 @@
+{
+  "inputs": {
+    "mape": {
+      "lin": 177.7,
+      "quad": 70.89999999999999,
+      "sat": 56.93333333333334
+    },
+    "proj_12m": {
+      "lin": 71.7,
+      "quad": 64.1,
+      "sat": 64.1
+    },
+    "proj_24m": {
+      "lin": 123.6,
+      "quad": 102.7,
+      "sat": 102.7
+    },
+    "scenario_intervals": {
+      "12m": [
+        57.1,
+        71.7
+      ],
+      "24m": [
+        78.6,
+        123.9
+      ]
+    },
+    "weights_inv_mape": {
+      "lin": 0.1509,
+      "quad": 0.3782,
+      "sat": 0.4709
+    }
+  },
+  "ensemble": {
+    "12m": {
+      "inv_mape": 65.2,
+      "equal": 66.6,
+      "sat_only": 64.1,
+      "band": [
+        64.1,
+        66.6
+      ],
+      "in_scenario_band": true
+    },
+    "24m": {
+      "inv_mape": 105.9,
+      "equal": 109.7,
+      "sat_only": 102.7,
+      "band": [
+        102.7,
+        109.7
+      ],
+      "in_scenario_band": true
+    }
+  },
+  "landing": {
+    "12m": {
+      "inv_mape": true,
+      "equal": true,
+      "sat_only": true
+    },
+    "24m": {
+      "inv_mape": true,
+      "equal": true,
+      "sat_only": true
+    }
+  }
+}
