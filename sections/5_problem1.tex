@@ -2,11 +2,13 @@
 
 \subsection{问题分析}
 
+\begin{sloppypar}%
 问题一要求完成三项任务：（1）建立数据质量评分方法，给出样本级与域级质量分；
 （2）定义并消解质量信号冲突；（3）建立 17 领域配比与损失之间的数量关系模型，
 并讨论配比效应随规模的转移。A1--A3 提供约 27.3 万条样本、22 个质量指标
 （14 项标量、8 项列表型），A4--A15 提供 1M/60M/1B 训练集与 10b/70b 估计
 五档规模下的配比--损失数据，A16 给出 17 个配比域到 7 个质量域的映射。
+\end{sloppypar}
 
 \subsection{质量评分模型}
 
@@ -73,6 +75,7 @@ RSR 因忽略指标幅值而偏离（book 降至第 6、wikipedia 升至第 1）
 \label{fig:p1_methods}
 \end{figure}
 
+\begin{sloppypar}%
 \textbf{权重扰动鲁棒性}（图 \ref{fig:p1_weightrob}）：在官方全量口径
 （$n=272{,}505$，域序与官方 \texttt{p1\_domain\_quality.csv} 的
 $Q_{\text{weighted}}$ 域序 Spearman$=1.000$）上，对熵-CRITIC 组合权重施加
@@ -82,6 +85,7 @@ N(0,1)$，每档 200 次重抽）检验评分链对权重设定的敏感度：$\
 居首与 stackexchange 垫底概率均为 1.00；即使 $\sigma=0.5$（$\pm50\%$
 量级），book 居首概率仍为 1.00、垫底概率 0.995——域序对权重扰动高度
 稳健，``book 居首、低质域垫底''的结论不依赖单一权重标定。
+\end{sloppypar}
 
 \begin{figure}[htbp]
 \centering
@@ -347,6 +351,7 @@ commoncrawl 显著偏低——域间差异不仅是均值层面的，而且是�
 \label{fig:p1_domain_sig}
 \end{figure}
 
+\begin{sloppypar}%
 \textbf{抽样规模收敛性}（图 \ref{fig:p1_sampleconv}）：在 90k 质量样本上
 固定全量权重，按比例 $f\in\{5\%,10\%,20\%,40\%,70\%,100\%\}$ 对每域
 有放回重抽 30 次，检查域序稳定性。结果：\textbf{book 保持第 1 的概率在
@@ -355,6 +360,7 @@ commoncrawl 显著偏低——域间差异不仅是均值层面的，而且是�
 域级质量排序对抽样规模高度稳健，
 ``book 居首、低质域垫底''的结论在极小样本下依然成立，抽样充分性核验通过
 （质量信号幅值大、信噪比高）。
+\end{sloppypar}
 
 \begin{figure}[htbp]
 \centering
