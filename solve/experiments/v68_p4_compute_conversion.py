@@ -69,7 +69,7 @@ def main():
     ax2.set_ylabel("H100 卡天数 (log)", color="#3eede7")
     ax2.tick_params(axis="y", labelcolor="#3eede7")
     ax2.set_yscale("log")
-    ax.set_title(f"v68: 能力目标->训练算力->工程规模 (2025, 整数年口径)")
+    ax.set_title(f"能力目标->训练算力->工程规模 (2025, 整数年口径)")
     ax.grid(alpha=0.3)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v68_p4_compute_conversion.png"), dpi=200)
     plt.close(fig)

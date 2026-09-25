@@ -70,7 +70,7 @@ def main():
     ax.scatter([lnN25 + gN], [4.0], [s26], s=90, marker="^", color="#1685a9", label=f"2026 预测 (S={np.exp(s26):.0f})")
     ax.scatter([lnN25 + 2 * gN], [5.0], [s27], s=90, marker="^", color="#1685a9", label=f"2027 预测 (S={np.exp(s27):.0f})")
     ax.set_xlabel("lnN (参数量)"); ax.set_ylabel("t (年, 2022=0)"); ax.set_zlabel("lnS (能力)")
-    ax.set_title("v25: 前沿表面与 0.9 分位数回归平面")
+    ax.set_title("前沿表面与 0.9 分位数回归平面")
     ax.view_init(elev=18, azim=-58)
     ax.legend(fontsize=8, loc="upper left")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v25_p4_3d_surface.png"), dpi=200)

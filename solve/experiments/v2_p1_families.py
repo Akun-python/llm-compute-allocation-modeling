@@ -235,7 +235,7 @@ def main():
     dom_order = ["book", "arxiv", "c4", "commoncrawl", "github", "wikipedia", "stackexchange"]
     dd = dom_wide.loc[dom_order, sel]
     dd.plot(kind="bar", ax=ax, width=0.85)
-    ax.set_ylabel("域级质量分 Q"); ax.set_title("v2: 赋权×聚合家族下的域级质量分")
+    ax.set_ylabel("域级质量分 Q"); ax.set_title("赋权×聚合家族下的域级质量分")
     ax.legend(fontsize=7, ncol=3)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v2_p1_domains.png"), dpi=200); plt.close(fig)
 

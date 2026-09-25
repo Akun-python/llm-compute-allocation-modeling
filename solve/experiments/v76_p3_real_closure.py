@@ -147,7 +147,7 @@ def main():
     ax.set_title("(b) 实际点相对最优轨迹的偏差分布")
     ax.legend(fontsize=8)
     ax.grid(alpha=0.3)
-    fig.suptitle("v76: P3 最优轨迹与真实训练点的闭环对照 —— 算力-规模关系外部验证", fontsize=12, y=1.02)
+    fig.suptitle("P3 最优轨迹与真实训练点的闭环对照 —— 算力-规模关系外部验证", fontsize=12, y=1.02)
     fig.tight_layout(rect=[0, 0, 1, 0.97])
     fig.savefig(os.path.join(EX, "v76_p3_real_closure.png"), dpi=200)
     plt.close(fig)

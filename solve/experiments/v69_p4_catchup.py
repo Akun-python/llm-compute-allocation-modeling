@@ -98,7 +98,7 @@ def main():
         ax.text(r["gap_pct"], r["family"], f"  {lab}", va="center", fontsize=8)
     ax.axvline(0, color="black", lw=0.8)
     ax.set_xlabel("相对领跑者差距 (%)")
-    ax.set_title("v69: 开源家族追赶时间 (蓝<=12个月, 青>12个月, 红=永不)")
+    ax.set_title("开源家族追赶时间 (蓝<=12个月, 青>12个月, 红=永不)")
     ax.grid(alpha=0.3, axis="x")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v69_p4_catchup.png"), dpi=200)
     plt.close(fig)

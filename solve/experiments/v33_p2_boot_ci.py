@@ -116,7 +116,7 @@ def main():
                 fmt="o", color="#177cb0", capsize=4, lw=1.5)
     ax.set_yticks(y); ax.set_yticklabels(sub["param"])
     ax.axvline(0, color="#88ada6", lw=0.8, ls="--")
-    ax.set_title("v33: 广义标度律参数 Bootstrap CI (n=810, B=300)")
+    ax.set_title("广义标度律参数 Bootstrap CI (n=810, B=300)")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v33_p2_boot_ci.png"), dpi=200)
     plt.close(fig)
 

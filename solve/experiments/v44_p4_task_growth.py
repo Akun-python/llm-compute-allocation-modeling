@@ -62,7 +62,7 @@ def main():
         g = g[g.notna()].sort_index()
         ax.plot(range(len(g)), g.values, "o-", lw=1.8, label=t)
     ax.set_xticks(range(len(g))); ax.set_xticklabels(g.index, rotation=45, fontsize=8)
-    ax.set_ylabel("任务前沿 (月度最大值)"); ax.set_title("v44: 分任务能力前沿 (2024-06..2025-03)")
+    ax.set_ylabel("任务前沿 (月度最大值)"); ax.set_title("分任务能力前沿 (2024-06..2025-03)")
     ax.legend(fontsize=8, ncol=2); ax.grid(alpha=0.3)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v44_p4_task_growth.png"), dpi=200)
     plt.close(fig)

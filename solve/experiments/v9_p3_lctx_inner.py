@@ -200,7 +200,7 @@ def main():
     ax2.set_ylabel("训练损失 L", color="#70f3ff")
     ax.legend(loc="upper left"); ax2.legend(loc="lower right")
     ax.set_yscale("log")
-    ax.set_title("v9: 最优上下文长度与收益权重的平衡 (C=1e22)")
+    ax.set_title("最优上下文长度与收益权重的平衡 (C=1e22)")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v9_p3_lctx_inner.png"), dpi=200); plt.close(fig)
     print("\ndone v9")
 

@@ -146,7 +146,7 @@ def main():
             ax.set_xlabel("质量通道份额 s_Q"); ax.set_ylabel("训练通道份额 s_train")
             ax.plot(s[1], s[0], "o", ms=12, color="#177cb0", mec="white", mew=2, label="全局最优分配")
             cb = fig.colorbar(c, ax=ax); cb.set_label("最小损失 L*")
-            ax.set_title("v17: 三通道分配响应面 (C=1e22, power)")
+            ax.set_title("三通道分配响应面 (C=1e22, power)")
             ax.legend(fontsize=9)
             fig.tight_layout(); fig.savefig(os.path.join(EX, "v17_p3_simplex.png"), dpi=200)
             plt.close(fig)

@@ -133,7 +133,7 @@ def main():
         ax.scatter(pred, L - pred, s=6, alpha=0.4, label=f)
     ax.axhline(0, color="#88ada6", lw=0.8)
     ax.set_xlabel("预测 Loss"); ax.set_ylabel("残差")
-    ax.set_title("v3: 不同质量项形式的残差分布")
+    ax.set_title("不同质量项形式的残差分布")
     ax.legend(fontsize=8)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v3_p2_forms_resid.png"), dpi=200); plt.close(fig)
 

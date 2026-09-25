@@ -62,7 +62,7 @@ def main():
         ax.plot(d["C"], d["L"] - E, "o-", lw=2, label=form)
     ax.set_xscale("log"); ax.set_yscale("log")
     ax.set_xlabel("总预算 C (FLOPs)"); ax.set_ylabel("最优剩余损失 L* - E")
-    ax.set_title("v22: 预算规模经济 (三种质量成本形式)")
+    ax.set_title("预算规模经济 (三种质量成本形式)")
     ax.legend(fontsize=9)
     ax.grid(alpha=0.3)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v22_p3_budget_ladder.png"), dpi=200)

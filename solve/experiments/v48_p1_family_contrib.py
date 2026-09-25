@@ -89,7 +89,7 @@ def main():
     ax.axvline(0, color="#88ada6", lw=0.8)
     ax.set_yticks(pos); ax.set_yticklabels(fams)
     ax.set_xlabel("book 相对全域的加权分贡献")
-    ax.set_title(f"v48: book 领先的指标族贡献分解 (总优势 {book_d.sum():.4f})")
+    ax.set_title(f"book 领先的指标族贡献分解 (总优势 {book_d.sum():.4f})")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v48_p1_family_contrib.png"), dpi=200)
     plt.close(fig)
 

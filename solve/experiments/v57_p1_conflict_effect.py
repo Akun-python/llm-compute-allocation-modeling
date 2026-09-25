@@ -75,7 +75,7 @@ def main():
                     textcoords="offset points", xytext=(5, 4), fontsize=8)
     ax.set_xlabel("域内冲突率 (conflict_mean)")
     ax.set_ylabel("消解造成的分数位移 |ΔQ|")
-    ax.set_title(f"v57: 冲突消解的有效性 (冲突率-位移相关 {corr_cm:.3f})")
+    ax.set_title(f"冲突消解的有效性 (冲突率-位移相关 {corr_cm:.3f})")
     ax.grid(alpha=0.3)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v57_p1_conflict_effect.png"), dpi=200)
     plt.close(fig)

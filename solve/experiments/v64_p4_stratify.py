@@ -78,7 +78,7 @@ def main():
     ax.axhline(0, color="#3eede7", lw=1.0)
     ax.set_xticks(x); ax.set_xticklabels(rdf["scope"])
     ax.set_ylabel("年化对数增速")
-    ax.set_title("v64: 前沿的分层演进 (p90/p75/p50)")
+    ax.set_title("前沿的分层演进 (p90/p75/p50)")
     ax.legend(fontsize=9); ax.grid(alpha=0.3, axis="y")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v64_p4_stratify.png"), dpi=200)
     plt.close(fig)

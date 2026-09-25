@@ -87,7 +87,7 @@ def main():
     ax.plot(rdf["k"], rdf["Qstar_all"], "s--", lw=2, color="#88ada6", label="全体样本 Q*")
     ax.axhline(rows[0]["Qstar_base_conf"], ls=":", color="#3eede7", label="高冲突基准(未消解)")
     ax.set_xlabel("对称截尾深度 k"); ax.set_ylabel("聚合质量分 Q*")
-    ax.set_title("v28: 冲突消解深度敏感性")
+    ax.set_title("冲突消解深度敏感性")
     ax.legend(fontsize=9); ax.grid(alpha=0.3)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v28_p1_k_sens.png"), dpi=200)
     plt.close(fig)

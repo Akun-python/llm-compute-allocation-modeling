@@ -61,7 +61,7 @@ def main():
     axes[2].set_title("(c) 数据通道")
     for ax in axes:
         ax.legend(fontsize=8); ax.grid(alpha=0.3)
-    fig.suptitle("v31: 最优解族随预算轨迹 (成本形式决定转移区间)", y=1.03)
+    fig.suptitle("最优解族随预算轨迹 (成本形式决定转移区间)", y=1.03)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v31_p3_solution_family.png"), dpi=200)
     plt.close(fig)
 

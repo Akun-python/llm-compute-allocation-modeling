@@ -63,7 +63,7 @@ def main():
         ax.annotate(f"{r['S_24']:.0f}", (r["gN"], r["S_24"]), textcoords="offset points",
                     xytext=(0, 6), fontsize=8, color="#3eede7")
     ax.set_xlabel("参数量年均对数增速 gN"); ax.set_ylabel("预测前沿平均分 S")
-    ax.set_title("v34: 前沿预测对增速假设的敏感性 (tornado)")
+    ax.set_title("前沿预测对增速假设的敏感性 (tornado)")
     ax.legend(fontsize=9); ax.grid(alpha=0.3)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v34_p4_gN_sens.png"), dpi=200)
     plt.close(fig)

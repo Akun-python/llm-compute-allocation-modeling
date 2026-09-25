@@ -62,7 +62,7 @@ def main():
     ax2 = ax.twinx()
     ax2.plot(range(len(rdf)), rdf["ratio"], "d-", lw=1.6, color="#44cef6", label="开源/全量比值")
     ax2.set_ylabel("开源/全量比值", color="#44cef6"); ax2.set_ylim(0.5, 1.05)
-    ax.set_title("v38: 开源 vs 全量能力前沿 (开源追赶)")
+    ax.set_title("开源 vs 全量能力前沿 (开源追赶)")
     ax.legend(loc="upper left", fontsize=9); ax2.legend(loc="lower left", fontsize=9)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v38_p4_open_gap.png"), dpi=200)
     plt.close(fig)

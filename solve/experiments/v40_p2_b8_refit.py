@@ -84,7 +84,7 @@ def main():
     ax.bar(x + w/2, p_8, w, color="#3eede7", label="B8 (原样)")
     ax.axhline(0, color="#88ada6", lw=0.8)
     ax.set_xticks(x); ax.set_xticklabels(names)
-    ax.set_ylabel("参数值"); ax.set_title("v40: interaction_N 在 B6+B7 vs B8 的参数复核")
+    ax.set_ylabel("参数值"); ax.set_title("interaction_N 在 B6+B7 vs B8 的参数复核")
     ax.legend(fontsize=9); ax.grid(alpha=0.3)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v40_p2_b8_refit.png"), dpi=200)
     plt.close(fig)

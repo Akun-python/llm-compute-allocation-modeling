@@ -238,7 +238,7 @@ def main():
         ax.axvline(C, color="#88ada6", ls="--", lw=0.8)
     ax.set_xscale("log")
     ax.set_xlabel("预算 C (FLOPs)"); ax.set_ylabel("最优 Loss L*")
-    ax.set_title("v4: 算力--性能帕累托前沿")
+    ax.set_title("算力--性能帕累托前沿")
     ax.legend()
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v4_p3_pareto.png"), dpi=200); plt.close(fig)
 

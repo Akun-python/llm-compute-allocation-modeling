@@ -51,7 +51,7 @@ def main():
         lnN = np.log(S) - B0 - BT * TS
         ax.plot(TS, lnN, lw=1.8, marker="o", ms=3, label=f"S={S}")
     ax.set_xlabel("年份 t (2022=0, 整数年口径)"); ax.set_ylabel("ln N (对数参数量)")
-    ax.set_title(f"v71: 规模-时间等能力线 (斜率 {mrs:.3f}: 等1年少22%参数)")
+    ax.set_title(f"规模-时间等能力线 (斜率 {mrs:.3f}: 等1年少22%参数)")
     ax.legend(fontsize=9); ax.grid(alpha=0.3)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v71_p4_isoquant.png"), dpi=200)
     plt.close(fig)

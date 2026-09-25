@@ -68,7 +68,7 @@ def main():
             label="每 +0.1Q 等价减少参数 (B)")
     ax.axhline(0.243, color="#3eede7", lw=1.4, ls="--", label="v36 参考点 0.243B/0.1Q")
     ax.set_xlabel("N (B)"); ax.set_ylabel("等价参数 (B) / +0.1Q")
-    ax.set_title("v51: 质量-参数替代率随规模的演化 (Q=0.6, interaction_N)")
+    ax.set_title("质量-参数替代率随规模的演化 (Q=0.6, interaction_N)")
     ax.legend(fontsize=9); ax.grid(alpha=0.3)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v51_p2_subst_scale.png"), dpi=200)
     plt.close(fig)

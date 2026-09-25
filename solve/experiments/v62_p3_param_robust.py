@@ -121,7 +121,7 @@ def main():
     axes[0].scatter(qs, ns, s=40, color="#177cb0", alpha=0.8)
     axes[0].axvline(np.median(qs), color="#3eede7", lw=1.2, ls="--", label="Q* 中位")
     axes[0].set_xlabel("Q*"); axes[0].set_ylabel("N* (B)")
-    axes[0].set_title("v62: 参数不确定性下的最优解 (C=1e22, exp)")
+    axes[0].set_title("参数不确定性下的最优解 (C=1e22, exp)")
     axes[0].legend(fontsize=8); axes[0].grid(alpha=0.3)
     axes[1].bar(range(len(rdf)), ls, color="#1685a9", alpha=0.85)
     axes[1].set_xticks(range(len(rdf))); axes[1].set_xticklabels(rdf["case"], rotation=60, fontsize=7)

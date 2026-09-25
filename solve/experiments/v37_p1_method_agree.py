@@ -115,7 +115,7 @@ def main():
     for i in range(len(names)):
         for j in range(len(doms)):
             ax.text(j, i, str(R.iloc[j, i]), ha="center", va="center", fontsize=9)
-    ax.set_title(f"v37: 6 种评分方法的域序 (Kendall W={W:.3f})")
+    ax.set_title(f"6 种评分方法的域序 (Kendall W={W:.3f})")
     fig.colorbar(im, ax=ax, label="秩 (1=最优)")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v37_p1_method_agree.png"), dpi=200)
     plt.close(fig)

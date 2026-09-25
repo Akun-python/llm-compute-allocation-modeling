@@ -197,7 +197,7 @@ def main():
         ax.grid(alpha=0.3, axis="y")
     handles, labels = axes[0].get_legend_handles_labels()
     fig.legend(handles, labels, loc="lower center", ncol=5, fontsize=9, frameon=False)
-    fig.suptitle("v72: 五框架跨框架求解对比 —— 全局最优一致性 (括号为最大相对偏差)",
+    fig.suptitle("五框架跨框架求解对比 —— 全局最优一致性 (括号为最大相对偏差)",
                  fontsize=11, y=1.02)
     fig.tight_layout(rect=[0, 0.06, 1, 1])
     fig.savefig(os.path.join(EX, "v72_p3_framework_solvers.png"), dpi=200)

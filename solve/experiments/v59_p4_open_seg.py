@@ -73,7 +73,7 @@ def main():
     ax.axhline(1.0, color="#3eede7", lw=1.3, ls="--", label="open = closed")
     ax.set_xticks(qs); ax.set_xticklabels([f"Q{int(q%4) or 4}" for q in qs])
     ax.set_ylabel("开源/闭源中位分比"); ax.set_xlabel("季度")
-    ax.set_title("v59: 开源-闭源差距的规模段分解")
+    ax.set_title("开源-闭源差距的规模段分解")
     ax.legend(fontsize=8); ax.grid(alpha=0.3)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v59_p4_open_seg.png"), dpi=200)
     plt.close(fig)

@@ -99,7 +99,7 @@ def main():
         ax.bar([h], [vals[1]], bottom=[vals[0]], color="#177cb0", label=labels[1] if j == 0 else None)
         ax.bar([h], [vals[2]], bottom=[vals[0] + vals[1]], color="#70f3ff", label=labels[2] if j == 0 else None)
     ax.set_xticks([12, 24]); ax.set_xticklabels(["12M", "24M"])
-    ax.set_ylabel("方差占比 (%)"); ax.set_title("v54: 前沿预测不确定性的来源分解")
+    ax.set_ylabel("方差占比 (%)"); ax.set_title("前沿预测不确定性的来源分解")
     ax.legend(fontsize=9); ax.grid(alpha=0.3, axis="y")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v54_p4_uncert_budget.png"), dpi=200)
     plt.close(fig)

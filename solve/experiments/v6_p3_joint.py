@@ -201,7 +201,7 @@ def main():
     ax.bar(np.arange(nd), qvec[order] * 100, color="#177cb0", alpha=0.55, label="域质量 Q×100")
     ax.bar(np.arange(nd) + 0.35, p_opt[order] * 100, color="#70f3ff", alpha=0.85, width=0.6, label="最优配比 p×100")
     ax.set_xticks(np.arange(nd)); ax.set_xticklabels([MIX_DOMAINS[i] for i in order], rotation=60, fontsize=7)
-    ax.set_ylabel("%"); ax.set_title("v6: 联合优化最优配比 vs 域质量 (C=1e22)")
+    ax.set_ylabel("%"); ax.set_title("联合优化最优配比 vs 域质量 (C=1e22)")
     ax.legend(fontsize=8)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v6_p3_joint.png"), dpi=200); plt.close(fig)
 

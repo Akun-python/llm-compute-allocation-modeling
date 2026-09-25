@@ -129,7 +129,7 @@ def main():
     ax.bar(x, dq_pca.reindex(doms).values, 0.22, color="#3eede7", label="PCA 自编码")
     ax.bar(x + 0.25, dq_mlp.reindex(doms).values, 0.22, color="#70f3ff", label="MLP 自编码")
     ax.set_xticks(x); ax.set_xticklabels(doms, rotation=20); ax.set_ylabel("域平均质量分")
-    ax.set_title("v15: 监督/无监督质量评分家族对比")
+    ax.set_title("监督/无监督质量评分家族对比")
     ax.legend(fontsize=8)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v15_p1_ae.png"), dpi=200); plt.close(fig)
 

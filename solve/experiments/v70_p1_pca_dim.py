@@ -70,7 +70,7 @@ def main():
         axes[0].axhline(thr, color="#3eede7", lw=0.9, ls="--")
         axes[0].text(d - 0.4, thr + 0.02, f"{int(thr*100)}%: {d} 维", fontsize=8, color="#3eede7")
     axes[0].set_xlabel("主成分序"); axes[0].set_ylabel("累积方差占比")
-    axes[0].set_title(f"v70: 有效维度 (80% = {d80} 维 / 22)")
+    axes[0].set_title(f"有效维度 (80% = {d80} 维 / 22)")
     axes[0].grid(alpha=0.3, axis="y")
     axes[1].bar(np.arange(len(ALL_IND)) - 0.15, load3[:, 0], 0.3, label="PC1", color="#177cb0")
     axes[1].bar(np.arange(len(ALL_IND)) + 0.15, load3[:, 1], 0.3, label="PC2", color="#1685a9")

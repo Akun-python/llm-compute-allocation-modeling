@@ -81,7 +81,7 @@ def main():
     pos = np.arange(len(rdf))
     ax.barh(pos, rdf["sd"], color="#177cb0", alpha=0.85)
     ax.set_yticks(pos); ax.set_yticklabels(rdf["domain"])
-    ax.set_xlabel("域内质量分标准差"); ax.set_title(f"v45: 域内离散度 (ICC={icc:.3f})")
+    ax.set_xlabel("域内质量分标准差"); ax.set_title(f"域内离散度 (ICC={icc:.3f})")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v45_p1_domain_icc.png"), dpi=200)
     plt.close(fig)
 

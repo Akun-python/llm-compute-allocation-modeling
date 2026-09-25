@@ -75,7 +75,7 @@ def main():
     for i, r in rdf.iterrows():
         ax.annotate(r["leader"], (i, r["hhi_top5"]),
                     textcoords="offset points", xytext=(0, -16), ha="center", fontsize=8, color="#3eede7")
-    ax.set_title("v42: 开源前沿家族竞争 (领跑家族 + top5 集中度)")
+    ax.set_title("开源前沿家族竞争 (领跑家族 + top5 集中度)")
     ax.legend(fontsize=9); ax.grid(alpha=0.3)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v42_p4_family_dyn.png"), dpi=200)
     plt.close(fig)

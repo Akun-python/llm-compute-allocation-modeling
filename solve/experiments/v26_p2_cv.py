@@ -95,7 +95,7 @@ def main():
            color=["#88ada6", "#70f3ff", "#177cb0", "#44cef6"])
     ax.set_xticks(x); ax.set_xticklabels(forms, rotation=15)
     ax.set_ylabel("留出折 RMSE")
-    ax.set_title("v26: 标度律形式 5 折 x3 交叉验证 (B6+B7, n=810)")
+    ax.set_title("标度律形式 5 折 x3 交叉验证 (B6+B7, n=810)")
     for i, v in enumerate(rdf["cv_rmse_mean"]):
         ax.text(i, v + 0.003, f"{v:.3f}", ha="center", fontsize=9)
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v26_p2_cv.png"), dpi=200); plt.close(fig)

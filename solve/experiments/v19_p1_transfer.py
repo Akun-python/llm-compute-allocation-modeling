@@ -91,7 +91,7 @@ def main():
     ax.set_xticks(np.arange(len(src_doms))); ax.set_xticklabels(src_doms, rotation=45, ha="right", fontsize=9)
     ax.set_yticks(np.arange(len(loss_doms))); ax.set_yticklabels(loss_doms, fontsize=9)
     ax.set_xlabel("混合源域 (配比系数)"); ax.set_ylabel("下游损失域")
-    ax.set_title("v19: 配比-损失域 迁移系数热图 (1M)")
+    ax.set_title("配比-损失域 迁移系数热图 (1M)")
     fig.colorbar(im, ax=ax, label="Ridge 系数 (负=降低损失)")
     fig.tight_layout(); fig.savefig(os.path.join(EX, "v19_p1_transfer.png"), dpi=200); plt.close(fig)
 
