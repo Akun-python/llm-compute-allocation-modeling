@@ -1,0 +1,95 @@
+{
+  "thresholds": [
+    {
+      "qa": 0.45,
+      "qs": 0.95,
+      "band": {
+        "exp": 2.139,
+        "power": 1.504,
+        "log": 0.53
+      },
+      "C_act": {
+        "exp": 1e+18,
+        "power": 2.225586831150675e+18,
+        "log": 1.1298747492786166e+18
+      },
+      "C_sat": {
+        "exp": 1.375991622417603e+20,
+        "power": 7.100863379900355e+19,
+        "log": 3.831186849557277e+18
+      },
+      "band_order": "exp > power > log",
+      "act_order": "power > log > exp",
+      "sat_order": "exp > power > log"
+    },
+    {
+      "qa": 0.5,
+      "qs": 0.9,
+      "band": {
+        "exp": 1.687,
+        "power": 1.077,
+        "log": 0.424
+      },
+      "C_act": {
+        "exp": 1.3369100475104663e+18,
+        "power": 4.6083795824713426e+18,
+        "log": 1.2766169490574062e+18
+      },
+      "C_sat": {
+        "exp": 6.50086976952501e+19,
+        "power": 5.5028033900467585e+19,
+        "log": 3.39080668189406e+18
+      },
+      "band_order": "exp > power > log",
+      "act_order": "power > exp > log",
+      "sat_order": "exp > power > log"
+    },
+    {
+      "qa": 0.52,
+      "qs": 0.88,
+      "band": {
+        "exp": 1.52,
+        "power": 0.968,
+        "log": 0.382
+      },
+      "C_act": {
+        "exp": 1.602840027414992e+18,
+        "power": 5.346903405343505e+18,
+        "log": 1.3405182387914783e+18
+      },
+      "C_sat": {
+        "exp": 5.305847467889446e+19,
+        "power": 4.969276150532319e+19,
+        "log": 3.22916999994389e+18
+      },
+      "band_order": "exp > power > log",
+      "act_order": "power > exp > log",
+      "sat_order": "exp > power > log"
+    },
+    {
+      "qa": 0.55,
+      "qs": 0.85,
+      "band": {
+        "exp": 1.269,
+        "power": 0.805,
+        "log": 0.318
+      },
+      "C_act": {
+        "exp": 2.1041280588294336e+18,
+        "power": 6.682415570211298e+18,
+        "log": 1.4424172552410693e+18
+      },
+      "C_sat": {
+        "exp": 3.912277958903946e+19,
+        "power": 4.264389205856687e+19,
+        "log": 3.0010465178188687e+18
+      },
+      "band_order": "exp > power > log",
+      "act_order": "power > exp > log",
+      "sat_order": "power > exp > log"
+    }
+  ],
+  "band_order_invariant": true,
+  "act_order_invariant": false,
+  "sat_order_invariant": false
+}
