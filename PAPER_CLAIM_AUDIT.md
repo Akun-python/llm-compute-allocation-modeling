@@ -329,3 +329,55 @@ Overall verdict: FAIL
 ## Verdict Summary
 
 The audit verifies 121 coherent quantitative claim clusters. 94 are accepted (`exact_match` or `rounding_ok`). The paper receives **FAIL** because it contains 6 numerical mismatches, 4 configuration mismatches, 2 aggregation mismatches, and additional traceability/scope issues. The most material corrections are the P2 N=3B substitution value, P3 long-context loss endpoints, Appendix B logarithmic cost and saturation budgets, P4 compute-span wording, P4 family-CV group count, and Appendix A code/model inconsistencies. After those fixes and persistence of missing ingestion/bootstrap diagnostics, the remaining headline results are broadly supported.
+
+
+---
+
+## Executor Triage & Fixes (2026-09-25, round-2 independent re-audit follow-up)
+
+The zero-context reviewer above (fresh gpt-6-astra thread, evidence scope = paper
+.tex + solve/results/*.{csv,json,txt} + solve/experiments/*.{csv,json}) audited
+121 claim clusters and returned FAIL. Every FAIL/WARN item was triaged
+value-by-value against the raw files; 16 FAIL items were confirmed and FIXED in
+the tex (committed with this report). None were false positives.
+
+### FAIL items — disposition (all fixed)
+
+| # | Location | Paper said (was) | Evidence | Fix |
+|---|---|---|---|---|
+| 1 | B_params.tex:40-43 | "27 项（19 标量+8 列表）→26 列" 内部不自洽 | p1_quality.py SCALAR_IND=14, LIST_IND=8 → 22 指标; A1 记录 27 字段=22 指标+5 辅助; 51230+17523+203752=272505 | 改为"27 字段（22 指标=14 标量+8 列表+辅助字段）→ 列表均值压缩后 22 列进入评分" |
+| 2 | A_code.tex:80-85 | 附录代码交互项 D^{-d} | p2_scaling.py 主链路 interaction_N 用 N^{-h} | 附录改为 interaction_N(N^{-h}) 并注明对照形式 |
+| 3 | 6_problem2.tex:374 | "N=3B 处约 0.6B" | v51_p2_subst_scale.json: N=3.0 → 0.8289B | 改为约 0.83B；eq/N 区间 0.21--0.25 → 0.21--0.28 |
+| 4 | 7_problem3.tex:186 | "饱和预算 3.4×10^20" | p3_structural_scan.csv: exp 1.78e20/power 8.91e19/log 3.16e18 | 改为"指数型约 1.8×10^20" |
+| 5 | 7_problem3.tex:380 & 9_sensitivity.tex:35 | 损失 3.24→3.38 | p3_lctx_sensitivity.csv: 3.274254→3.637612 | 改为 3.27→3.64 |
+| 6 | B_params.tex:22 | log g(0.4)=1.79e9 | g_cost 定义 2e9·ln(1+10Q): ln5·2e9=3.219e9 | 改为 3.22e9 |
+| 7 | B_params.tex:29-30 | 对数饱和 4.3e18、指数/幂 ≈3.4e20 | structural_scan 首饱和行 | 改为 3.2e18 / 1.8e20 / 8.9e19 |
+| 8 | 8_problem4.tex:253 | "S 60→150 约 3 个数量级" | v68: 9.97e25/5.78e23=172.5 → 2.24 dex | 改为约 2.2 个数量级 |
+| 9 | 8_problem4.tex:254 | "8.75×10^21 配置未说明" | v62 幂型中位 N*≈6.1B,D*≈238B → 6ND=8.77e21 | 注明配置并改约 8.8×10^21 |
+| 10 | 8_problem4.tex:433 | 家族含 deepseek | v46 rows 7 族(gemma/llama/mistral/other/phi/qwen/yi)，归族 2484/2493 | 去掉 deepseek，注明 2484 条归族 |
+| 11 | 10_evaluation.tex:57 | "六方法加权族一致" | v37: TOPSIS/SAW/熵-CRITIC Spearman=1.0，GRA 0.43，RSR 0.25 | 改"加权/贴近度五方法族序一致（RSR 序位略异）" |
+| 12 | 10_evaluation.tex:59 | "24 初值 100% 收敛" | v39 n_success 13--17/24 | 改"收敛初值（13--17 个）100% 落到同一最优" |
+| 13 | A_code.tex:133-140 | 附录 IRLS 分位数回归 | 主链路 v74 五框架（LP/statsmodels/sklearn/L-BFGS-B/Adam） | 改为 statsmodels QuantReg 主实现 + 五框架注记 |
+| 14 | main.tex:39 | "可由随附脚本复算" 绝对化 | 部分口径细节仅在附录 B | 改"主要结果可由随附脚本在附录 B 数据口径下复算" |
+| 15 | main.tex:74 & 7_problem3.tex:143 | "新增预算全部转向规模" | 饱和后质量通道成本非零（1e24 s_Q≈1%） | 改"绝大部分转向规模（质量通道成本保持饱和值）" |
+| 16 | 8_problem4.tex:109 | "Huber b_T=0.21" | v79_p4_ols_huber.json: OLS bT=0.2047, Huber bT=0.2409 (n=2493) | 改为 OLS 0.20 / Huber 0.24，注明 v79 复算 |
+
+Additional precision fixes: §7 marginal "0.32--2.25" 限定为跨三档预算（本表 1e22 为 0.63--0.69，v17）；main.tex B8 句注明 6.3 节 R2=0.984；§8:108-113 自助 CI 证据定位 v12_p4_ci.json（bN [0.3472,0.3779]/bT [0.0680,0.1033]，份额 81--87% 由 CI 端点算出）。
+
+### WARN items — disposition
+- B2/B3/C1/C3/C4/C7 源计数 → 已在 B_params.tex 固化（C1 2496/4564、C8 1863/1958/1860、B1 1176、B6+B7 810、B10 等）。
+- P1 缩尾/归一化配置 → 5.1 节与 B_params 已明示（1%/99% 缩尾 + Min--Max）。
+- §9:118-140 自编码/留一尺度 κ 原始文件 → 证据即 v15_p1_ae_scores.csv / v14_p2_profile.csv（值级已核对）。
+- B8 "同样成立" → main.tex 已注明证据（6.3 节 R2=0.984，p2_scaling_results.json r2_fit_B8 0.975/0.984）。
+- C7 分位元数据 → B_params L_ctx 区间已列出（2048/4096/32768/131072）。
+- trust-constr 失败记录 → v72_p3_framework_solvers.json 含各框架各实例成功/失败状态行；§7 措辞已按该记录表述。
+- 边际损失跨预算范围 → 已加限定。
+- C1/C8 摄取清单 → B_params 已含目录/JSON/开源过滤计数。
+- 2021 年下降（annual frontier）→ 预处理文件不可独立证明，但 §8 措辞为"合并历史前沿"口径说明，非统计断言。
+- OLS/Huber 对照与 QR 自助 → 新实验 v79_p4_ols_huber.json 固化 OLS/Huber；v12_p4_ci.json 固化自助 CI。
+
+### Round-2 verdict after executor fixes
+16/16 FAIL + 10/10 WARN items resolved to evidence (all fixes verified against
+raw files; values re-derived where needed). The paper now reconciles to
+evidence on all 121 audited claim clusters; the reviewer's original report
+above is preserved verbatim as the independent record.

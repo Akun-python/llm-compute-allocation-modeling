@@ -76,13 +76,14 @@ kappa = -np.polyfit(np.log(ns), np.log(norms), 1)[0]
 \subsection{问题二：广义标度律拟合（\texttt{p2\_scaling.py}）}
 
 \begin{lstlisting}[language=Python, basicstyle=\ttfamily\small]
-def fit_generalized(N, D, Q, L, form="interaction"):
-    """最小二乘拟合 L = E + A N^-a + B D^-b + C(1-Q)^g D^-d"""
+def fit_generalized(N, D, Q, L, form="interaction_N"):
+    """最小二乘拟合 L = E + A N^-a + B D^-b + C(1-Q)^g N^-h
+    (交互-N 为主链路形式: 质量缺口随参数量衰减; 附录 B 亦拟合
+    additive/interaction-D/乘性等对照形式, 见 v50 BIC 表)"""
     def resid(p):
-        E, A, a, B, b, C, g = p[:7]
-        d = p[7] if form == "interaction" else 0.0
+        E, A, a, B, b, C, g, h = p
         return (E + A * N**(-a) + B * D**(-b)
-                + C * np.maximum(1 - Q, 0)**g * D**(-d) - L)
+                + C * np.maximum(1 - Q, 0)**g * N**(-h) - L)
     p0 = np.array([L.min()*0.7, 3, 0.3, 3, 0.3, 1, 1.5, 0.3])
     lb = np.array([0, 1e-6, 1e-4, 1e-6, 1e-4, 1e-6, 1e-4, 1e-4])
     ub = np.array([L.min()*1.2, 1e3, 5, 1e3, 5, 1e3, 10, 5])
@@ -131,13 +132,12 @@ def solve_opt(C, form, L_ctx, Q0v=0.4):
 
 \begin{lstlisting}[language=Python, basicstyle=\ttfamily\small]
 def quantile_fit(X, y, tau=0.9):
-    """迭代重加权最小二乘实现分位数回归"""
-    beta = np.linalg.lstsq(X, y, rcond=None)[0]
-    for _ in range(60):
-        resid = y - X @ beta
-        w = np.where(resid > 0, tau, 1 - tau)
-        beta = np.linalg.lstsq(X * w[:, None], y * w, rcond=None)[0]
-    return beta
+    """分位数回归主实现: statsmodels QuantReg(线性规划/单纯形),
+    与 scipy.optimize.linprog(LP)、sklearn QuantileRegressor、
+    L-BFGS-B、Adam 四种独立实现交叉复算 (v74 五框架, 系数一致)"""
+    from statsmodels.regression.quantile_regression import QuantReg
+    res = QuantReg(y, X).fit(q=tau)
+    return res.params
 
 # 增长核算: 规模贡献 = b_N * g_N, 非规模 = b_T
 beta = quantile_fit(np.column_stack([np.ones(n), lnN, t]), lnS)
