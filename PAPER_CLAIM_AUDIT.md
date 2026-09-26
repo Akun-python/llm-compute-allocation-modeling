@@ -1646,3 +1646,15 @@ PROMETHEE-II 与 VIKOR），作为"多框架算法交叉验证"的补强轮。
    （figures/v99_pipeline_overview.png，与论文 fig:pipeline 同一张），
    并加推理链引导句（质量度量→标度律→联合优化→前沿预测，Q/L 贯穿）。
 2) 更新日志批次 13 已含技术路线图与验收清单记录。
+
+
+---
+
+## Round-66c: tab:checklist 引用闭环
+
+1) 结论章节"与题面要求的逐项对照"小节补引导句与表引用
+   （"把四问的题面要求与本团队的交付逐项对照（表 \ref{tab:checklist}）"），
+   消除该表仅定义未引用的问题。
+2) 引用完整性终态复验：fig/tab/eq 0 未引用
+   （含新增 fig:pipeline/tab:verify/tab:conclusion/tab:checklist）。
+3) 编译全绿、布局 0 缺陷。
