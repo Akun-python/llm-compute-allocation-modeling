@@ -1618,3 +1618,21 @@ PROMETHEE-II 与 VIKOR），作为"多框架算法交叉验证"的补强轮。
    -> 83.7%/16.3%（p4_results annual_decomp.scale_share=0.836570）。
 2) 至此 README 展示区 + 正文 8_problem4/9_sensitivity/10_evaluation
    全部统一 83.7% 口径（Round-65b 已改正文三处）。
+
+
+---
+
+## Round-66: 批次13——技术路线框架图 + 结果验收清单（参照 C 题 main.tex）
+
+1) 问题分析"总体思路"小节补四问技术路线框架图
+   figures/v99_pipeline_overview.png（参照 C 题 fig:fwall）：
+   - 四层结构：数据族(A/B/C) → 四问建模 → 核心方法 → 关键产物，
+     底部贯穿主线（质量分 Q 与损失 L 两量纲衔接四问）
+   - 水色调色板合规 0.00%（修正 hue 检测分支 bug 后复核，旧图亦 0.00%）
+2) 附录 A 补"结果验收清单"表 tab:verify（参照 C 题 tab:verify）：
+   问题一(八方法一致/逐位闭合/抽样收敛)、问题二(BIC 决定性/留出配对显著/
+   六框架 SSE 全等)、问题三(24 初值全收敛/九路径一致/KKT 核对)、
+   问题四(五框架系数一致/回测 MAPE/口径带落区间)、物理自检
+   (R²≈0.999/残差无偏/κ 极差 3×10⁻¹⁰)
+3) README 同步：图数量 82→99、更新日志批次 13
+4) 编译全绿、布局 0 缺陷；fig:pipeline/tab:verify 标签解析正常

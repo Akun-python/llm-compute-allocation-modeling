@@ -96,6 +96,16 @@
 
 ### 2026-09-25
 
+**整体润色批次 13：技术路线框架图 + 结果验收清单（继续参照 C 题 main.tex）**
+- 问题分析"总体思路"小节补**四问技术路线框架图**（figures/v99_pipeline_overview.png，
+  水色系 0.00% 违规）：数据族 → 四问建模 → 核心方法 → 关键产物，质量分 Q 与
+  损失 L 贯穿全程，与 C 题"总体技术路线 + fig:fwall"排版对应
+- 附录 A 补**结果验收清单表**（tab:verify，参照 C 题 tab:verify）：
+  问题一/二/三/四 + 物理自检五层面验收项（八方法一致、BIC 决定性、九路径
+  一致、五框架系数一致、κ 极差 3×10⁻¹⁰ 等），全部通过
+- README 图数量注释 82 → 99
+- 编译全绿、布局 0 缺陷
+
 **README 残留"约 84%"同步为 83.7%（与正文/摘要/JSON 三处一致）**
 - 问题四方法表"贡献分解"行与图注"规模扩张贡献约 84% / 非规模约 16%"
   → 83.7% / 16.3%（p4_results annual_decomp=0.836570）
@@ -627,7 +637,7 @@ $$
 │   ├── 5_problem1.tex 6_problem2.tex 7_problem3.tex 8_problem4.tex
 │   ├── 9_sensitivity.tex 10_conclusion.tex 10_evaluation.tex
 │   └── A_code.tex  B_params.tex  ...
-├── figures/                        # 82 张论文插图（本 README 所引图均来自此处）
+├── figures/                        # 99 张论文插图（本 README 所引图均来自此处）
 ├── solve/                          # 求解代码（质量评分 / 标度律拟合 / 联合优化 / 前沿预测）
 │   └── results/                    # 数值结果表
 ├── real_attachments/               # 赛题原始数据（体积过大，已 gitignore）★
