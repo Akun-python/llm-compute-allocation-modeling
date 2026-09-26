@@ -1636,3 +1636,13 @@ PROMETHEE-II 与 VIKOR），作为"多框架算法交叉验证"的补强轮。
    (R²≈0.999/残差无偏/κ 极差 3×10⁻¹⁰)
 3) README 同步：图数量 82→99、更新日志批次 13
 4) 编译全绿、布局 0 缺陷；fig:pipeline/tab:verify 标签解析正常
+
+
+---
+
+## Round-66b: README 同步技术路线图
+
+1) README"四问建模主线"开头补四问技术路线框架图
+   （figures/v99_pipeline_overview.png，与论文 fig:pipeline 同一张），
+   并加推理链引导句（质量度量→标度律→联合优化→前沿预测，Q/L 贯穿）。
+2) 更新日志批次 13 已含技术路线图与验收清单记录。
