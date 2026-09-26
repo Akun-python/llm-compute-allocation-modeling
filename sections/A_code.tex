@@ -1,13 +1,18 @@
 \section{核心代码}
 
-全部代码位于 \texttt{solve/code/}，由 \texttt{common.py}（路径与常量）、
-\texttt{p1\_quality.py}（问题一评分与冲突消解）、\texttt{p1\_mixture.py}
-（问题一配比建模）、\texttt{p2\_scaling.py}（问题二标度律）、
-\texttt{p3\_optimization.py}（问题三优化）、\texttt{p4\_evolution.py}
-（问题四分解预测）六个脚本构成，运行环境为 Python 3.14 + numpy 2.4 +
-pandas 3.0 + scipy 1.17 + scikit-learn 1.8 + matplotlib 3.10，结果写入
-\texttt{solve/results/}，插图写入 \texttt{solve/figures/}。以下列出每个
-脚本的核心代码片段（完整代码随提交文件一并提供）。
+\begin{sloppypar}%
+\textbf{支撑材料文件列表}：全部代码位于 \texttt{solve/code/}，由
+\texttt{common.py}（路径与常量）、\texttt{p1\_quality.py}（问题一评分与
+冲突消解）、\texttt{p1\_mixture.py}（问题一配比建模）、
+\texttt{p2\_scaling.py}（问题二标度律）、\texttt{p3\_optimization.py}
+（问题三优化）、\texttt{p4\_evolution.py}（问题四分解预测）六个脚本构成，
+运行环境为 Python 3.14 + numpy 2.4 + pandas 3.0 + scipy 1.17 +
+scikit-learn 1.8 + matplotlib 3.10；结果写入 \texttt{solve/results/}，
+插图写入 \texttt{solve/figures/}（正文全部图件）；每个实验的复算脚本位于
+\texttt{solve/experiments/v*\_*.py}，对应的数值输出为
+\texttt{solve/results/v*\_*.json/.csv}。以下列出每个脚本的核心代码片段
+（完整代码随提交文件一并提供，注释均为中文）。
+\end{sloppypar}
 
 \subsection{问题一：质量评分与冲突消解（\texttt{p1\_quality.py}）}
 
