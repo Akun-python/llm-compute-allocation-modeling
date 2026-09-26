@@ -1782,3 +1782,23 @@ PROMETHEE-II 与 VIKOR），作为"多框架算法交叉验证"的补强轮。
 3) 证伪/反例类表述确认：问题二"交叉验证排除了标度律…"、问题三
    "进一步排除多初值…"、问题一"1B 外推失败正是该预测的直接表现"、
    "拒绝七域同分布零假设"——与 C 题证伪实验精神一致
+
+
+---
+
+## Round-73: README 运行环境补 TeX Live + 敏感性/KKT 数值核验
+
+1) README 编译与复现区运行环境补"TeX Live 2024 以上（XeLaTeX）"
+   （参照 C 题运行环境表述"LaTeX 环境为 TeX Live 2024"），
+   与 A_code 附录运行环境（Python 3.14 + numpy 2.4 + pandas 3.0 +
+   scipy 1.17 + scikit-learn 1.8 + matplotlib 3.10）并列一致
+2) 数值交叉核验通过：
+   - 预算-损失对数线性：R²≈0.999、斜率 −0.160（7_problem3 L180 与
+     README 核心结果速览一致）
+   - KKT 规模指数 b/(a+b)≈0.49、N*~C^0.46 与真实模型云 OLS 0.490
+     （7_problem3 L352/389/562/571）
+   - 饱和预算：对数型 3.2×10^18 首饱和（9_sensitivity/B_params/
+     v91/v94 changelog 各处一致，exp 1.78e20 / power 8.91e19 /
+     log 3.16e18）
+   - 9_sensitivity 覆盖 12 项敏感性小节（权重扰动/形式选择/转移阈值/
+     Lctx/分位数/离散化/断点/ML 对比/自助区间/消融/无监督对照/配比收缩）
