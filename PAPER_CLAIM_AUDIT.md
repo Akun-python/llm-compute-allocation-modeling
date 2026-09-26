@@ -1658,3 +1658,23 @@ PROMETHEE-II 与 VIKOR），作为"多框架算法交叉验证"的补强轮。
 2) 引用完整性终态复验：fig/tab/eq 0 未引用
    （含新增 fig:pipeline/tab:verify/tab:conclusion/tab:checklist）。
 3) 编译全绿、布局 0 缺陷。
+
+
+---
+
+## Round-67: 批次14——支撑材料表升级 + README 复现命令修正
+
+1) 附录 A 文件列表由 sloppypar 段落升级为分类表格 tab:files
+   （参照 C 题 tab:files 格式）：
+   - （一）模型求解主程序：common.py + p1_quality/p1_mixture/p2_scaling/
+     p3_optimization/p4_evolution（每行给出用途）
+   - （二）工具与绘图脚本：plotstyle.py（水色系）
+   - （三）复算实验脚本：solve/experiments/ 92 个 v*_*.py，
+     输出 solve/results/v*_*.json/.csv，确定性复现
+   - 运行环境说明保留（Python 3.14 + numpy 2.4 + pandas 3.0 +
+     scipy 1.17 + scikit-learn 1.8 + matplotlib 3.10，单机 CPU）
+2) README"编译与复现"修正：主脚本实际位于 solve/code/（原 cd solve
+   有误），脚本名修正（p3_optimize.py -> p3_optimization.py、
+   p4_frontier.py -> p4_evolution.py），补 experiments 复算示例与
+   运行环境说明
+3) 编译全绿、布局 0 缺陷；tab:files 引用闭环，终态 0 未引用。

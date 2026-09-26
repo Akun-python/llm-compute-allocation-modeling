@@ -1,20 +1,36 @@
 \section{核心代码}
 
-\begin{sloppypar}%
-\textbf{支撑材料文件列表}：全部代码位于 \texttt{solve/code/}，由
-\texttt{common.py}（路径与常量）、\texttt{p1\_quality.py}（问题一评分与
-冲突消解）、\texttt{p1\_mixture.py}（问题一配比建模）、
-\texttt{p2\_scaling.py}（问题二标度律）、\texttt{p3\_optimization.py}
-（问题三优化）、\texttt{p4\_evolution.py}（问题四分解预测）六个脚本与
-\texttt{plotstyle.py}（绘图样式）构成，
-运行环境为 Python 3.14 + numpy 2.4 + pandas 3.0 + scipy 1.17 +
-scikit-learn 1.8 + matplotlib 3.10；结果写入 \texttt{solve/results/}，
-插图写入 \texttt{solve/figures/}（正文全部图件）；每个实验的复算脚本位于
-\texttt{solve/experiments/v*\_*.py}，对应的数值输出为
-\texttt{solve/results/v*\_*.json/.csv}。以下列出五个主要脚本的核心代码
-片段（\texttt{common.py} 为路径与常量工具脚本、\texttt{plotstyle.py} 为
-绘图样式脚本，二者随提交文件一并提供；全部注释均为中文）。
-\end{sloppypar}
+全部代码位于 \texttt{solve/code/}，结果写入 \texttt{solve/results/}，
+插图写入 \texttt{figures/}；运行环境为 Python 3.14 + numpy 2.4 + pandas
+3.0 + scipy 1.17 + scikit-learn 1.8 + matplotlib 3.10（单机 CPU）。
+支撑材料文件列表见表 \ref{tab:files}；以下列出各主要脚本的核心代码片段，
+全部注释均为中文。
+
+\begin{table}[htbp]
+\centering
+\caption{支撑材料文件列表}
+\label{tab:files}
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{4.4cm}|>{\raggedright\arraybackslash}p{8.0cm}}
+\toprule
+文件名 & 说明 \\
+\midrule
+\multicolumn{2}{l}{\textit{（一）模型求解主程序（\texttt{solve/code/}）}} \\
+\texttt{common.py} & 路径与常量工具脚本 \\
+\texttt{p1\_quality.py} & 问题一：质量评分 / 冲突消解（熵-CRITIC + TOPSIS + 对称截尾） \\
+\texttt{p1\_mixture.py} & 问题一：17 域配比建模与跨尺度收缩分析 \\
+\texttt{p2\_scaling.py} & 问题二：广义标度律拟合与弹性分析（六形式 + BIC） \\
+\texttt{p3\_optimization.py} & 问题三：算力约束联合优化（SLSQP 多起点） \\
+\texttt{p4\_evolution.py} & 问题四：前沿分解与预测（分位数回归 + 双情景） \\
+\midrule
+\multicolumn{2}{l}{\textit{（二）工具与绘图脚本}} \\
+\texttt{plotstyle.py} & 统一绘图色系（水色系）与 colormap 注册 \\
+\midrule
+\multicolumn{2}{l}{\textit{（三）复算实验脚本（\texttt{solve/experiments/}，92 个）}} \\
+\texttt{v*\_*.py} & 每个实验的独立复算脚本，输出对应 \texttt{solve/results/v*\_*.json/.csv}，确定性复现（如 v29 杠杆总览、v75 配比五框架、v87 留出配对检验等） \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection{结果验收清单}
 
