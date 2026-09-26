@@ -1831,3 +1831,17 @@ PROMETHEE-II 与 VIKOR），作为"多框架算法交叉验证"的补强轮。
    （"按照模型建立→模型求解→模型验证的流程组织本节"）风格一致
 3) 核验：四问（5-8）均有统一总起段；2_analysis 有总体思路段；
    纯句式润色、数字零变化；编译全绿（tex_build_v91/v92）、布局 0 缺陷。
+
+
+---
+
+## Round-76: 排版样式与完整性终检
+
+1) 表格样式统一终检：全部章节 0 处 \hline，全部使用 booktabs 三线
+   （toprule/midrule/bottomrule）；caption 全部位于 tabular 之前
+   （标题在上方，符合排版规范）
+2) tab:files 分类完整：模型求解主程序（common + 五主脚本）/
+   工具与绘图脚本（plotstyle）/ 复算实验脚本（92 个 v*）——与 C 题
+   tab:files 分类结构对应
+3) TODO/占位符终检：正文与 README 展示区 0 占位（仅 changelog 历史
+   "待办"记录保留）；fig/tab/eq 0 未引用保持
