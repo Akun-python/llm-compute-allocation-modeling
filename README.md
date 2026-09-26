@@ -8,7 +8,7 @@
 
 ![Contest](https://img.shields.io/badge/Contest-Huawei%20Cup%202026-blue)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
-![Paper](https://img.shields.io/badge/Paper-61%20pages%20XeLaTeX-informational)
+![Paper](https://img.shields.io/badge/Paper-72%20pages%20XeLaTeX-informational)
 ![Tech](https://img.shields.io/badge/Tech-Scaling%20Laws%20%7C%20Multiobj.%20Optimization%20%7C%20Quantile%20Regression-blueviolet)
 ![Claims](https://img.shields.io/badge/Claims%20Audit-45%2F45%20passed-success)
 ![Data](https://img.shields.io/badge/Data-Real%20Public%20Datasets-orange)
@@ -16,7 +16,7 @@
 > 大模型训练好比培养一名高质量学生：参数量 $N$ 是脑容量，数据量 $D$ 是阅读量，
 > 算力 $C$ 是教育经费，数据质量 $Q$ 是教材质量，领域配比 $p$ 是各科课时分配。
 > 算力总有上限 —— 参数、数据、质量、配比与上下文长度之间如何取舍？
-> 本项目用 60+ 个版本的建模迭代给出完整答案。
+> 本项目用 90+ 个版本（v1–v98 复算实验脚本）的建模迭代给出完整答案。
 
 </div>
 
@@ -95,6 +95,15 @@
 > 按日维护：记录建模开发、论文写作与仓库建设进展。新条目追加在最上方。
 
 ### 2026-09-25
+
+**README 顶部徽章/引言同步（61→72 页徽章、60+→90+ 版本）**
+- Paper 徽章"61 pages"→"72 pages"（与仓库结构/竞赛素养两处一致）
+- 引言"60+ 个版本"→"90+ 个版本（v1–v98 复算实验脚本）"
+  （solve/experiments 实有 92 个 v* 脚本）
+- 结构核验通过：四问全部"模型建立→模型求解→模型验证"三小节（与范文
+  5.x.1/5.x.2/5.x.3 一致）；每问验证≥2 手段（问题一 3 类：可视化 20 余幅
+  +数值交叉验证+物理对照）；AI 声明（L150-152）确在参考文献（L182）
+  之前，六项 itemize 完整
 
 **README 页数声明同步：61 → 72 页（新增结论章节/框架图/验收清单后的实际页数）**
 - pypdf 实测 main.pdf 共 72 页（main.xdv 输出一致）；仓库结构注释与
