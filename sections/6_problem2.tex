@@ -1,28 +1,25 @@
 \section{问题二的模型建立与求解}
 
-\subsection{问题分析}
-
-\begin{sloppypar}%
-问题二要求在经典标度律 $L(N,D)$ 基础上引入数据质量 $Q$，建立广义标度律
+按照``模型建立 $\to$ 模型求解 $\to$ 模型验证''的流程组织本节。问题二要求
+在经典标度律 $L(N,D)$ 基础上引入数据质量 $Q$，建立广义标度律
 $L(N,D,Q)$，并利用 B 族数据估计参数、验证跨家族泛化、分析弹性与替代关系。
 数据侧：B1 为 Pythia 家族 1176 条训练轨迹（拟合经典形式），B2 为 Cerebras
 训练日志（半合成，做族外验证），B4/B5 为缩放基准与文献数据（跨家族/文献
 验证），B6/B7 为 $N$--$D$--$Q$ 半合成实验（拟合广义形式），B8 为大规模
 外推补充（结构对照），B9/B10 为补充大模型集合与大规模基线（100B 以上
 外推验证）。
-\end{sloppypar}
 
 按题意，本问通过问题一输出的质量分 $Q$ 与配比 $p$ 引入 A 侧信息，不重复
 读取附件 A 原始文件：域级质量分经配比加权聚合
 $\bar{Q}(p)=\sum_{d}p_{d}Q_{d}$ 进入广义标度律；配比 $p$ 对损失的\textbf{独立
-一阶效应}由问题一的配比模型 $L(p)$（5.4 节，同尺度 $R^2=0.459$--$0.585$）
+一阶效应}由问题一的配比模型 $L(p)$（第 \ref{sec:p1_mix} 节，同尺度 $R^2=0.459$--$0.585$）
 刻画，且跨尺度收缩规律（$\kappa=0.314$）预测配比效应随规模衰减——因此
 $p$ 通过``配比$\to$域质量聚合$\to$标度律损失 + 一阶配比面''两条通道进入
 模型，$Q$ 与 $p$ 的引入均有可检验依据。
 
-\subsection{经典标度律}
+\subsection{模型建立}
 
-\subsubsection{模型}
+\subsubsection{经典标度律模型}
 
 经典标度律（Kaplan--Hoffmann 形式）：
 \begin{equation}
@@ -47,7 +44,7 @@ $\alpha=0.34$、$\beta=0.28$ 与 Chinchilla 论文报告值高度一致，说明
 \label{fig:p2_classical}
 \end{figure}
 
-\subsubsection{跨家族与文献验证}
+\paragraph{跨家族与文献验证}
 
 不同家族（Pythia/Cerebras/其他）的验证集与词表不同，绝对 Loss 存在不可
 比的常数偏移。为此定义\textbf{家族偏移修正 $R^2$}：
@@ -86,9 +83,9 @@ Mistral 仅 1 个留出点、$R^2$ 不可计算）；$\alpha,\beta$ 估计随留
 （identifiability）问题，但函数形式跨族稳健。该交叉验证排除了``标度律
 形状仅由单一家族支撑''的疑虑。
 
-\subsection{广义标度律}
+\subsubsection{广义标度律模型}
 
-\subsubsection{质量项的两种形式}
+\paragraph{质量项的两种形式}
 
 为使质量维度可退化（$Q=1$ 时回到经典形式），考察两种扩展：
 \begin{align}
@@ -100,7 +97,7 @@ Mistral 仅 1 个留出点、$R^2$ 不可计算）；$\alpha,\beta$ 估计随留
 交互形式允许质量损失项随数据量 $D$ 衰减（$d>0$ 时），物理含义为：数据量
 越充裕，质量不足的相对代价越低。
 
-\subsubsection{拟合结果}
+\paragraph{拟合结果}
 
 在 B6+B7（810 条 $N$--$D$--$Q$ 组合，$N\in[0.07,12]$B，
 $D\in[10,600]$B，$Q\in[0.1,1.0]$）上拟合：
@@ -289,7 +286,7 @@ $\varepsilon_Q$ & $-0.146$ & $-0.151$ & $-0.142$ \\
 \label{fig:p2_boot}
 \end{figure}
 
-\subsubsection{B8 数据方向诊断与结构对照}
+\paragraph{B8 数据方向诊断与结构对照}
 
 B8 为大规模外推补充数据（含 calibrated 984 条与 extrapolated 720 条）。
 诊断发现 B8 的 $Q$ 列与 B6/B7 方向相反：同一 $N,D$ 组内 $Q$ 与 Loss 的
@@ -316,13 +313,13 @@ B8 为大规模外推补充数据（含 calibrated 984 条与 extrapolated 720 �
 \label{fig:p2_b8refit}
 \end{figure}
 
-\subsubsection{极端规模外推}
+\paragraph{极端规模外推}
 
 在 B9/B10（补充大模型集合与 100B--10000B 大规模基线）上检验经典标度律外推，原始与偏移修正
 $R^2$ 均为 1.000，说明标度律在大规模区间保持形状，可放心用于问题三在
 $10^{19}$--$10^{24}$ FLOPs 预算下的优化外推。
 
-\subsubsection{参数可辨识性（剖面似然）}
+\paragraph{参数可辨识性（剖面似然）}
 
 对选定的交互($N$) 形式做剖面似然检验：固定其余参数于最优值、逐点扫描单个
 参数并记录剖面 $R^2$，由似然比准则（$\chi^2_{0.90,1}$ 阈值）给出 90\% 剖面
@@ -340,7 +337,7 @@ $\alpha$ 跨族波动）。该检验说明：本文新增的质量维度参数�
 \label{fig:p2_profile}
 \end{figure}
 
-\subsubsection{质量回报与规模交互（数值核验）}
+\paragraph{质量回报与规模交互（数值核验）}
 
 固定数据量 $D=300$B 扫描质量 $Q\in[0.4,1]$、参数量 $N\in\{0.1,\ldots,10^3\}$B，
 得到质量投资回报曲线（图 \ref{fig:p2_qreturns}）。三个核验结论：
@@ -359,9 +356,9 @@ $N^{-h}$ 项的语义；（ii）数值微分得到的质量弹性 $|dL/dQ|$ 对 
 \label{fig:p2_qreturns}
 \end{figure}
 
-\subsection{弹性与等价性分析}
+\subsection{模型求解}
 
-\subsubsection{弹性}
+\paragraph{弹性}
 
 在基准点 $(N_0,D_0,Q_0)=(1.0\text{B},300\text{B},0.6)$ 用有限差分计算
 对数弹性 $\varepsilon_x=\partial\ln L/\partial\ln x$：
@@ -429,7 +426,7 @@ $|\varepsilon_Q/\varepsilon_D|\in[4.14,5.63]$（中位 4.89）——``质量弹�
 \label{fig:p2_epsgrid}
 \end{figure}
 
-\subsubsection{等价性}
+\paragraph{等价性}
 
 定义``质量等价参数增量''：保持 $L$ 不变，$Q$ 提升 $\Delta Q$ 所需补偿的
 参数增量 $\Delta N$，由全微分 $\partial L/\partial Q\cdot\Delta Q+
@@ -442,7 +439,16 @@ $|\varepsilon_Q/\varepsilon_D|\in[4.14,5.63]$（中位 4.89）——``质量弹�
 在基准点处质量每提升 0.1 等价于增加 $\Delta N=0.289$B 参数（约 29\% 相对
 增量），进一步说明质量杠杆的高效性。
 
-\subsection{小结}
+\subsection{模型验证}
+
+问题二的验证由三类手段构成：\textbf{可视化验证}（图
+\ref{fig:p2_classical}--\ref{fig:p2_boot} 等给出拟合曲线、残差诊断与参数
+Bootstrap 区间）、\textbf{数值交叉验证}（六种候选形式统一拟合、六框架跨
+框架参数最大相对极差 $2.4\times10^{-3}$\%、留出交叉验证 RMSE 0.051、参数
+Bootstrap $B=300$ 区间）与\textbf{物理/几何规律对照}（$\alpha=0.34$、
+$\beta=0.28$ 与文献 Chinchilla 参数一致；$Q=1$ 自动退化回经典形式；质量
+弹性高于参数与数据弹性、与配比收缩规律互相印证）。三项验证均通过，证实了
+广义标度律形式的合理性与参数估计的稳健性。
 
 问题二完成了从经典标度律到广义标度律的推广：经典参数与文献一致
 （$\alpha=0.34,\beta=0.28$），跨家族偏移修正验证 $R^2=0.83$；对四种候选
