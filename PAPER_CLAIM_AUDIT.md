@@ -1251,3 +1251,32 @@ PROMETHEE-II 与 VIKOR），作为"多框架算法交叉验证"的补强轮。
 待办（批次 3+）: 句句式库落正文（"我们不妨/依题/由…可知/经计算"
 等套用）; 人称"我们"通检（含摘要）; 图表引导句补齐（每图至少一句解读）;
 附录文件列表与代码注释中文核验; 摘要表引用编号复核（已改 \ref）。
+
+
+---
+
+## Round-51: 写作风格规范全文应用（批次 3：人称/句式/图表引用闭环）
+
+1) **人称"我们"通检**: 3 处正文"本文"改为"我们"（6_problem2 参数检验、
+   9_sensitivity 无监督对照、10_evaluation 推广段）；摘要总起段保留
+   "本文针对…"（规范模板句式）、main.tex AI 披露保留（赛题要求）。
+2) **句式库落问题分析**: 2_analysis 四个小节补规范起句
+   "针对问题X，我们构建……模型"。
+3) **图表引用闭环（核心修复）**:
+   - 17 幅图未被正文引用 -> 逐幅补"图X是……，可以发现……"引导解读句
+     （§5: domain_q/shrink/conflict/domainicc; §6: cv/generalized/
+     profile/elasticity; §7: shares/structural/lctx/joint_mix/
+     lctx_inner; §8: decomp/bridge; §9: ablation/ae）；
+   - 20 个公式未被引用 -> 补 式(\ref{}) 引导（§5: weights/topsis/
+     conflict/ridge; §6: r2off/classical_fit/add/int/gen_choice/
+     elasticity/equiv; §7: p3obj-cons-costs-bounds/gforms/lcrit/
+     kkt_balance; §8: decomp/bridge）；
+   - 扫描核验: fig/tab/eq 三类 0 未引用（规范"不出现未被引用的公式/图/表"）。
+4) **附录文件列表**: A_code 开头补"支撑材料文件列表"（六个核心脚本、
+   环境版本、results/figures 路径、experiments/v* 复算脚本与 json/csv
+   输出），符合"附录=文件列表+全部代码、注释中文"。
+5) 每步编译验证: 全部 Overfull/Underfull 清零，无 undefined reference。
+
+待办（批次 4）: 收束验证句三选一统一（"这验证了模型的合理性"等）;
+摘要与正文数值口径再对拍（0.288515B vs 0.289B 一阶口径并存问题）;
+参考文献上标 [1]-[12] 是否全部在正文被引（少而精规范）。
