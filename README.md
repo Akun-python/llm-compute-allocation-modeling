@@ -96,6 +96,13 @@
 
 ### 2026-09-25
 
+**README 运行环境补 TeX Live 版本 + 敏感性/KKT 数值交叉核验**
+- 编译区补"TeX Live 2024 以上（XeLaTeX）"（参照 C 题运行环境表述）
+- 交叉核验通过：预算-损失对数线性 R²≈0.999/斜率 −0.160、KKT 规模指数
+  b/(a+b)≈0.49、N*~C^0.46 与真实模型云 OLS 0.490、饱和预算（对数型
+  3.2×10¹⁸ 首饱和）均在 7_problem3/9_sensitivity/B_params 与 README
+  各处一致
+
 **问题四前沿预测补三步流程说明（规范⑤：算法步骤化）**
 - 8_problem4"前沿预测（12/24 个月）"段落补三步流程概述：
   ① 分位数回归参数给当前基线 → ② 双情景（历史延续/减半）外推
@@ -719,8 +726,9 @@ python v29_leverage_overview.py   # 示例：能力杠杆总览（六维弹性�
 ```
 
 运行环境：Python 3.14 + numpy 2.4 + pandas 3.0 + scipy 1.17 +
-scikit-learn 1.8 + matplotlib 3.10（单机 CPU，无 GPU），全流程可逐位复现；
-数据口径见附录 B 与《数据说明.pdf》。
+scikit-learn 1.8 + matplotlib 3.10（单机 CPU，无 GPU），论文编译环境为
+TeX Live 2024 以上（XeLaTeX）；全流程可逐位复现，数据口径见附录 B 与
+《数据说明.pdf》。
 
 ---
 
