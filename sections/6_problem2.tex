@@ -21,7 +21,7 @@ $p$ 通过``配比$\to$域质量聚合$\to$标度律损失 + 一阶配比面''�
 
 \subsubsection{经典标度律模型}
 
-经典标度律（Kaplan--Hoffmann 形式）：
+经典标度律（Kaplan\cite{refKaplan}--Hoffmann\cite{refHoffmann} 形式）：
 \begin{equation}
 L(N,D)=E+A N^{-\alpha}+B D^{-\beta},
 \label{eq:classical}
@@ -89,7 +89,8 @@ Mistral 仅 1 个留出点、$R^2$ 不可计算）；$\alpha,\beta$ 估计随留
 \paragraph{质量项的两种形式}
 
 为使质量维度可退化（$Q=1$ 时回到经典形式），考察两种扩展
-（式 \ref{eq:add}--\ref{eq:int}）：
+（式 \ref{eq:add}--\ref{eq:int}），质量通道的设计借鉴数据质量标度律
+文献\cite{refSardana}：
 \begin{align}
 \text{加性形式:}\quad & L=E+A N^{-a}+B D^{-b}+C(1-Q)^{g},
 \label{eq:add}\\
@@ -107,6 +108,7 @@ $D\in[10,600]$B，$Q\in[0.1,1.0]$）上拟合：
 \begin{table}[htbp]
 \centering
 \caption{广义标度律候选形式对比（B6+B7）}
+\label{tab:p2_forms}
 \begin{tabular}{c|cccccccccc}
 \toprule
 形式 & $E$ & $A$ & $a$ & $B$ & $b$ & $C$ & $g$ & $d$ & $h$ & $R^2$ \\
@@ -267,7 +269,7 @@ $h=0.163\ [0.142,0.187]$ 与质量指数 $g=0.992\ [0.921,1.067]$ 均显著
 异于 0/1 退化边界；弹性区间表明质量弹性显著高于规模弹性：
 $|\varepsilon_Q|=0.146\ [0.142,0.151]$ vs $|\varepsilon_N|=0.060\
 [0.059,0.061]$（区间不交叠）。严格等价的参数节省（保持损失不变）为
-$0.216\ [0.210,0.224]$B（一阶线性近似 0.289B 因忽略 $N$ 的非线性而略高，
+$0.216\ [0.210,0.224]$B（一阶线性近似 0.288515B 因忽略 $N$ 的非线性而略高，
 正文统一采用一阶口径以与弹性定义一致）。
 
 \begin{table}[htbp]
@@ -376,8 +378,8 @@ $N^{-h}$ 项的语义；（ii）数值微分得到的质量弹性 $|dL/dQ|$ 对 
 在基准点 $(N_0,D_0,Q_0)=(1.0\text{B},300\text{B},0.6)$ 用有限差分计算
 对数弹性 $\varepsilon_x=\partial\ln L/\partial\ln x$：
 \begin{equation}
-\varepsilon_N=-0.060,\qquad \varepsilon_D=-0.030,\qquad
-\varepsilon_Q=-0.146.
+\varepsilon_N=-0.060185,\qquad \varepsilon_D=-0.029942,\qquad
+\varepsilon_Q=-0.146080.
 \label{eq:elasticity}
 \end{equation}
 式 (\ref{eq:elasticity}) 给出三个弹性值。图 \ref{fig:p2_elasticity} 展示了
@@ -398,7 +400,7 @@ $N^{-h}$ 项的语义；（ii）数值微分得到的质量弹性 $|dL/dQ|$ 对 
 画出 $L(N,Q)$ 等高线及``等损失等价轨迹''（保持 $L$ 不变的
 $(N,Q)$ 组合）。等高线的局部切线斜率即替代率：基准点处
 $dN/dQ=-2.88$B/单位$Q$（主链路梯度核算 $0.356/0.123$，每提升 0.1 质量
-可减少 0.288B 参数需求）；而沿轨迹向下，$N$ 越小所需补偿越少（$N$ 的
+可减少 0.288515B 参数需求）；而沿轨迹向下，$N$ 越小所需补偿越少（$N$ 的
 $-a$ 与 $-h$ 幂的凸性），严格非线性等价为每 0.1 节省 0.216B（见
 Bootstrap 节）。
 
@@ -453,7 +455,7 @@ $|\varepsilon_Q/\varepsilon_D|\in[4.14,5.63]$（中位 4.89）——``质量弹�
 \label{eq:equiv}
 \end{equation}
 按式 (\ref{eq:equiv})，在基准点处质量每提升 0.1 等价于增加
-$\Delta N=0.289$B 参数（约 29\% 相对
+$\Delta N=0.288515$B 参数（约 29\% 相对
 增量），进一步说明质量杠杆的高效性。
 
 \subsection{模型验证}
@@ -472,6 +474,6 @@ $\beta=0.28$ 与文献 Chinchilla 参数一致；$Q=1$ 自动退化回经典形�
 质量扩展形式统一拟合，选定\textbf{质量--参数量交互形式}
 $L=E+A N^{-a}+B D^{-b}+C(1-Q)^{g}N^{-h}$ 在 B6+B7 上 $R^2=0.979$，
 $Q=1$ 可退化，其物理含义为``模型越大对质量缺口越不敏感''；弹性分析表明
-质量弹性最高（$-0.146$），质量 0.1 等价于 0.289B 参数；
+质量弹性最高（$-0.146080$），质量 0.1 等价于 0.288515B 参数；
 并诊断出 B8 方向相反的数据口径问题，仅作结构对照。该广义标度律将作为
 问题三优化的目标函数。

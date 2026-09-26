@@ -20,7 +20,8 @@ $X\in[0,1]^{n\times 22}$。
 
 \paragraph{组合赋权}
 
-为避免单一赋权法的偏差，采用熵权法与 CRITIC 法按 $0.5:0.5$ 组合：
+为避免单一赋权法的偏差，采用熵权法\cite{refEntropy}与 CRITIC
+法\cite{refCritic}按 $0.5:0.5$ 组合：
 \begin{equation}
 w_j=\frac{1}{2}w_j^{\text{ent}}+\frac{1}{2}w_j^{\text{critic}},\qquad
 w_j^{\text{ent}}=\frac{1-H_j}{22-\sum_k H_k},\quad
@@ -36,7 +37,7 @@ w_j^{\text{critic}}=\frac{\sigma_j\sum_{k\neq j}(1-|r_{jk}|)}{\sum_l
 
 在组合权重下构造加权标准化矩阵 $V_{ij}=w_j X_{ij}$，计算正理想解
 $V^{+}$（各列最大值）与负理想解 $V^{-}$（各列最小值），样本质量分为
-贴近度（式 \ref{eq:topsis}）：
+贴近度\cite{refTopsis}（式 \ref{eq:topsis}）：
 \begin{equation}
 Q_i=\frac{d_i^{-}}{d_i^{+}+d_i^{-}},\qquad
 d_i^{+}=\sqrt{\sum_j (V_{ij}-V_j^{+})^2},\quad
@@ -201,7 +202,8 @@ $x\in\Delta^{17}$ 为解释变量、损失 $L_r^{(s)}$ 为响应建立岭回归
 +\lambda\lVert\beta\rVert_2^2\Bigr\}.
 \label{eq:ridge}
 \end{equation}
-式 (\ref{eq:ridge}) 的岭回归在配比高度共线（领域间相关性高）时仍能给出
+式 (\ref{eq:ridge}) 的岭回归\cite{refRidge}在配比高度共线（领域间相关性
+高）时仍能给出
 稳定系数。训练/测试按
 规模内留出划分，采用\textbf{尺度校正 $R^2$}：在去均值（即对每个规模族内
 中心化）的意义上计算决定系数，避免不同规模绝对 Loss 尺度差异污染拟合优度。
@@ -298,7 +300,8 @@ $4.9\%$（$c=10\%$）升至 $16.9\%$（$c=100\%$，无约束上界），而实�
 对 1M 尺度 13 源域 $\times$ 17 损失域的系数矩阵做解释性分析（图
 \ref{fig:p1_transfer}）：\textbf{自域对齐}——每个损失域的``本域''源域系数
 全部为负（13/13，如 ubuntu\_irc $-7.6$、dm\_mathematics $-9.6$），即混合中本域
-份额越高、该域验证损失越低，配比模型与``同域强化''的直觉完全一致；
+份额越高、该域验证损失越低，配比模型与``同域强化''的直觉一致
+（跨域迁移结构与文献中的迁移标度律\cite{refHernandez}方向相符）；
 \textbf{跨域迁移}——最强负迁移对几乎都是自域对，说明配比的第一作用是
 自域强化而非跨域借力；\textbf{book 域}系数均值约 0（min $-2.3$、max
 $0.7$），对 17 个损失域中的 8 个有压低作用且无强副作用，是``广谱优质

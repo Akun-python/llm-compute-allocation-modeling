@@ -23,7 +23,7 @@ $C_Q=D[g(Q)-g(Q_0)]_+$；
 架构固定，与优化变量 $N,D,Q$ 相比其取值空间离散且由硬件决定，因此
 作为外生参数处理并做敏感性分析。
 \item \textbf{训练成本常数假设}：训练 FLOPs 按 $C_{\text{train}}=6ND$ 估计
-（每参数每 token 约 6 FLOPs），注意力成本按系数 $\eta=2\times10^{-4}$ 计入；
+（每参数每 token 约 6 FLOPs\cite{refRae}），注意力成本按系数 $\eta=2\times10^{-4}$ 计入；
 理由：6 FLOPs/参数/token 是文献广泛使用的训练成本经验值，注意力项相对
 训练项仅在 $L_{\text{ctx}}>30000$ 时占比超过一半（临界点解析式
 $L_{\text{ctx}}^{\text{crit}}=6/\eta$），两者量级可比，故均须计入。
