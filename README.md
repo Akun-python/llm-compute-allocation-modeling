@@ -96,6 +96,16 @@
 
 ### 2026-09-25
 
+**AI 声明支撑材料明确指向 + tab:files 补说明文件分类**
+- AI 声明两处"见支撑材料"改为明确指向：附录 A 表 \ref{tab:files}
+  所列说明文件（PAPER_CLAIM_AUDIT.md 逐条审计记录、README.md 使用
+  环节说明）——参照 C 题 tab:files 含"AI 工具使用详情.pdf"的做法
+- tab:files 新增"（四）说明与核验文件"分类：PAPER_CLAIM_AUDIT.md
+  （45 项断言审计记录）、README.md（AI 使用环节与说明）
+- 修复 tab:files 中 \texttt 长文件名 Overfull（\allowbreak），
+  布局恢复 0 缺陷、73 页
+- 引用完整性 0 未引用；tab:files 引用增至 3 处
+
 **摘要行距优化（参照 C 题 \begingroup\linespread{1.22}\selectfont）**
 - main.tex 摘要正文加 1.22 行距（\begingroup\linespread{1.22}\selectfont
   …\endgroup，关键字保持 1 倍行距），摘要可读性提升

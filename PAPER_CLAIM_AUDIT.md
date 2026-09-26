@@ -1890,3 +1890,20 @@ PROMETHEE-II 与 VIKOR），作为"多框架算法交叉验证"的补强轮。
 2) "45 项可核验断言"口径确认：README 顶部徽章（Claims Audit 45/45
    passed）、竞赛素养声明、AI 使用声明"人工核验方式"（45 项论文数字
    与结果文件一致性审计）三处一致
+
+
+---
+
+## Round-80: AI 声明支撑材料明确指向 + tab:files 说明文件分类
+
+1) main.tex AI 使用声明两处"见支撑材料"改为明确指向：
+   "见附录 A 表 \ref{tab:files} 所列说明文件（PAPER_CLAIM_AUDIT.md
+   为逐条审计记录、README.md 含使用环节说明）"——参照 C 题
+   tab:files 含"AI 工具使用详情.pdf"说明文件的部署
+2) tab:files 新增"（四）说明与核验文件"分类：
+   - PAPER_CLAIM_AUDIT.md —— 45 项论文断言逐条对照审计记录
+   - README.md —— AI 工具使用环节、人工核验方式与仓库说明
+   分类结构扩展为：主程序/工具绘图/复算实验/说明核验四类
+3) 修复 Overfull：\texttt{PAPER_CLAIM_AUDIT.md} 在 p 列无法断行
+   （1.30106pt too wide）→ \allowbreak 断行点，布局恢复 0 缺陷
+4) 编译全绿（tex_build_v94/v95）、73 页、0 未引用；tab:files 引用 3 处。
