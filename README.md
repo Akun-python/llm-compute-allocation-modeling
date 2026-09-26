@@ -96,6 +96,15 @@
 
 ### 2026-09-25
 
+**整体润色批次 14：支撑材料表升级 + README 复现命令修正**
+- 附录 A 文件列表由段落升级为分类表格 tab:files（参照 C 题 tab:files
+  格式）：模型求解主程序（common + 五个主脚本）/ 工具绘图脚本
+  （plotstyle）/ 复算实验脚本（92 个 v*，确定性复现）；运行环境保留
+- README"编译与复现"修正：主脚本实际位于 solve/code/（原 `cd solve`
+  有误），脚本名修正（p3_optimization.py / p4_evolution.py），补
+  experiments 复算示例（v29 杠杆总览）与运行环境说明
+- 编译全绿、布局 0 缺陷；tab:files 引用闭环，终态 0 未引用
+
 **整体润色批次 13：技术路线框架图 + 结果验收清单（继续参照 C 题 main.tex）**
 - 问题分析"总体思路"小节补**四问技术路线框架图**（figures/v99_pipeline_overview.png，
   水色系 0.00% 违规）：数据族 → 四问建模 → 核心方法 → 关键产物，质量分 Q 与
@@ -661,16 +670,25 @@ $$
 ## 🚀 编译与复现
 
 ```bash
-# 编译论文（XeLaTeX）
+# 编译论文（XeLaTeX，TeX Live 2024 以上）
 xelatex main.tex          # 或 latexmk -xelatex main.tex
 
-# 求解（示例：质量评分 → 配比 → 标度律 → 优化 → 前沿）
-cd solve
-python p1_quality.py      # 问题一：质量评分 / 冲突消解 / 配比建模
+# 求解（主脚本位于 solve/code/，结果写入 solve/results/，插图写入 figures/）
+cd solve/code
+python p1_quality.py      # 问题一：质量评分 / 冲突消解
+python p1_mixture.py      # 问题一：配比建模 / 跨尺度收缩
 python p2_scaling.py      # 问题二：广义标度律拟合与弹性分析
-python p3_optimize.py     # 问题三：算力约束联合优化
-python p4_frontier.py     # 问题四：前沿回归 / 分解 / 预测
+python p3_optimization.py # 问题三：算力约束联合优化
+python p4_evolution.py    # 问题四：前沿回归 / 分解 / 预测
+
+# 复算实验脚本（每个 v*_*.py 输出对应 solve/results/v*_*.json/.csv，确定性复现）
+cd ../experiments
+python v29_leverage_overview.py   # 示例：能力杠杆总览（六维弹性排序）
 ```
+
+运行环境：Python 3.14 + numpy 2.4 + pandas 3.0 + scipy 1.17 +
+scikit-learn 1.8 + matplotlib 3.10（单机 CPU，无 GPU），全流程可逐位复现；
+数据口径见附录 B 与《数据说明.pdf》。
 
 ---
 
