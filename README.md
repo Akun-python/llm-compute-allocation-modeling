@@ -8,7 +8,7 @@
 
 ![Contest](https://img.shields.io/badge/Contest-Huawei%20Cup%202026-blue)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
-![Paper](https://img.shields.io/badge/Paper-72%20pages%20XeLaTeX-informational)
+![Paper](https://img.shields.io/badge/Paper-73%20pages%20XeLaTeX-informational)
 ![Tech](https://img.shields.io/badge/Tech-Scaling%20Laws%20%7C%20Multiobj.%20Optimization%20%7C%20Quantile%20Regression-blueviolet)
 ![Claims](https://img.shields.io/badge/Claims%20Audit-45%2F45%20passed-success)
 ![Data](https://img.shields.io/badge/Data-Real%20Public%20Datasets-orange)
@@ -95,6 +95,15 @@
 > 按日维护：记录建模开发、论文写作与仓库建设进展。新条目追加在最上方。
 
 ### 2026-09-25
+
+**摘要行距优化（参照 C 题 \begingroup\linespread{1.22}\selectfont）**
+- main.tex 摘要正文加 1.22 行距（\begingroup\linespread{1.22}\selectfont
+  …\endgroup，关键字保持 1 倍行距），摘要可读性提升
+- 页数 72 → 73 页（摘要行距增 1 行跨度）：徽章/仓库结构/竞赛素养三处
+  同步；历史 changelog 保留原状
+- 问题三"顺序决策陷阱"表述确认（"先定规模、后补质量"→联合优化提前
+  为质量通道定价并预留预算，损失下降）——与 C 题证伪实验精神一致
+- 编译全绿、布局 0 缺陷
 
 **章节总起段补齐（9_sensitivity/10_evaluation，参照范文行文）**
 - 9_sensitivity 补总起段：按"首先（质量评分环节：权重扰动/消融/无监督
@@ -703,7 +712,7 @@ $$
 
 ```
 .
-├── main.tex                        # 论文主文件（XeLaTeX + gmcmthesis 模板，72 页）
+├── main.tex                        # 论文主文件（XeLaTeX + gmcmthesis 模板，73 页）
 ├── sections/                       # 各章节 LaTeX 源码（问题重述 → 模型 → 灵敏度 → 结论 → 评价）
 │   ├── 5_problem1.tex 6_problem2.tex 7_problem3.tex 8_problem4.tex
 │   ├── 9_sensitivity.tex 10_conclusion.tex 10_evaluation.tex
@@ -764,7 +773,7 @@ TeX Live 2024 以上（XeLaTeX）；全流程可逐位复现，数据口径见�
 
 ## ⚠️ 竞赛素养与声明
 
-- 本文为 **2026 年中国研究生数学建模竞赛（华为杯）F 题**参赛论文的完整复现，全文 72 页，包含全部模型推导、数值结果（45 项可核验断言逐条对照原始文件通过）与灵敏度分析。
+- 本文为 **2026 年中国研究生数学建模竞赛（华为杯）F 题**参赛论文的完整复现，全文 73 页，包含全部模型推导、数值结果（45 项可核验断言逐条对照原始文件通过）与灵敏度分析。
 - 论文遵循竞赛 AI 使用规范：所有公式可推导、所有引用可核验、所有数值可复现；**AI 工具使用声明**按 2026 规定第 3 条置于参考文献之前（main.tex，黑体小四标题），逐条说明使用工具（GLM 系列大语言模型，对话式调用，未使用题解检索/自动答题服务）、三个使用环节（代码生成与调试 / 语言润色与排版检查 / 图件脚本辅助）、人工核验方式（45 项一致性审计 + 跨框架复算 + Bootstrap 区间）与责任声明（模型框架、求解算法、参数标定、结果分析与结论均由参赛队独立完成）。
 - 如需引用其中方法或结果，请注明出处。
 - 欢迎扫码加入文首微信群，与我们讨论建模思路、数据口径与迭代方向（二维码见顶部）。
