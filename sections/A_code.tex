@@ -137,7 +137,7 @@ kappa = -np.polyfit(np.log(ns), np.log(norms), 1)[0]
 \begin{lstlisting}[language=Python, basicstyle=\ttfamily\small]
 def fit_generalized(N, D, Q, L, form="interaction_N"):
     """最小二乘拟合 L = E + A N^-a + B D^-b + C(1-Q)^g N^-h
-    (交互-N 为主链路形式: 质量缺口随参数量衰减; 附录 B 亦拟合
+    (交互-N 为主链路形式: 质量缺口随参数量衰减; B 族数据亦拟合
     additive/interaction-D/乘性等对照形式, 见 v50 BIC 表)"""
     def resid(p):
         E, A, a, B, b, C, g, h = p
