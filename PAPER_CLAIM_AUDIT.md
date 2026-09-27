@@ -2059,3 +2059,16 @@ PROMETHEE-II 与 VIKOR），作为"多框架算法交叉验证"的补强轮。
    - 参数类保持 B：7_problem3（3 处）与 A_code（1 处）"附录 B
      参数/激活饱和特征量"；AI 声明"附录 A"保持
 4) 编译全绿（tex_build_v99/v100）、布局 0 缺陷、73 页。
+
+
+---
+
+## Round-90: A_code docstring 附录引用消除（B 族数据）
+
+1) A_code lstlisting docstring"附录 B 亦拟合 additive/…对照形式"
+   原义指附件 B 数据族（B6/B7 半合成实验），与论文附录 B（质量成本
+   函数参数）易混淆 → 改为"B 族数据亦拟合"，消除歧义
+2) 终检：A_code/B_params 全文已无"附录 B"字样（标题去冗余 + docstring
+   重命名完成）；README changelog 历史"附录 B 数据口径"类 4 处按
+   历史保留原则不动
+3) 编译全绿（tex_build_v101）、布局 0 缺陷、73 页。

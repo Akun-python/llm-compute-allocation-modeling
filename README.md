@@ -96,6 +96,14 @@
 
 ### 2026-09-25
 
+**A_code docstring"附录 B"→"B 族数据"（消除与论文附录混淆）**
+- lstlisting 代码注释"附录 B 亦拟合 additive/…对照形式"原义指附件 B
+  数据族（B6/B7 半合成实验），与论文附录 B（质量成本函数参数）易混
+  → 改为"B 族数据亦拟合"
+- 终检：A_code/B_params 已无"附录 B"字样残留；changelog 历史
+  "附录 B 数据口径"类 4 处按历史保留原则不动
+- 编译全绿、布局 0 缺陷、73 页
+
 **附录编号与引用重映射（B_params 双 section → 附录 B/C）**
 - 发现：main.tex 已有 \begin{appendices} 环境（gmcmthesis \appendix
   \thesection=附录\@Alph 生效），B_params 含两个 \section → 实际
