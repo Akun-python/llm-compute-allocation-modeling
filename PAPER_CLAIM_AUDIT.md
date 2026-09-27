@@ -2647,3 +2647,25 @@ tab:conclusion 四行关键数字全部与正文/数据文件对应：
    并入相邻轮）
 4) 本轮 README 为实质改动（非纯核验），已编译不受影响
    （README 不参与 LaTeX 构建），markdown 结构验证通过
+
+
+---
+
+## Round-122: κ 五框架极差精确化（3e-10 → 2.6e-10）
+
+1) 核验发现：v75_p1_ridge_frameworks.json 五框架 κ（sklearn-auto
+   0.314030626411 / sklearn-lsqr 0.314030626411 / numpy-closed
+   0.314030626411 / scipy-TRF 0.314030626187 / torch-Adam
+   0.314030626444）实测极差 2.572e-10；正文"极差 3×10⁻¹⁰"精确化
+   为 2.6×10⁻¹⁰（诚实精确化：六位小数口径下取 2.6e-10）
+2) 修正 6 处对位（论文产物）：main.tex 2 处（摘要灵敏度段 + AI
+   声明人工核验段）、5_problem1 3 处（跨框架一致性核验段落与
+   fig:p1_ridgefw 图题）、A_code 1 处（tab:verify 验收清单）；
+   审计历史 PAPER_CLAIM_AUDIT.md 保留原值（追加式审计不可篡改）
+3) 过程中 Python re.sub repl 参数转义注入复位（\\$\\^\\{\\}
+   字面残留 5 处）已用字面 replace 修复，终态"正确 2.6e-10：
+   main.tex 2 / 5_problem1 3 / A_code 1，残留坏转义 0"
+4) 编译验证：latexmk 全绿、73 页（xdv 输出确认）、Over/Underfull
+   0 行；missing character 字体回退警告为既有现象（Times New
+   Roman 拉丁字体缺 CJK 字形），非本轮引入
+5) README 顶部同步条目已插入。
