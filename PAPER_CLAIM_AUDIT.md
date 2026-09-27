@@ -2137,3 +2137,21 @@ PROMETHEE-II 与 VIKOR），作为"多框架算法交叉验证"的补强轮。
 3) 家族留出口径：n=2493 中 2484 条归族（七族），qwen/phi 显著
    高于规模-时间预测线（技术进步更快）——正文与 v46 JSON 一致
 4) 本轮无正文文件改动（核验 + 记录）。
+
+
+---
+
+## Round-95: 10_evaluation 缺点拆分 2 条 + README 徽章终检
+
+1) 10_evaluation"模型的缺点与改进方向"由 1 条 enumerate 拆为 2 条
+   （对照 C 题 6.2 多条目风格，内容不变仅重组）：
+   - ① 数据口径局限：B 族半合成（B8 与 B6/B7 不一致）、质量/规模
+     可加分解近似、g(Q) γ,λ 由题意给定跨度大、C1 受提交意愿与
+     评测版本影响；改进：真实多质量档校准/引入 N-Q 交互/真实成本
+     标定 g(Q)/C8 去偏因子得分
+   - ② 外推形式局限：lnS~lnN+t 线性外推 24 个月后可能饱和失效；
+     改进：logit 上界饱和项/滚动再估计窗口
+2) README 顶部 6 枚徽章终检全部同步：Contest Huawei Cup 2026 /
+   Status Completed / Paper 73 pages XeLaTeX / Tech / Claims Audit
+   45/45 passed / Data Real Public Datasets
+3) 编译全绿（tex_build_v102）、布局 0 缺陷、73 页。
