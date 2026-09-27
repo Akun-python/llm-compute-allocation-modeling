@@ -96,6 +96,20 @@
 
 ### 2026-09-25
 
+**附录编号与引用重映射（B_params 双 section → 附录 B/C）**
+- 发现：main.tex 已有 \begin{appendices} 环境（gmcmthesis \appendix
+  \thesection=附录\@Alph 生效），B_params 含两个 \section → 实际
+  编号为"附录 A 核心代码 / 附录 B 质量成本函数参数 / 附录 C 附件
+  使用与数据口径说明"
+- B_params 标题"质量成本函数参数（附录 B）"去冗余 →"质量成本函数
+  参数"（避免"附录 B …（附录 B）"）
+- 引用分流：摘要 5 处"附录 B"（总起段数据口径 + 四问"结果详见表X
+  与附录 B"）→"附录 C"；10_conclusion"附录 B 数据口径说明"→
+  "附录 C"；README 运行环境"数据口径见附录 B"→"附录 C"
+- 7_problem3（3 处）与 A_code（1 处）"附录 B 参数/激活饱和特征量"
+  保持（附录 B = 质量成本函数参数）✓；AI 声明"附录 A"保持 ✓
+- 编译全绿、布局 0 缺陷、73 页
+
 **10_conclusion 文字瑕疵修复 + 结论结构终检**
 - 体会段"预测、拟合、优化与预测的"重复"预测"→"拟合、优化与预测的"
   （其三：中间过程应当可复核）
@@ -796,7 +810,7 @@ python v29_leverage_overview.py   # 示例：能力杠杆总览（六维弹性�
 
 运行环境：Python 3.14 + numpy 2.4 + pandas 3.0 + scipy 1.17 +
 scikit-learn 1.8 + matplotlib 3.10（单机 CPU，无 GPU），论文编译环境为
-TeX Live 2024 以上（XeLaTeX）；全流程可逐位复现，数据口径见附录 B 与
+TeX Live 2024 以上（XeLaTeX）；全流程可逐位复现，数据口径见附录 C 与
 《数据说明.pdf》。
 
 ---
