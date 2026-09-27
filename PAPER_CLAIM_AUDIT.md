@@ -2269,3 +2269,22 @@ PROMETHEE-II 与 VIKOR），作为"多框架算法交叉验证"的补强轮。
 3) 能力杠杆总览三条政策含义与 10_conclusion 决策坐标互相印证
    （质量/上下文最高杠杆、数据最低、时间只可预判不可购买）
 4) 本轮无文件改动（核验性轮次）。
+
+
+---
+
+## Round-103: 摘要四问表引用覆盖 + 禁用词终扫 + 编译区核验
+
+1) 摘要四问"结果详见表X 与附录 C"全覆盖（模板句式四题齐全）：
+   问题一 tab:p1_domain（"配比收缩/调节收益 3%
+   …表 \ref{tab:p1_domain} 与附录 C"）、问题二 tab:p2_forms、
+   问题三 tab:p3_lctx、问题四 tab:backtest——四表各对应一题，
+   无一遗漏
+2) 禁用词全面终扫（综上/值得注意的是/显而易见/不难发现/众所周知/
+   显然可/不言而喻）：全文 0 处命中，历史零违规保持
+3) README 编译与复现区与 A_code 运行环境一致：xelatex/latexmk、
+   五主脚本（p1_quality/p1_mixture/p2_scaling/p3_optimization/
+   p4_evolution）、v29 复算示例、Python 3.14+numpy2.4+pandas3.0+
+   scipy1.17+sklearn1.8+matplotlib3.10、TeX Live 2024+、数据口径
+   见附录 C
+4) 本轮无文件改动（核验性轮次）。
