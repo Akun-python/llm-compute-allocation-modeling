@@ -2155,3 +2155,17 @@ PROMETHEE-II 与 VIKOR），作为"多框架算法交叉验证"的补强轮。
    Status Completed / Paper 73 pages XeLaTeX / Tech / Claims Audit
    45/45 passed / Data Real Public Datasets
 3) 编译全绿（tex_build_v102）、布局 0 缺陷、73 页。
+
+
+---
+
+## Round-96: 4_symbols 符号表与正文使用核验 + 推广部分终检
+
+1) 4_symbols 符号表 21 条全部在正文使用（E 21 处/A 19 处/B 87 处/
+   C 66 处数学模式引用），无"列而未用"符号，无"用而未列"主符号
+2) 10_evaluation"模型推广"完整（对照 C 题推广节）：多模态数据
+   质量评分与配比优化、RAG/微调质量-成本权衡、企业算力采购预算
+   分配、一般"数据工程投入 vs 算力投入"资源规划、跨尺度系数收缩
+   分析推广到其他"定量投入-性能"系统（推荐特征工程/模拟器
+   fidelity 选择）
+3) 本轮无文件改动（核验性轮次）。
