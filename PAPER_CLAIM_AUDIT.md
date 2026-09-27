@@ -2669,3 +2669,29 @@ tab:conclusion 四行关键数字全部与正文/数据文件对应：
    0 行；missing character 字体回退警告为既有现象（Times New
    Roman 拉丁字体缺 CJK 字形），非本轮引入
 5) README 顶部同步条目已插入。
+
+
+---
+
+## Round-123: 问题三九路径求解一致性核验
+
+1) v83_p3_solver9.json 与正文逐一对应：
+   - "九条独立求解路径"= agree_frameworks 9 个：SLSQP/COBYLA/
+     DE/SHGO/L-BFGS-B/Powell/Nelder-Mead/双退火/网格（trust-constr
+     为第 10 个对照，含于数据但非九路径）——与正文枚举逐字一致 ✓
+   - 9/9 实例 = 3 预算×3 成本形式 ✓
+   - "最大相对偏差不超过 2.6×10⁻²%"：agg.max_rel_pct 最大
+     0.0255%（1e22 exp）→2.6×10⁻²% ✓
+   - "其中 6/9 实例偏差小于 10⁻⁶"：all_agree_1e6=True 恰好 6 个
+     （1e19 exp/power、1e22 log、1e24 exp/power/log）✓
+   - "Q* 跨框架波动不超过 5.5×10⁻⁶"：Q_range 最大 5.4945e-06
+     （1e19 exp）✓
+   - "trust-constr 最优损失偏离达 7.5%"：trust_gap_pct 最大
+     7.4875%（1e24 exp）→7.5% ✓；3 实例 n_converged=8/9 与
+     "部分初值求解失败"一致 ✓
+2) v39_p3_solver_diag.json（24 初值诊断）：in1pct_frac=1.0、
+   spread_pct~1e-12 量级 → 正文"24 初值成功收敛初值 100% 落到
+   同一最优" ✓（成功初值全收敛，个别初值求解失败属 trust-constr
+   对照路径，语义一致）
+3) 摘要"24 初值、九类框架一致"与本节口径一致
+4) 本轮无文件改动（核验性轮次）。
