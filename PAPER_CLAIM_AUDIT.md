@@ -2004,3 +2004,22 @@ PROMETHEE-II 与 VIKOR），作为"多框架算法交叉验证"的补强轮。
 3) 叠词/错别字扫描：全文 0 真错误（"两两/域域/指标"等命中均为
    合法短语或跨词巧合）
 4) 编译全绿（tex_build_v98）、布局 0 缺陷。
+
+
+---
+
+## Round-87: A_code 附录与 README 更新日志结构终检
+
+1) A_code 附录完整性终检：
+   - lstlisting 5 块全部配对（开=闭=5），language=Python 统一
+   - 五主脚本在 tab:files 与 lstlisting 一一对应（各出现 2 次）：
+     块1 entropy_weight（p1_quality）、块2 fit_eval 岭回归
+     （p1_mixture）、块3 fit_generalized（p2_scaling）、块4
+     solve_opt SLSQP（p3_optimization）、块5 quantile_fit
+     （p4_evolution）
+   - 分类表四类（主程序/工具绘图/复算实验/说明核验）+ 运行环境 +
+     结果验收清单 tab:verify 完整
+2) README 更新日志结构终检：按日分组（2026-09-25）、批次标题
+   新条目置顶（结论修复/C1计数/动词多样性/OLS对照…），
+   历史批次（12/13/14、83.7% 同步等）保留
+3) 本轮无文件改动（核验性轮次）。
