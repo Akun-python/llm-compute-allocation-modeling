@@ -2288,3 +2288,20 @@ PROMETHEE-II 与 VIKOR），作为"多框架算法交叉验证"的补强轮。
    scipy1.17+sklearn1.8+matplotlib3.10、TeX Live 2024+、数据口径
    见附录 C
 4) 本轮无文件改动（核验性轮次）。
+
+
+---
+
+## Round-104: eq 标签引用补齐 + 图件完整性终核
+
+1) 发现 eq:classical / eq:frontier 两原型方程未被 \ref 引用
+   （violates "fig/tab/eq 0 未引用"目标）→ 补引用：
+   - 6_problem2"经典标度律（Kaplan--Hoffmann 形式，式
+     \ref{eq:classical}）"
+   - 8_problem4"建立 90% 分位数回归（式 \ref{eq:frontier}）"
+   补齐后 fig/tab/eq 全部被 \ref 引用（0 未引用终态达成）
+2) 图件完整性：118 标签/136 ref 调用，fig/tab 全部被引导句引用
+3) 6_problem2 拟合框架与 v73 核对：v73 六求解器（TRF/dogbox/
+   LM/L-BFGS-B/DE/Adam），正文"四框架 BIC 排序"与主链路三求解器
+   均取自 v73 子集，口径自洽
+4) 编译全绿（tex_build_v104）、布局 0 缺陷、73 页。
