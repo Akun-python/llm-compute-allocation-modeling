@@ -2628,3 +2628,22 @@ tab:conclusion 四行关键数字全部与正文/数据文件对应：
 5) tab:checklist 逐项对照表引用（tab:p1_domain、eq:gen_choice、
    tab:p2_forms、tab:backtest、附录 C）均存在且方向正确
 6) 本轮无文件改动（核验性轮次）。
+
+
+---
+
+## Round-121: README 更新日志与审计记录同步
+
+1) 核对发现：README 更新日志（2026-09-25 块）记录了截至
+   Round-103 的实质改动（eq:classical_fit 合并、风格改造批次等），
+   但缺 Round-104~120 的同步条目（其中 Round-104 含实质修复——
+   eq:classical/eq:frontier 两原型方程补 \\ref；Round-105~120 为
+   连续核验轮）
+2) README 顶部插入"引用闭环收尾 + 连续核验轮（Round-104~120）"
+   条目：汇总 0 未引用终态、21 轮核验结论（结构 5 项 + 数值核对
+   13 组逐位通过）与 Round-118 预测 90% 区间存档观察（诚实口径）
+3) 审计 Round 计数核对：PAPER_CLAIM_AUDIT.md 唯一 Round 编号 110
+   个、最大 120 → 与逐轮追加记录一致（个别轮次无独立编号的核验
+   并入相邻轮）
+4) 本轮 README 为实质改动（非纯核验），已编译不受影响
+   （README 不参与 LaTeX 构建），markdown 结构验证通过
